@@ -20,4 +20,4 @@ For development, you will only need Node.js and a node global package, npm, inst
 
 ## Running the project
 
-    $ node start
+    $ npm start
