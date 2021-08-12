@@ -6,7 +6,7 @@ import TableRow from "@material-ui/core/TableRow";
 export const PrimaryTheme = createMuiTheme({
     palette: {
         primary: {
-            main: "#0166fe"
+            main: "#008080"
         },
         secondary:{
             main: "#fff9d1"
