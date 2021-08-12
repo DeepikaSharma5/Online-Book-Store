@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PrivatePolictHeading from "../../../../Customer/PrivatePolicy/PrivatePolictHeading";
-import ViewPrivatePolicyBody from '../ViewPrivatePolicy/ViewPrivatePolicyBody';
+import ViewPrivatePolicyBody from './ViewPrivatePolicyBody';
 
 class ViewPrivatePolicy extends Component {
     render() { 
