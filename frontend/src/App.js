@@ -9,6 +9,8 @@ import {
 import ContactUs from "./Components/Customer/ContactUs/contactUs";
 import PrivatePolicy from "./Components/Customer/PrivatePolicy/PrivatePolicy";
 import ViewPrivatePolicy from "./Components/Admin/Contents/PrivatePolicy/ViewPrivatePolicy/ViewPrivatePolicy";
+import AddPrivatePolicy from "./Components/Admin/Contents/PrivatePolicy/AddPrivatePolicy/AddPrivatePolicy";
+import UpdatePrivatePolicy from "./Components/Admin/Contents/PrivatePolicy/UpdatePrivatePolicy/UpdatePrivatePolicy";
 
 function App() {
   return (
@@ -20,6 +22,8 @@ function App() {
     
       {/**Admin side*/}
       <Route component={ViewPrivatePolicy} path='/admin-view-private-policy'></Route>
+      <Route component={AddPrivatePolicy} path='/admin-add-private-policy'></Route>
+      <Route component={UpdatePrivatePolicy} path='/admin-update-private-policy'></Route>
 
     </Router>
   );
