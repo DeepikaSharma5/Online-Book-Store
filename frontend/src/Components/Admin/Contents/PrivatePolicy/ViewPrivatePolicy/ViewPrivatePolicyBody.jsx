@@ -1,15 +1,17 @@
 import React, { Component } from 'react';
-import {Trash, Pencil} from 'react-bootstrap-icons';
+import { Trash, Pencil, PlusLg } from 'react-bootstrap-icons';
 import axios from 'axios';
 import Swal from 'sweetalert2';
+import { reactLocalStorage } from 'reactjs-localstorage';
 
 class PrivatePolicyBody extends Component {
     constructor(props) {
         super(props);
         this.deleteData = this.deleteData.bind(this);
-        this.state = { 
-            policy:[]
-         }
+        this.updatePrivatePolicy = this.updatePrivatePolicy.bind(this);
+        this.state = {
+            policy: []
+        }
     }
 
     componentDidMount() {
@@ -31,7 +33,7 @@ class PrivatePolicyBody extends Component {
                     title: "Are you sure want to delete?",
                     text: "You won't be able to revert this!",
                     icon: "warning",
-                    showCancelButton:"true",
+                    showCancelButton: "true",
                     confirmButtonColor: '#3085d6',
                     cancelButtonColor: '#d33',
                     confirmButtonText: 'Yes, delete it!'
@@ -61,17 +63,25 @@ class PrivatePolicyBody extends Component {
             });
     }
 
-    render() { 
-        return ( 
+    updatePrivatePolicy(id, heading, details) {
+        reactLocalStorage.setObject("PrivatePolicy", [id, heading, details]);
+        window.location.href = "/admin-update-private-policy";
+    }
+
+    render() {
+        return (
             <div>
                 <div className="card card border border-light shadow-0 mb-3" style={{ maxWidth: '100rem', margin: 'auto', padding: '10px' }}>
+                    <button type="button" className="btn btn-default" onClick={() => { window.location.href = "/admin-add-private-policy" }}>
+                        <PlusLg /> Add new Private Policy
+                    </button>
                     <div className="card-body" >
                         <div className="row">
                             <table className="table table-success table-striped">
                                 <thead className="table-info" >
                                     <tr>
                                         <th scope="col">Heading</th>
-                                        <th scope="col">Details</th>    
+                                        <th scope="col">Details</th>
                                         <th scope="col">Edit</th>
                                         <th scope="col">Delete</th>
                                     </tr>
@@ -82,18 +92,14 @@ class PrivatePolicyBody extends Component {
                                             <td>{item.heading}</td>
                                             <td>{item.details}</td>
                                             <td>
-                                                <button type="button" className="btn btn-default">
-                                                    <Pencil/>Update
+                                                <button type="button" className="btn btn-default" onClick={() => this.updatePrivatePolicy(item._id, item.heading, item.details)}>
+                                                    <Pencil />Update
                                                 </button>
-                                                {/* <button type="button" className="btn btn-warning"
-                                                    onClick={() => this.updateAboutus(item._id, item.description, item.dateRange, item.conferenceStart, item.conferenceEnd, item.conferenceWebsite, item.organizerPhone, item.organizerEmail, item.organizerWebsite, item.status)}>Edit</button> */}
                                             </td>
                                             <td>
                                                 <button type="button" className="btn btn-default" onClick={() => this.deleteData(item._id)}>
-                                                    <Trash/>Delete
+                                                    <Trash />Delete
                                                 </button>
-                                                {/* <button type="button" className="btn btn-danger"
-                                                    onClick={() => this.deleteData(item._id)}>Delete</button> */}
                                             </td>
                                         </tr>
                                     </tbody>
@@ -103,8 +109,8 @@ class PrivatePolicyBody extends Component {
                     </div>
                 </div>
             </div>
-         );
+        );
     }
 }
- 
+
 export default PrivatePolicyBody;
