@@ -25,6 +25,9 @@ app.get('/',(req,res) => {
     res.send("Running Successfully")
 })
 
+const PrivatePolicy = require("./routers/PrivatePolicy");
+app.use("/private-policy",PrivatePolicy)
+
 //Contact Us Email sending configuration
 app.post("/contactdata", (req, res) => {
   let data = req.body
