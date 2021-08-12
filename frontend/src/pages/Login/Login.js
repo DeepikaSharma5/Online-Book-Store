@@ -9,7 +9,7 @@ const Login = () => {
     <React.Fragment>
       <Grid container direction="row" className="content-padding">
         <Grid item direction="column" md={5} className={styles.leftCol}>
-          <h3 className="font-weight-bold" className={styles.explore}>
+          <h3 className={styles.explore}>
             EXPLORE
           </h3>
           <div className={styles.tagBox}>
