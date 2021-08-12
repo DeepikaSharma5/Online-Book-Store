@@ -1,5 +1,5 @@
-import React from "react";
-import {Route} from "react-router-dom";
+// import React from "react";
+// import {Route} from "react-router-dom";
 
 // const PrivateRoute = ({Component, ...rest}) => {
 //     return(
@@ -12,4 +12,4 @@ import {Route} from "react-router-dom";
 //     )
 // }
 
-export default PrivateRoute;
+// export default PrivateRoute;
