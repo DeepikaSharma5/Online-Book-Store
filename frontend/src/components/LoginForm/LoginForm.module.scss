@@ -1,26 +1,26 @@
-.textField{
-    background-color: #f5f5f5;
-    width: 400px;
-    margin-top: 10px;
+.textField.textField{
+  margin-top: 10px;
+  background-color: #f5f5f5;
+  width: 400px;
 }
 
-.login{
-    color: #008080;
-    font-size: 60px;
-    text-align: center;
-    margin: 80px 0px 40px 0px;
+.login.login{
+  color: #008080;
+  font-size: 60px;
+  text-align: center;
+  margin: 80px 0px 40px 0px;
 }
 
-.signInBtn {
-    background-color: #008080;
-    padding: 0px 70px;
-    border-radius: 20px;
-    color: white;
-    font-size: 30px;
-    margin-top: 40px;
-    font-weight: 300;
-  }
+.signInBtn.signInBtn {
+  background-color: #008080;
+  padding: 0px 70px;
+  border-radius: 20px;
+  color: white;
+  font-size: 30px;
+  margin-top: 40px;
+  font-weight: 300;
+}
 
-  .signInBtn:hover {
-    background-color: #036868;
-  }
+.signInBtn.signInBtn:hover {
+  background-color: #036868;
+}
