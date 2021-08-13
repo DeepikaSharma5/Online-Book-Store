@@ -10,6 +10,11 @@ import PrivatePolicy from "../components/Customer/PrivatePolicy/PrivatePolicy";
 import ViewPrivatePolicy from "../components/Admin/Contents/PrivatePolicy/ViewPrivatePolicy/ViewPrivatePolicy";
 import AddPrivatePolicy from "../components/Admin/Contents/PrivatePolicy/AddPrivatePolicy/AddPrivatePolicy";
 import UpdatePrivatePolicy from "../components/Admin/Contents/PrivatePolicy/UpdatePrivatePolicy/UpdatePrivatePolicy";
+import TermsAndConditions from "../components/Customer/TermsAndConditions/TermsAndConditions";
+import ViewTermsAndConditions from "../components/Admin/Contents/Terms&Conditions/ViewTermsAndConditions/ViewTermsAndConditions";
+import AddTermsAndConditions from "../components/Admin/Contents/Terms&Conditions/AddTermsAndConditions/AddTermsAndConditions";
+import UpdateTermsAndConditions from "../components/Admin/Contents/Terms&Conditions/UpdateTermsAndConditions/UpdateTermsAndConditions";
+
 
 import {Login} from "../pages";
 
@@ -21,13 +26,17 @@ const AppRoutes = () => {
 
             {/**Customer side*/}
             <PublicRoute exact path={APP_ROUTES.LOGIN} Component={Login} />
-            <PublicRoute exact path='/contact-us' Component={ContactUs} />
-            <PublicRoute exact path='/private-policy' Component={PrivatePolicy} />
+            <PublicRoute exact path={APP_ROUTES.USER_CONTACT_US} Component={ContactUs} />
+            <PublicRoute exact path={APP_ROUTES.USER_PRIVATE_POLICY} Component={PrivatePolicy} />
+            <PublicRoute exact path={APP_ROUTES.USER_TERMS_AND_CONDITIONS} Component={TermsAndConditions} />
 
             {/**Admin side*/}
-            <PublicRoute exact path='/admin-view-private-policy' Component={ViewPrivatePolicy} />
-            <PublicRoute exact path='/admin-add-private-policy' Component={AddPrivatePolicy} />
-            <PublicRoute exact path='/admin-update-private-policy' Component={UpdatePrivatePolicy} />
+            <PublicRoute exact path={APP_ROUTES.ADMIN_VIEW_PRIVATE_POLICY} Component={ViewPrivatePolicy} />
+            <PublicRoute exact path={APP_ROUTES.ADMIN_ADD_PRIVATE_POLICY} Component={AddPrivatePolicy} />
+            <PublicRoute exact path={APP_ROUTES.ADMIN_UPDATE_PRIVATE_POLICY} Component={UpdatePrivatePolicy} />
+            <PublicRoute exact path={APP_ROUTES.ADMIN_VIEW_TERMS_AND_CONDITIONS} Component={ViewTermsAndConditions} />
+            <PublicRoute exact path={APP_ROUTES.ADMIN_ADD_TERMS_AND_CONDITIONS} Component={AddTermsAndConditions} />
+            <PublicRoute exact path={APP_ROUTES.ADMIN_UPDATE_TERMS_AND_CONDITIONS} Component={UpdateTermsAndConditions} />
         </Router>
     )
 }

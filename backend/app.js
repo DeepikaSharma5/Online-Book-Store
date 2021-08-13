@@ -28,6 +28,10 @@ app.get('/',(req,res) => {
 const PrivatePolicy = require("./routers/PrivatePolicy");
 app.use("/private-policy",PrivatePolicy)
 
+const TermsAndConditions = require("./routers/TermsAndConditions");
+app.use("/terms-and-conditions",TermsAndConditions)
+
+
 //Contact Us Email sending configuration
 app.post("/contactdata", (req, res) => {
   let data = req.body

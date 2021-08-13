@@ -3,6 +3,7 @@ import axios from 'axios';
 import Swal from 'sweetalert2';
 import { reactLocalStorage } from 'reactjs-localstorage';
 import { Folder, XCircle, Backspace } from 'react-bootstrap-icons';
+import { APP_ROUTES } from '../../../../../utilities/constants/routes.constants';
 
 export default function UpdatePrivatePolicyBody() {
     var PrivatePolicy = reactLocalStorage.getObject('PrivatePolicy');
@@ -27,7 +28,7 @@ export default function UpdatePrivatePolicyBody() {
                     timer: 2000
                 }).then(okay => {
                     if (okay) {
-                        window.location.href = "/admin-view-private-policy";
+                        window.location.href = APP_ROUTES.ADMIN_VIEW_PRIVATE_POLICY;
                     }
                 });
 
@@ -50,7 +51,7 @@ export default function UpdatePrivatePolicyBody() {
         
 
         function cancel () {
-            window.location.href = "/admin-view-private-policy" ;
+            window.location.href = APP_ROUTES.ADMIN_VIEW_PRIVATE_POLICY;
         }
 
         function reset (){

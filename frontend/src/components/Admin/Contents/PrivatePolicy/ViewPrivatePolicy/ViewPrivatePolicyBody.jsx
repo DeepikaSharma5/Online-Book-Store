@@ -3,6 +3,7 @@ import { Trash, Pencil, PlusLg } from 'react-bootstrap-icons';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import { reactLocalStorage } from 'reactjs-localstorage';
+import { APP_ROUTES } from '../../../../../utilities/constants/routes.constants';
 
 class PrivatePolicyBody extends Component {
     constructor(props) {
@@ -65,7 +66,7 @@ class PrivatePolicyBody extends Component {
 
     updatePrivatePolicy(id, heading, details) {
         reactLocalStorage.setObject("PrivatePolicy", [id, heading, details]);
-        window.location.href = "/admin-update-private-policy";
+        window.location.href = APP_ROUTES.ADMIN_UPDATE_PRIVATE_POLICY;
     }
 
     render() {
@@ -73,7 +74,7 @@ class PrivatePolicyBody extends Component {
             <div>
                 <div className="card card border border-light shadow-0 mb-3" style={{ maxWidth: '100rem', margin: 'auto', padding: '10px' }}>
                     <div>
-                        <button type="button" className="btn btn-info" style={{ float: 'right', padding: '12px 28px', marginBottom:'30px' }} onClick={() => { window.location.href = "/admin-add-private-policy" }}>
+                        <button type="button" className="btn btn-info" style={{ float: 'right', padding: '12px 28px', marginBottom:'30px' }} onClick={() => { window.location.href = APP_ROUTES.ADMIN_ADD_PRIVATE_POLICY }}>
                             <PlusLg /> Add new Private Policy
                         </button>
                     </div>

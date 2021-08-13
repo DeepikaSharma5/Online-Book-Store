@@ -2,11 +2,6 @@ import React, { Component } from 'react';
 import axios from 'axios';
 
 class PrivatePolicyBody extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {}
-    }
-
     componentDidMount() {
         axios.get('http://localhost:6060/private-policy/view')
             .then(response => {
@@ -25,7 +20,7 @@ class PrivatePolicyBody extends Component {
                     <div class="card overflow-auto" style={{ maxHeight: '200%', minHeight:"120%" , background: '#ffffff', boxShadow: '10px 10px 45px #919191,-10px -10px 45px #ffffff'}}>
                         <div class="card-body">
                             {this.state?.policy?.length > 0 && this.state.policy.map((item, index) =>
-                                <div style={{ height: '150px' }}>
+                                <div style={{ height: '150px' }} key={index}>
                                     <h3 class="card-title">{item.heading}</h3>
                                     <p>{item.details}</p>
                                 </div>
