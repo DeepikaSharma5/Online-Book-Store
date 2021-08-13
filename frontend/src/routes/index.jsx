@@ -11,7 +11,7 @@ import ViewPrivatePolicy from "../components/Admin/Contents/PrivatePolicy/ViewPr
 import AddPrivatePolicy from "../components/Admin/Contents/PrivatePolicy/AddPrivatePolicy/AddPrivatePolicy";
 import UpdatePrivatePolicy from "../components/Admin/Contents/PrivatePolicy/UpdatePrivatePolicy/UpdatePrivatePolicy";
 
-import {Login} from "../pages";
+import {Login, Signup} from "../pages";
 
 const AppRoutes = () => {
     const history = createBrowserHistory();
@@ -21,6 +21,7 @@ const AppRoutes = () => {
 
             {/**Customer side*/}
             <PublicRoute exact path={APP_ROUTES.LOGIN} Component={Login} />
+            <PublicRoute exact path={APP_ROUTES.SIGNUP} Component={Signup} />
             <PublicRoute exact path='/contact-us' Component={ContactUs} />
             <PublicRoute exact path='/private-policy' Component={PrivatePolicy} />
 
