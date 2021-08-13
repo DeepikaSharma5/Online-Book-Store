@@ -1,39 +1,35 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 
 class PrivatePolicyBody extends Component {
     constructor(props) {
         super(props);
         this.state = {}
     }
+
+    componentDidMount() {
+        axios.get('http://localhost:6060/private-policy/view')
+            .then(response => {
+                const policy = response.data;
+                this.setState({ policy });
+                console.log("response", response);
+            }).catch(error => {
+                alert(error.message);
+                console.log("Error", error);
+            });
+    }
     render() {
         return (
-            <div className="col-md-14 col-sm-12" style={{ maxWidth: '120rem', margin: 'auto', padding: '10px' }}>
-                <div style={{ height: '300px' }}>
-                    <div class="card overflow-auto" style={{ maxHeight: '300%' }}>
+            <div className="col-md-14 col-sm-12" style={{ maxWidth: '100rem', margin: 'auto', padding: '10px' }}>
+                <div style={{ height: '500px' }}>
+                    <div class="card overflow-auto" style={{ maxHeight: '200%', minHeight:"120%" , background: '#ffffff', boxShadow: '10px 10px 45px #919191,-10px -10px 45px #ffffff'}}>
                         <div class="card-body">
-                            <div style={{height:'150px'}}>
-                                <h3 class="card-title">Card title</h3>
-                                <p>fjjdkfnmadknfkdnfjadf asfafaf4asasf
-                                    asfafaf4asasfasfafsasf
-                                    asfafafaf sfasf asfafaf afafasf asfafaf 
-                                    fjjdkfnmadknfkdnfjadf asfafaf4asasf
-                                    asfafaf4asasfasfafsasf
-                                    asfafafaf sfasf asfafaf afafasf asfafaf
-                                    fjjdkfnmadknfkdnfjadf asfafaf4asasf
-                                    asfafaf4asasfasfafsasf
-                                    asfafafaf sfasf asfafaf afafasf asfafaf
-                                    fjjdkfnmadknfkdnfjadf asfafaf4asasf
-                                    asfafaf4asasfasfafsasf
-                                    asfafafaf sfasf asfafaf afafasf asfafaf
-                                    fjjdkfnmadknfkdnfjadf asfafaf4asasf
-                                    asfafaf4asasfasfafsasf
-                                    asfafafaf sfasf asfafaf afafasf asfafaf
-                                </p>
-                            </div>
-                            <div style={{height:'50%'}}>
-                                <h3 class="card-title">Card title</h3>
-                                <p></p>
-                            </div>
+                            {this.state?.policy?.length > 0 && this.state.policy.map((item, index) =>
+                                <div style={{ height: '150px' }}>
+                                    <h3 class="card-title">{item.heading}</h3>
+                                    <p>{item.details}</p>
+                                </div>
+                            )}
                         </div>
                     </div>
                 </div>
