@@ -72,39 +72,47 @@ class PrivatePolicyBody extends Component {
         return (
             <div>
                 <div className="card card border border-light shadow-0 mb-3" style={{ maxWidth: '100rem', margin: 'auto', padding: '10px' }}>
-                    <button type="button" className="btn btn-default" onClick={() => { window.location.href = "/admin-add-private-policy" }}>
-                        <PlusLg /> Add new Private Policy
-                    </button>
-                    <div className="card-body" >
-                        <div className="row">
-                            <table className="table table-success table-striped">
-                                <thead className="table-info" >
-                                    <tr>
-                                        <th scope="col">Heading</th>
-                                        <th scope="col">Details</th>
-                                        <th scope="col">Edit</th>
-                                        <th scope="col">Delete</th>
-                                    </tr>
-                                </thead>
-                                {this.state?.policy?.length > 0 && this.state.policy.map((item, index) =>
-                                    <tbody key={index}>
-                                        <tr>
-                                            <td>{item.heading}</td>
-                                            <td>{item.details}</td>
-                                            <td>
-                                                <button type="button" className="btn btn-default" onClick={() => this.updatePrivatePolicy(item._id, item.heading, item.details)}>
-                                                    <Pencil />Update
-                                                </button>
-                                            </td>
-                                            <td>
-                                                <button type="button" className="btn btn-default" onClick={() => this.deleteData(item._id)}>
-                                                    <Trash />Delete
-                                                </button>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                )}
-                            </table>
+                    <div>
+                        <button type="button" className="btn btn-info" style={{ float: 'right', padding: '12px 28px', marginBottom:'30px' }} onClick={() => { window.location.href = "/admin-add-private-policy" }}>
+                            <PlusLg /> Add new Private Policy
+                        </button>
+                    </div>
+                    <div className="card overflow-auto" style={{ maxHeight: '300%',background:'#ffffff',boxShadow:'10px 10px 45px #919191,-10px -10px 45px #ffffff' }}>
+                        <div className="card-body">
+                            <div style={{ height: '450px' }}>
+                                <div className="card-body" >
+                                    <div className="row">
+                                        <table className="table table-bordered" style={{ textAlign: 'center' }}>
+                                            <thead className="thead-light" >
+                                                <tr>
+                                                    <th scope="col" className="w-25">Heading</th>
+                                                    <th scope="col" className="w-50">Details</th>
+                                                    <th scope="col" className="w-15">Edit</th>
+                                                    <th scope="col" className="w-15">Delete</th>
+                                                </tr>
+                                            </thead>
+                                            {this.state?.policy?.length > 0 && this.state.policy.map((item, index) =>
+                                                <tbody key={index}>
+                                                    <tr>
+                                                        <td>{item.heading}</td>
+                                                        <td>{item.details}</td>
+                                                        <td>
+                                                            <button type="button" className="btn btn-outline-success" onClick={() => this.updatePrivatePolicy(item._id, item.heading, item.details)}>
+                                                                <Pencil /> Update
+                                                            </button>
+                                                        </td>
+                                                        <td>
+                                                            <button type="button" className="btn btn-outline-danger" onClick={() => this.deleteData(item._id)}>
+                                                                <Trash /> Delete
+                                                            </button>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            )}
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
