@@ -11,15 +11,15 @@ class ViewTermsAndConditionsBody extends Component {
         this.deleteData = this.deleteData.bind(this);
         this.updateTermsAndConditions = this.updateTermsAndConditions.bind(this);
         this.state = {
-            policy: []
+            termsAndconditions: []
         }
     }
 
     componentDidMount() {
         axios.get('http://localhost:6060/terms-and-conditions/view')
             .then(response => {
-                const policy = response.data;
-                this.setState({ policy });
+                const termsAndconditions = response.data;
+                this.setState({ termsAndconditions });
                 console.log("response", response);
             }).catch(error => {
                 alert(error.message);
@@ -92,7 +92,7 @@ class ViewTermsAndConditionsBody extends Component {
                                                     <th scope="col" className="w-15">Delete</th>
                                                 </tr>
                                             </thead>
-                                            {this.state?.policy?.length > 0 && this.state.policy.map((item, index) =>
+                                            {this.state?.termsAndconditions?.length > 0 && this.state.termsAndconditions.map((item, index) =>
                                                 <tbody key={index}>
                                                     <tr>
                                                         <td>{item.heading}</td>
