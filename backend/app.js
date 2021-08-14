@@ -31,6 +31,11 @@ app.use("/private-policy",PrivatePolicy)
 const TermsAndConditions = require("./routers/TermsAndConditions");
 app.use("/terms-and-conditions",TermsAndConditions)
 
+const AboutUs = require('./routers/AboutUs');
+app.use('/about-us',AboutUs);
+
+const TeamDetails = require('./routers/TeamDetails');
+app.use('/team-details',TeamDetails);
 
 //Contact Us Email sending configuration
 app.post("/contactdata", (req, res) => {
