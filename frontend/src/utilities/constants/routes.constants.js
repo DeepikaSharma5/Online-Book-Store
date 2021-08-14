@@ -14,5 +14,6 @@ export const APP_ROUTES = {
     ADMIN_UPDATE_PRIVATE_POLICY : '/admin-update-private-policy',
     ADMIN_VIEW_TERMS_AND_CONDITIONS : '/admin-view-terms-and-conditions',
     ADMIN_ADD_TERMS_AND_CONDITIONS : '/admin-add-terms-and-conditions',
-    ADMIN_UPDATE_TERMS_AND_CONDITIONS : '/admin-update-terms-and-conditions'
+    ADMIN_UPDATE_TERMS_AND_CONDITIONS : '/admin-update-terms-and-conditions',
+    ADMIN_ADD_ABOUT_US : '/admin-add-about-us',
 }
