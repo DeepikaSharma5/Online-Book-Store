@@ -1,31 +1,27 @@
 import React, { useState } from "react";
 import { Grid, TextField, Box, Button } from "@material-ui/core";
 
-import styles from "./LoginForm.module.scss";
-
-const LoginForm = () => {
+const PersonalInfoForm = () => {
   return (
     <React.Fragment>
       <form style={{ marginTop: "70px" }}>
         <Grid alignItems="center" container direction="column">
           <TextField
-            label="Email"
+            label="Name"
             variant="outlined"
-            className={styles.textField}
           />
           <TextField
-            label="Password"
+            label="Email"
             variant="outlined"
-            type="password"
-            className={styles.textField}
           />
-          <Box textAlign="center">
-            <Button className={styles.signInBtn}>LOG IN</Button>
-          </Box>
+          <TextField
+            label="Contact Number"
+            variant="outlined"
+          />
         </Grid>
       </form>
     </React.Fragment>
   );
 };
 
-export default LoginForm;
+export default PersonalInfoForm;
