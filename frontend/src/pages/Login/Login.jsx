@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { Button, Grid, Box } from "@material-ui/core";
 
-import styles from "./Login.module.scss";
+import styles from "./Login.module.scss"
 import { LoginForm } from "../../components";
+import { APP_ROUTES } from "../../utilities/constants/routes.constants";
 
 const Login = () => {
   return (
@@ -10,15 +11,15 @@ const Login = () => {
       <Grid container direction="row" className="content-padding">
         <Grid item direction="column" md={5} className={styles.leftCol}>
           <h3 className={styles.explore}>
-            EXPLORE
+            EXPLORE!
           </h3>
           <div className={styles.tagBox}>
             <p className={styles.tagLine}>
-              The world's books at your fingertips!
+              The world's books at your fingertips
             </p>
           </div>
           <Box textAlign="center">
-            <Button className={styles.signUpBtn}>SIGN UP !</Button>
+            <Button className={styles.signUpBtn} href={APP_ROUTES.SIGNUP}>SIGN UP !</Button>
           </Box>
         </Grid>
         <Grid

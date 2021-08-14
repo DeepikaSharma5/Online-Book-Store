@@ -16,7 +16,7 @@ import AddTermsAndConditions from "../components/Admin/Contents/Terms&Conditions
 import UpdateTermsAndConditions from "../components/Admin/Contents/Terms&Conditions/UpdateTermsAndConditions/UpdateTermsAndConditions";
 
 
-import {Login} from "../pages";
+import {Login, Signup} from "../pages";
 
 const AppRoutes = () => {
     const history = createBrowserHistory();
@@ -26,6 +26,7 @@ const AppRoutes = () => {
 
             {/**Customer side*/}
             <PublicRoute exact path={APP_ROUTES.LOGIN} Component={Login} />
+            <PublicRoute exact path={APP_ROUTES.SIGNUP} Component={Signup} />
             <PublicRoute exact path={APP_ROUTES.USER_CONTACT_US} Component={ContactUs} />
             <PublicRoute exact path={APP_ROUTES.USER_PRIVATE_POLICY} Component={PrivatePolicy} />
             <PublicRoute exact path={APP_ROUTES.USER_TERMS_AND_CONDITIONS} Component={TermsAndConditions} />
