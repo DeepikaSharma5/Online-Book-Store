@@ -1,0 +1,1 @@
+export {default as PersonalInfoForm} from "./PersonalDetails/PersonalInfoForm/PersonalInfoForm";
