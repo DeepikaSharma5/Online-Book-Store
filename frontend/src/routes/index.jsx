@@ -20,6 +20,9 @@ import UpdateAboutUs from "../components/Admin/Contents/AboutUs/UpdateAboutUs/Up
 import AddTeamDetails from "../components/Admin/Contents/TeamDetails/AddTeamDetails";
 import ViewTeamDetails from "../components/Admin/Contents/TeamDetails/ViewTeamDetails";
 import UpdateTeamDetails from "../components/Admin/Contents/TeamDetails/UpdateTeamDetails";
+import ViewDeliveryAddress from "../components/Customer/DeliveryAddress/ViewDeliveryAddress";
+import AddDeliveryAddress from "../components/Customer/DeliveryAddress/AddDeliveryAddress";
+import UpdateDeliveryAddress from "../components/Customer/DeliveryAddress/UpdateDeliveryAddress";
 
 import {Login, Signup, PersonalDetails} from "../pages";
 
@@ -38,6 +41,12 @@ const AppRoutes = () => {
             <PublicRoute exact path={APP_ROUTES.USER_CONTACT_US} Component={ContactUs} />
             <PublicRoute exact path={APP_ROUTES.USER_PRIVATE_POLICY} Component={PrivatePolicy} />
             <PublicRoute exact path={APP_ROUTES.USER_TERMS_AND_CONDITIONS} Component={TermsAndConditions} />
+
+            <PublicRoute exact path={APP_ROUTES.USER_VIEW_ADDRESS} Component={ViewDeliveryAddress} />
+            <PublicRoute exact path={APP_ROUTES.USER_ADD_ADDRESS} Component={AddDeliveryAddress} />
+            <PublicRoute exact path={APP_ROUTES.USER_UPDATE_ADDRESS} Component={UpdateDeliveryAddress} />
+
+
 
             {/**Admin side*/}
             <PublicRoute exact path={APP_ROUTES.ADMIN_VIEW_PRIVATE_POLICY} Component={ViewPrivatePolicy} />
