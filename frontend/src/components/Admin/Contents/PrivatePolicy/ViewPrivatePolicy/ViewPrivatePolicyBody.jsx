@@ -50,7 +50,7 @@ class PrivatePolicyBody extends Component {
             }).catch((err) => {
                 Swal.fire({
                     title: "error!",
-                    text: "About Us Deleting Not Success",
+                    text: "Private policy Deleting Not Success",
                     icon: 'error',
                     position: 'center',
                     showConfirmButton: false,

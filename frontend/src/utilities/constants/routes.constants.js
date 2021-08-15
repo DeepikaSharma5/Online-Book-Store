@@ -16,4 +16,6 @@ export const APP_ROUTES = {
     ADMIN_ADD_TERMS_AND_CONDITIONS : '/admin-add-terms-and-conditions',
     ADMIN_UPDATE_TERMS_AND_CONDITIONS : '/admin-update-terms-and-conditions',
     ADMIN_ADD_ABOUT_US : '/admin-add-about-us',
+    ADMIN_VIEW_ABOUT_US : '/admin-view-about-us',
+    ADMIN_UPDATE_ABOUT_US : '/admin-update-about-us',
 }
