@@ -19,6 +19,10 @@ const AboutUsSchema = new Schema(
         type: String,
         required: true,
       },
+      choice: {
+        type: String,
+        required: true,
+      },
       story1: {
         type: String,
         required: true,
