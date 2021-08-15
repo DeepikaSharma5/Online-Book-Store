@@ -4,21 +4,36 @@ import {
   Typography,
   Button,
   Divider,
-  TextField
+  TextField,
+  Modal,
+  Backdrop,
+  Fade,
+  makeStyles,
 } from "@material-ui/core";
 
 import styles from "./WishList.module.scss";
+import { dangerIcon, okIcon } from "../../assets/images";
 
-import {
-  AppLayout,
-  ChangePasswordModal,
-  DeleteAccountModal,
-  PersonalInfoForm,
-  VisibilityModal,
-  WishItemCard,
-} from "../../components";
+import { AppLayout, VisibilityModal, WishItemCard } from "../../components";
 import SearchSelect from "react-select";
 import { Autocomplete } from "@material-ui/lab";
+
+const useStyles = makeStyles((theme) => ({
+  modal: {
+    alignItems: "center",
+    justifyContent: "center",
+    width: "40%",
+    display: "block",
+    margin: "120px auto",
+  },
+  paper: {
+    backgroundColor: "#f9f9f9",
+    outline: "none",
+    borderRadius: "15px",
+    boxShadow: theme.shadows[5],
+    padding: theme.spacing(2, 4, 3),
+  },
+}));
 
 const WishList = () => {
   const bookList = [
@@ -87,9 +102,13 @@ const WishList = () => {
     },
   ];
 
+  const classes = useStyles();
+
   const [bookToAdd, setBookToAdd] = useState("");
 
-  const [isPublic, setIsPublic] = useState(true)
+  const [isPublic, setIsPublic] = useState(true);
+  const [openSuccess, setOpenSuccess] = useState(false);
+  const [openFail, setOpenFail] = useState(false);
 
   const formatOptionLabel = ({ label, author, price }) => (
     <div style={{ display: "flex", justifyContent: "space-evenly" }}>
@@ -107,7 +126,15 @@ const WishList = () => {
   };
 
   const removeListItem = (itemId) => {
-    alert("Removed item " + itemId);
+    //Send DELETE req
+
+    //If all ok
+    setOpenSuccess(true);
+    setTimeout(() => setOpenSuccess(false), 1500);
+
+    //If error
+    // setOpenFail(true);
+    // setTimeout(() => setOpenFail(false), 2500);
   };
 
   return (
@@ -145,8 +172,8 @@ const WishList = () => {
                 Add to list
               </Button>
             </Grid>
-            <div style={{width:"230px"}}>
-            <VisibilityModal isPublic={isPublic} setIsPublic={setIsPublic} />
+            <div style={{ width: "230px" }}>
+              <VisibilityModal isPublic={isPublic} setIsPublic={setIsPublic} />
             </div>
           </div>
           <Divider style={{ margin: "20px 0px 30px 0px", width: "100%" }} />
@@ -166,6 +193,71 @@ const WishList = () => {
             </Grid>
           </div>
         </div>
+        <Modal
+          aria-labelledby="transition-modal-title"
+          aria-describedby="transition-modal-description"
+          className={classes.modal}
+          open={openSuccess}
+          closeAfterTransition
+          BackdropComponent={Backdrop}
+          BackdropProps={{
+            timeout: 500,
+          }}
+        >
+          <Fade in={openSuccess}>
+            <div className={classes.paper}>
+              <Grid container direction="row">
+                <img
+                  src={okIcon}
+                  style={{
+                    marginRight: "20px",
+                    height: "100px",
+                    width: "100px",
+                  }}
+                />
+                <Typography
+                  className={styles.descText}
+                  style={{ marginTop: "35px" }}
+                >
+                  Item successfully removed from wish list.
+                </Typography>
+              </Grid>
+            </div>
+          </Fade>
+        </Modal>
+        <Modal
+          aria-labelledby="transition-modal-title"
+          aria-describedby="transition-modal-description"
+          className={classes.modal}
+          open={openFail}
+          closeAfterTransition
+          BackdropComponent={Backdrop}
+          BackdropProps={{
+            timeout: 500,
+          }}
+        >
+          <Fade in={openFail}>
+            <div className={classes.paper}>
+              <Grid container direction="row">
+                <img
+                  src={dangerIcon}
+                  style={{
+                    marginRight: "20px",
+                    height: "100px",
+                    width: "100px",
+                  }}
+                />
+                <Typography
+                  className={styles.descText}
+                  style={{ marginTop: "20px", width:"300px" }}
+                >
+                  Sorry, there was an error when removing this item.<br />
+                  Please try again.
+                </Typography>
+              </Grid>
+            </div>
+          </Fade>
+        </Modal>
       </AppLayout>
     </React.Fragment>
   );

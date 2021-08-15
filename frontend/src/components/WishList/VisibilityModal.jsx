@@ -21,9 +21,9 @@ const useStyles = makeStyles((theme) => ({
   modal: {
     alignItems: "center",
     justifyContent: "center",
-    width: "53%",
+    width: "47%",
     display: "block",
-    margin: "60px auto",
+    margin: "80px auto",
   },
   paper: {
     backgroundColor: "#f9f9f9",
