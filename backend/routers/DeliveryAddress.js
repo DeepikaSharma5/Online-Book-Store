@@ -46,10 +46,19 @@ router.route("/delete/:id").delete(async (req, res) => {
 
 router.route("/update/:id").post(async (req, res) => {
   let id = req.params.id
-  name, address1, address2, address3, phoneNumber, email
+  const name = req.body.name
+  const address1 = req.body.address1
+  const address2 = req.body.address2
+  const address3 = req.body.address3
+  const phoneNumber = req.body.phoneNumber
+  const email = req.body.email
   const updateRangeDeliveryAddress = {
-    heading,
-    details,
+    name,
+    address1,
+    address2,
+    address3,
+    phoneNumber,
+    email,
   }
   const updateRange = await DeliveryAddress.findOneAndUpdate({ _id: id }, updateRangeDeliveryAddress)
     .then(() => {
