@@ -2,17 +2,9 @@ import React, { useState } from "react";
 import { Grid, Card, Typography, Button } from "@material-ui/core";
 
 import styles from "./PersonalDetails.module.scss";
-import { AppLayout, PersonalInfoForm } from "../../components";
+import { AppLayout, ChangePasswordModal, PersonalInfoForm } from "../../components";
 
 const PersonalDetails = () => {
-
-  const openDeleteModal = () => {
-    //Open modal
-  }
-
-  const openPasswordModal = () => {
-    //Open modal
-  }
   
   return (
     <React.Fragment>
@@ -47,9 +39,9 @@ const PersonalDetails = () => {
                 Update your password by entering your current password and a new
                 password.
               </Typography>
-              <Button className={styles.changePwd} onClick={openPasswordModal}>
-                CHANGE PASSWORD
-              </Button>
+              <div style={{marginTop: "10px"}}>
+              <ChangePasswordModal />
+              </div>
             </Card>
           </Grid>
           <Grid item xs={12} sm={6}>
@@ -67,7 +59,7 @@ const PersonalDetails = () => {
                   This action is irreversible.
                 </span>
               </Typography>
-              <Button className={styles.deleteAcc} onClick={openDeleteModal}>
+              <Button className={styles.deleteAcc} >
                 DELETE ACCOUNT
               </Button>
             </Card>

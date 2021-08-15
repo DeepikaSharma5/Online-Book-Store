@@ -17,7 +17,28 @@
   background-color: #036868;
 }
 
-.txtfield{
+.cancel.cancel {
+  border: 2px solid #008080;
+  padding: 5px 20px;
+  border-radius: 5px;
+  color: #008080;
+  margin-left: 20px;
+  font-weight: bold;
+  margin: 0px 5px 0px 0px;
+}
+
+.txtfield {
   background-color: #ebf6f7;
   width: 100%;
+}
+
+.descText {
+  color: #5c5c5c;
+  font-size: 18px;
+}
+
+.modalTextField.modalTextField {
+  background-color: #ebf6f7;
+  width: 100%;
+  margin-top: 10px;
 }
