@@ -9,8 +9,13 @@ export const PrimaryTheme = createMuiTheme({
             main: "#008080"
         },
         secondary:{
-            main: "#fff9d1"
-            // main: "#b2d0ff"
+            main: "#ebf6f7"
+        },
+        danger:{
+            main:"#f57373"
+        },
+        text:{
+            disabled: "#555555"
         }
     }
 });
