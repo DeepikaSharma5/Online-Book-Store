@@ -24,7 +24,7 @@ import ViewDeliveryAddress from "../components/Customer/DeliveryAddress/ViewDeli
 import AddDeliveryAddress from "../components/Customer/DeliveryAddress/AddDeliveryAddress";
 import UpdateDeliveryAddress from "../components/Customer/DeliveryAddress/UpdateDeliveryAddress";
 
-import {Login, Signup, PersonalDetails} from "../pages";
+import {Login, Signup, PersonalDetails, WishList} from "../pages";
 
 const AppRoutes = () => {
     const history = createBrowserHistory();
@@ -37,6 +37,7 @@ const AppRoutes = () => {
             <PublicRoute exact path={APP_ROUTES.SIGNUP} Component={Signup} />
 
             <PublicRoute exact path={APP_ROUTES.USER_PERSONAL_DETAILS} Component={PersonalDetails} />
+            <PublicRoute exact path={APP_ROUTES.USER_WISHLIST} Component={WishList} />
 
             <PublicRoute exact path={APP_ROUTES.USER_CONTACT_US} Component={ContactUs} />
             <PublicRoute exact path={APP_ROUTES.USER_PRIVATE_POLICY} Component={PrivatePolicy} />

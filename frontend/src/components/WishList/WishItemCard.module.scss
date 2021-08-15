@@ -1,0 +1,22 @@
+.mainText.mainText{
+    font-size: larger;
+    font-weight: 500;
+    margin-top: 20px;
+}
+
+.subText.subText{
+    font-size: large;
+}
+
+.removeBtn{
+    color: #f57373;
+    border: 2px solid #f57373;
+    border-radius: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+.removeBtn:hover{
+    color: white;
+    background-color: #f57373;
+}

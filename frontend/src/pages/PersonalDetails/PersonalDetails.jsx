@@ -8,7 +8,7 @@ const PersonalDetails = () => {
   
   return (
     <React.Fragment>
-      <AppLayout componentTitle="Personal Information">
+      <AppLayout>
         <Grid
           container
           className="content-padding"

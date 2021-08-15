@@ -8,9 +8,7 @@ const AppLayout = ({ children, componentTitle }) => {
     <React.Fragment>
               <div>
                 <aside className="content">
-                  <AppLayoutHeader
-                    componentTitle={componentTitle}
-                  />
+                  <AppLayoutHeader/>
                   {children}
                 </aside>
               </div>
