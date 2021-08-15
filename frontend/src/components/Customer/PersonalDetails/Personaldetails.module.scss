@@ -61,8 +61,27 @@
   font-size: 18px;
 }
 
+.descText2.descText2 {
+  color: #5c5c5c;
+  font-weight: 800;
+  font-size: 20px;
+}
+
 .modalTextField.modalTextField {
   background-color: #ebf6f7;
   width: 100%;
   margin-top: 10px;
+}
+
+.removeBtn{
+  color: #f57373;
+  border: 2px solid #f57373;
+  border-radius: 5px;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.removeBtn:hover{
+  color: white;
+  background-color: #f57373;
 }
