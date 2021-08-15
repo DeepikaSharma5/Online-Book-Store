@@ -37,6 +37,9 @@ app.use("/about-us", AboutUs)
 const TeamDetails = require("./routers/TeamDetails")
 app.use("/team-details", TeamDetails)
 
+const DeliveryAddress = require("./routers/DeliveryAddress")
+app.use("/delivery-address",DeliveryAddress)
+
 //Contact Us Email sending configuration
 app.post("/contactdata", (req, res) => {
   let data = req.body
