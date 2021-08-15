@@ -17,6 +17,9 @@ import UpdateTermsAndConditions from "../components/Admin/Contents/Terms&Conditi
 import AddAboutUs from "../components/Admin/Contents/AboutUs/AddAboutUs/AddAboutUs";
 import ViewAboutUs from "../components/Admin/Contents/AboutUs/ViewAboutUs/ViewAboutUs";
 import UpdateAboutUs from "../components/Admin/Contents/AboutUs/UpdateAboutUs/UpdateAboutUs";
+import AddTeamDetails from "../components/Admin/Contents/TeamDetails/AddTeamDetails";
+import ViewTeamDetails from "../components/Admin/Contents/TeamDetails/ViewTeamDetails";
+import UpdateTeamDetails from "../components/Admin/Contents/TeamDetails/UpdateTeamDetails";
 
 import {Login, Signup, PersonalDetails} from "../pages";
 
@@ -46,6 +49,9 @@ const AppRoutes = () => {
             <PublicRoute exact path={APP_ROUTES.ADMIN_ADD_ABOUT_US} Component={AddAboutUs} />
             <PublicRoute exact path={APP_ROUTES.ADMIN_VIEW_ABOUT_US} Component={ViewAboutUs}></PublicRoute>
             <PublicRoute exact path={APP_ROUTES.ADMIN_UPDATE_ABOUT_US} Component={UpdateAboutUs}></PublicRoute>
+            <PublicRoute exact path={APP_ROUTES.ADMIN_ADD_TEAM_DETAILS} Component={AddTeamDetails}></PublicRoute>
+            <PublicRoute exact path={APP_ROUTES.ADMIN_UPDATE_TEAM_DETAILS} Component={UpdateTeamDetails}></PublicRoute>
+            <PublicRoute exact path={APP_ROUTES.ADMIN_VIEW_TEAM_DETAILS} Component={ViewTeamDetails}></PublicRoute>
         </Router>
     )
 }

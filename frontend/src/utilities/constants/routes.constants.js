@@ -18,4 +18,7 @@ export const APP_ROUTES = {
     ADMIN_ADD_ABOUT_US : '/admin-add-about-us',
     ADMIN_VIEW_ABOUT_US : '/admin-view-about-us',
     ADMIN_UPDATE_ABOUT_US : '/admin-update-about-us',
+    ADMIN_ADD_TEAM_DETAILS : '/admin-add-team-details',
+    ADMIN_VIEW_TEAM_DETAILS : '/admin-view-team-details',
+    ADMIN_UPDATE_TEAM_DETAILS : '/admin-update-team-details',
 }
