@@ -12,7 +12,7 @@ import {
 import { Alert } from "@material-ui/lab";
 
 import styles from "./Personaldetails.module.scss";
-import { questionIcon } from "../../../assets/images";
+import { dangerIcon } from "../../../assets/images";
 
 const useStyles = makeStyles((theme) => ({
   modal: {
@@ -31,23 +31,14 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const ChangePasswordModal = () => {
-  const [password, setPassword] = useState({
-    current: "",
-    new: "",
-    newRenter: "",
-  });
+const DeleteAccountModal = () => {
+  const [password, setPassword] = useState("");
 
   const [success, setSuccess] = useState("");
   const [error, setError] = useState("");
 
   const handleFieldChange = (e) => {
-    setPassword((current) => {
-      return {
-        ...current,
-        [e.target.id]: e.target.value,
-      };
-    });
+    setPassword(e.target.value);
   };
 
   const classes = useStyles();
@@ -58,42 +49,35 @@ const ChangePasswordModal = () => {
   };
 
   const handleClose = () => {
-    setPassword({
-      current: "",
-      new: "",
-      newRenter: "",
-    });
+    setPassword("");
     setOpen(false);
   };
 
   const handleSubmit = () => {
     setSuccess("");
     setError("");
-    if (
-      password.current === "" ||
-      password.new === "" ||
-      password.newRenter === ""
-    ) {
-      setError("Please enter all required fields.");
-      setTimeout(() => setError(""), 4000);
-    } else if (password.new !== password.newRenter) {
-      setError("The new passwords do not match.");
-      setTimeout(() => setError(""), 4000);
+    if (password === "") {
+      setError("Please enter your current password to proceed.");
+      setTimeout(() => setError(""), 3000);
     } else {
       //POST
 
       //Check for errors in mismatching current password
 
       //if All good set success
-      setSuccess("Password updated successfully!");
-      setTimeout(() => setSuccess(""), 3000);
+      setSuccess("Account deleted successfully");
+      setTimeout(() => setSuccess(""), 2000);
+
+      //Else set error
+      // setError("Password entered is incorrect.");
+      // setTimeout(() => setError(""), 4000);
     }
   };
 
   return (
     <React.Fragment>
-      <Button className={styles.signInBtn} onClick={handleOpen}>
-        CHANGE PASSWORD
+      <Button className={styles.deleteAcc} onClick={handleOpen}>
+        DELETE ACCOUNT
       </Button>
       <Modal
         aria-labelledby="transition-modal-title"
@@ -110,66 +94,55 @@ const ChangePasswordModal = () => {
           <div className={classes.paper}>
             <Grid container direction="row">
               <img
-                src={questionIcon}
+                src={dangerIcon}
                 style={{ marginRight: "20px", height: "100px", width: "100px" }}
               />
               <div style={{ marginTop: "30px" }}>
                 <Typography
                   variant="h5"
                   component="h2"
-                  style={{ paddingBottom: "10px" }}
+                  style={{ paddingBottom: "10px", fontWeight:"500" }}
                 >
-                  Changing your password
+                  DELETE your account?
                 </Typography>
                 <div>
                   <Typography className={styles.descText}>
-                    Please enter your previous password and a new password to
-                    continue.
+                    This deletes your account and all data related to it including :
+                    <br />
+                    <span style={{fontWeight: "600"}}>
+                      Delivery details <br/>
+                      Currently pending orders <br />
+                      Your wish list items
+                    </span>
                   </Typography>
-                  <Grid item container style={{ width: "250px" }}>
+                  <Typography className={styles.descText} style={{marginTop:"10px"}}>Enter your current password to proceed.</Typography>
                     <TextField
                       className={styles.modalTextField}
-                      id="current"
+                      id="password"
                       type="password"
                       label="Current password"
-                      value={password.current}
+                      value={password}
                       onChange={handleFieldChange}
                       variant="outlined"
                     />
-                    <TextField
-                      className={styles.modalTextField}
-                      id="new"
-                      type="password"
-                      label="New password"
-                      value={password.new}
-                      onChange={handleFieldChange}
-                      variant="outlined"
-                    />
-                    <TextField
-                      className={styles.modalTextField}
-                      id="newRenter"
-                      type="password"
-                      label="Re-enter new password"
-                      value={password.newRenter}
-                      onChange={handleFieldChange}
-                      variant="outlined"
-                    />
-                  </Grid>
-                  <div style={{ marginTop: "10px" }}>
-                    {success ? (
-                      <Alert severity="success">{success}</Alert>
-                    ) : null}
-                    {error ? <Alert severity="warning">{error}</Alert> : null}
+                  <Typography className={styles.descText} style={{marginTop:"10px"}}>
+                    <span style={{fontWeight: "600"}}>
+                      NOTE : This action cannot be undone.
+                    </span>
+                  </Typography>
+                  <div style={{marginTop:"10px"}}>
+                  {success ? <Alert severity="success">{success}</Alert> : null}
+                  {error ? <Alert severity="warning">{error}</Alert> : null}
                   </div>
                   <Button
-                    className={styles.signInBtn}
+                    className={styles.deleteAcc}
                     style={{ marginTop: "15px" }}
                     onClick={handleSubmit}
                   >
-                    Change Password
+                    DELETE my account
                   </Button>
                   <Button
-                    className={styles.cancel}
+                    className={styles.canceldanger}
                     style={{ marginTop: "15px" }}
                     onClick={handleClose}
                   >
@@ -185,4 +158,4 @@ const ChangePasswordModal = () => {
   );
 };
 
-export default ChangePasswordModal;
+export default DeleteAccountModal;

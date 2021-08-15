@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Grid, Card, Typography, Button } from "@material-ui/core";
 
 import styles from "./PersonalDetails.module.scss";
-import { AppLayout, ChangePasswordModal, PersonalInfoForm } from "../../components";
+import { AppLayout, ChangePasswordModal, DeleteAccountModal, PersonalInfoForm } from "../../components";
 
 const PersonalDetails = () => {
   
@@ -59,9 +59,9 @@ const PersonalDetails = () => {
                   This action is irreversible.
                 </span>
               </Typography>
-              <Button className={styles.deleteAcc} >
-                DELETE ACCOUNT
-              </Button>
+              <div style={{marginTop: "10px"}}>
+              <DeleteAccountModal />
+              </div>
             </Card>
           </Grid>
         </Grid>

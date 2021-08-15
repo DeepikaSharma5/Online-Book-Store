@@ -27,6 +27,30 @@
   margin: 0px 5px 0px 0px;
 }
 
+.canceldanger.canceldanger {
+  border: 2px solid #f57373;
+  padding: 5px 20px;
+  border-radius: 5px;
+  color: #f57373;
+  margin-left: 20px;
+  font-weight: bold;
+  margin: 0px 5px 0px 0px;
+}
+
+.deleteAcc.deleteAcc {
+  background-color: #f57373;
+  padding: 5px 20px;
+  border-radius: 5px;
+  color: white;
+  margin-left: 20px;
+  font-weight: bold;
+  margin: 10px 5px 0px 0px;
+}
+
+.deleteAcc.deleteAcc:hover {
+  background-color: #e25c5c;
+}
+
 .txtfield {
   background-color: #ebf6f7;
   width: 100%;
