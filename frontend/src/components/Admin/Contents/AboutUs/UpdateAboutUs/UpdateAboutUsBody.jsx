@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import { reactLocalStorage } from 'reactjs-localstorage';
-import { Folder, XCircle, Backspace } from 'react-bootstrap-icons';
+import { Folder, Backspace } from 'react-bootstrap-icons';
 import { APP_ROUTES } from '../../../../../utilities/constants/routes.constants';
 
 export default function UpdateAboutUsBody() {
