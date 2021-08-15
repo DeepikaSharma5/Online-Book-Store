@@ -6,6 +6,7 @@ router.route("/add").post((req, res) => {
     const missionInfo = req.body.missionInfo;
     const customerService = req.body.customerService;
     const convenience = req.body.convenience;
+    const choice = req.body.choice;
     const story1 = req.body.story1;
     const story2 = req.body.story2;
     const story3 = req.body.story3;
@@ -16,6 +17,7 @@ router.route("/add").post((req, res) => {
         missionInfo,
         customerService,
         convenience,
+        choice,
         story1,
         story2,
         story3,
@@ -53,12 +55,19 @@ router.route("/add").post((req, res) => {
     const missionInfo = req.body.missionInfo;
     const customerService = req.body.customerService;
     const convenience = req.body.convenience;
+    const choice = req.body.choice;
     const story1 = req.body.story1;
     const story2 = req.body.story2;
     const story3 = req.body.story3;
     const updateRangeAboutUs = {
-      heading,
-      details,
+      mission,
+      missionInfo,
+      customerService,
+      convenience,
+      choice,
+      story1,
+      story2,
+      story3
     }
     const updateRange = await AboutUs.findOneAndUpdate({ _id: id }, updateRangeAboutUs)
       .then(() => {

@@ -15,6 +15,7 @@ class AddAboutUsBody extends Component {
             missionInfo: "",
             customerService: "",
             convenience: "",
+            choice: "",
             story1: "",
             story2: "",
             story3: ""
@@ -32,6 +33,7 @@ class AddAboutUsBody extends Component {
             missionInfo: this.state.missionInfo,
             customerService: this.state.customerService,
             convenience: this.state.convenience,
+            choice: this.state.choice,
             story1: this.state.story1,
             story2: this.state.story2,
             story3: this.state.story3
@@ -74,6 +76,7 @@ class AddAboutUsBody extends Component {
             missionInfo: " ",
             customerService: " ",
             convenience: "",
+            choice: "",
             story1: " ",
             story2: " ",
             story3: " "
@@ -82,8 +85,8 @@ class AddAboutUsBody extends Component {
 
     render() {
         return (
-            <div className="col-md-14 col-sm-12" style={{ maxWidth: '70rem', margin: 'auto', padding: '10px', borderColor: 'black', background: '#ffffff', boxShadow: '10px 10px 45px #919191,-10px -10px 45px #ffffff' }}>
-                <div className="col" style={{ borderRadius: '33px', height: '970px' }}>
+            <div className="col-md-14 col-sm-12" style={{ maxWidth: '80rem', margin: 'auto', padding: '10px', borderColor: 'black', background: '#ffffff', boxShadow: '10px 10px 45px #919191,-10px -10px 45px #ffffff' }}>
+                <div className="col" style={{ borderRadius: '33px', height: '1100px' }}>
                     <form style={{ paddingTop: "70px" }}>
                         <div className="form-group row">
                             <label htmlFor="inputSubject" className="col-sm-2 col-form-label col-form-label-lg" style={{ fontSize: "170%", fontWeight: "bold", height: '100px' }}>Mission: <label style={{ color: 'red' }}>*</label></label>
@@ -92,7 +95,7 @@ class AddAboutUsBody extends Component {
                             </div>
                         </div>
                         <div className="form-group row">
-                            <label htmlFor="inputSubject" className="col-sm-2 col-form-label col-form-label-lg" style={{ fontSize: "170%", fontWeight: "bold", height: '100px' }}>Mission Info: <label style={{ color: 'red' }}>*</label></label>
+                            <label htmlFor="inputSubject" className="col-sm-2 col-form-label col-form-label-lg" style={{ fontSize: "170%", fontWeight: "bold", height: '100px' }}>Mission Info:<label style={{ color: 'red' }}>*</label></label>
                             <div className="col-sm-10">
                                 <textarea className="form-control form-control-lg" id="missionInfo" rows="2" name="missionInfo" value={this.state.missionInfo} onChange={this.onChange} required />
                             </div>
@@ -104,9 +107,15 @@ class AddAboutUsBody extends Component {
                             </div>
                         </div>
                         <div className="form-group row">
-                            <label htmlFor="inputSubject" className="col-sm-2 col-form-label col-form-label-lg" style={{ fontSize: "170%", fontWeight: "bold", height: '100px' }}>Convenience: <label style={{ color: 'red' }}>*</label></label>
+                            <label htmlFor="inputSubject" className="col-sm-2 col-form-label col-form-label-lg" style={{ fontSize: "170%", fontWeight: "bold", height: '100px' }}>Convenience:<label style={{ color: 'red' }}>*</label></label>
                             <div className="col-sm-10">
                                 <textarea className="form-control form-control-lg" id="convenience" rows="2" name="convenience" value={this.state.convenience} onChange={this.onChange} required />
+                            </div>
+                        </div>
+                        <div className="form-group row">
+                            <label htmlFor="inputSubject" className="col-sm-2 col-form-label col-form-label-lg" style={{ fontSize: "170%", fontWeight: "bold", height: '100px' }}>Choice: <label style={{ color: 'red' }}>*</label></label>
+                            <div className="col-sm-10">
+                                <textarea className="form-control form-control-lg" id="choice" rows="2" name="choice" value={this.state.choice} onChange={this.onChange} required />
                             </div>
                         </div>
                         <div className="form-group row">
