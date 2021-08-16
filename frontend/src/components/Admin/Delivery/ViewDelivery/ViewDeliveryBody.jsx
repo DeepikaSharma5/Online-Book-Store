@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import { Trash, Pencil, PlusLg, File} from 'react-bootstrap-icons';
+import { Trash, Pencil, PlusLg, FileEarmarkPdf, Search } from 'react-bootstrap-icons';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import { reactLocalStorage } from 'reactjs-localstorage';
-import { APP_ROUTES } from '../../../../../utilities/constants/routes.constants';
+import { APP_ROUTES } from '../../../../utilities/constants/routes.constants';
 
 class PrivatePolicyBody extends Component {
     constructor(props) {
@@ -74,13 +74,13 @@ class PrivatePolicyBody extends Component {
             <div>
                 <div className="card card border border-light shadow-0 mb-3" style={{ maxWidth: '100rem', margin: 'auto', padding: '10px' }}>
                     <div>
-                        <button type="button" className="btn btn-info" style={{ float: 'right', padding: '12px 28px', marginBottom:'30px' }} >
-                            <PlusLg /> Add new Private Policy
-                        </button>
+                        {/* <input type="submit" className="orm-control mr-sm-2" placeholder="Search" style={{ float: 'right', padding: '12px 28px', marginBottom: '30px' }} >
+                            <Search />
+                        </input> */}
                     </div>
-                    <div className="card overflow-auto" style={{ maxHeight: '300%',background:'#ffffff',boxShadow:'10px 10px 45px #919191,-10px -10px 45px #ffffff' }}>
+                    <div className="card overflow-auto" style={{ maxHeight: '400%', background: '#ffffff', boxShadow: '10px 10px 45px #919191,-10px -10px 45px #ffffff' }}>
                         <div className="card-body">
-                            <div style={{ height: '450px' }}>
+                            <div style={{ height: '750px' }}>
                                 <div className="card-body" >
                                     <div className="row">
                                         <table className="table table-bordered" style={{ textAlign: 'center' }}>
@@ -125,8 +125,8 @@ class PrivatePolicyBody extends Component {
                         </div>
                     </div>
                     <div>
-                        <button type="button" className="btn btn-info" style={{ float: 'left', padding: '12px 28px', marginBottom:'30px' }} >
-                            <File /> Generate Report
+                        <button type="button" className="btn btn-info" style={{ float: 'left', padding: '12px 28px', marginTop: '30px' }} >
+                            <FileEarmarkPdf /> Generate Report
                         </button>
                     </div>
                 </div>
