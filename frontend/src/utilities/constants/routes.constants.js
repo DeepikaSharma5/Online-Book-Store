@@ -11,6 +11,7 @@ export const APP_ROUTES = {
     USER_VIEW_ADDRESS : '/view-delivery-address',
     USER_UPDATE_ADDRESS : '/update-delivery-address',
     USER_ADD_ADDRESS : '/add-delivery-address',
+    USER_MY_DELIVERIES : '/my-deliveries',
 
 
     ADMIN_VIEW_PRIVATE_POLICY : '/admin-view-private-policy',
@@ -25,4 +26,6 @@ export const APP_ROUTES = {
     ADMIN_ADD_TEAM_DETAILS : '/admin-add-team-details',
     ADMIN_VIEW_TEAM_DETAILS : '/admin-view-team-details',
     ADMIN_UPDATE_TEAM_DETAILS : '/admin-update-team-details',
+    ADMIN_VIEW_DELIVERY : '/admin-view-delivery',
+    ADMIN_UPDATE_DELIVERY : '/admin-update-delivery',
 }
