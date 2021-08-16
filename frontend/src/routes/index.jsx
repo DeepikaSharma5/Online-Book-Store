@@ -23,6 +23,7 @@ import UpdateTeamDetails from "../components/Admin/Contents/TeamDetails/UpdateTe
 import ViewDeliveryAddress from "../components/Customer/DeliveryAddress/ViewDeliveryAddress";
 import AddDeliveryAddress from "../components/Customer/DeliveryAddress/AddDeliveryAddress";
 import UpdateDeliveryAddress from "../components/Customer/DeliveryAddress/UpdateDeliveryAddress";
+import MyDeliveries from "../components/Customer/MyDeliveries/MyDeliveries";
 
 import {Login, Signup, PersonalDetails, WishList} from "../pages";
 
@@ -46,6 +47,9 @@ const AppRoutes = () => {
             <PublicRoute exact path={APP_ROUTES.USER_VIEW_ADDRESS} Component={ViewDeliveryAddress} />
             <PublicRoute exact path={APP_ROUTES.USER_ADD_ADDRESS} Component={AddDeliveryAddress} />
             <PublicRoute exact path={APP_ROUTES.USER_UPDATE_ADDRESS} Component={UpdateDeliveryAddress} />
+            <PublicRoute exact path={APP_ROUTES.USER_MY_DELIVERIES} Component={MyDeliveries} />
+
+
 
 
 
