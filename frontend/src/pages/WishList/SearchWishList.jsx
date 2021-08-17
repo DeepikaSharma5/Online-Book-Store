@@ -76,7 +76,7 @@ const SearchWishList = () => {
                 fontWeight: "bold",
               }}
             >
-              List owner name
+              List owner's name
             </Typography>
             <TextField
               className={styles.modalTextField}
