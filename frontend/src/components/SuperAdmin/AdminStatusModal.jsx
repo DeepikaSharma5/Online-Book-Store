@@ -1,0 +1,151 @@
+import React from "react";
+import {
+  Typography,
+  Switch,
+  Fade,
+  Grid,
+  Backdrop,
+  Modal,
+  Button,
+  makeStyles,
+} from "@material-ui/core";
+import { Alert } from "@material-ui/lab";
+
+import { StyledTableCell, StyledTableRow } from "../../assets/theme/theme";
+import { dangerIcon } from "../../assets/images";
+
+import styles from "./AdminTable.module.scss";
+
+const useStyles = makeStyles((theme) => ({
+  modal: {
+    alignItems: "center",
+    justifyContent: "center",
+    width: "53%",
+    display: "block",
+    margin: "60px auto",
+  },
+  paper: {
+    backgroundColor: "#f9f9f9",
+    outline: "none",
+    borderRadius: "15px",
+    boxShadow: theme.shadows[5],
+    padding: theme.spacing(2, 4, 3),
+  },
+}));
+
+const AdminStatusModal = ({ adminId, adminName, isActive }) => {
+
+  const [open, setOpen] = React.useState(false);
+
+  const [success, setSuccess] = React.useState("");
+  const [error, setError] = React.useState("");
+
+  const [isActivated, setIsActivated] = React.useState(isActive);
+
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const setEnable = () => {
+    //UPDATE api to enable admin
+
+    //If no errors
+    setIsActivated(!isActive);
+    console.log("Status of admin ", adminId, " is ", !isActive);
+    setSuccess("Admin status updated successfully")
+    setTimeout(() => {
+        setSuccess(null)
+        setOpen(false)
+    }, 2000)
+
+    //else show error
+    // setError("Error updating admin status")
+    // setTimeout(() => setError(null), 3000)
+  };
+
+  const classes = useStyles();
+
+  return (
+    <React.Fragment>
+      <Switch
+        color="primary"
+        checked={isActivated}
+        id="isActivated"
+        onChange={handleOpen}
+      />
+      <Modal
+        aria-labelledby="transition-modal-title"
+        aria-describedby="transition-modal-description"
+        className={classes.modal}
+        open={open}
+        closeAfterTransition
+        BackdropComponent={Backdrop}
+        BackdropProps={{
+          timeout: 500,
+        }}
+      >
+        <Fade in={open}>
+          <div className={classes.paper}>
+            <Grid container direction="row">
+              <img
+                src={dangerIcon}
+                style={{
+                  marginRight: "20px",
+                  height: "100px",
+                  width: "100px",
+                }}
+              />
+              <div
+                style={{
+                  margin: "30px 0px 0px 30px",
+                  width: "500px",
+                }}
+              >
+                <Typography
+                  variant="h5"
+                  component="h2"
+                  style={{ paddingBottom: "10px", fontWeight: "500" }}
+                >
+                  {isActive ? "Deactivate admin?" : "Activate admin?"}
+                </Typography>
+                <div>
+                  <Typography className={styles.descText}>
+                    <span style={{ fontWeight: "600", fontSize: "25px" }}>
+                      {adminName}
+                    </span>
+                    <br />
+                    {isActive
+                      ? "This admin will lose authorization to add or update any site content until activated again."
+                      : "This admin WILL BE AUTHORIZED to add or update any site content until deactivated."}
+                  </Typography>
+                  {success ? <Alert severity="success">{success}</Alert> : null}
+                  {error ? <Alert severity="warning">{error}</Alert> : null}
+                  <Button
+                    className={styles.deleteAcc}
+                    style={{ marginTop: "15px" }}
+                    onClick={setEnable}
+                  >
+                    {isActive ? "deactivate" : "activate"} admin
+                  </Button>
+                  <Button
+                    className={styles.canceldanger}
+                    style={{ marginTop: "15px" }}
+                    onClick={handleClose}
+                  >
+                    Cancel
+                  </Button>
+                </div>
+              </div>
+            </Grid>
+          </div>
+        </Fade>
+      </Modal>
+    </React.Fragment>
+  );
+};
+
+export default AdminStatusModal;

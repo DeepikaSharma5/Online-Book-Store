@@ -1,0 +1,48 @@
+.enabled {
+  display: inline-block;
+  padding: 0 4px;
+  border-radius: 3px;
+  font-size: 12px;
+  margin-right: 4px;
+  border: 1px solid rgba(0, 255, 0, 0.5);
+  background: rgba(0, 255, 0, 0.3);
+}
+.disabled {
+  display: inline-block;
+  padding: 0 4px;
+  border-radius: 3px;
+  font-size: 12px;
+  margin-right: 4px;
+  border: 1px solid #f8564a;
+  background: #ffb4ae;
+}
+
+.descText {
+  color: #5c5c5c;
+  font-size: 18px;
+}
+
+.canceldanger.canceldanger {
+  border: 2px solid #f57373;
+  padding: 5px 20px;
+  border-radius: 5px;
+  color: #f57373;
+  margin-left: 20px;
+  font-weight: bold;
+  margin: 0px 5px 0px 0px;
+}
+
+.deleteAcc.deleteAcc {
+  background-color: #f57373;
+  padding: 5px 20px;
+  border-radius: 5px;
+  color: white;
+  margin-left: 20px;
+  font-weight: bold;
+  margin: 10px 5px 0px 0px;
+}
+
+.deleteAcc.deleteAcc:hover {
+  background-color: #e25c5c;
+}
+

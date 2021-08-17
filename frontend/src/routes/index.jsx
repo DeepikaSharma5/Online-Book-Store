@@ -27,6 +27,7 @@ import MyDeliveries from "../components/Customer/MyDeliveries/MyDeliveries";
 import ViewDelivery from "../components/Admin/Delivery/ViewDelivery/ViewDelivery";
 import UpdateDelivery from "../components/Admin/Delivery/UpdateDelivery/UpdateDelivery";
 
+
 //sid's part
 import AddBook from "../components/Admin/Contents/Book/AddBook/AddBook";
 import AddCategory from "../components/Admin/Contents/Category/AddCategory/AddCategory";
@@ -36,7 +37,6 @@ import UpdateBook from "../components/Admin/Contents/Book/UpdateBook/UpdateBook"
 import UpdateCategory from "../components/Admin/Contents/Category/UpdateCategory/UpdateCategory";
 import ProductDashboard from "../components/Admin/Contents/ProductDashboard/ProductDashboard";
 import Homepage from "../components/Customer/Homepage/Homepage/Homepage";
-
 
 import {Login, Signup, PersonalDetails, WishList, SearchWishList, ManageAdmins} from "../pages";
 

@@ -18,3 +18,4 @@ const CardDetailsSchema = new mongoose.Schema(
 );
 
 module.exports = mongoose.model("carddetails", CardDetailsSchema);
+
