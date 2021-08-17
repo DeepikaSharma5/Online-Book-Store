@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { APP_ROUTES } from '../../../../utilities/constants/routes.constants';
 
 class Footer extends Component {
     render() { 
@@ -24,8 +25,8 @@ class Footer extends Component {
                     <div class="col">
                         <h3 style={{ color: 'white' }} >Terms and Policy</h3>
                         <ul class="nav flex-column">
-                            <li class="nav-item mb-2"><a href="http://localhost:3000/terms-and-conditions" style={{ color: 'white', fontSize:'19px' }}>Terms and Conditions</a></li>
-                            <li class="nav-item mb-2"><a href="http://localhost:3000/private-policy" style={{ color: 'white', fontSize:'19px' }}>Private Policy</a></li>
+                            <li class="nav-item mb-2"><a href={APP_ROUTES.USER_TERMS_AND_CONDITIONS} style={{ color: 'white', fontSize:'19px' }}>Terms and Conditions</a></li>
+                            <li class="nav-item mb-2"><a href={APP_ROUTES.USER_PRIVATE_POLICY} style={{ color: 'white', fontSize:'19px' }}>Private Policy</a></li>
                         </ul>
                     </div>
                     <div class="col">

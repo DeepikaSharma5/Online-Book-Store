@@ -37,6 +37,9 @@ app.use('/about-us',AboutUs);
 const TeamDetails = require('./routers/TeamDetails');
 app.use('/team-details',TeamDetails);
 
+const DeliveryAddress = require('./routers/DeliveryAddress');
+app.use('/delivery-address', DeliveryAddress)
+
 const Book = require('./routers/Book');
 app.use('/book', Book);
 

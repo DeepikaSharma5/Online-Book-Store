@@ -1,22 +1,26 @@
 import React, { Component } from 'react';
 import PrivatePolicyHeading from './PrivatePolictHeading';
 import PrivatePolicyBody from './PrivatePolicyBody';
+import Header from "../Homepage/Header/Header";
+import Footer from '../Homepage/Footer/Footer';
 
 class PrivatePolicy extends Component {
-    render() { 
-        return ( 
+    render() {
+        return (
             <div>
-                {/**navigation */}
+                <Header />
                 <div>
-                    <PrivatePolicyHeading/>
+                    <PrivatePolicyHeading />
                 </div>
                 <div>
-                    <PrivatePolicyBody/>
+                    <PrivatePolicyBody />
                 </div>
-                {/**footer */}
+                <div style={{ paddingTop: "8%" }}>
+                    <Footer />
+                </div>
             </div>
-         );
+        );
     }
 }
- 
+
 export default PrivatePolicy;
