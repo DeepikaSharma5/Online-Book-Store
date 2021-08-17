@@ -1,7 +1,7 @@
 const express = require("express")
 const cors = require("cors")
 const mongoose = require("mongoose")
-const nodemailer = require("nodemailer")
+const nodemailer = require('nodemailer')
 
 require("dotenv").config()
 const app = express()
@@ -9,7 +9,7 @@ const port = process.env.PORT || 6060
 app.use(cors())
 app.use(express.json())
 
-const password = process.env.EMAIL_PASSWORD
+const password = process.env.EMAIL_PASSWORD;
 
 const url = process.env.ATLAS_URI
 global.URL = url
@@ -18,27 +18,30 @@ mongoose.connect(url, { useNewUrlParser: true, useCreateIndex: true, useUnifiedT
 const connection = mongoose.connection
 
 connection.once("open", () => {
-  console.log("MongoDB connection successfully")
+    console.log("MongoDB connection successfully")
+  })
+
+app.get('/',(req,res) => {
+    res.send("Running Successfully")
 })
 
-app.get("/", (req, res) => {
-  res.send("Running Successfully")
-})
+const PrivatePolicy = require("./routers/PrivatePolicy");
+app.use("/private-policy",PrivatePolicy)
 
-const PrivatePolicy = require("./routers/PrivatePolicy")
-app.use("/private-policy", PrivatePolicy)
+const TermsAndConditions = require("./routers/TermsAndConditions");
+app.use("/terms-and-conditions",TermsAndConditions)
 
-const TermsAndConditions = require("./routers/TermsAndConditions")
-app.use("/terms-and-conditions", TermsAndConditions)
+const AboutUs = require('./routers/AboutUs');
+app.use('/about-us',AboutUs);
 
-const AboutUs = require("./routers/AboutUs")
-app.use("/about-us", AboutUs)
+const TeamDetails = require('./routers/TeamDetails');
+app.use('/team-details',TeamDetails);
 
-const TeamDetails = require("./routers/TeamDetails")
-app.use("/team-details", TeamDetails)
+const Book = require('./routers/Book');
+app.use('/book', Book);
 
-const DeliveryAddress = require("./routers/DeliveryAddress")
-app.use("/delivery-address",DeliveryAddress)
+const Category = require('./routers/Category');
+app.use('/category', Category);
 
 //Contact Us Email sending configuration
 app.post("/contactdata", (req, res) => {

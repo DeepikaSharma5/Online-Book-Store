@@ -27,6 +27,17 @@ import MyDeliveries from "../components/Customer/MyDeliveries/MyDeliveries";
 import ViewDelivery from "../components/Admin/Delivery/ViewDelivery/ViewDelivery";
 import UpdateDelivery from "../components/Admin/Delivery/UpdateDelivery/UpdateDelivery";
 
+
+//sid's part
+import AddBook from "../components/Admin/Contents/Book/AddBook/AddBook";
+import AddCategory from "../components/Admin/Contents/Category/AddCategory/AddCategory";
+import ViewBook from "../components/Admin/Contents/Book/ViewBook/ViewBook";
+import ViewCategory from "../components/Admin/Contents/Category/ViewCategory/ViewCategory";
+import UpdateBook from "../components/Admin/Contents/Book/UpdateBook/UpdateBook";
+import UpdateCategory from "../components/Admin/Contents/Category/UpdateCategory/UpdateCategory";
+import ProductDashboard from "../components/Admin/Contents/ProductDashboard/ProductDashboard";
+import Homepage from "../components/Customer/Homepage/Homepage/Homepage";
+
 import {Login, Signup, PersonalDetails, WishList, SearchWishList, ManageAdmins} from "../pages";
 
 const AppRoutes = () => {
@@ -53,7 +64,7 @@ const AppRoutes = () => {
             <PublicRoute exact path={APP_ROUTES.USER_ADD_ADDRESS} Component={AddDeliveryAddress} />
             <PublicRoute exact path={APP_ROUTES.USER_UPDATE_ADDRESS} Component={UpdateDeliveryAddress} />
             <PublicRoute exact path={APP_ROUTES.USER_MY_DELIVERIES} Component={MyDeliveries} />
-
+            <PublicRoute exact path={APP_ROUTES.USER_HOMEPAGE} Component={Homepage} />
 
 
 
@@ -73,6 +84,14 @@ const AppRoutes = () => {
             <PublicRoute exact path={APP_ROUTES.ADMIN_VIEW_TEAM_DETAILS} Component={ViewTeamDetails}></PublicRoute>
             <PublicRoute exact path={APP_ROUTES.ADMIN_VIEW_DELIVERY} Component={ViewDelivery}></PublicRoute>
             <PublicRoute exact path={APP_ROUTES.ADMIN_UPDATE_DELIVERY} Component={UpdateDelivery}></PublicRoute>
+            <PublicRoute exact path={APP_ROUTES.ADMIN_ADD_BOOK} Component={AddBook} />
+            <PublicRoute exact path={APP_ROUTES.ADMIN_ADD_CATEGORY} Component={AddCategory} />             
+            <PublicRoute exact path={APP_ROUTES.ADMIN_VIEW_BOOK} Component={ViewBook} />                
+            <PublicRoute exact path={APP_ROUTES.ADMIN_VIEW_CATEGORY} Component={ViewCategory} />             
+            <PublicRoute exact path={APP_ROUTES.ADMIN_UPDATE_BOOK} Component={UpdateBook} />            
+            <PublicRoute exact path={APP_ROUTES.ADMIN_UPDATE_CATEGORY} Component={UpdateCategory} />
+            <PublicRoute exact path={APP_ROUTES.ADMIN_PRODUCT_DASHBOARD} Component={ProductDashboard} />
+        
         </Router>
     )
 }
