@@ -17,6 +17,7 @@ export const APP_ROUTES = {
     USER_ADD_ADDRESS : '/add-delivery-address',
     USER_MY_DELIVERIES : '/my-deliveries',
 
+    SUPERADMIN_MANAGE_ADMINS : '/manage-admins',
 
     ADMIN_VIEW_PRIVATE_POLICY : '/admin-view-private-policy',
     ADMIN_ADD_PRIVATE_POLICY : '/admin-add-private-policy',

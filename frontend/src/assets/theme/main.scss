@@ -284,3 +284,22 @@ h6 {
 
 }
 
+.statusChip {
+  display: inline-block;
+  padding: 0 4px;
+  border-radius: 3px;
+  font-size: 12px;
+  margin-right: 4px;
+
+  &.enabled {
+    border: 1px solid rgba(0, 255, 0, 0.5);
+    background: rgba(0, 255, 0, 0.3);
+  }
+
+  &.disabled {
+    border: 1px solid #f8564a;
+    background: #ffb4ae;
+  }
+
+}
+
