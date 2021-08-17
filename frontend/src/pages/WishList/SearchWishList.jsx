@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Grid, Typography, Button, TextField } from "@material-ui/core";
+import { Alert } from "@material-ui/lab";
 
 import styles from "./WishList.module.scss";
 
@@ -7,6 +8,8 @@ import { AppLayout, WishListTable } from "../../components";
 
 const SearchWishList = () => {
   const [ownerName, setOwnerName] = useState("");
+
+  const [error, setError] = useState(null);
 
   const [searchResults, setSearchResults] = useState([
     {
@@ -25,6 +28,17 @@ const SearchWishList = () => {
       location: "Kandy",
     },
   ]);
+
+  const searchForList = () => {
+    setError(null);
+    if (ownerName === "") {
+      setError("Please enter a name to search");
+      setTimeout(() => setError(null), 3000);
+    } else {
+      //Search
+      //setSearchResults(resultset)
+    }
+  };
 
   return (
     <React.Fragment>
@@ -75,9 +89,11 @@ const SearchWishList = () => {
             <Button
               className={styles.searchbtn}
               style={{ margin: "20px 0px", width: "90%" }}
+              onClick={searchForList}
             >
               Search for list
             </Button>
+            {error ? <Alert severity="warning">{error}</Alert> : null}
           </Grid>
           <Grid
             item
