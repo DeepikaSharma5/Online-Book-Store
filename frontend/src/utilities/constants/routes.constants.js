@@ -7,6 +7,7 @@ export const APP_ROUTES = {
     USER_WISHLIST : '/mywishlist',
     WISHLIST_SEARCH:'/wishlists',
     A_WISHLIST:'/wishlist/',
+    USER_HOMEPAGE : '/homepage',
 
     USER_CONTACT_US : '/contact-us',
     USER_PRIVATE_POLICY : '/private-policy',
@@ -17,6 +18,7 @@ export const APP_ROUTES = {
     USER_ADD_ADDRESS : '/add-delivery-address',
     USER_MY_DELIVERIES : '/my-deliveries',
 
+    SUPERADMIN_MANAGE_ADMINS : '/manage-admins',
 
     ADMIN_VIEW_PRIVATE_POLICY : '/admin-view-private-policy',
     ADMIN_ADD_PRIVATE_POLICY : '/admin-add-private-policy',
@@ -31,5 +33,12 @@ export const APP_ROUTES = {
     ADMIN_VIEW_TEAM_DETAILS : '/admin-view-team-details',
     ADMIN_UPDATE_TEAM_DETAILS : '/admin-update-team-details',
     ADMIN_VIEW_DELIVERY : '/admin-view-delivery',
-    ADMIN_UPDATE_DELIVERY : '/admin-update-delivery',
+    ADMIN_UPDATE_DELIVERY : '/admin-update-delivery',   
+    ADMIN_ADD_BOOK : '/admin-add-book',   
+    ADMIN_ADD_CATEGORY : '/admin-add-category',
+    ADMIN_VIEW_BOOK : '/admin-view-book',
+    ADMIN_VIEW_CATEGORY : '/admin-view-category',            
+    ADMIN_UPDATE_BOOK : '/admin-update-book',           
+    ADMIN_UPDATE_CATEGORY : '/admin-update-category',
+    ADMIN_PRODUCT_DASHBOARD : '/admin-product-dashboard',
 }
