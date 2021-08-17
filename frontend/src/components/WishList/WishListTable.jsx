@@ -4,12 +4,12 @@ import {
   TableHead,
   TableRow,
   TableBody,
-  makeStyles,
-  CircularProgress,
+  Button,
   Typography,
 } from "@material-ui/core";
 
 import { StyledTableCell, StyledTableRow } from "../../assets/theme/theme";
+import { APP_ROUTES } from "../../utilities/constants/routes.constants";
 
 const WishListTable = ({ resultList }) => {
   return (
@@ -26,7 +26,7 @@ const WishListTable = ({ resultList }) => {
             resultList.map((wishListResult) => (
               <StyledTableRow key={wishListResult.id}>
                 <StyledTableCell align="left">
-                  {wishListResult.name}
+                  <Button href={APP_ROUTES.A_WISHLIST+wishListResult.id}>{wishListResult.name}</Button>
                 </StyledTableCell>
                 <StyledTableCell align="left">
                   {wishListResult.location}

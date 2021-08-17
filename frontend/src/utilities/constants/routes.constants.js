@@ -5,7 +5,8 @@ export const APP_ROUTES = {
     USER_PERSONAL_DETAILS : '/personaldetails',
 
     USER_WISHLIST : '/mywishlist',
-    USER_WISHLIST_SEARCH:'/wishlists',
+    WISHLIST_SEARCH:'/wishlists',
+    A_WISHLIST:'/wishlist/',
 
     USER_CONTACT_US : '/contact-us',
     USER_PRIVATE_POLICY : '/private-policy',
