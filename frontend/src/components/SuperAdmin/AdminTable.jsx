@@ -10,15 +10,12 @@ import {
 } from "@material-ui/core";
 
 import { StyledTableCell, StyledTableRow } from "../../assets/theme/theme";
+import { dangerIcon } from "../../assets/images";
 
-import styles from "./AdminTable.module.scss"
+import styles from "./AdminTable.module.scss";
+import AdminStatusModal from "./AdminStatusModal";
 
 const AdminTable = ({ adminList }) => {
-
-    const setEnable = (e) => {
-        //UPDATE api to enable admin
-    }
-
   return (
     <React.Fragment>
       <Table>
@@ -44,7 +41,11 @@ const AdminTable = ({ adminList }) => {
                   )}
                 </StyledTableCell>
                 <StyledTableCell align="left">
-                  <Switch color="primary" checked={admin.isActive} id="isActive" onChange={setEnable(admin.id)} />
+                  <AdminStatusModal
+                    adminId={admin.id}
+                    adminName={admin.name}
+                    isActive={admin.isActive}
+                  />
                 </StyledTableCell>
               </StyledTableRow>
             ))
