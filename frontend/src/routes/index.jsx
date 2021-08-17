@@ -40,6 +40,8 @@ import Homepage from "../components/Customer/Homepage/Homepage/Homepage";
 
 import {Login, Signup, PersonalDetails, WishList, SearchWishList, ManageAdmins} from "../pages";
 
+import PaymentDashboard from "../pages/Payment/PaymentDashboard";
+
 const AppRoutes = () => {
     const history = createBrowserHistory();
 
@@ -91,6 +93,8 @@ const AppRoutes = () => {
             <PublicRoute exact path={APP_ROUTES.ADMIN_UPDATE_BOOK} Component={UpdateBook} />            
             <PublicRoute exact path={APP_ROUTES.ADMIN_UPDATE_CATEGORY} Component={UpdateCategory} />
             <PublicRoute exact path={APP_ROUTES.ADMIN_PRODUCT_DASHBOARD} Component={ProductDashboard} />
+            <PublicRoute exact path={APP_ROUTES.ADMIN_PAYMENT_DASHBOARD} Component={PaymentDashboard} />
+
         
         </Router>
     )
