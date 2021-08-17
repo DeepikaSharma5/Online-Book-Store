@@ -23,6 +23,9 @@ import UpdateTeamDetails from "../components/Admin/Contents/TeamDetails/UpdateTe
 import ViewDeliveryAddress from "../components/Customer/DeliveryAddress/ViewDeliveryAddress";
 import AddDeliveryAddress from "../components/Customer/DeliveryAddress/AddDeliveryAddress";
 import UpdateDeliveryAddress from "../components/Customer/DeliveryAddress/UpdateDeliveryAddress";
+import MyDeliveries from "../components/Customer/MyDeliveries/MyDeliveries";
+import ViewDelivery from "../components/Admin/Delivery/ViewDelivery/ViewDelivery";
+import UpdateDelivery from "../components/Admin/Delivery/UpdateDelivery/UpdateDelivery";
 
 import {Login, Signup, PersonalDetails, WishList, SearchWishList} from "../pages";
 
@@ -47,6 +50,9 @@ const AppRoutes = () => {
             <PublicRoute exact path={APP_ROUTES.USER_VIEW_ADDRESS} Component={ViewDeliveryAddress} />
             <PublicRoute exact path={APP_ROUTES.USER_ADD_ADDRESS} Component={AddDeliveryAddress} />
             <PublicRoute exact path={APP_ROUTES.USER_UPDATE_ADDRESS} Component={UpdateDeliveryAddress} />
+            <PublicRoute exact path={APP_ROUTES.USER_MY_DELIVERIES} Component={MyDeliveries} />
+
+
 
 
 
@@ -63,6 +69,8 @@ const AppRoutes = () => {
             <PublicRoute exact path={APP_ROUTES.ADMIN_ADD_TEAM_DETAILS} Component={AddTeamDetails}></PublicRoute>
             <PublicRoute exact path={APP_ROUTES.ADMIN_UPDATE_TEAM_DETAILS} Component={UpdateTeamDetails}></PublicRoute>
             <PublicRoute exact path={APP_ROUTES.ADMIN_VIEW_TEAM_DETAILS} Component={ViewTeamDetails}></PublicRoute>
+            <PublicRoute exact path={APP_ROUTES.ADMIN_VIEW_DELIVERY} Component={ViewDelivery}></PublicRoute>
+            <PublicRoute exact path={APP_ROUTES.ADMIN_UPDATE_DELIVERY} Component={UpdateDelivery}></PublicRoute>
         </Router>
     )
 }
