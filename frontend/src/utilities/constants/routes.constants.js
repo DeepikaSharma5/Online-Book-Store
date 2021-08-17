@@ -3,7 +3,10 @@ export const APP_ROUTES = {
     SIGNUP : '/signup',
     LOGIN : '/login',
     USER_PERSONAL_DETAILS : '/personaldetails',
+
     USER_WISHLIST : '/mywishlist',
+    USER_WISHLIST_SEARCH:'/wishlists',
+
     USER_CONTACT_US : '/contact-us',
     USER_PRIVATE_POLICY : '/private-policy',
     USER_TERMS_AND_CONDITIONS : '/terms-and-conditions',
