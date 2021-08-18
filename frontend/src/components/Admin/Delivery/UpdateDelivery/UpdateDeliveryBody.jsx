@@ -60,53 +60,55 @@ export default function UpdatePrivatePolicyBody() {
 
 
     return (
-        <div className="col-md-14 col-sm-12" style={{ maxWidth: '70rem', margin: 'auto', padding: '10px', borderColor: 'black', background: '#ffffff', boxShadow: '10px 10px 45px #919191,-10px -10px 45px #ffffff' }}>
-            <div className="col" style={{ borderRadius: '33px', height: '1270px' }}>
-                <form id="UpdateForm" style={{ paddingTop: "70px" }}>
-                    <div className="form-group row ">
-                        <label htmlFor="inputName" className="col-sm-2 col-form-label col-form-label-lg" style={{ fontSize: "170%", fontWeight: "bold", height: '150px' }}>Order ID: </label>
-                        <div className="col-sm-10">
-                            <h4>{heading}</h4>
+        <div style={{ position: 'relative', left: '110px', height:'1100px' }}>
+            <div className="col-md-14 col-sm-12" style={{ maxWidth: '70rem', margin: 'auto', padding: '10px', borderColor: 'black', background: '#ffffff', boxShadow: '10px 10px 45px #919191,-10px -10px 45px #ffffff' }}>
+                <div className="col" style={{ borderRadius: '33px', height: '1000px' }}>
+                    <form id="UpdateForm" style={{ paddingTop: "70px" }}>
+                        <div className="form-group row ">
+                            <label htmlFor="inputName" className="col-sm-2 col-form-label col-form-label-lg" style={{ fontSize: "130%", fontWeight: "bold", height: '150%' }}>Order ID: </label>
+                            <div className="col-sm-10">
+                                <h4>{heading}</h4>
+                            </div>
                         </div>
-                    </div>
-                    <div className="form-group row">
-                        <label htmlFor="inputSubject" className="col-sm-2 col-form-label col-form-label-lg" style={{ fontSize: "170%", fontWeight: "bold", height: '200px' }}>Address 1:</label>
-                        <div className="col-sm-10">
-                            <h4>{details}</h4>
+                        <div className="form-group row">
+                            <label htmlFor="inputSubject" className="col-sm-2 col-form-label col-form-label-lg" style={{ fontSize: "130%", fontWeight: "bold", height: '150%' }}>Address 1:</label>
+                            <div className="col-sm-10">
+                                <h4>{details}</h4>
+                            </div>
                         </div>
-                    </div>
-                    <div className="form-group row">
-                        <label htmlFor="inputSubject" className="col-sm-2 col-form-label col-form-label-lg" style={{ fontSize: "170%", fontWeight: "bold", height: '200px' }}>Address 2:</label>
-                        <div className="col-sm-10">
-                            <h4>{details}</h4>
+                        <div className="form-group row">
+                            <label htmlFor="inputSubject" className="col-sm-2 col-form-label col-form-label-lg" style={{ fontSize: "130%", fontWeight: "bold", height: '150%' }}>Address 2:</label>
+                            <div className="col-sm-10">
+                                <h4>{details}</h4>
+                            </div>
                         </div>
-                    </div>
-                    <div className="form-group row">
-                        <label htmlFor="inputSubject" className="col-sm-2 col-form-label col-form-label-lg" style={{ fontSize: "170%", fontWeight: "bold", height: '200px' }}>Address 3:</label>
-                        <div className="col-sm-10">
-                            <h4>{details}</h4>
+                        <div className="form-group row">
+                            <label htmlFor="inputSubject" className="col-sm-2 col-form-label col-form-label-lg" style={{ fontSize: "130%", fontWeight: "bold", height: '150%' }}>Address 3:</label>
+                            <div className="col-sm-10">
+                                <h4>{details}</h4>
+                            </div>
                         </div>
-                    </div>
-                    <div className="form-group row">
-                        <label htmlFor="inputSubject" className="col-sm-2 col-form-label col-form-label-lg" style={{ fontSize: "170%", fontWeight: "bold", height: '200px' }}>Phone Number:</label>
-                        <div className="col-sm-10">
-                            <h4>{details}</h4>
+                        <div className="form-group row">
+                            <label htmlFor="inputSubject" className="col-sm-2 col-form-label col-form-label-lg" style={{ fontSize: "130%", fontWeight: "bold", height: '150%' }}>Phone Number:</label>
+                            <div className="col-sm-10">
+                                <h4>{details}</h4>
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleFormControlSelect1" style={{ fontSize: "170%", fontWeight: "bold", height: '50px' }}>Order Delivery Status: </label>
-                        <select class="form-control" id="exampleFormControlSelect1">
-                            <option>Pending</option>
-                            <option>Processing</option>
-                            <option>Shipped</option>
-                            <option>Delivered</option>
-                        </select>
-                    </div>
-                    <div className="btn-toolbar justify-content-between" role="toolbar" aria-label="Toolbar with button groups">
-                        <button type="button" className="btn btn-outline-danger" style={{ float: 'right', padding: '12px 68px', marginBottom: '30px', fontWeight: 'bold', fontSize: "130%" }} onClick={cancel}><Backspace /> Cancel</button>
-                        <button type="submit" className="btn btn-outline-success" style={{ float: 'left', padding: '12px 68px', marginBottom: '30px', fontWeight: 'bold', fontSize: "130%" }} onClick={updatePrivatePolicy}><Folder /> Save</button>
-                    </div>
-                </form>
+                        <div class="form-group">
+                            <label for="exampleFormControlSelect1" style={{ fontSize: "130%", fontWeight: "bold", height: '50px' }}>Order Delivery Status: </label>
+                            <select class="form-control" id="exampleFormControlSelect1">
+                                <option>Pending</option>
+                                <option>Processing</option>
+                                <option>Shipped</option>
+                                <option>Delivered</option>
+                            </select>
+                        </div>
+                        <div className="btn-toolbar justify-content-between" role="toolbar" aria-label="Toolbar with button groups">
+                            <button type="button" className="btn btn-outline-danger" style={{ float: 'right', padding: '12px 68px', marginBottom: '30px', fontWeight: 'bold', fontSize: "130%" }} onClick={cancel}><Backspace /> Cancel</button>
+                            <button type="submit" className="btn btn-outline-success" style={{ float: 'left', padding: '12px 68px', marginBottom: '30px', fontWeight: 'bold', fontSize: "130%" }} onClick={updatePrivatePolicy}><Folder /> Save</button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     );
