@@ -16,11 +16,11 @@ export const APP_ROUTES = {
   USER_CONTACT_US: "/contact-us",
   USER_PRIVATE_POLICY: "/private-policy",
   USER_TERMS_AND_CONDITIONS: "/terms-and-conditions",
-  USER_ADD_ADDRESS: "./delivery-address",
   USER_VIEW_ADDRESS: "/view-delivery-address",
   USER_UPDATE_ADDRESS: "/update-delivery-address",
   USER_ADD_ADDRESS: "/add-delivery-address",
   USER_MY_DELIVERIES: "/my-deliveries",
+  USER_ABOUT_US: "/about-us",
 
   SUPERADMIN_MANAGE_ADMINS: "/manage-admins",
 
