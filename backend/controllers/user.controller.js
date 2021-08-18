@@ -10,12 +10,12 @@ dotenv.config();
 const validateUser = (user) => {
   const emailRegExp = /\S+@\S+\.\S+/;
   const passwordRegExp = "^[a-zA-Z0-9]{3,30}$";
-  const phoneRegExp = "^[0][0-9]{3,9}$";
+  const phoneRegExp = "^[0-9]{10,10}$";
 
   const schema = Joi.object({
     name: Joi.string().min(6).required(),
     email: Joi.string().pattern(new RegExp(emailRegExp)).required(),
-    phone: Joi.string().pattern(new RegExp(phoneRegExp)).required(),
+    phone: Joi.string().pattern(new RegExp(phoneRegExp)).min(10).required(),
     password: Joi.string().pattern(new RegExp(passwordRegExp)).required(),
   });
 

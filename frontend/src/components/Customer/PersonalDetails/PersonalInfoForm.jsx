@@ -8,7 +8,7 @@ const PersonalInfoForm = () => {
   const [personalDetails, setPersonalDetails] = useState({
     name: "Nipuni Fernando",
     email: "nipuni@gmail.com",
-    contactNum: "0718829934",
+    phone: "0718829934",
   });
 
   const [success, setSuccess] = useState("");
@@ -36,15 +36,24 @@ const PersonalInfoForm = () => {
   };
 
   const submitDetails = () => {
+
+    setError("")
+    setSuccess("")
+
     if (
       personalDetails.name === "" ||
       personalDetails.email === "" ||
-      personalDetails.contactNum === ""
+      personalDetails.phone === ""
     ) {
-      setSuccess("");
       setError("Please enter all required fields");
       setTimeout(() => setError(""), 3000);
-    } else {
+    } else if(!personalDetails.email.match(/[\w\d\.-]+@[\w\d\.-]+\.[\w\d\.-]+/g)) {
+      setError("Please enter a valid email");
+      setTimeout(() => setError(""), 3000);
+    } else if(personalDetails.phone.length < 10) {
+      setError("Please enter a valid phone number")
+      setTimeout(() => setError(""), 3000);
+    }else {
       setError("");
       setSuccess("Details updated successfully");
       setTimeout(() => setSuccess(""), 3000);
@@ -102,11 +111,11 @@ const PersonalInfoForm = () => {
               <TextField
                 className={styles.txtfield}
                 disabled={disableFields}
-                id="contactNum"
+                id="phone"
                 inputProps={{
                   maxLength: 10,
                 }}
-                value={personalDetails.contactNum}
+                value={personalDetails.phone}
                 onChange={handleFieldChange}
                 variant="outlined"
                 className={styles.txtfield}
