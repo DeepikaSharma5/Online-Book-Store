@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Swal from 'sweetalert2';
+import Select from 'react-select';
 import { reactLocalStorage } from 'reactjs-localstorage';
 import { Folder, XCircle, Backspace } from 'react-bootstrap-icons';
 import { APP_ROUTES } from '../../../../../utilities/constants/routes.constants';
@@ -10,12 +11,22 @@ export default function UpdateCategoryBody() {
     const id = Categories[0];
     const [category_name, setCategoryName] = useState(Categories[1]);
     const [description, setDescription] = useState(Categories[2]);
+    const [books, setBooks] = useState(Categories[3]);
+    const [options, setOptions] = useState([]);
+ 
+    useEffect(async () => {
+      const options = await axios(
+        'http://localhost:6060/books/view',
+      );   
+      setOptions(options.data.data);
+    });
 
     function updateCategories(e) {
         e.preventDefault();
         const newUpdateCategories = {
             category_name,
-            description
+            description,
+            books
         }
 
         axios.post("http://localhost:6060/category/update/" + id, newUpdateCategories)
@@ -85,6 +96,16 @@ export default function UpdateCategoryBody() {
                             style={{height: "100px"}}
                             onChange={(e) => { setDescription(e.target.value) }}/>
                     </div>
+                    <p>Select Books</p>
+                    <Select
+                        isMulti
+                        name="books"
+                        onChange={(e) => { setBooks(e.target.value) }}
+                        options={options}
+                        className="basic-multi-select"
+                        classNamePrefix="select"
+                    />
+                    <br></br>
                     <div className="btn-toolbar justify-content-between" role="toolbar" aria-label="Toolbar with button groups">
                         <button type="button" className="btn btn-outline-danger" style={{ float: 'right', padding: '12px 68px', marginBottom: '30px', fontWeight: 'bold', fontSize: "130%" }} onClick={cancel}><Backspace /> Cancel</button>
                         <button type="reset" className="btn btn-outline-primary" style={{ float: 'center',padding: '12px 68px', marginBottom:'30px', fontWeight:'bold', fontSize:"130%"  }} onClick={reset}><XCircle/> Clear</button>

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import Swal from 'sweetalert2';
+import Select from 'react-select';
 import { APP_ROUTES } from '../../../../../utilities/constants/routes.constants';
 
 class AddCategoryBody extends Component {
@@ -8,22 +9,48 @@ class AddCategoryBody extends Component {
         super(props);
         this.onChange = this.onChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
-        this.onClear = this.onClear.bind(this);
+        this.onBookSelect = this.onBookSelect.bind(this);
         this.state = {
             category_name: '',
-            description: ''
+            description: '',
+            books: [],
+            options: [],
+            selectedBooks: []
         }
+    }
+
+    componentDidMount(){
+        axios.get('http://localhost:6060/book/view')
+        .then(response => {
+            this.setState({ books: response.data.data}, () => {
+                let data = [];
+                this.state.books.map((item, index) => {
+                    let book = {
+                        value: item._id, 
+                        label: item.title
+                    }
+                    data.push(book)
+                })
+                this.setState({options: data});
+            })   
+        })
+        
     }
 
     onChange(e) {
         this.setState({ [e.target.name]: e.target.value })
     };
 
+    onBookSelect(e) {
+        this.setState( { selectedBooks: e ? e.map(item =>item.value) : [] })
+    }
+
     onSubmit(e) {
         e.preventDefault();
         let AddCategory = {
             category_name: this.state.category_name,
-            description: this.state.description
+            description: this.state.description,            
+            books: this.state.selectedBooks
         }
         console.log('Data', AddCategory);
         axios.post('http://localhost:6060/category/add', AddCategory)
@@ -57,13 +84,6 @@ class AddCategoryBody extends Component {
             })
     }
 
-    onClear(e){
-        this.setState= {
-            category_name: '',
-            description: ''
-        }
-    }
-
     render() {
         return (
             <div className="container">
@@ -93,6 +113,16 @@ class AddCategoryBody extends Component {
                             style={{height: "100px"}}
                             onChange={this.onChange}/>
                     </div>
+                    <p>Select books</p>
+                    <Select
+                        isMulti
+                        name="books"
+                        onChange={this.onBookSelect}
+                        options={this.state.options}
+                        className="basic-multi-select"
+                        classNamePrefix="select"
+                    />
+                    <br></br>
                     <br></br>
                     <button type="submit" className="btn btn-primary">Submit</button>
                     <br></br><br></br>

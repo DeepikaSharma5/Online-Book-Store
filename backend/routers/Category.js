@@ -4,13 +4,13 @@ let Category = require("../models/Category");
 router.route("/add").post((req, res) => {
     const category_name = req.body.category_name;
     const description = req.body.description;
-    const options = req.body.books;
+    const books = req.body.books;
     const date = new Date().toISOString().slice(0,10);
   
     const newCategory = new Category({
         category_name,
         description,
-        options,
+        books,
         date
     })
   
@@ -22,7 +22,7 @@ router.route("/add").post((req, res) => {
 
 
   router.route("/view").get((req, res) => {
-    Category.find({}).populate('books', 'title author_name publisher year isbn description')
+    Category.find({}).populate('books', 'title author_name publisher year isbn description price image')
     .then(data => {
       res.status(200).send({data: data});
     })
@@ -45,11 +45,11 @@ router.route("/add").post((req, res) => {
     let id = req.params.id
     const category_name = req.body.category_name;
     const description = req.body.description;    
-    const options = req.body.books;
+    const books = req.body.books;
     const updateRangeCategory = {
       category_name,
       description,
-      options
+      books
     }
     const updateRange = await Category.findOneAndUpdate({ _id: id }, updateRangeCategory)
       .then(() => {
@@ -63,7 +63,7 @@ router.route("/add").post((req, res) => {
 
   router.route("/view/:id").get((req, res) => {
     if (req.params && req.params.id) {
-      Category.findById(req.params.id).populate('books', 'title author_name publisher year isbn description')
+      Category.findById(req.params.id).populate('books', 'title author_name publisher year isbn description price image')
       .then(data => {
           res.status(200).send({data: data});
       })

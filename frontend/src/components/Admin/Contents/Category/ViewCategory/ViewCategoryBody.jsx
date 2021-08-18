@@ -3,6 +3,7 @@ import { Trash, Pencil, PlusLg } from 'react-bootstrap-icons';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import { reactLocalStorage } from 'reactjs-localstorage';
+import { Folder, XCircle, Backspace } from 'react-bootstrap-icons';
 import { APP_ROUTES } from '../../../../../utilities/constants/routes.constants';
 
 class ViewCategoryBody extends Component {
@@ -11,21 +12,22 @@ class ViewCategoryBody extends Component {
     this.deleteData = this.deleteData.bind(this);
     this.updateCategories = this.updateCategories.bind(this);
     this.state = {
-        categories: []
+        categories: [],
+        books:[]
     }
 }
 
 componentDidMount() {
     axios.get('http://localhost:6060/category/view')
         .then(response => {
-            const categories = response.data.data;            
-            this.setState({ categories });
+            const categories = response.data.data;  
+            const books = response.data.data.books;           
+            this.setState({ categories, books });
             console.log("response", response);
         }).catch(error => {
             alert(error.message);
             console.log("Error", error);
         });
-
    
 }
 
@@ -47,6 +49,11 @@ deleteData(id) {
                         'Your file has been deleted.',
                         'success'
                     )
+                    .then(okay => {
+                        if (okay) {
+                            window.location.href = APP_ROUTES.ADMIN_VIEW_CATEGORY;
+                        }
+                    });
                 }
             });
         }).catch((err) => {
@@ -66,8 +73,8 @@ deleteData(id) {
         });
 }
 
-updateCategories(id, category_name, description) {
-    reactLocalStorage.setObject("Categories", [id, category_name, description]);
+updateCategories(id, category_name, description, books) {
+    reactLocalStorage.setObject("Categories", [id, category_name, description, books]);
     window.location.href = APP_ROUTES.ADMIN_UPDATE_CATEGORY;
 }
 
@@ -83,6 +90,7 @@ render() {
                     <button type="button" className="btn btn-info" style={{ float: 'right', padding: '12px 28px', marginBottom:'30px' }} onClick={() => { window.location.href = APP_ROUTES.ADMIN_ADD_CATEGORY }}>
                         <PlusLg /> Add New Category
                     </button>
+                    <button type="submit" className="btn btn-outline-success" style={{ float: 'left', padding: '12px 68px', marginBottom: '30px', fontWeight: 'bold', fontSize: "130%" }} ><Folder /> Generate Category Report </button>
                 </div>
                 <div className="card overflow-auto" style={{ maxHeight: '300%',background:'#ffffff'}}>
                     <div className="card-body">
@@ -104,7 +112,7 @@ render() {
                                                     <td>{item.category_name}</td>
                                                     <td>{item.description}</td>
                                                     <td>
-                                                        <button type="button" className="btn btn-outline-success" onClick={() => this.updateCategories(item._id, item.category_name, item.description)}>
+                                                        <button type="button" className="btn btn-outline-success" onClick={() => this.updateCategories(item._id, item.category_name, item.description, item.books)}>
                                                             <Pencil /> Update
                                                         </button>
                                                     </td>
