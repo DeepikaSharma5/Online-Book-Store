@@ -4,7 +4,6 @@ import UpdateTermsAndConditionsBody from './UpdateTermsAndConditionsBody';
 import NavBar from '../../../NavBar/NavBar';
 
 class updateTermsAndConditions extends Component {
-    state = {}
     render() {
         return (
             <div>

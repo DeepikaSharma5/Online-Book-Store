@@ -1,22 +1,22 @@
 import React, { Component } from 'react';
 import AddPrivatePolicyHeading from './AddPrivatePolicyHeading';
 import AddPrivatePolicyBody from './AddPrivatePolicyBody';
+import NavBar from '../../../NavBar/NavBar';
 
 class AddPrivatePolicy extends Component {
-    render() { 
-        return ( 
+    render() {
+        return (
             <div>
-                {/**navigation */}
+                <NavBar />
                 <div>
-                    <AddPrivatePolicyHeading/>
+                    <AddPrivatePolicyHeading />
                 </div>
                 <div>
-                    <AddPrivatePolicyBody/>
+                    <AddPrivatePolicyBody />
                 </div>
-                {/**footer */}
             </div>
-         );
+        );
     }
 }
- 
+
 export default AddPrivatePolicy;

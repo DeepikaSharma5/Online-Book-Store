@@ -1,21 +1,22 @@
 import React, { Component } from 'react';
 import UpdatePrivatePolicyHeading from './UpdatePrivatePolicyHeading';
 import UpdatePrivatePolicyBody from './UpdatePrivatePolicyBody';
+import NavBar from '../../../NavBar/NavBar';
 
 class UpdatePrivatePolicy extends Component {
-    state = {  }
-    render() { 
-        return ( 
+    render() {
+        return (
             <div>
+                <NavBar />
                 <div>
-                    <UpdatePrivatePolicyHeading/>
+                    <UpdatePrivatePolicyHeading />
                 </div>
                 <div>
-                    <UpdatePrivatePolicyBody/>
+                    <UpdatePrivatePolicyBody />
                 </div>
             </div>
-         );
+        );
     }
 }
- 
+
 export default UpdatePrivatePolicy;
