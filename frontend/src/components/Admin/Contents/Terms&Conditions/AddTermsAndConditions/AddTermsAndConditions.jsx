@@ -1,22 +1,22 @@
 import React, { Component } from 'react';
 import AddTermsAndConditonsHeading from './AddTermsAndConditionsHeading';
 import AddTermsAndConditonsBody from './AddTermsAndConditionsBody';
+import NavBar from '../../../NavBar/NavBar';
 
 class AddTermsAndConditons extends Component {
-    render() { 
-        return ( 
+    render() {
+        return (
             <div>
-                {/**navigation */}
+                <NavBar />
                 <div>
-                    <AddTermsAndConditonsHeading/>
+                    <AddTermsAndConditonsHeading />
                 </div>
                 <div>
-                    <AddTermsAndConditonsBody/>
+                    <AddTermsAndConditonsBody />
                 </div>
-                {/**footer */}
             </div>
-         );
+        );
     }
 }
- 
+
 export default AddTermsAndConditons;

@@ -66,12 +66,12 @@ class PrivatePolicyBody extends Component {
 
     updatePrivatePolicy(id, heading, details) {
         reactLocalStorage.setObject("PrivatePolicy", [id, heading, details]);
-        window.location.href = APP_ROUTES.ADMIN_UPDATE_PRIVATE_POLICY;
+        window.location.href = APP_ROUTES.ADMIN_UPDATE_DELIVERY;
     }
 
     render() {
         return (
-            <div>
+            <div style={{ position: 'relative', left: '110px' }}>
                 <div className="card card border border-light shadow-0 mb-3" style={{ maxWidth: '100rem', margin: 'auto', padding: '10px' }}>
                     <div>
                         {/* <input type="submit" className="orm-control mr-sm-2" placeholder="Search" style={{ float: 'right', padding: '12px 28px', marginBottom: '30px' }} >
@@ -80,7 +80,7 @@ class PrivatePolicyBody extends Component {
                     </div>
                     <div className="card overflow-auto" style={{ maxHeight: '400%', background: '#ffffff', boxShadow: '10px 10px 45px #919191,-10px -10px 45px #ffffff' }}>
                         <div className="card-body">
-                            <div style={{ height: '750px' }}>
+                            <div style={{ height: '540px' }}>
                                 <div className="card-body" >
                                     <div className="row">
                                         <table className="table table-bordered" style={{ textAlign: 'center' }}>
