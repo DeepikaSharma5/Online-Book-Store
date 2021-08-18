@@ -80,7 +80,7 @@ const PersonalInfoForm = () => {
                 id="name"
                 value={personalDetails.name}
                 onChange={handleFieldChange}
-                variant="outlined"
+                variant="filled"
               />
             </Grid>
           </Grid>
@@ -95,7 +95,7 @@ const PersonalInfoForm = () => {
                 id="email"
                 value={personalDetails.email}
                 onChange={handleFieldChange}
-                variant="outlined"
+                variant="filled"
               />
             </Grid>
             <Grid item alignItems="flex-end">
@@ -117,7 +117,7 @@ const PersonalInfoForm = () => {
                 }}
                 value={personalDetails.phone}
                 onChange={handleFieldChange}
-                variant="outlined"
+                variant="filled"
                 className={styles.txtfield}
               />
             </Grid>

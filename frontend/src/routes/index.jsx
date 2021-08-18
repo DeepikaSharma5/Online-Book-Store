@@ -1,5 +1,5 @@
 import React from "react";
-import { Router } from 'react-router-dom';
+import { HashRouter as Router } from 'react-router-dom';
 import { createBrowserHistory } from 'history';
 //import PrivateRoute from "./PrivateRoute";
 import PublicRoute from "./PublicRoute";

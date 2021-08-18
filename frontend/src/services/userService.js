@@ -48,6 +48,7 @@ export async function login(userCreds){
         }else{
             //Store jwt token
             localStorage.setItem("user-token",response.headers.get('auth-token'));
+            localStorage.setItem("user-id",response.body);
             return("ok");
         }
         

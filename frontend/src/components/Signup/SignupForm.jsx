@@ -61,21 +61,21 @@ const SignupForm = () => {
           </p>
           <TextField
             label="Name *"
-            variant="outlined"
+            variant="filled"
             id="name"
             onChange={handleChange}
             className={styles.textField}
           />
           <TextField
             label="Email *"
-            variant="outlined"
+            variant="filled"
             id="email"
             onChange={handleChange}
             className={styles.textField}
           />
           <TextField
             label="Contact number *"
-            variant="outlined"
+            variant="filled"
             id="phone"
             inputProps={{
               maxLength: 10,
@@ -85,7 +85,7 @@ const SignupForm = () => {
           />
           <TextField
             label="New password *"
-            variant="outlined"
+            variant="filled"
             type="password"
             id="password"
             onChange={handleChange}

@@ -1,30 +1,76 @@
 import React, { useState } from "react";
 import { Grid, TextField, Box, Button } from "@material-ui/core";
+import { Alert } from "@material-ui/lab";
 
 import styles from "./LoginForm.module.scss";
 
+//import { useHistory } from "react-router-dom";
+import { login } from "../../services/userService";
+
 const LoginForm = () => {
+  //const history = useHistory();
+  const [error, setError] = useState(null);
+
+  const [user, setUser] = useState({
+    email: "",
+    password: "",
+  });
+
+  const handleChange = (e) => {
+    setUser((current) => {
+      return {
+        ...current,
+        [e.target.id]: e.target.value,
+      };
+    });
+  };
+
+  async function handleSubmit(event) {
+    setError(null);
+
+    if (!user.email.match(/[\w\d\.-]+@[\w\d\.-]+\.[\w\d\.-]+/g)) {
+      setError("Please enter a valid email");
+    } else {
+      const response = await login(user);
+      if (response !== "ok") {
+        //SHOW error message as alert
+        console.log(response);
+        setError(response);
+      } else {
+        console.log("User logged in");
+        //history.push("/personaldetails");
+      }
+    }
+  }
+
   return (
-      <React.Fragment>
-        <form style={{ marginTop: "70px" }}>
-          <Grid alignItems="center" container direction="column">
-            <TextField
-              label="Email"
-              variant="outlined"
-              className={styles.textField}
-            />
-            <TextField
-              label="Password"
-              variant="outlined"
-              type="password"
-              className={styles.textField}
-            />
-            <Box textAlign="center">
-              <Button className={styles.signInBtn}>LOG IN</Button>
-            </Box>
-          </Grid>
-        </form>
-      </React.Fragment>
+    <React.Fragment>
+      <Box textAlign="center" md={8} style={{ margin: "10px 0px" }}>
+        {error ? <Alert severity="warning">{error}</Alert> : null}
+      </Box>
+      <form style={{ marginTop: "70px" }}>
+        <Grid alignItems="center" container direction="column">
+          <TextField
+            label="Email"
+            variant="filled"
+            id="email"
+            onChange={handleChange}
+            className={styles.textField}
+          />
+          <TextField
+            label="Password"
+            variant="filled"
+            type="password"
+            id="password"
+            onChange={handleChange}
+            className={styles.textField}
+          />
+          <Box textAlign="center">
+            <Button onClick={handleSubmit} className={styles.signInBtn}>LOG IN</Button>
+          </Box>
+        </Grid>
+      </form>
+    </React.Fragment>
   );
 };
 

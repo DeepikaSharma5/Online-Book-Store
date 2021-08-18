@@ -162,7 +162,7 @@ const WishList = () => {
                   <TextField
                     {...params}
                     label="Search for a book"
-                    variant="outlined"
+                    variant="filled"
                     style={{ padding: "0px" }}
                   />
                 )}
