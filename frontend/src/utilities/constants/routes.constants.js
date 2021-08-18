@@ -20,6 +20,7 @@ export const APP_ROUTES = {
   USER_UPDATE_ADDRESS: "/update-delivery-address",
   USER_ADD_ADDRESS: "/add-delivery-address",
   USER_MY_DELIVERIES: "/my-deliveries",
+  USER_ABOUT_US : "/about-us",
 
   SUPERADMIN_MANAGE_ADMINS: "/manage-admins",
 
