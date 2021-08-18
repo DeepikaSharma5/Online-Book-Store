@@ -71,7 +71,7 @@ class ViewTermsAndConditionsBody extends Component {
 
     render() {
         return (
-            <div>
+            <div style={{ position:'relative', left:'110px'}}>
                 <div className="card card border border-light shadow-0 mb-3" style={{ maxWidth: '100rem', margin: 'auto', padding: '10px' }}>
                     <div>
                         <button type="button" className="btn btn-info" style={{ float: 'right', padding: '12px 28px', marginBottom:'30px' }} onClick={() => { window.location.href = APP_ROUTES.ADMIN_ADD_TERMS_AND_CONDITIONS }}>
