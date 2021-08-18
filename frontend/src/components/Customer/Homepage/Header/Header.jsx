@@ -89,7 +89,9 @@ export default function Header() {
   
   const preventDefault = (event) => event.preventDefault();
   const navigateToHome = (event) => window.location.href = APP_ROUTES.USER_HOMEPAGE;
+  const NavigateToBooks = (event) => window.location.href = APP_ROUTES.BOOKS;
   const NavigateToContactUs = (event) => window.location.href = APP_ROUTES.USER_CONTACT_US;
+  const navigateToSearchResults = (event) => window.location.href = APP_ROUTES.USER_SEARCH_BOOKS;
 
   const handleMenuClose = () => {
     setAnchorEl(null);
@@ -115,7 +117,7 @@ export default function Header() {
 
     return (
         <div className={classes.grow}>
-            <AppBar position="static">
+            <AppBar position="fixed" width='device-width'>
                 <Toolbar>
                     {/*Booklab logo*/}
                     <IconButton
@@ -135,7 +137,7 @@ export default function Header() {
                         <div className={classes.searchIcon}>
                             <SearchIcon />
                             </div>
-                            <InputBase
+                            <InputBase onClick={navigateToSearchResults}
                             placeholder="Search…"
                             classes={{
                                 root: classes.inputRoot,
@@ -147,7 +149,7 @@ export default function Header() {
                     <div className={classes.grow} />
                     <div className={classes.sectionDesktop}>   
                         <ButtonGroup variant="text" aria-label="text primary button group">
-                            <Button onClick={preventDefault}>
+                            <Button onClick={NavigateToBooks}>
                                 <Typography className={classes.title} style={{ color: 'white'}} variant="h6" noWrap>
                                     Books
                                 </Typography>

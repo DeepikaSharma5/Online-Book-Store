@@ -37,6 +37,11 @@ import UpdateBook from "../components/Admin/Contents/Book/UpdateBook/UpdateBook"
 import UpdateCategory from "../components/Admin/Contents/Category/UpdateCategory/UpdateCategory";
 import ProductDashboard from "../components/Admin/Contents/ProductDashboard/ProductDashboard";
 import Homepage from "../components/Customer/Homepage/Homepage/Homepage";
+import ProductPage from "../components/Customer/ProductPage/ProductPage";
+import Books from "../components/Customer/Books/Books";
+import ViewBookByCategory from "../components/Customer/Books/ViewBookByCategory";
+import SearchBooks from "../components/Customer/SearchBooks/SearchBooks";
+
 
 import {Login, Signup, PersonalDetails, WishList, SearchWishList, ManageAdmins} from "../pages";
 
@@ -67,7 +72,10 @@ const AppRoutes = () => {
             <PublicRoute exact path={APP_ROUTES.USER_UPDATE_ADDRESS} Component={UpdateDeliveryAddress} />
             <PublicRoute exact path={APP_ROUTES.USER_MY_DELIVERIES} Component={MyDeliveries} />
             <PublicRoute exact path={APP_ROUTES.USER_HOMEPAGE} Component={Homepage} />
-
+            <PublicRoute exact path={APP_ROUTES.PRODUCT_PAGE} Component={ProductPage} />
+            <PublicRoute exact path={APP_ROUTES.BOOKS} Component={Books} />
+            <PublicRoute exact path={APP_ROUTES.USER_VIEW_BY_CATEGORY} Component={ViewBookByCategory} />            
+            <PublicRoute exact path={APP_ROUTES.USER_SEARCH_BOOKS} Component={SearchBooks} />
 
 
 

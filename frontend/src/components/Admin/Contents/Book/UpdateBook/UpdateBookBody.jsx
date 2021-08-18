@@ -15,6 +15,7 @@ export default function UpdateBookBody() {
     const [year, setYear] = useState(Books[4]);
     const [isbn, setIsbn] = useState(Books[5]);
     const [description, setDescription] = useState(Books[6]);
+    const [price, setPrice] = useState(Books[7]);
 
     function updateBooks(e) {
         e.preventDefault();
@@ -24,7 +25,8 @@ export default function UpdateBookBody() {
             publisher,
             year,
             isbn,
-            description
+            description,
+            price
         }
 
         axios.post("http://localhost:6060/book/update/" + id, newUpdateBooks)
@@ -60,7 +62,7 @@ export default function UpdateBookBody() {
         
 
         function cancel () {
-            window.location.href = APP_ROUTES.ADMIN_VIEW_BOO;
+            window.location.href = APP_ROUTES.ADMIN_VIEW_BOOK;
         }
 
         function reset (){
@@ -70,6 +72,7 @@ export default function UpdateBookBody() {
             setYear(" ");
             setIsbn(" ");
             setDescription(" ");
+            setPrice(0);
         }
 
 
@@ -130,6 +133,19 @@ export default function UpdateBookBody() {
                                 value={isbn}
                                 onChange={(e) => { setIsbn(e.target.value) }}/>
                         </div>  
+                    </div> 
+                    <div className="row mb-3">                        
+                        <div className="col mb-3">
+                            <b><label for="inputPrice" className="form-label">Price</label></b>
+                            <input 
+                                type="number" 
+                                className="form-control" 
+                                id="price" 
+                                name="price" 
+                                value={price}
+                                style={{width: "300px"}}
+                                onChange={(e) => { setPrice(e.target.value) }}/>
+                        </div>                        
                     </div> 
                     <div className="mb-3">
                         <label for="inputDescription" className="form-label">Description</label>

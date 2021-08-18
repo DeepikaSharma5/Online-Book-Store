@@ -27,6 +27,14 @@ const BookSchema = new Schema(
         type: String,
         required: true,
       },
+      price: {
+        type: Number,
+        required: true,
+      },
+      image: {
+        type: String,
+        required: false,
+      },
       categories: [{ type: mongoose.Schema.Types.ObjectId, required: false, ref: 'categories' }]
     });
   

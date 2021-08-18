@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import Footer from '../Footer/Footer';
-import Header from '../Header/Header';
-import HomepageBody from './HomepageBody';
+import Footer from '../Homepage/Footer/Footer';
+import Header from '../Homepage/Header/Header';
+import ViewBookByCategoryBody from './ViewBookByCategoryBody';
 
-class Homepage extends Component {
+class ViewBookByCategory extends Component {
     render() { 
         return ( 
             <div>
@@ -11,11 +11,10 @@ class Homepage extends Component {
                     <Header/>
                 </div>
                 <br></br>
-                <br></br>
-                <br></br>
                 <div>
-                    <HomepageBody/>
+                    <ViewBookByCategoryBody/>
                 </div>
+                <br></br><br></br>
                 <div>
                     <Footer/>
                 </div>
@@ -25,4 +24,4 @@ class Homepage extends Component {
     }
 }
  
-export default Homepage;
+export default ViewBookByCategory;
