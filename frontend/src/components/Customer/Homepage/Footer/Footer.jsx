@@ -4,7 +4,7 @@ class Footer extends Component {
     render() { 
         return ( 
             <div>             
-               <footer class="row row-cols-6 py-5" style={{backgroundColor: '#049191', width:'100.76%'}}>
+               <footer class="row row-cols-6 py-5" style={{backgroundColor: '#049191', width:'device-width', bottom:'0'}}>
                     <div class="col">
                     </div>
                     <div class="col">

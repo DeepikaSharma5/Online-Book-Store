@@ -1,15 +1,14 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import Swal from 'sweetalert2';
-import Select from 'react-select';
 import { APP_ROUTES } from '../../../../../utilities/constants/routes.constants';
+import UploadImage from './UploadImage';
 
 class AddBookBody extends Component {
     constructor(props) {
         super(props);
         this.onChange = this.onChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
-        this.onCategorySelect = this.onCategorySelect.bind(this);
         this.state = {
             title: '',
             author_name: '',
@@ -17,38 +16,18 @@ class AddBookBody extends Component {
             year: '',
             isbn: '',
             description: '',
-            categories: [],
-            options: [],
-            selectedCategories: []
+            price:0,
+            image: ''
         }
     }
 
-    componentDidMount(){
-        axios.get('http://localhost:6060/category/view')
-        .then(response => {
-            this.setState({ categories: response.data.data}, () => {
-                let data = [];
-                this.state.categories.map((item, index) => {
-                    let category = {
-                        value: item._id, 
-                        label: item.category_name
-                    }
-                    data.push(category)
-                })
-                this.setState({options: data});
-            })   
-        })
-        
+    componentDidMount(){        
     }
 
     onChange(e) {
         this.setState({ [e.target.name]: e.target.value })
     };
-
-    onCategorySelect(e) {
-        this.setState( { selectedCategories: e ? e.map(item =>item.value) : [] })
-    }
-
+    
     onSubmit(e) {
         e.preventDefault();
         let AddBook = {
@@ -58,7 +37,8 @@ class AddBookBody extends Component {
             year: this.state.year,
             isbn: this.state.isbn,
             description: this.state.description,
-            categories: this.state.selectedCategories
+            price: this.state.price,
+            image: this.state.image
         }
         console.log('Data', AddBook);
         axios.post('http://localhost:6060/book/add', AddBook)
@@ -100,7 +80,7 @@ class AddBookBody extends Component {
                 <br></br>
                 <form onSubmit={this.onSubmit} > 
                     <div className="mb-3"> 
-                        <label for="inputTitle" className="form-label">Title</label>
+                        <b><label for="inputTitle" className="form-label">Title</label></b>
                         <input 
                             type="text"
                             className="form-control" 
@@ -111,7 +91,7 @@ class AddBookBody extends Component {
                     </div>
                     <div className="row mb-3">                        
                         <div className="col mb-3">
-                            <label for="inputAuthorName" className="form-label">Author Name</label>
+                            <b><label for="inputAuthorName" className="form-label">Author Name</label></b>
                             <input 
                                 type="text" 
                                 className="form-control" 
@@ -121,7 +101,7 @@ class AddBookBody extends Component {
                                 onChange={this.onChange}/>
                         </div>
                         <div className="col mb-3">
-                            <label for="inputPublisher" className="form-label">Publisher Name</label>
+                            <b><label for="inputPublisher" className="form-label">Publisher Name</label></b>
                             <input 
                                 type="text" 
                                 className="form-control" 
@@ -133,7 +113,7 @@ class AddBookBody extends Component {
                     </div>   
                     <div className="row mb-3">                        
                         <div className="col mb-3">
-                            <label for="inputYear" className="form-label">Year</label>
+                            <b><label for="inputYear" className="form-label">Year</label></b>
                             <input 
                                 type="text" 
                                 className="form-control" 
@@ -143,7 +123,7 @@ class AddBookBody extends Component {
                                 onChange={this.onChange}/>
                         </div>
                         <div className="col mb-3">
-                            <label for="inputIsbn" className="form-label">ISBN</label>
+                            <b><label for="inputIsbn" className="form-label">ISBN</label></b>
                             <input 
                                 type="text" 
                                 className="form-control" 
@@ -153,8 +133,21 @@ class AddBookBody extends Component {
                                 onChange={this.onChange}/>
                         </div>  
                     </div> 
+                    <div className="row mb-3">                        
+                        <div className="col mb-3">
+                            <b><label for="inputPrice" className="form-label">Price</label></b>
+                            <input 
+                                type="number" 
+                                className="form-control" 
+                                id="price" 
+                                name="price" 
+                                value={this.state.price}
+                                style={{width: "300px"}}
+                                onChange={this.onChange}/>
+                        </div>                        
+                    </div>   
                     <div className="mb-3">
-                        <label for="inputDescription" className="form-label">Description</label>
+                        <b><label for="inputDescription" className="form-label">Description</label></b>
                         <textarea 
                             type="text" 
                             className="form-control" 
@@ -165,16 +158,22 @@ class AddBookBody extends Component {
                             style={{height: "100px"}}
                             onChange={this.onChange}/>
                     </div>
-                    <p>Select category</p>
-                    <Select
-                        isMulti
-                        name="categories"
-                        onChange={this.onCategorySelect}
-                        options={this.state.options}
-                        className="basic-multi-select"
-                        classNamePrefix="select"
-                    />
-                    <br></br>
+                    <hr></hr>
+                    <b><p>Upload Image</p></b>
+                    <div>
+                        <UploadImage/>
+                    </div>
+                    <div className="mb-3"> 
+                        <b><label for="inputImage" className="form-label">Image Url</label></b>
+                        <input 
+                            type="text"
+                            className="form-control" 
+                            id="image" 
+                            name="image"         
+                            value={this.state.image}
+                            onChange={this.onChange} />
+                    </div>
+                    <hr></hr>
                     <button type="submit" className="btn btn-primary">Submit</button>
                     <br></br><br></br>
                 </form>

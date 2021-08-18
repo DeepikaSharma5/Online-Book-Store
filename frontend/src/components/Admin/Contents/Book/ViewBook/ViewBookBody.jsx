@@ -3,6 +3,7 @@ import { Trash, Pencil, PlusLg } from 'react-bootstrap-icons';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import { reactLocalStorage } from 'reactjs-localstorage';
+import { Folder, XCircle, Backspace } from 'react-bootstrap-icons';
 import { APP_ROUTES } from '../../../../../utilities/constants/routes.constants';
 
 class ViewBookBody extends Component {
@@ -69,8 +70,8 @@ deleteData(id) {
         });
 }
 
-updateBooks(id, title, author_name, publisher, year, isbn, description) {
-    reactLocalStorage.setObject("Books", [id, title, author_name, publisher, year, isbn, description]);
+updateBooks(id, title, author_name, publisher, year, isbn, description, price) {
+    reactLocalStorage.setObject("Books", [id, title, author_name, publisher, year, isbn, description, price]);
     window.location.href = APP_ROUTES.ADMIN_UPDATE_BOOK;
 }
 
@@ -86,6 +87,7 @@ render() {
                     <button type="button" className="btn btn-info" style={{ float: 'right', padding: '12px 28px', marginBottom:'30px' }} onClick={() => { window.location.href = APP_ROUTES.ADMIN_ADD_BOOK }}>
                         <PlusLg /> Add New Book
                     </button>
+                    <button type="submit" className="btn btn-outline-success" style={{ float: 'left', padding: '12px 68px', marginBottom: '30px', fontWeight: 'bold', fontSize: "130%" }} ><Folder /> Generate Book Report </button>
                 </div>
                 <div className="card overflow-auto" style={{ maxHeight: '300%',background:'#ffffff'}}>
                     <div className="card-body">
@@ -96,11 +98,13 @@ render() {
                                         <thead className="thead-light" >
                                             <tr>
                                                 <th scope="col" className="w-25">Title</th>
-                                                <th scope="col" className="w-25">Author Name</th>
+                                                <th scope="col" className="w-10">Author Name</th>
                                                 <th scope="col" className="w-25">Publisher</th>
-                                                <th scope="col" className="w-25">Year</th>
-                                                <th scope="col" className="w-50">ISBN</th>                                                
-                                                <th scope="col" className="w-25">Description</th>   
+                                                <th scope="col" className="w-10">Year</th>
+                                                <th scope="col" className="w-10">ISBN</th>                                                
+                                                <th scope="col" className="w-100">Description</th>                                         
+                                                <th scope="col" className="w-25">Price</th>                                        
+                                                <th scope="col" className="w-10">Image</th>  
                                                 <th scope="col" className="w-15">Edit</th>
                                                 <th scope="col" className="w-15">Delete</th>
                                             </tr>
@@ -114,8 +118,10 @@ render() {
                                                     <td>{item.year}</td>
                                                     <td>{item.isbn}</td>
                                                     <td>{item.description}</td>
+                                                    <td>Rs.{item.price}.00</td>
+                                                    <td> <img className="card-img-top " style={{ width: '100px' }} src={item.image}/> </td>
                                                     <td>
-                                                        <button type="button" className="btn btn-outline-success" onClick={() => this.updateBooks(item._id, item.title, item.author_name, item.publisher, item.year, item.isbn, item.description)}>
+                                                        <button type="button" className="btn btn-outline-success" onClick={() => this.updateBooks(item._id, item.title, item.author_name, item.publisher, item.year, item.isbn, item.description, item.price)}>
                                                             <Pencil /> Update
                                                         </button>
                                                     </td>

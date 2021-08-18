@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
+import Cards from './Cards';
 import CategoryContainer from './CategoryContainer';
+import Contents from './Contents';
 import Slideshow from './Slideshow';
 import Tagline from './Tagline';
 
@@ -14,13 +16,23 @@ class HomepageBody extends Component {
                     <div className="col">
                         <Tagline/>
                     </div>
-                </div>           
+                </div>      
+                <hr></hr>       
+                <div className="row row-cols-1" style={{width:'100%', padding:'30px 30px 30px 30px'}}>
+                    <div className="col">
+                        <Cards/>
+                    </div>
+                </div>       
+                <hr></hr>    
                 <div className="row row-cols-1" style={{width:'100%', padding:'30px 30px 30px 30px'}}>
                     <div className="col">
                         <CategoryContainer/>
                     </div>
+                </div>                      
+                <hr></hr>    
+                <div className="row row-cols-1" style={{width:'100%', padding:'30px 30px 30px 30px'}}>
                     <div className="col">
-                        <CategoryContainer/>
+                        <Contents/>
                     </div>
                 </div>
             </div>

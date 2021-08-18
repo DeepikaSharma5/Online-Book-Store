@@ -8,6 +8,10 @@ export const APP_ROUTES = {
     WISHLIST_SEARCH:'/wishlists',
     A_WISHLIST:'/wishlist/',
     USER_HOMEPAGE : '/homepage',
+    PRODUCT_PAGE : '/product-page',
+    BOOKS : '/books',
+    USER_VIEW_BY_CATEGORY : '/books-by-category',
+    USER_SEARCH_BOOKS : '/search-results',
 
     USER_CONTACT_US : '/contact-us',
     USER_PRIVATE_POLICY : '/private-policy',
