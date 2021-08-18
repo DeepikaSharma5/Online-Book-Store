@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
     title: {
         display: 'none',
         [theme.breakpoints.up('sm')]: {
-        display: 'block',
+            display: 'block',
         },
     },
     search: {
@@ -34,14 +34,14 @@ const useStyles = makeStyles((theme) => ({
         borderRadius: theme.shape.borderRadius,
         backgroundColor: alpha(theme.palette.common.white, 0.15),
         '&:hover': {
-        backgroundColor: alpha(theme.palette.common.white, 0.25),
+            backgroundColor: alpha(theme.palette.common.white, 0.25),
         },
         marginRight: theme.spacing(2),
         marginLeft: 0,
         width: '100%',
         [theme.breakpoints.up('sm')]: {
-        marginLeft: theme.spacing(3),
-        width: 'auto',
+            marginLeft: theme.spacing(3),
+            width: 'auto',
         },
     },
     searchIcon: {
@@ -63,13 +63,13 @@ const useStyles = makeStyles((theme) => ({
         transition: theme.transitions.create('width'),
         width: '100%',
         [theme.breakpoints.up('md')]: {
-        width: '20ch',
+            width: '20ch',
         },
     },
     sectionDesktop: {
         display: 'none',
         [theme.breakpoints.up('md')]: {
-        display: 'flex',
+            display: 'flex',
         },
     },
     button: {
@@ -78,42 +78,42 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function Header() {
-  const classes = useStyles();
-  const [anchorEl, setAnchorEl] = React.useState(null);
+    const classes = useStyles();
+    const [anchorEl, setAnchorEl] = React.useState(null);
 
-  const isMenuOpen = Boolean(anchorEl);
+    const isMenuOpen = Boolean(anchorEl);
 
-  const handleProfileMenuOpen = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-  
-  const preventDefault = (event) => event.preventDefault();
-  const navigateToHome = (event) => window.location.href = APP_ROUTES.USER_HOMEPAGE;
-  const NavigateToBooks = (event) => window.location.href = APP_ROUTES.BOOKS;
-  const NavigateToContactUs = (event) => window.location.href = APP_ROUTES.USER_CONTACT_US;
-  const navigateToSearchResults = (event) => window.location.href = APP_ROUTES.USER_SEARCH_BOOKS;
+    const handleProfileMenuOpen = (event) => {
+        setAnchorEl(event.currentTarget);
+    };
 
-  const handleMenuClose = () => {
-    setAnchorEl(null);
-  };
+    const navigateToHome = (event) => window.location.href = APP_ROUTES.USER_HOMEPAGE;
+    const NavigateToBooks = (event) => window.location.href = APP_ROUTES.BOOKS;
+    const NavigateToContactUs = (event) => window.location.href = APP_ROUTES.USER_CONTACT_US;
+    const NavigateToAboutUs = (event) => window.location.href = APP_ROUTES.USER_ABOUT_US;
+    const navigateToSearchResults = (event) => window.location.href = APP_ROUTES.USER_SEARCH_BOOKS;
 
-  const menuId = 'primary-search-account-menu';
-  const renderMenu = (
-    <Menu
-      anchorEl={anchorEl}
-      anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-      id={menuId}
-      keepMounted
-      transformOrigin={{ vertical: 'top', horizontal: 'right' }}
-      open={isMenuOpen}
-      onClose={handleMenuClose}
-    >
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
-      <MenuItem onClick={handleMenuClose}>My Delivery Address</MenuItem>
-      <MenuItem onClick={handleMenuClose}>My Deliveries</MenuItem>
-    </Menu>
-  );
+    const handleMenuClose = () => {
+        setAnchorEl(null);
+    };
+
+    const menuId = 'primary-search-account-menu';
+    const renderMenu = (
+        <Menu
+            anchorEl={anchorEl}
+            anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+            id={menuId}
+            keepMounted
+            transformOrigin={{ vertical: 'top', horizontal: 'right' }}
+            open={isMenuOpen}
+            onClose={handleMenuClose}
+        >
+            <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
+            <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+            <MenuItem onClick={handleMenuClose}>My Delivery Address</MenuItem>
+            <MenuItem onClick={handleMenuClose}>My Deliveries</MenuItem>
+        </Menu>
+    );
 
     return (
         <div className={classes.grow}>
@@ -126,7 +126,7 @@ export default function Header() {
                         color="inherit"
                         aria-label="open drawer"
                     >
-                    <LibraryBooksIcon onClick={navigateToHome} />
+                        <LibraryBooksIcon onClick={navigateToHome} />
                     </IconButton>
                     {/*Booklab title*/}
                     <Typography className={classes.title} variant="h5" noWrap>
@@ -136,8 +136,8 @@ export default function Header() {
                     <div className={classes.search}>
                         <div className={classes.searchIcon}>
                             <SearchIcon />
-                            </div>
-                            <InputBase onClick={navigateToSearchResults}
+                        </div>
+                        <InputBase onClick={navigateToSearchResults}
                             placeholder="Search…"
                             classes={{
                                 root: classes.inputRoot,
@@ -147,22 +147,22 @@ export default function Header() {
                         />
                     </div>
                     <div className={classes.grow} />
-                    <div className={classes.sectionDesktop}>   
+                    <div className={classes.sectionDesktop}>
                         <ButtonGroup variant="text" aria-label="text primary button group">
                             <Button onClick={NavigateToBooks}>
-                                <Typography className={classes.title} style={{ color: 'white'}} variant="h6" noWrap>
+                                <Typography className={classes.title} style={{ color: 'white' }} variant="h6" noWrap>
                                     Books
                                 </Typography>
                             </Button>
-                            <Button onClick={preventDefault}>
-                                <Typography className={classes.title} style={{ color: 'white'}} variant="h6" noWrap>
+                            <Button onClick={NavigateToAboutUs}>
+                                <Typography className={classes.title} style={{ color: 'white' }} variant="h6" noWrap>
                                     About Us
                                 </Typography></Button>
                             <Button onClick={NavigateToContactUs} >
-                                <Typography className={classes.title} style={{ color: 'white'}} variant="h6" noWrap>
+                                <Typography className={classes.title} style={{ color: 'white' }} variant="h6" noWrap>
                                     Contact Us
                                 </Typography></Button>
-                        </ButtonGroup>                  
+                        </ButtonGroup>
                         <IconButton aria-label="show 4 new mails" color="inherit">
                             <Badge badgeContent={4} color="secondary">
                                 <ShoppingCartIcon />
@@ -176,16 +176,16 @@ export default function Header() {
                             onClick={handleProfileMenuOpen}
                             color="inherit"
                         >
-                        <AccountCircle />
-                        <Typography className={classes.title} variant="h5" >
+                            <AccountCircle />
+                            <Typography className={classes.title} variant="h5" >
                                 {/*Add user name here*/}
-                                  user name
-                        </Typography>
+                                user name
+                            </Typography>
                         </IconButton>
                     </div>
                 </Toolbar>
             </AppBar>
-        {renderMenu}
+            {renderMenu}
         </div>
-  );
+    );
 }
