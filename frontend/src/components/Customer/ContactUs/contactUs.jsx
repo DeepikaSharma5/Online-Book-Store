@@ -1,19 +1,21 @@
 import React, { Component } from 'react';
 import ContactUsBody from './contactUsBody';
 import ContactUsHeading from './contactUsHeading';
+import Header from "../Homepage/Header/Header";
+import Footer from '../Homepage/Footer/Footer';
 
 class ContactUs extends Component {
     render() { 
         return ( 
             <div >
-                {/**navigation */}
-                <div style={{background:"#008080"}}>
+                <Header/>
+                <div>
                     <ContactUsHeading/>
                 </div>
-                <div style={{background:"#008080"}}>
+                <div>
                     <ContactUsBody/>
                 </div>
-                {/**footer */}
+                <Footer/>
             </div>
         );
     }

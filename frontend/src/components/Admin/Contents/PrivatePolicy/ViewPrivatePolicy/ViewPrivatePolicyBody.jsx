@@ -71,14 +71,14 @@ class PrivatePolicyBody extends Component {
 
     render() {
         return (
-            <div>
+            <div style={{ position: 'relative', left: '110px' }}>
                 <div className="card card border border-light shadow-0 mb-3" style={{ maxWidth: '100rem', margin: 'auto', padding: '10px' }}>
                     <div>
-                        <button type="button" className="btn btn-info" style={{ float: 'right', padding: '12px 28px', marginBottom:'30px' }} onClick={() => { window.location.href = APP_ROUTES.ADMIN_ADD_PRIVATE_POLICY }}>
+                        <button type="button" className="btn btn-info" style={{ float: 'right', padding: '12px 28px', marginBottom: '30px' }} onClick={() => { window.location.href = APP_ROUTES.ADMIN_ADD_PRIVATE_POLICY }}>
                             <PlusLg /> Add new Private Policy
                         </button>
                     </div>
-                    <div className="card overflow-auto" style={{ maxHeight: '300%',background:'#ffffff',boxShadow:'10px 10px 45px #919191,-10px -10px 45px #ffffff' }}>
+                    <div className="card overflow-auto" style={{ maxHeight: '300%', background: '#ffffff', boxShadow: '10px 10px 45px #919191,-10px -10px 45px #ffffff' }}>
                         <div className="card-body">
                             <div style={{ height: '450px' }}>
                                 <div className="card-body" >

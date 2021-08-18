@@ -110,6 +110,8 @@ export default function Header() {
     >
       <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
       <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+      <MenuItem onClick={handleMenuClose}>My Delivery Address</MenuItem>
+      <MenuItem onClick={handleMenuClose}>My Deliveries</MenuItem>
     </Menu>
   );
 

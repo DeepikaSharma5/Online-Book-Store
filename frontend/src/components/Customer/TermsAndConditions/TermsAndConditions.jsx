@@ -1,22 +1,26 @@
 import React, { Component } from 'react';
 import TermsAndConditionsHeading from './TermsAndConditionsHeading';
 import TermsAndConditionsBody from './TermsAndConditionsBody';
+import Header from "../Homepage/Header/Header";
+import Footer from '../Homepage/Footer/Footer';
 
 class TermsAndConditions extends Component {
-    render() { 
-        return ( 
+    render() {
+        return (
             <div>
-                {/**navigation */}
+                <Header />
                 <div>
-                    <TermsAndConditionsHeading/>
+                    <TermsAndConditionsHeading />
                 </div>
                 <div>
-                    <TermsAndConditionsBody/>
+                    <TermsAndConditionsBody />
                 </div>
-                {/**footer */}
+                <div style={{ paddingTop: "8%" }}>
+                    <Footer />
+                </div>
             </div>
-         );
+        );
     }
 }
- 
+
 export default TermsAndConditions;

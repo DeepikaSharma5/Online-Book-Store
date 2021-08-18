@@ -4,7 +4,7 @@ import { Alert } from "@material-ui/lab";
 
 import styles from "../WishList/WishList.module.scss";
 
-import { AdminTable, AppLayout, WishListTable } from "../../components";
+import { AdminAddModal, AdminTable, AppLayout, WishListTable } from "../../components";
 
 const ManageAdmins = () => {
   const [newAdmin, setNewAdmin] = useState({
@@ -45,28 +45,6 @@ const ManageAdmins = () => {
       }
     })
   }
-
-  const addAdmin = () => {
-    setError(null);
-    setSuccess(null);
-    if (
-      (newAdmin.email === "") |
-      (newAdmin.name === "") |
-      (newAdmin.password === "")
-    ) {
-      setError("Please all required fields");
-      setTimeout(() => setError(null), 4000);
-    } else if (!newAdmin.email.match(/[\w\d\.-]+@[\w\d\.-]+\.[\w\d\.-]+/g)){
-      setError("Please enter a valid email");
-      setTimeout(() => setError(null), 4000);
-    } else {
-      //Add
-      //setError OR setSuccess
-
-      setSuccess("Admin added successfully");
-      setTimeout(() => setSuccess(null), 3000);
-    }
-  };
 
   return (
     <React.Fragment>
@@ -120,15 +98,7 @@ const ManageAdmins = () => {
               label="New password for admin"
               style={{ backgroundColor: "#ffffff", width: "90%", marginTop: "10px" }}
             />
-            <Button
-              className={styles.searchbtn}
-              style={{ margin: "20px 0px", width: "90%" }}
-              onClick={addAdmin}
-            >
-              Add administrator
-            </Button>
-            {error ? <Alert severity="warning">{error}</Alert> : null}
-            {success ? <Alert severity="success">{success}</Alert> : null}
+            <AdminAddModal admin={newAdmin} />
           </Grid>
           <Grid
             item
