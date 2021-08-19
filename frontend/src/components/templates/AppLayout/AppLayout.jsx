@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { APP_ROUTES } from "../../../utilities/constants/routes.constants";
 import { AppLayoutHeader } from "../index";
+import Footer from "../../Customer/Homepage/Footer/Footer"
 
 const AppLayout = ({ children, componentTitle }) => {
 
@@ -10,6 +11,7 @@ const AppLayout = ({ children, componentTitle }) => {
                 <aside className="content">
                   <AppLayoutHeader/>
                   {children}
+                  <Footer />
                 </aside>
               </div>
     </React.Fragment>

@@ -78,7 +78,7 @@ const ManageAdmins = () => {
               id="email"
               value={newAdmin.email}
               onChange={handleFieldChange}
-              variant="outlined"
+              variant="filled"
               label="Admin email"
               style={{ backgroundColor: "#ffffff", width: "90%" }}
             />
@@ -86,7 +86,7 @@ const ManageAdmins = () => {
               id="name"
               value={newAdmin.name}
               onChange={handleFieldChange}
-              variant="outlined"
+              variant="filled"
               label="Admin name"
               style={{ backgroundColor: "#ffffff", width: "90%", marginTop: "10px" }}
             />
@@ -94,7 +94,7 @@ const ManageAdmins = () => {
               id="password"
               value={newAdmin.password}
               onChange={handleFieldChange}
-              variant="outlined"
+              variant="filled"
               label="New password for admin"
               style={{ backgroundColor: "#ffffff", width: "90%", marginTop: "10px" }}
             />

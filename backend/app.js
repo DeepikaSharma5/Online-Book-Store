@@ -18,7 +18,7 @@ mongoose.connect(url, { useNewUrlParser: true, useCreateIndex: true, useUnifiedT
 const connection = mongoose.connection
 
 connection.once("open", () => {
-    console.log("MongoDB connection successfully")
+    console.log("MongoDB connected successfully")
   })
 
 app.get('/',(req,res) => {
@@ -45,6 +45,9 @@ app.use('/book', Book);
 
 const Category = require('./routers/Category');
 app.use('/category', Category);
+
+const userAPI = require("./api/user.api");
+app.use('/user', userAPI());
 
 //Contact Us Email sending configuration
 app.post("/contactdata", (req, res) => {

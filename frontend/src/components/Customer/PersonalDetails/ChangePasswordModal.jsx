@@ -134,7 +134,7 @@ const ChangePasswordModal = () => {
                       label="Current password"
                       value={password.current}
                       onChange={handleFieldChange}
-                      variant="outlined"
+                      variant="filled"
                     />
                     <TextField
                       className={styles.modalTextField}
@@ -143,7 +143,7 @@ const ChangePasswordModal = () => {
                       label="New password"
                       value={password.new}
                       onChange={handleFieldChange}
-                      variant="outlined"
+                      variant="filled"
                     />
                     <TextField
                       className={styles.modalTextField}
@@ -152,7 +152,7 @@ const ChangePasswordModal = () => {
                       label="Re-enter new password"
                       value={password.newRenter}
                       onChange={handleFieldChange}
-                      variant="outlined"
+                      variant="filled"
                     />
                   </Grid>
                   <div style={{ marginTop: "10px" }}>
