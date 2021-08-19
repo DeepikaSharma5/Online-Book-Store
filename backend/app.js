@@ -40,6 +40,9 @@ app.use('/team-details',TeamDetails);
 const DeliveryAddress = require('./routers/DeliveryAddress');
 app.use('/delivery-address', DeliveryAddress)
 
+const DeliveryStatus = require('./routers/DeliveryStatus');
+app.use('/delivery-status',DeliveryStatus);
+
 const Book = require('./routers/Book');
 app.use('/book', Book);
 
