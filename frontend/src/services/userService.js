@@ -68,3 +68,59 @@ export async function getUserByID(id) {
     }
     throw response;
 }
+
+export async function updateUser(userDetails){
+    try{
+        const response = await fetch(baseUrl+"/",{
+            method: "PUT",
+    
+            // Adding body or contents to send
+            body: JSON.stringify(userDetails),
+            
+            // Adding headers to the request
+            headers: {
+                'Content-Type': 'application/json; charset=UTF-8',
+            }
+    
+        });
+
+        if(!response.ok){
+            throw response;
+        }else{
+            return("ok");
+        }
+        
+        
+    }catch(error){
+        let responseTxt = await error.text();
+        return responseTxt;
+    }
+}
+
+export async function updatePassword(userDetails){
+    try{
+        const response = await fetch(baseUrl+"/",{
+            method: "PATCH",
+    
+            // Adding body or contents to send
+            body: JSON.stringify(userDetails),
+            
+            // Adding headers to the request
+            headers: {
+                'Content-Type': 'application/json; charset=UTF-8',
+            }
+    
+        });
+
+        if(!response.ok){
+            throw response;
+        }else{
+            return("ok");
+        }
+        
+        
+    }catch(error){
+        let responseTxt = await error.text();
+        return responseTxt;
+    }
+}
