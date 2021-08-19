@@ -13,8 +13,8 @@ import { Alert } from "@material-ui/lab";
 
 import styles from "./Personaldetails.module.scss";
 import { questionIcon } from "../../../assets/images";
-import { getUserByID } from "../../../services/userService";
-import bcrypt from "bcryptjs"
+import { getUserByID, updatePassword } from "../../../services/userService";
+import bcrypt from "bcryptjs";
 import jwt_decode from "jwt-decode";
 
 const useStyles = makeStyles((theme) => ({
@@ -77,7 +77,10 @@ const ChangePasswordModal = ({ currentpassword }) => {
       const response = await getUserByID(decodedToken.id);
 
       if (response._id !== null) {
-        return response.password;
+        return {
+          password: response.password,
+          id: decodedToken.id
+        };
       } else {
         return null;
       }
@@ -100,26 +103,41 @@ const ChangePasswordModal = ({ currentpassword }) => {
       setError("The new passwords do not match.");
       setTimeout(() => setError(""), 4000);
     } else {
+      let userId;
       //Checking if current passwords match
       const currentuserpwd = await getCurrentPassword();
 
-      if (currentuserpwd) {
-
+      if (currentuserpwd.password) {
         //Check for errors in mismatching current password
         const passwordsMatch = await bcrypt.compare(
           password.current,
-          currentuserpwd
+          currentuserpwd.password
         );
 
         if (passwordsMatch) {
+          const salt = await bcrypt.genSalt(10);
+          const hashedPassword = await bcrypt.hash(password.new, salt);
+          const newPassword = {
+            id: currentuserpwd.id,
+            password: hashedPassword,
+          };
 
-          //POST
+          const response = await updatePassword(newPassword);
 
-          setSuccess("Password updated successfully!");
-          setTimeout(() => {
-            setSuccess("");
-            handleClose()
-          }, 2000);
+          if (response === "ok") {
+            console.log(newPassword);
+            setSuccess("Password updated successfully!");
+            setTimeout(() => {
+              setSuccess("");
+              handleClose();
+            }, 2000);
+          } else {
+            setError("Error updating password, please try again later.");
+            setTimeout(() => {
+              setError("");
+              handleClose();
+            }, 2500);
+          }
         } else {
           setError("Incorrect password entered as current password.");
         }
