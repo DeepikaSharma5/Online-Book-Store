@@ -4,11 +4,11 @@ import { Alert } from "@material-ui/lab";
 
 import styles from "./LoginForm.module.scss";
 
-//import { useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { login } from "../../services/userService";
 
 const LoginForm = () => {
-  //const history = useHistory();
+  const history = useHistory();
   const [error, setError] = useState(null);
 
   const [user, setUser] = useState({
@@ -38,18 +38,18 @@ const LoginForm = () => {
         setError(response);
       } else {
         console.log("User logged in");
-        //history.push("/personaldetails");
+        window.location.href = "/personaldetails";
       }
     }
   }
 
   return (
     <React.Fragment>
-      <Box textAlign="center" md={8} style={{ margin: "10px 0px" }}>
-        {error ? <Alert severity="warning">{error}</Alert> : null}
-      </Box>
       <form style={{ marginTop: "70px" }}>
         <Grid alignItems="center" container direction="column">
+          <Box textAlign="center" md={4} style={{ margin: "10px 0px" }}>
+            {error ? <Alert severity="warning">{error}</Alert> : null}
+          </Box>
           <TextField
             label="Email"
             variant="filled"
@@ -66,7 +66,9 @@ const LoginForm = () => {
             className={styles.textField}
           />
           <Box textAlign="center">
-            <Button onClick={handleSubmit} className={styles.signInBtn}>LOG IN</Button>
+            <Button onClick={handleSubmit} className={styles.signInBtn}>
+              LOG IN
+            </Button>
           </Box>
         </Grid>
       </form>

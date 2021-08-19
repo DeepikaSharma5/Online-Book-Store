@@ -72,7 +72,7 @@ const createUser = async (req, res) => {
       } else {
         res
           .status(500)
-          .send({ error: "Sorry, an account already exists for this email." });
+          .send("Sorry, an account already exists for this email.");
       }
     });
   }
@@ -91,7 +91,7 @@ const loginUser = async (req, res) => {
           req.body.password,
           userExists.password
         );
-        if (!validPassword) return res.status(400).send({error : "Incorrect password!"});
+        if (!validPassword) return res.status(400).send("Incorrect password!");
 
         token = jwt.sign(
           { id: userExists._id, role: 1 },
@@ -100,17 +100,32 @@ const loginUser = async (req, res) => {
 
         res.header("auth-token", token);
         res.header("Access-Control-Expose-Headers", "auth-token");
-        res.send(token);
+        res.send(userExists._id);
       } else {
         res
           .status(500)
-          .send({ error: `Sorry, the user ${req.body.email} does not exist.` });
+          .send(`Sorry, the user ${req.body.email} does not exist.`);
       }
     });
+  }
+};
+
+const getUser = async (req, res) => {
+  if (req.params && req.params.id) {
+
+    await User.findById(req.params.id)
+      .populate("users", "name email password phone")
+      .then((data) => {
+        res.status(200).send(data);
+      })
+      .catch((error) => {
+        res.status(500).send({ error: error.message });
+      });
   }
 };
 
 module.exports = {
   createUser,
   loginUser,
+  getUser
 };

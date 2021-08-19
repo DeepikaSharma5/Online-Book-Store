@@ -48,7 +48,6 @@ export async function login(userCreds){
         }else{
             //Store jwt token
             localStorage.setItem("user-token",response.headers.get('auth-token'));
-            localStorage.setItem("user-id",response.body);
             return("ok");
         }
         
@@ -57,4 +56,15 @@ export async function login(userCreds){
         let responseTxt = await error.text();
         return responseTxt;
     }
+}
+
+export async function getUserByID(id) {
+    const response = await fetch(baseUrl+"/"+id);
+    console.log("Fetching details of "+id);
+    if(response.ok){
+        return response.json()
+    }else{
+        return response.status(500).send({ error: "Error loading message" })
+    }
+    throw response;
 }
