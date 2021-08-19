@@ -124,8 +124,44 @@ const getUser = async (req, res) => {
   }
 };
 
+const updateUser = async (req, res) => {
+  if (req.body) {
+
+    await User.findByIdAndUpdate(
+      req.body.id,
+      req.body,
+      { new: true, useFindAndModify: false }
+    )
+    .then((data) => {
+      res.status(200).send(data);
+    })
+    .catch((error) => {
+      res.status(500).send({ error: error.message });
+    });
+  }
+};
+
+const updatePassword = async (req, res) => {
+  if (req.body) {
+
+    await User.findByIdAndUpdate(
+      req.body.id,
+      {password: req.body.password},
+      { new: true, useFindAndModify: false }
+    )
+    .then((data) => {
+      res.status(200).send(data);
+    })
+    .catch((error) => {
+      res.status(500).send({ error: error.message });
+    });
+  }
+};
+
 module.exports = {
   createUser,
   loginUser,
-  getUser
+  getUser,
+  updateUser,
+  updatePassword
 };

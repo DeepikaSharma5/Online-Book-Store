@@ -118,7 +118,7 @@ const ChangePasswordModal = ({ currentpassword }) => {
           setSuccess("Password updated successfully!");
           setTimeout(() => {
             setSuccess("");
-            setOpen(false)
+            handleClose()
           }, 2000);
         } else {
           setError("Incorrect password entered as current password.");
