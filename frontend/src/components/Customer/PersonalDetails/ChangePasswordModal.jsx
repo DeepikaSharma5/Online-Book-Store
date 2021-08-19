@@ -13,6 +13,9 @@ import { Alert } from "@material-ui/lab";
 
 import styles from "./Personaldetails.module.scss";
 import { questionIcon } from "../../../assets/images";
+import { getUserByID } from "../../../services/userService";
+import bcrypt from "bcryptjs"
+import jwt_decode from "jwt-decode";
 
 const useStyles = makeStyles((theme) => ({
   modal: {
@@ -31,7 +34,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const ChangePasswordModal = () => {
+const ChangePasswordModal = ({ currentpassword }) => {
   const [password, setPassword] = useState({
     current: "",
     new: "",
@@ -66,7 +69,24 @@ const ChangePasswordModal = () => {
     setOpen(false);
   };
 
-  const handleSubmit = () => {
+  const getCurrentPassword = async () => {
+    const userToken = localStorage.getItem("user-token");
+
+    if (userToken != null) {
+      const decodedToken = jwt_decode(userToken, { complete: true });
+      const response = await getUserByID(decodedToken.id);
+
+      if (response._id !== null) {
+        return response.password;
+      } else {
+        return null;
+      }
+    } else {
+      return null;
+    }
+  };
+
+  const handleSubmit = async () => {
     setSuccess("");
     setError("");
     if (
@@ -80,13 +100,34 @@ const ChangePasswordModal = () => {
       setError("The new passwords do not match.");
       setTimeout(() => setError(""), 4000);
     } else {
-      //POST
+      //Checking if current passwords match
+      const currentuserpwd = await getCurrentPassword();
+
+      if (currentuserpwd) {
+
+        //Check for errors in mismatching current password
+        const passwordsMatch = await bcrypt.compare(
+          password.current,
+          currentuserpwd
+        );
+
+        if (passwordsMatch) {
+
+          //POST
+
+          setSuccess("Password updated successfully!");
+          setTimeout(() => {
+            setSuccess("");
+            setOpen(false)
+          }, 2000);
+        } else {
+          setError("Incorrect password entered as current password.");
+        }
+      } else {
+        setError("Error retrieving data");
+      }
 
       //Check for errors in mismatching current password
-
-      //if All good set success
-      setSuccess("Password updated successfully!");
-      setTimeout(() => setSuccess(""), 3000);
     }
   };
 

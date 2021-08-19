@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Grid, Card, Typography, Button } from "@material-ui/core";
 
 import styles from "./PersonalDetails.module.scss";
 import { AppLayout, ChangePasswordModal, DeleteAccountModal, PersonalInfoForm } from "../../components";
 
 const PersonalDetails = () => {
-  
+
   return (
     <React.Fragment>
       <AppLayout>
