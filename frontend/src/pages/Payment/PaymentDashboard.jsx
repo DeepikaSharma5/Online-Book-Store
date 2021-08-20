@@ -19,6 +19,8 @@ import TableRow from '@material-ui/core/TableRow';
 import DeleteIcon from '@material-ui/icons/Delete';
 import DescriptionIcon from '@material-ui/icons/Description';
 import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
+import jsPDF from 'jspdf';
+import "jspdf-autotable"
 
 const useStyles = makeStyles({
 	root: {
@@ -29,6 +31,9 @@ const useStyles = makeStyles({
 	}
 });
 
+
+
+
 export default function Index() {
 	const classes = useStyles();
 	const [page, setPage] = useState(1);
@@ -36,18 +41,18 @@ export default function Index() {
 
 
 
-    function createData(name, book, price,status) {
+    function createData(name, book, price,qty,status) {
         
-        return { name, book,price,status };
+        return { name, book,price,qty,status };
       }
       
       const tableValues = [
-        createData('kajan','secret',20000.00,"paid"),
-        createData('kajan','secret',20000.00,"paid"),
-        createData('kajan','secret',20000.00,"paid"),
-        createData('kajan','secret',20000.00,"paid"),
-        createData('kajan','secret',20000.00,"paid"),
-        createData('kajan','secret',20000.00,"paid"),
+        createData('kajan','secret',2,2000.00,"paid"),
+        createData('john','shakesphere',1,2500.00,"paid"),
+        createData('peter','amazon',1,1600.00,"paid"),
+        createData('williams','strange things',1,5000.00,"paid"),
+        createData('sid','secret',1,2000.00,"paid"),
+        createData('shaun','amazon',1,1600.00,"paid"),
 
       
       ];
@@ -58,10 +63,50 @@ export default function Index() {
 	const tablehead = [
 		{ name: 'Customer Name', align: 'left', width: '20%' },
 		{ name: 'Book', align: 'left', width: '20%' },
-		{ name: 'total', align: 'left', width: '20%' },
-        { name: 'status', align: 'left', width: '20%' },
+		{ name: 'Quantity', align: 'left', width: '20%' },
+
+		{ name: 'Total', align: 'left', width: '20%' },
+        { name: 'Status', align: 'left', width: '20%' },
 		{ name: 'Actions', align: 'center', width: '20%' }
 	];
+
+
+	const generatePDF = (invoicedata) => {
+		//initilize the pds
+		const doc = new jsPDF();
+		
+	
+		//column definition
+		const tableColumns = ["Name", "Book name","Quantity", "Price"];
+		const tableRows = [];
+	
+		const rowdata = [
+		invoicedata.name,
+		invoicedata.book,
+		invoicedata.price,
+		invoicedata.qty,
+		invoicedata.status
+
+		];
+	
+		tableRows.push(rowdata);
+	
+		doc.autoTable(tableColumns, tableRows, { startY: 30 });
+		const date = Date().split(" ");
+		//the filename will be the current systems date
+		doc.setFontSize(12);
+		
+		const dateStr = date[0] + date[1] + date[2] + date[3] + date[4];
+		doc.text(" Thank you for choosing BookLab!!!", 10, 15);
+		doc.text("Invoice to :"+ invoicedata.name, 13, 25);
+		
+		doc.text(`status:` + invoicedata.status, 170, 60);
+
+
+
+		doc.save(`report_${dateStr}.pdf`);
+	
+	  }
 
 	return (
 		<>
@@ -75,7 +120,8 @@ export default function Index() {
                             <Grid item sm={2}></Grid>
                             <Grid item sm={10}>
 
-                           
+							
+
 						<div style={{ paddingLeft: '30px', paddingRight: '30px' }}>
 							<Paper style={{ paddingBottom: '10px' }} className={classes.root}>
 								<TableContainer className={classes.container}>
@@ -102,8 +148,13 @@ export default function Index() {
 			<TableCell>
 				{row.book}
 			</TableCell>
+			
+			
 			<TableCell>
 				{row.price}
+			</TableCell>
+			<TableCell>
+				{row.qty}
 			</TableCell>
             <TableCell>
 				{row.status}
@@ -113,7 +164,7 @@ export default function Index() {
 				
 				<Button
 					
-					
+					onClick={()=> generatePDF(row)}
 					title="Generate bill"
 					style={{ color: 'teal' }}
 				>
@@ -140,6 +191,7 @@ export default function Index() {
 								</TableContainer>
 								
 							</Paper>
+						
 						</div>
                         </Grid>
                         </Grid>

@@ -1,20 +1,21 @@
-import React from 'react';
-import { alpha, makeStyles } from '@material-ui/core/styles';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import IconButton from '@material-ui/core/IconButton';
-import Typography from '@material-ui/core/Typography';
-import InputBase from '@material-ui/core/InputBase';
-import Badge from '@material-ui/core/Badge';
-import MenuItem from '@material-ui/core/MenuItem';
-import Menu from '@material-ui/core/Menu';
-import SearchIcon from '@material-ui/icons/Search';
-import AccountCircle from '@material-ui/icons/AccountCircle';
-import LibraryBooksIcon from '@material-ui/icons/LibraryBooks';
-import Button from '@material-ui/core/Button';
-import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
-import { ButtonGroup } from '@material-ui/core';
-import { APP_ROUTES } from '../../../../utilities/constants/routes.constants';
+import React from "react";
+import { alpha, makeStyles } from "@material-ui/core/styles";
+import AppBar from "@material-ui/core/AppBar";
+import Toolbar from "@material-ui/core/Toolbar";
+import IconButton from "@material-ui/core/IconButton";
+import Typography from "@material-ui/core/Typography";
+import InputBase from "@material-ui/core/InputBase";
+import Badge from "@material-ui/core/Badge";
+import MenuItem from "@material-ui/core/MenuItem";
+import Menu from "@material-ui/core/Menu";
+import SearchIcon from "@material-ui/icons/Search";
+import AccountCircle from "@material-ui/icons/AccountCircle";
+import LibraryBooksIcon from "@material-ui/icons/LibraryBooks";
+import Button from "@material-ui/core/Button";
+import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
+import { ButtonGroup } from "@material-ui/core";
+import { APP_ROUTES } from "../../../../utilities/constants/routes.constants";
+import { useSelector } from "react-redux";
 import { User,Heart, Search, Truck, Clipboard, CreditCard, PlusSquare } from 'react-feather';
 
 const useStyles = makeStyles((theme) => ({
@@ -109,8 +110,19 @@ export default function Header() {
       setAnchorEl(null);
   };
 
+  const cart = useSelector((state) => state.cart);
+
+  const { cartItems } = cart;
+
+  const getCartCount = () => {
+    return cartItems.reduce((qty, item) => qty + Number(item.qty), 0);
+  };
+
+
     const navigateToAddCardDetails = (event) => window.location.href = APP_ROUTES.USER_ADD_CARD_DETAILS;
     const navigateToCardDetails = (event) => window.location.href = APP_ROUTES.USER_CARD_DETAILS;
+    const navigateToCart = (event) => window.location.href = APP_ROUTES.CART;
+
 
   const preventDefault = (event) => event.preventDefault();
   const navigateToHome = (event) => window.location.href = APP_ROUTES.USER_HOMEPAGE;
@@ -208,8 +220,8 @@ export default function Header() {
                                 </Typography></Button>
                         </ButtonGroup>
                         <IconButton aria-label="show 4 new mails" color="inherit">
-                            <Badge badgeContent={4} color="secondary">
-                                <ShoppingCartIcon />
+                            <Badge badgeContent={getCartCount()} color="secondary">
+                                <ShoppingCartIcon onClick={navigateToCart} />
                             </Badge>
                         </IconButton>
                         <IconButton
