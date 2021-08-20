@@ -49,4 +49,6 @@ export const APP_ROUTES = {
   HOME: "/home",
   PRODUCT: "/product",
   CART: "/cart",
+  USER_ADD_CARD_DETAILS: "/addcard",
+  USER_CARD_DETAILS: "/card",
 };

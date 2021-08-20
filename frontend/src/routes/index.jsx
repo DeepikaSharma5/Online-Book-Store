@@ -48,6 +48,8 @@ import PaymentDashboard from "../pages/Payment/PaymentDashboard";
 import HomeScreen from "../pages/Payment/HomeScreen";
 import ProductScreen from "../pages/Payment/ProductScreen";
 import CartScreen from "../pages/Payment/CartScreen";
+import AddCardDetails from "../pages/CardDetails/AddCardDetails";
+import CardDetails from "../pages/CardDetails/CardDetails";
 
 const AppRoutes = () => {
     const history = createBrowserHistory();
@@ -109,6 +111,10 @@ const AppRoutes = () => {
             <PublicRoute exact path={APP_ROUTES.HOME} Component={HomeScreen} />
             <PublicRoute exact path={APP_ROUTES.PRODUCT} Component={ProductScreen} />
             <PublicRoute exact path={APP_ROUTES.CART} Component={CartScreen} />
+            <PublicRoute exact path={APP_ROUTES.USER_ADD_CARD_DETAILS} Component={AddCardDetails} />
+            <PublicRoute exact path={APP_ROUTES.USER_CARD_DETAILS} Component={CardDetails} />
+
+
 
 
 
