@@ -38,7 +38,7 @@ import UpdateCategory from "../components/Admin/Contents/Category/UpdateCategory
 import ProductDashboard from "../components/Admin/Contents/ProductDashboard/ProductDashboard";
 import Homepage from "../components/Customer/Homepage/Homepage/Homepage";
 
-import {Login, Signup, PersonalDetails, WishList, SearchWishList, ManageAdmins, WishListReport} from "../pages";
+import {Login, Signup, PersonalDetails, WishList, SearchWishList, ManageAdmins, WishListReport, MyWishList} from "../pages";
 
 import PaymentDashboard from "../pages/Payment/PaymentDashboard";
 
