@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import {
   Grid,
-  TextField,
+  FormControlLabel,
+  Checkbox,
   Modal,
   Backdrop,
   Fade,
@@ -25,31 +26,37 @@ const useStyles = makeStyles((theme) => ({
     outline: "none",
     borderRadius: "15px",
     boxShadow: theme.shadows[5],
-    padding: theme.spacing(2, 4, 3),
+    padding: theme.spacing(2, 6, 3),
   },
 }));
 
-const BuyItemModal = ({ buy, itemId, name, price, author, imgSrc }) => {
+const BuyItemModal = ({ buy, itemId, name, price, author, imgSrc, setSuccess }) => {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
-  const [open2, setOpen2] = React.useState(false);
 
   const handleOpen = () => {
     setOpen(true);
   };
 
   const handleClose = () => {
+    setSuccess(null);
     setOpen(false);
   };
 
   const handleSubmit = () => {
     setOpen(false);
     buy(itemId);
+    setSuccess("Item added to cart");
+    setTimeout(() => setSuccess(null),3000)
   };
 
   return (
     <React.Fragment>
-      <div className={styles.signInBtn} style={{cursor:"pointer", fontWeight: "300"}} onClick={handleOpen}>
+      <div
+        className={styles.signInBtn}
+        style={{ cursor: "pointer", fontWeight: "300" }}
+        onClick={handleOpen}
+      >
         Add to cart
       </div>
       <Modal
@@ -70,14 +77,24 @@ const BuyItemModal = ({ buy, itemId, name, price, author, imgSrc }) => {
                 <Typography
                   variant="h5"
                   component="h2"
-                  style={{ paddingBottom: "20px", fontWeight: "500" }}
+                  style={{
+                    paddingBottom: "20px",
+                    fontWeight: "300",
+                    color: "#5f5e5e",
+                  }}
                 >
                   Buy this item from this wish list?
                 </Typography>
                 <div>
                   <Grid container direction="row" spacing={3}>
                     <Grid item>
-                      <div style={{ width: "100px", height: "130px", backgroundColor: "grey" }} />
+                      <div
+                        style={{
+                          width: "100px",
+                          height: "130px",
+                          backgroundColor: "grey",
+                        }}
+                      />
                     </Grid>
                     <Grid item>
                       <Typography className={styles.descText2}>
@@ -91,20 +108,48 @@ const BuyItemModal = ({ buy, itemId, name, price, author, imgSrc }) => {
                       </Typography>
                     </Grid>
                   </Grid>
-                  <Button
-                    className={styles.signInBtn}
-                    style={{ marginTop: "25px" }}
-                    onClick={handleSubmit}
-                  >
-                    Buy Item
-                  </Button>
-                  <Button
-                    className={styles.cancel}
-                    style={{ marginTop: "25px" }}
-                    onClick={handleClose}
-                  >
-                    Cancel
-                  </Button>
+                  <Grid container direction="column">
+                    <FormControlLabel
+                      style={{
+                        marginTop: "25px",
+                      }}
+                      control={
+                        <Checkbox
+                          onChange={() => {}}
+                          name="showName"
+                          color="primary"
+                        />
+                      }
+                      label="Show my name to list owner"
+                    />
+                    
+                    <div>
+                      <Button
+                        className={styles.signInBtn}
+                        style={{
+                          cursor: "pointer",
+                          fontWeight: "300",
+                        }}
+                        onClick={handleSubmit}
+                      >
+                        Add to cart
+                      </Button>
+                      <Button
+                        className={styles.cancel}
+                        style={{
+                          fontWeight: "normal",
+                          borderWidth: "1px",
+                        }}
+                        onClick={handleClose}
+                      >
+                        Cancel
+                      </Button>
+                    </div>
+                  </Grid>
+                  <Typography style={{ marginTop: "10px" }}>
+                    * This item will be shipped to the owner of this wishlist
+                  </Typography>
+                  
                 </div>
               </div>
             </Grid>

@@ -12,6 +12,7 @@ const AWishListItemCard = ({
   buyItem,
   isBought,
   itemsInStock,
+  setSuccess 
 }) => {
   return (
     <Card style={{ padding: "25px 20px" }} variant="outlined">
@@ -36,6 +37,7 @@ const AWishListItemCard = ({
             price={price}
             itemId={itemId}
             imgSrc={""}
+            setSuccess={setSuccess}
           />
         </div>
       )}

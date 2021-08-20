@@ -13,10 +13,9 @@ import {
 
 import styles from "./WishList.module.scss";
 import { dangerIcon, okIcon } from "../../assets/images";
+import { Alert } from "@material-ui/lab";
 
 import { AppLayout, AWishListItemCard } from "../../components";
-import SearchSelect from "react-select";
-import { Autocomplete } from "@material-ui/lab";
 
 const useStyles = makeStyles((theme) => ({
   modal: {
@@ -88,9 +87,7 @@ const WishList = (props) => {
   ];
 
   const classes = useStyles();
-
-  const [openSuccess, setOpenSuccess] = useState(false);
-  const [openFail, setOpenFail] = useState(false);
+  const [success, setSuccess] = React.useState(null);
 
   return (
     <React.Fragment>
@@ -98,7 +95,9 @@ const WishList = (props) => {
         <div style={{ margin: "10px 25px" }}>
           <Typography className={styles.pageHeading}>{props.match.params.fname+" "+props.match.params.lname}'s Wish List</Typography>
           <Divider style={{ margin: "20px 0px 30px 0px", width: "100%"}} />
+          
           <div style={{ margin: "0px 30px" }}>
+          {success ? <Alert severity="success" style={{marginBottom: "10px"}}>{success}</Alert> : null}
             <Grid container spacing={3}>
               {wishList.map((wishItem) => (
                 <Grid item xs={3}>
@@ -110,77 +109,13 @@ const WishList = (props) => {
                     buyItem={() => {}}
                     isBought={wishItem.isBought}
                     itemsInStock={wishItem.itemsInStock}
+                    setSuccess={setSuccess}
                   />
                 </Grid>
               ))}
             </Grid>
           </div>
         </div>
-        <Modal
-          aria-labelledby="transition-modal-title"
-          aria-describedby="transition-modal-description"
-          className={classes.modal}
-          open={openSuccess}
-          closeAfterTransition
-          BackdropComponent={Backdrop}
-          BackdropProps={{
-            timeout: 500,
-          }}
-        >
-          <Fade in={openSuccess}>
-            <div className={classes.paper}>
-              <Grid container direction="row">
-                <img
-                  src={okIcon}
-                  style={{
-                    marginRight: "20px",
-                    height: "100px",
-                    width: "100px",
-                  }}
-                />
-                <Typography
-                  className={styles.descText}
-                  style={{ marginTop: "35px" }}
-                >
-                  Item successfully removed from wish list.
-                </Typography>
-              </Grid>
-            </div>
-          </Fade>
-        </Modal>
-        <Modal
-          aria-labelledby="transition-modal-title"
-          aria-describedby="transition-modal-description"
-          className={classes.modal}
-          open={openFail}
-          closeAfterTransition
-          BackdropComponent={Backdrop}
-          BackdropProps={{
-            timeout: 500,
-          }}
-        >
-          <Fade in={openFail}>
-            <div className={classes.paper}>
-              <Grid container direction="row">
-                <img
-                  src={dangerIcon}
-                  style={{
-                    marginRight: "20px",
-                    height: "100px",
-                    width: "100px",
-                  }}
-                />
-                <Typography
-                  className={styles.descText}
-                  style={{ marginTop: "20px", width:"300px" }}
-                >
-                  Sorry, there was an error when removing this item.<br />
-                  Please try again.
-                </Typography>
-              </Grid>
-            </div>
-          </Fade>
-        </Modal>
       </AppLayout>
     </React.Fragment>
   );
