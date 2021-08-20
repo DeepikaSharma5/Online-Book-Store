@@ -83,7 +83,7 @@ const SearchWishList = () => {
               id="ownerName"
               value={ownerName}
               onChange={(e) => setOwnerName(e.target.value)}
-              variant="filled"
+              variant="outlined"
               style={{ backgroundColor: "#ffffff", width: "90%" }}
             />
             <Button

@@ -13,10 +13,9 @@ import {
 
 import styles from "./WishList.module.scss";
 import { dangerIcon, okIcon } from "../../assets/images";
+import { Alert } from "@material-ui/lab";
 
-import { AppLayout, VisibilityModal, WishItemCard } from "../../components";
-import SearchSelect from "react-select";
-import { Autocomplete } from "@material-ui/lab";
+import { AppLayout, AWishListItemCard } from "../../components";
 
 const useStyles = makeStyles((theme) => ({
   modal: {
@@ -35,229 +34,88 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const WishList = () => {
-  const bookList = [
-    {
-      value: 1,
-      label: "Star Talk",
-      author: "author1",
-      price: 6000,
-    },
-    {
-      value: 2,
-      label: "Ulimate Visual Dictionary",
-      author: "author1",
-      price: 6000,
-    },
-    {
-      value: 3,
-      label: "The Mentor",
-      author: "author1",
-      price: 6000,
-    },
-    {
-      value: 4,
-      label: "The Dog Book",
-      author: "author1",
-      price: 6000,
-    },
-    {
-      value: 5,
-      label: "CATS 101",
-      author: "author1",
-      price: 6000,
-    },
-    {
-      value: 6,
-      label: "Read me a story",
-      author: "author1",
-      price: 6000,
-    },
-    {
-      value: 7,
-      label: "Stay close",
-      author: "author1",
-      price: 6000,
-    },
-  ];
-
+const WishList = (props) => {
   const wishList = [
     {
-      value: 1,
-      label: "10,000 Years of Art",
-      author: "author1",
-      price: 5500,
-    },
-    {
-      value: 2,
-      label: "Classic ghost Stories",
+      id: 1,
+      name: "Star Talk",
       author: "author1",
       price: 6000,
+      isBought: 0,
+      itemsInStock: 12
     },
     {
-      value: 3,
-      label: "Light and Architecture",
+      id: 2,
+      name: "Ulimate Visual Dictionary",
       author: "author1",
-      price: 7000,
+      price: 6000,
+      isBought: 1,
+      itemsInStock: 12
+    },
+    {
+      id: 4,
+      name: "The Dog Book",
+      author: "author1",
+      price: 6000,
+      isBought: 0,
+      itemsInStock: 12
+    },
+    {
+      id: 5,
+      name: "CATS 101",
+      author: "author1",
+      price: 6000,
+      isBought: 0,
+      itemsInStock: 0
+    },
+    {
+      id: 6,
+      name: "Read me a story",
+      author: "author1",
+      price: 6000,
+      isBought: 0,
+      itemsInStock: 12
+    },
+    {
+      id: 7,
+      name: "Stay close",
+      author: "author1",
+      price: 6000,
+      isBought: 0,
+      itemsInStock: 12
     },
   ];
 
   const classes = useStyles();
-
-  const [bookToAdd, setBookToAdd] = useState("");
-
-  const [isPublic, setIsPublic] = useState(true);
-  const [openSuccess, setOpenSuccess] = useState(false);
-  const [openFail, setOpenFail] = useState(false);
-
-  const formatOptionLabel = ({ label, author, price }) => (
-    <div style={{ display: "flex", justifyContent: "space-evenly" }}>
-      <div>{label}</div>
-      <div style={{ height: "70px", width: "30px", backgroundColor: "grey" }} />
-    </div>
-  );
-
-  const selectBook = (event, value) => {
-    setBookToAdd(value.label);
-  };
-
-  const addBook = () => {
-    //POST
-  };
-
-  const removeListItem = (itemId) => {
-    //Send DELETE req
-
-    //If all ok
-    setOpenSuccess(true);
-    setTimeout(() => setOpenSuccess(false), 1500);
-
-    //If error
-    // setOpenFail(true);
-    // setTimeout(() => setOpenFail(false), 2500);
-  };
+  const [success, setSuccess] = React.useState(null);
 
   return (
     <React.Fragment>
       <AppLayout>
         <div style={{ margin: "10px 25px" }}>
-          <Typography className={styles.pageHeading}>My Wish List</Typography>
-          <div style={{ display: "flex", justifyContent: "space-around" }}>
-            <Grid container direction="row">
-              {/* <Grid item xs={3}>
-            <SearchSelect
-              placeholder="Search for a book"
-              formatOptionLabel={formatOptionLabel}
-              options={bookList}
-              isSearchable={true}
-            />
-            </Grid> */}
-              <Autocomplete
-                id="book-select"
-                options={bookList}
-                getOptionLabel={(option) => option.label}
-                onChange={selectBook}
-                disableClearable
-                renderInput={(params) => (
-                  <TextField
-                    {...params}
-                    label="Search for a book"
-                    variant="filled"
-                    style={{ padding: "0px" }}
-                  />
-                )}
-                style={{ width: "200px" }}
-              />
-              <Button className={styles.searchbtn} onClick={addBook}>
-                Add to list
-              </Button>
-            </Grid>
-            <div style={{ width: "230px" }}>
-              <VisibilityModal isPublic={isPublic} setIsPublic={setIsPublic} />
-            </div>
-          </div>
-          <Divider style={{ margin: "20px 0px 30px 0px", width: "100%" }} />
+          <Typography className={styles.pageHeading}>{props.match.params.fname+" "+props.match.params.lname}'s Wish List</Typography>
+          <Divider style={{ margin: "20px 0px 30px 0px", width: "100%"}} />
+          
           <div style={{ margin: "0px 30px" }}>
+          {success ? <Alert severity="success" style={{marginBottom: "10px"}}>{success}</Alert> : null}
             <Grid container spacing={3}>
               {wishList.map((wishItem) => (
                 <Grid item xs={3}>
-                  <WishItemCard
-                    itemId={wishItem.value}
-                    name={wishItem.label}
+                  < AWishListItemCard
+                    itemId={wishItem.id}
+                    name={wishItem.name}
                     author={wishItem.author}
                     price={wishItem.price}
-                    removeItem={removeListItem}
+                    buyItem={() => {}}
+                    isBought={wishItem.isBought}
+                    itemsInStock={wishItem.itemsInStock}
+                    setSuccess={setSuccess}
                   />
                 </Grid>
               ))}
             </Grid>
           </div>
         </div>
-        <Modal
-          aria-labelledby="transition-modal-title"
-          aria-describedby="transition-modal-description"
-          className={classes.modal}
-          open={openSuccess}
-          closeAfterTransition
-          BackdropComponent={Backdrop}
-          BackdropProps={{
-            timeout: 500,
-          }}
-        >
-          <Fade in={openSuccess}>
-            <div className={classes.paper}>
-              <Grid container direction="row">
-                <img
-                  src={okIcon}
-                  style={{
-                    marginRight: "20px",
-                    height: "100px",
-                    width: "100px",
-                  }}
-                />
-                <Typography
-                  className={styles.descText}
-                  style={{ marginTop: "35px" }}
-                >
-                  Item successfully removed from wish list.
-                </Typography>
-              </Grid>
-            </div>
-          </Fade>
-        </Modal>
-        <Modal
-          aria-labelledby="transition-modal-title"
-          aria-describedby="transition-modal-description"
-          className={classes.modal}
-          open={openFail}
-          closeAfterTransition
-          BackdropComponent={Backdrop}
-          BackdropProps={{
-            timeout: 500,
-          }}
-        >
-          <Fade in={openFail}>
-            <div className={classes.paper}>
-              <Grid container direction="row">
-                <img
-                  src={dangerIcon}
-                  style={{
-                    marginRight: "20px",
-                    height: "100px",
-                    width: "100px",
-                  }}
-                />
-                <Typography
-                  className={styles.descText}
-                  style={{ marginTop: "20px", width:"300px" }}
-                >
-                  Sorry, there was an error when removing this item.<br />
-                  Please try again.
-                </Typography>
-              </Grid>
-            </div>
-          </Fade>
-        </Modal>
       </AppLayout>
     </React.Fragment>
   );
