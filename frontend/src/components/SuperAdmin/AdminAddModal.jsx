@@ -159,7 +159,7 @@ const AdminAddModal = ({ admin }) => {
                     label="Current super admin password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    variant="outlined"
+                    variant="filled"
                   />
                   <br />
                   <div style={{margin: "10px 0px"}}>

@@ -22,7 +22,7 @@ mongoose.connect(url, {
 const connection = mongoose.connection;
 
 connection.once("open", () => {
-  console.log("MongoDB connection successfully");
+  console.log("MongoDB connected successfully");
 });
 
 app.get("/", (req, res) => {
@@ -44,6 +44,9 @@ app.use("/team-details", TeamDetails);
 const DeliveryAddress = require("./routers/DeliveryAddress");
 app.use("/delivery-address", DeliveryAddress);
 
+const DeliveryStatus = require("./routers/DeliveryStatus");
+app.use("/delivery-status", DeliveryStatus);
+
 const Book = require("./routers/Book");
 app.use("/book", Book);
 
@@ -52,6 +55,9 @@ app.use("/category", Category);
 
 const CardDetails = require("./routers/CardDetails");
 app.use("/card", CardDetails);
+
+const userAPI = require("./api/user.api");
+app.use("/user", userAPI());
 
 //Contact Us Email sending configuration
 app.post("/contactdata", (req, res) => {
