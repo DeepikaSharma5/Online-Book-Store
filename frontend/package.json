@@ -1,6 +1,7 @@
 {
   "name": "online-book-store",
   "version": "0.1.0",
+  "proxy": "http://127.0.0.1:6060",
   "private": true,
   "dependencies": {
     "@cloudinary/base": "^1.0.0-beta.4",
@@ -32,6 +33,9 @@
     "react-scripts": "4.0.3",
     "react-select": "^4.3.1",
     "reactjs-localstorage": "^1.0.1",
+    "redux": "^4.1.1",
+    "redux-devtools-extension": "^2.13.9",
+    "redux-thunk": "^2.3.0",
     "sweetalert2": "^11.1.2",
     "web-vitals": "^1.1.2"
   },

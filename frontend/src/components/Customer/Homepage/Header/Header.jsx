@@ -113,6 +113,12 @@ export default function Header() {
     const NavigateToContactUs = (event) => window.location.href = APP_ROUTES.USER_CONTACT_US;
     const NavigateToAboutUs = (event) => window.location.href = APP_ROUTES.USER_ABOUT_US;
     const navigateToSearchResults = (event) => window.location.href = APP_ROUTES.USER_SEARCH_BOOKS;
+    const navigateToAddCardDetails = (event) => window.location.href = APP_ROUTES.USER_ADD_CARD_DETAILS;
+    const navigateToCardDetails = (event) => window.location.href = APP_ROUTES.USER_CARD_DETAILS;
+
+
+
+   
     const navigateToMyAccount = (event) => {
       handleMenuClose();
       window.location.href = APP_ROUTES.USER_PERSONAL_DETAILS;
@@ -135,6 +141,10 @@ export default function Header() {
             <MenuItem onClick={navigateToMyAccount}>My account</MenuItem>
             <MenuItem onClick={handleMenuClose}>My Delivery Address</MenuItem>
             <MenuItem onClick={handleMenuClose}>My Deliveries</MenuItem>
+            <MenuItem onClick={navigateToAddCardDetails}>Add Card Details</MenuItem>
+            <MenuItem onClick={navigateToCardDetails}>Card Details</MenuItem>
+
+
         </Menu>
     );
 
