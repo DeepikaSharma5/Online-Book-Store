@@ -27,76 +27,118 @@ import {
   Layers as LayerIcon,
   UserCheck as AccountIcon,
   Star as RecognitionIcon,
+  Truck as TruckIcon,
   PlusSquare,
-  Book
+  Book,
+  Clipboard,
+  CreditCard,
+  Users,
+  Trello,
+  Heart
 } from 'react-feather';
 import HeadsetMicIcon from '@material-ui/icons/HeadsetMic';
 import NavItem from './NavItem';
 import SettingsSystemDaydreamIcon from '@material-ui/icons/SettingsSystemDaydream';
 import GroupWorkIcon from '@material-ui/icons/GroupWork';
 
-const items = [
+/*
+  Also don't forget to add APPBAR, NAVBAR in your admin pages.
+
+  <div>
+    <div className="row">
+      <AppBar/>      
+    </div>
+    <div className="row">
+      div className="col">
+        <NavBar/>
+      </div>
+      <div className="col-10">
+        <br></br><br></br>
+        < Your page />
+      </div>                    
+    </div>
+  </div>
+*/
+
+//list of dashboards
+const dashboardItem = [
   {
-    href: '/app/dashboard',
+    href: '/admin-product-dashboard',
     icon: BarChartIcon,
-    title: 'Dashboard'
+    title: 'Product Dashboard'
   },
-
-];
-const itemsTwo = [
   {
-    href: '/app/support',
-    icon: DollarIcon,
-    title: 'Payment'
+    href: '/payment-dashboard',
+    icon: BarChartIcon,
+    title: 'Payment Dashboard'
   },
 ];
 
+//sid's part [dont modify]
 const bookItems = [
    {
-    href: '/',
+    href: '/admin-add-book',
     icon: PlusSquare,
-    title: 'Add Book'
+    title: 'Add Books'
   },
   {
-    href: '/',
+    href: '/admin-view-book',
     icon: BookIcon,
-    title: 'Usage'
+    title: 'Manage Books'
   },
   {
-    href: '/',
+    href: '/admin-add-category',
+    icon: PlusSquare,
+    title: 'Add Categories'
+  },
+  {
+    href: '/admin-view-category',
     icon: LayerIcon,
-    title: 'Payment History'
-  },
-  {
-    href: '/',
-    icon: AccountIcon,
-    title: 'My Account'
+    title: 'Manage Categories'
    },
-    {
-      href: '/',
-      icon: KeyIcon,
-      title: 'Change Password'
-  },
-]
+];
 
-const userItems = [
+//Delivery part
+const deliveryItems = [
   {
-   href: '/',
-   icon: PlusSquare,
-   title: 'Add User'
- },
- 
- {
-   href: '/',
-   icon: AccountIcon,
-   title: 'My Account'
+    href: '/admin-view-delivery',
+    icon: TruckIcon,
+    title: 'View Delivery Details'
   },
-   {
-     href: '/',
-     icon: KeyIcon,
-     title: 'Change Password'
- },
-]
+];
+
+//Contents part
+const contentsItems = [
+  {
+    href: '/admin-view-about-us',
+    icon: Trello,
+    title: 'View About Us'
+  },
+  {
+    href: '/admin-view-team-details',
+    icon: Users,
+    title: 'View Team Details'
+  },
+  {
+    href: '/admin-view-private-policy',
+    icon: Trello,
+    title: 'View Privacy Policy'
+  },
+  {
+    href: '/admin-view-terms-and-conditions',
+    icon: Trello,
+    title: 'View Terms&Conditions'
+  },
+];
+
+//Wishlist part
+const wishlistItems = [
+  {
+    href: '/wishlistreport',
+    icon: Clipboard,
+    title: 'View Wishlist report'
+  },
+];
 
 const useStyles = makeStyles((theme) => ({
   mobileDrawer: {
@@ -125,134 +167,200 @@ const useStyles = makeStyles((theme) => ({
 
 const NavBar = ({ onMobileClose, openMobile }) => {
   const classes = useStyles();
-  const location = useLocation();
-  const [dropDownOpen, setDropDownOpen] = useState('');
-  const [accountOpen, setAccountOpen] = React.useState(false);
-  const [userOpen, setUserOpen] = React.useState(false);
+  const [dashboardOpen, setDashboardOpen] = React.useState(false);
+  const [wishlistOpen, setWishlistOpen] = React.useState(false);
+  const [bookOpen, setBookOpen] = React.useState(false);
+  const [deliveryOpen, setDeliveryOpen] = React.useState(false);
+  const [contentsOpen, setContentsOpen] = React.useState(false);
+  const [paymentOpen, setPaymentOpen] = React.useState(false);
 
-  const accounthandleClick = () => {
-    setAccountOpen(!accountOpen);
+  const dashboardhandleClick = () => {
+    setDashboardOpen(!dashboardOpen);
   };
 
-  const userhandleClick = () => {
-    setUserOpen(!userOpen);
+  const wishlisthandleClick = () => {
+    setWishlistOpen(!wishlistOpen);
   };
 
-  const page = window.location.href.split('/').slice(-2)[0];
+  const bookhandleClick = () => {
+    setBookOpen(!bookOpen);
+  };
 
-  useEffect(() => {
-    if (openMobile && onMobileClose) {
-      onMobileClose();
-    }
-  }, [location.pathname]);
+  const deliveryhandleClick = () => {
+    setDeliveryOpen(!deliveryOpen);
+  };
+
+  const contentshandleClick = () => {
+    setContentsOpen(!contentsOpen);
+  };
+
+  const paymenthandleClick = () => {
+    setPaymentOpen(!paymentOpen);
+  };
+
 
   const content = (
-    <Box height="100%" display="flex" flexDirection="column">
+    <Box height="400%" display="flex" flexDirection="column" style={{backgroundColor:"#e6e6e6"}}>
       <Divider />
       <Box p={2}>
         <List>
-          {items.map(item => (
-            <NavItem
-              href={item.href}
-              key={item.title}
-              title={item.title}
-              icon={item.icon}
-            />
-          ))}
-          <div
-            
-            onClick={accounthandleClick}
-          >
+          {/* Dashboard Drop Down */}
+          <div onClick={dashboardhandleClick}>
             <ListItem button>
-            <Icon style={{ position: 'relative', left: '-10px',top:"-5px" }}>
-              <UserIcon style={{ color: '#637b86' }} />
-            </Icon>
-            <ListItemText
-              primary="Users"
-              className={classes.font}
-              disableTypography
+              <Icon style={{ position: 'relative', left: '-10px',top:"-5px", height:'30px', width:'30px' }}>
+                <BarChartIcon style={{ color: '#637b86' }} />
+              </Icon>
+              <ListItemText
+                primary="Dashboards"
+                className={classes.font}
+                style={{ fontSize:'19px'}}
+                disableTypography
               />
-              {accountOpen ? <ExpandLess /> : <ExpandMore />}
-          </ListItem>
-
+              {dashboardOpen ? <ExpandLess /> : <ExpandMore />}
+            </ListItem>
           </div>
-
-          <div
-            
-            onClick={userhandleClick}
-          >
-            <ListItem button>
-            <Icon style={{ position: 'relative', left: '-10px',top:"-5px" }}>
-              <Book style={{ color: '#637b86' }} />
-            </Icon>
-            <ListItemText
-              primary="Book"
-              className={classes.font}
-              disableTypography
-              />
-              {userOpen ? <ExpandLess /> : <ExpandMore />}
-          </ListItem>
-
-          </div>
-
-          <Collapse in={userOpen} timeout="auto" unmountOnExit>
+          <Collapse in={dashboardOpen} timeout="auto" unmountOnExit>
               <List component="div" className={classes.nested}>
-              <div >
-              {userItems.map(item => (
-                <NavItem
-                  href={item.href}
-                  key={item.title}
-                  title={item.title}
-                  icon={item.icon}
-                />
-            ))}
-
-            
-                 
-                      </div>
-                </List>
-          </Collapse>
-
-          <Collapse in={accountOpen} timeout="auto" unmountOnExit>
-              <List component="div" className={classes.nested}>
-              <div >
-              {bookItems.map(item => (
-                <NavItem
-                  href={item.href}
-                  key={item.title}
-                  title={item.title}
-                  icon={item.icon}
-                />
-            ))}
-
-            
-                 
-                      </div>
-                </List>
-          </Collapse>
-
-          
-          {itemsTwo.map(item => (
-            <NavItem
-              href={item.href}
-              key={item.title}
-              title={item.title}
-              icon={item.icon}
-            />
-          ))}
-
-<ListItem button   >
-                  <Icon style={{ position: 'relative', left: '-10px' }}>
-                    <LockIcon style={{ color: '#637b86' }} />
-                  </Icon>
-                  <ListItemText
-                    primary="Logout"
-                    className={classes.font}
-                    disableTypography
+              <div>
+                {dashboardItem.map(item => (
+                  <NavItem
+                    href={item.href}
+                    key={item.title}
+                    title={item.title}
+                    icon={item.icon}
                   />
-                      </ListItem>
+                ))}
+              </div>
+              </List>
+          </Collapse>      
+          {/* Book Drop Down */}
+          <div onClick={bookhandleClick}>
+            <ListItem button>
+              <Icon style={{ position: 'relative', left: '-10px',top:"-5px", height:'30px', width:'30px' }}>
+                <BookIcon style={{ color: '#637b86' }} />
+              </Icon>
+              <ListItemText
+                primary="Books"
+                className={classes.font}
+                style={{ fontSize:'19px'}}
+                disableTypography
+                />
+                {bookOpen ? <ExpandLess /> : <ExpandMore />}
+            </ListItem>
+          </div>  
+          <Collapse in={bookOpen} timeout="auto" unmountOnExit>
+              <List component="div" className={classes.nested}>
+              <div>
+                {bookItems.map(item => (
+                  <NavItem
+                    href={item.href}
+                    key={item.title}
+                    title={item.title}
+                    icon={item.icon}
+                  />
+                ))}
+              </div>
+              </List>
+          </Collapse>
+          {/* Delivery Drop Down */}
+          <div onClick={deliveryhandleClick}>
+            <ListItem button>
+              <Icon style={{ position: 'relative', left: '-10px',top:"-5px", height:'30px', width:'30px' }}>
+                <TruckIcon style={{ color: '#637b86' }} />
+              </Icon>
+              <ListItemText
+                primary="Delivery"
+                className={classes.font}
+                style={{ fontSize:'19px'}}
+                disableTypography
+                />
+                {deliveryOpen ? <ExpandLess /> : <ExpandMore />}
+            </ListItem>
+          </div>  
+          <Collapse in={deliveryOpen} timeout="auto" unmountOnExit>
+              <List component="div" className={classes.nested}>
+              <div>
+                {deliveryItems.map(item => (
+                  <NavItem
+                    href={item.href}
+                    key={item.title}
+                    title={item.title}
+                    icon={item.icon}
+                  />
+                ))}
+              </div>
+              </List>
+          </Collapse>
+          {/* Contents Drop Down */}
+          <div onClick={contentshandleClick}>
+            <ListItem button>
+              <Icon style={{ position: 'relative', left: '-10px',top:"-5px", height:'30px', width:'30px' }}>
+                <Clipboard style={{ color: '#637b86' }} />
+              </Icon>
+              <ListItemText
+                primary="Contents"
+                className={classes.font}
+                style={{ fontSize:'19px'}}
+                disableTypography
+                />
+                {contentsOpen ? <ExpandLess /> : <ExpandMore />}
+            </ListItem>
+          </div>  
+          <Collapse in={contentsOpen} timeout="auto" unmountOnExit>
+              <List component="div" className={classes.nested}>
+              <div>
+                {contentsItems.map(item => (
+                  <NavItem
+                    href={item.href}
+                    key={item.title}
+                    title={item.title}
+                    icon={item.icon}
+                  />
+                ))}
+              </div>
+              </List>
+          </Collapse>        
+          {/* Wishlist Drop Down */}
+          <div onClick={wishlisthandleClick}>
+            <ListItem button>
+              <Icon style={{ position: 'relative', left: '-10px',top:"-5px", height:'30px', width:'30px' }}>
+                <Heart style={{ color: '#637b86' }} />
+              </Icon>
+              <ListItemText
+                primary="Wishlist"
+                className={classes.font}
+                style={{ fontSize:'19px'}}
+                disableTypography
+                />
+                {wishlistOpen ? <ExpandLess /> : <ExpandMore />}
+            </ListItem>
+          </div>  
+          <Collapse in={wishlistOpen} timeout="auto" unmountOnExit>
+              <List component="div" className={classes.nested}>
+              <div>
+                {wishlistItems.map(item => (
+                  <NavItem
+                    href={item.href}
+                    key={item.title}
+                    title={item.title}
+                    icon={item.icon}
+                  />
+                ))}
+              </div>
+              </List>
+          </Collapse>
+          <ListItem button>
+            <Icon style={{ position: 'relative', left: '-10px', height:'30px', width:'30px' }}>
+              <LockIcon style={{ color: '#637b86' }} />
+            </Icon>
+            <ListItemText
+              primary="Logout"
+              className={classes.font}
+              style={{ fontSize:'19px'}}
+              disableTypography
+            />
+          </ListItem>
         </List>
-
         {/* <SetupWizardSide /> */}
       </Box>
       <Box flexGrow={1} />

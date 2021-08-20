@@ -4,7 +4,7 @@ export default class Cards extends Component {
     render() {
         return (
             <div className="container row row-cols-3 shadow-lg rounded" 
-                    style={{width:'100%', padding:'30px 30px 30px 30px', 'marginLeft':'300px', 'backgroundColor':'#000000', 'color':'white'}}>
+                    style={{width:'100%', padding:'30px 30px 30px 30px', margin:'auto', 'backgroundColor':'#8a8a8a', 'color':'white'}}>
                 <div class="col">
                         <ul class="nav flex-row">
                             <li class="nav-item">

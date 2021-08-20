@@ -3,8 +3,8 @@ import React, { Component } from 'react';
 export default class Contents extends Component {  
     render() {
         return (
-            <div className='container'>
-                <div class="card-columns">
+            <div className='container' >
+                <div class="card-columns" >
                     <div class="card">
                         <img class="card-img-top" src="https://cdn-japantimes.com/wp-content/uploads/2019/03/n-haruki-a-20190323_v0.2.jpg" alt="Card image cap"/>
                         <div class="card-body">
