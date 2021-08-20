@@ -15,6 +15,8 @@ import Button from "@material-ui/core/Button";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import { ButtonGroup } from "@material-ui/core";
 import { APP_ROUTES } from "../../../../utilities/constants/routes.constants";
+import { useSelector } from "react-redux";
+
 
 const useStyles = makeStyles((theme) => ({
   grow: {
@@ -108,6 +110,14 @@ export default function Header() {
       setAnchorEl(null);
   };
 
+  const cart = useSelector((state) => state.cart);
+
+  const { cartItems } = cart;
+
+  const getCartCount = () => {
+    return cartItems.reduce((qty, item) => qty + Number(item.qty), 0);
+  };
+
     const navigateToHome = (event) => window.location.href = APP_ROUTES.USER_HOMEPAGE;
     const NavigateToBooks = (event) => window.location.href = APP_ROUTES.BOOKS;
     const NavigateToContactUs = (event) => window.location.href = APP_ROUTES.USER_CONTACT_US;
@@ -115,6 +125,8 @@ export default function Header() {
     const navigateToSearchResults = (event) => window.location.href = APP_ROUTES.USER_SEARCH_BOOKS;
     const navigateToAddCardDetails = (event) => window.location.href = APP_ROUTES.USER_ADD_CARD_DETAILS;
     const navigateToCardDetails = (event) => window.location.href = APP_ROUTES.USER_CARD_DETAILS;
+    const navigateToCart = (event) => window.location.href = APP_ROUTES.CART;
+
 
 
 
@@ -197,8 +209,8 @@ export default function Header() {
                                 </Typography></Button>
                         </ButtonGroup>
                         <IconButton aria-label="show 4 new mails" color="inherit">
-                            <Badge badgeContent={4} color="secondary">
-                                <ShoppingCartIcon />
+                            <Badge badgeContent={getCartCount()} color="secondary">
+                                <ShoppingCartIcon onClick={navigateToCart} />
                             </Badge>
                         </IconButton>
                         <IconButton

@@ -1,8 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import axios from 'axios';
 import { reactLocalStorage } from 'reactjs-localstorage';
+import { addToCart } from "../../../redux/actions/cartActions";
+import { useDispatch, useSelector } from "react-redux";
 
-export default function ProductPageBody() {
+
+const ProductPageBody =({match,history}) => {
 
     var Book = reactLocalStorage.getObject('Book');
     const id = Book[0];
@@ -14,6 +17,13 @@ export default function ProductPageBody() {
     const [description, setDescription] = useState(Book[6]);
     const [price, setPrice] = useState(Book[7]);
     const [image, setImage] = useState(Book[8]);
+
+    const dispatch = useDispatch();
+
+    const addToCartHandler = () => {
+        dispatch(addToCart(id));
+        console.log("this is" + id);
+      };
 
     return (
         <div className="container" style={{ maxWidth: '90rem', margin: 'auto', padding: '10px', borderColor: 'black', background: '#ffffff'}}>
@@ -27,7 +37,7 @@ export default function ProductPageBody() {
                     <p style={{'fontSize':'40px', 'color':'#069999', 'marginTop':'-20px'}} > <b> Rs. {price}.00  </b> </p>
                     <div className="row" style={{'width': '500px'}}>
                         <div className="col"  >
-                            <button type="button" class="btn btn-lg shadow " style={{'backgroundColor':'#069999', 'color':'white'}} >                        
+                            <button type="button" class="btn btn-lg shadow " style={{'backgroundColor':'#069999', 'color':'white'}} onClick={addToCartHandler} >                        
                                 <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16"
                                 style={{'marginRight':'10px'}}>
                                     <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
@@ -63,3 +73,5 @@ export default function ProductPageBody() {
     );
 
 }
+
+export default ProductPageBody;
