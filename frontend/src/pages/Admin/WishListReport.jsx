@@ -75,7 +75,7 @@ const WishListReport = () => {
       id: "P020",
       title: "10,000 Years of Art",
       publisher: "Phaidon",
-      price: 2500.0,
+      price: 3500.0,
     },
     {
       id: "P040",
@@ -170,7 +170,7 @@ const WishListReport = () => {
               Generate Report
             </Button>
             {success ? <Alert style={{border: "1px solid #74c274", width:"90%"}} severity="success">{success}</Alert> : null}
-            {error ? <Alert style={{border: "1px solid #ffca18", width:"90%"}} severity="warning">{error}</Alert> : null}
+            {error ? <Alert style={{border: "1px solid #f5d872", width:"90%"}} severity="warning">{error}</Alert> : null}
           </Grid>
           <Grid
             item

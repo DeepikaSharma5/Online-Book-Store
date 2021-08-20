@@ -30,7 +30,9 @@ const SignupForm = () => {
     setError(null);
     setSuccess(null);
 
-    if (newUser.phone.length < 10) {
+    if(newUser.name === "" | newUser.email === "" | newUser.password === "" | newUser.phone === ""){
+      setError("Please all required fields")
+    }else if (newUser.phone.length < 10 | isNaN(newUser.phone)) {
       setError("Please enter a valid phone number")
     } else if(!newUser.email.match(/[\w\d\.-]+@[\w\d\.-]+\.[\w\d\.-]+/g)){
       setError("Please enter a valid email")

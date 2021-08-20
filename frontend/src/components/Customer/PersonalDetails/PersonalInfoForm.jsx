@@ -62,7 +62,7 @@ const PersonalInfoForm = () => {
     ) {
       setError("Please enter a valid email");
       setTimeout(() => setError(""), 3000);
-    } else if (personalDetails.phone.length < 10) {
+    } else if (personalDetails.phone.length < 10 | isNaN(personalDetails.phone)) {
       setError("Please enter a valid phone number");
       setTimeout(() => setError(""), 3000);
     } else {
