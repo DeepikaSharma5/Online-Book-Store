@@ -26,7 +26,7 @@ const WishListTable = ({ resultList }) => {
             resultList.map((wishListResult) => (
               <StyledTableRow key={wishListResult.id}>
                 <StyledTableCell align="left">
-                  <Button href={APP_ROUTES.A_WISHLIST+wishListResult.id}>{wishListResult.name}</Button>
+                  <Button href={APP_ROUTES.A_WISHLIST+wishListResult.id+"/"+wishListResult.name.split(" ")[0]+"/"+wishListResult.name.split(" ")[1]}>{wishListResult.name}</Button>
                 </StyledTableCell>
                 <StyledTableCell align="left">
                   {wishListResult.location}

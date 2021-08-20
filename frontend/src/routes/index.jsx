@@ -42,7 +42,7 @@ import ViewBookByCategory from "../components/Customer/Books/ViewBookByCategory"
 import SearchBooks from "../components/Customer/SearchBooks/SearchBooks";
 
 
-import { Login, Signup, PersonalDetails, WishList, SearchWishList, ManageAdmins } from "../pages";
+import {Login, Signup, PersonalDetails, MyWishList, WishList, SearchWishList, ManageAdmins} from "../pages";
 
 import PaymentDashboard from "../pages/Payment/PaymentDashboard";
 import HomeScreen from "../pages/Payment/HomeScreen";
@@ -62,7 +62,8 @@ const AppRoutes = () => {
             <PublicRoute exact path={APP_ROUTES.SIGNUP} Component={Signup} />
 
             <PublicRoute exact path={APP_ROUTES.USER_PERSONAL_DETAILS} Component={PersonalDetails} />
-            <PublicRoute exact path={APP_ROUTES.USER_WISHLIST} Component={WishList} />
+            <PublicRoute exact path={APP_ROUTES.USER_WISHLIST} Component={MyWishList} />
+            <PublicRoute path={APP_ROUTES.A_WISHLIST+":id/:fname/:lname"} Component={WishList} />
             <PublicRoute exact path={APP_ROUTES.WISHLIST_SEARCH} Component={SearchWishList} />
 
             <PublicRoute exact path={APP_ROUTES.USER_CONTACT_US} Component={ContactUs} />
