@@ -15,19 +15,32 @@ import Button from '@material-ui/core/Button';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import { ButtonGroup } from '@material-ui/core';
 import { APP_ROUTES } from '../../../../utilities/constants/routes.constants';
-import { User,Heart, Search, Truck, Clipboard } from 'react-feather';
+import { User,Heart, Search, Truck, Clipboard, CreditCard, PlusSquare } from 'react-feather';
 
 const useStyles = makeStyles((theme) => ({
-    grow: {
-        flexGrow: 1,
+  grow: {
+    flexGrow: 1,
+  },
+  menuButton: {
+    marginRight: theme.spacing(2),
+  },
+  title: {
+    display: "none",
+    [theme.breakpoints.up("sm")]: {
+      display: "block",
     },
-    menuButton: {
-        marginRight: theme.spacing(2),
+  },
+  search: {
+    position: "relative",
+    borderRadius: theme.shape.borderRadius,
+    backgroundColor: alpha(theme.palette.common.white, 0.15),
+    "&:hover": {
+      backgroundColor: alpha(theme.palette.common.white, 0.25),
     },
     title: {
         display: 'none',
         [theme.breakpoints.up('sm')]: {
-        display: 'block',
+            display: 'block',
         },
     },
     search: {
@@ -35,14 +48,14 @@ const useStyles = makeStyles((theme) => ({
         borderRadius: theme.shape.borderRadius,
         backgroundColor: alpha(theme.palette.common.white, 0.15),
         '&:hover': {
-        backgroundColor: alpha(theme.palette.common.white, 0.25),
+            backgroundColor: alpha(theme.palette.common.white, 0.25),
         },
         marginRight: theme.spacing(2),
         marginLeft: 0,
         width: '100%',
         [theme.breakpoints.up('sm')]: {
-        marginLeft: theme.spacing(3),
-        width: 'auto',
+            marginLeft: theme.spacing(3),
+            width: 'auto',
         },
     },
     searchIcon: {
@@ -64,30 +77,41 @@ const useStyles = makeStyles((theme) => ({
         transition: theme.transitions.create('width'),
         width: '100%',
         [theme.breakpoints.up('md')]: {
-        width: '20ch',
+            width: '20ch',
         },
     },
     sectionDesktop: {
         display: 'none',
         [theme.breakpoints.up('md')]: {
-        display: 'flex',
+            display: 'flex',
         },
     },
     button: {
         color: 'inherit',
     },
+  },
+  button: {
+    color: "inherit",
+  },
 }));
 
 export default function Header() {
-  const classes = useStyles();
-  const [anchorEl, setAnchorEl] = React.useState(null);
+    const classes = useStyles();
+    const [anchorEl, setAnchorEl] = React.useState(null);
 
-  const isMenuOpen = Boolean(anchorEl);
+    const isMenuOpen = Boolean(anchorEl);
 
-  const handleProfileMenuOpen = (event) => {
-    setAnchorEl(event.currentTarget);
+    const handleProfileMenuOpen = (event) => {
+        setAnchorEl(event.currentTarget);
+    };
+
+    const handleMenuClose = () => {
+      setAnchorEl(null);
   };
-  
+
+    const navigateToAddCardDetails = (event) => window.location.href = APP_ROUTES.USER_ADD_CARD_DETAILS;
+    const navigateToCardDetails = (event) => window.location.href = APP_ROUTES.USER_CARD_DETAILS;
+
   const preventDefault = (event) => event.preventDefault();
   const navigateToHome = (event) => window.location.href = APP_ROUTES.USER_HOMEPAGE;
   const NavigateToBooks = (event) => window.location.href = APP_ROUTES.BOOKS;
@@ -99,12 +123,6 @@ export default function Header() {
   const navigateToMyAccount = (event) => window.location.href = APP_ROUTES.USER_PERSONAL_DETAILS;
   const navigateToMyWishlist = (event) => window.location.href = APP_ROUTES.USER_WISHLIST;
   const navigateToSearchForWishlist = (event) => window.location.href = APP_ROUTES.WISHLIST_SEARCH;
-
-
-
-  const handleMenuClose = () => {
-    setAnchorEl(null);
-  };
 
   const menuId = 'primary-search-account-menu';
   const renderMenu = (
@@ -133,6 +151,10 @@ export default function Header() {
         <Truck/>&ensp;My Deliveries
       </MenuItem>
 
+      <MenuItem onClick={navigateToAddCardDetails}>
+        <PlusSquare/>&ensp;Add Card Details</MenuItem>
+      <MenuItem onClick={navigateToCardDetails}>
+        <CreditCard/>&ensp;Card Details</MenuItem>
 
     </Menu>
   );
@@ -148,31 +170,31 @@ export default function Header() {
                         color="inherit"
                         aria-label="open drawer"
                     >
-                    <LibraryBooksIcon onClick={navigateToHome} />
+                        <LibraryBooksIcon onClick={navigateToHome} />
                     </IconButton>
                     {/*Booklab title*/}
                     <Typography className={classes.title} variant="h5" noWrap>
                         BookLab
                     </Typography>
                     {/*Search Bar*/}
-                    <div className={classes.search}>
+                    <div className={classes.search} style={{"width":"300px", "height":"40px"}}>
                         <div className={classes.searchIcon}>
                             <SearchIcon />
-                            </div>
-                            <InputBase onClick={navigateToSearchResults}
+                        </div>
+                        <InputBase onClick={navigateToSearchResults}
                             placeholder="Search…"
                             classes={{
                                 root: classes.inputRoot,
                                 input: classes.inputInput,
                             }}
-                            inputProps={{ 'aria-label': 'search' }}
+                            inputProps={{'aria-label': 'search'}}
                         />
                     </div>
                     <div className={classes.grow} />
-                    <div className={classes.sectionDesktop}>   
+                    <div className={classes.sectionDesktop}>
                         <ButtonGroup variant="text" aria-label="text primary button group">
                             <Button onClick={NavigateToBooks}>
-                                <Typography className={classes.title} style={{ color: 'white'}} variant="h6" noWrap>
+                                <Typography className={classes.title} style={{ color: 'white' }} variant="h6" noWrap>
                                     Books
                                 </Typography>
                             </Button>
@@ -181,10 +203,10 @@ export default function Header() {
                                     About Us
                                 </Typography></Button>
                             <Button onClick={NavigateToContactUs} >
-                                <Typography className={classes.title} style={{ color: 'white'}} variant="h6" noWrap>
+                                <Typography className={classes.title} style={{ color: 'white' }} variant="h6" noWrap>
                                     Contact Us
                                 </Typography></Button>
-                        </ButtonGroup>                  
+                        </ButtonGroup>
                         <IconButton aria-label="show 4 new mails" color="inherit">
                             <Badge badgeContent={4} color="secondary">
                                 <ShoppingCartIcon />
@@ -198,16 +220,16 @@ export default function Header() {
                             onClick={handleProfileMenuOpen}
                             color="inherit"
                         >
-                        <AccountCircle />
-                        <Typography className={classes.title} variant="h5" >
+                            <AccountCircle />
+                            <Typography className={classes.title} variant="h5" >
                                 {/*Add user name here*/}
-                                &ensp;sithpavan
+                                username
                         </Typography>
                         </IconButton>
                     </div>
                 </Toolbar>
             </AppBar>
-        {renderMenu}
+            {renderMenu}
         </div>
-  );
+    );
 }

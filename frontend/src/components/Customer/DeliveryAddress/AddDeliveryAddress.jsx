@@ -129,7 +129,7 @@ class AddDeliveryAddress extends Component {
                                     </div>
                                 </div>
                                 <div className="btn-toolbar justify-content-between" role="toolbar" aria-label="Toolbar with button groups">
-                                    <button type="submit" className="btn btn-outline-danger" style={{ float: 'right', padding: '12px 68px', marginBottom: '30px', fontWeight: 'bold', fontSize: "130%" }} onClick={() => { window.location.href = APP_ROUTES.ADMIN_VIEW_PRIVATE_POLICY }}><Backspace /> Cancel</button>
+                                    <button type="submit" className="btn btn-outline-danger" style={{ float: 'right', padding: '12px 68px', marginBottom: '30px', fontWeight: 'bold', fontSize: "130%" }} onClick={() => { window.location.href = APP_ROUTES.USER_VIEW_ADDRESS }}><Backspace /> Cancel</button>
                                     <button type="reset" className="btn btn-outline-primary" style={{ float: 'center', padding: '12px 68px', marginBottom: '30px', fontWeight: 'bold', fontSize: "130%" }} onClick={this.onClear}><XCircle /> Clear</button>
                                     <button type="submit" className="btn btn-outline-success" style={{ float: 'left', padding: '12px 68px', marginBottom: '30px', fontWeight: 'bold', fontSize: "130%" }} onClick={this.onSubmit}><Folder /> Save</button>
                                 </div>

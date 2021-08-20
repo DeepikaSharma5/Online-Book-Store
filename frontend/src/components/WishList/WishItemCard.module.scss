@@ -7,3 +7,21 @@
 .subText.subText{
     font-size: large;
 }
+
+.outOfStock{
+        color: #3aa9ab;
+        text-align: center;
+        background-color: #484848;
+        padding: 5px 20px;
+        border-radius: 2px;
+        font-weight: bold;
+}
+
+.bought{
+    color: #006666;
+    text-align: center;
+    border: 2px solid #006666;
+    padding: 3.5px 20px;
+    border-radius: 4px;
+    font-weight: bold;
+}

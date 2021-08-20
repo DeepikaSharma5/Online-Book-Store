@@ -3,7 +3,7 @@ import { Router } from 'react-router-dom';
 import { createBrowserHistory } from 'history';
 //import PrivateRoute from "./PrivateRoute";
 import PublicRoute from "./PublicRoute";
-import {APP_ROUTES} from "../utilities/constants/routes.constants";
+import { APP_ROUTES } from "../utilities/constants/routes.constants";
 
 import ContactUs from "../components/Customer/ContactUs/contactUs";
 import PrivatePolicy from "../components/Customer/PrivatePolicy/PrivatePolicy";
@@ -26,9 +26,8 @@ import UpdateDeliveryAddress from "../components/Customer/DeliveryAddress/Update
 import MyDeliveries from "../components/Customer/MyDeliveries/MyDeliveries";
 import ViewDelivery from "../components/Admin/Delivery/ViewDelivery/ViewDelivery";
 import UpdateDelivery from "../components/Admin/Delivery/UpdateDelivery/UpdateDelivery";
+import AboutUs from "../components/Customer/AboutUs/AboutUs";
 
-
-//sid's part
 import AddBook from "../components/Admin/Contents/Book/AddBook/AddBook";
 import AddCategory from "../components/Admin/Contents/Category/AddCategory/AddCategory";
 import ViewBook from "../components/Admin/Contents/Book/ViewBook/ViewBook";
@@ -43,14 +42,20 @@ import ViewBookByCategory from "../components/Customer/Books/ViewBookByCategory"
 import SearchBooks from "../components/Customer/SearchBooks/SearchBooks";
 
 
-import {Login, Signup, PersonalDetails, WishList, SearchWishList, ManageAdmins} from "../pages";
+import {Login, Signup, PersonalDetails, WishList, SearchWishList, ManageAdmins, WishListReport} from "../pages";
 
 import PaymentDashboard from "../pages/Payment/PaymentDashboard";
+import HomeScreen from "../pages/Payment/HomeScreen";
+import ProductScreen from "../pages/Payment/ProductScreen";
+import CartScreen from "../pages/Payment/CartScreen";
+import AddCardDetails from "../pages/CardDetails/AddCardDetails";
+import CardDetails from "../pages/CardDetails/CardDetails";
+import { MyWishList } from "../pages";
 
 const AppRoutes = () => {
     const history = createBrowserHistory();
 
-    return(
+    return (
         <Router history={history}>
 
             {/**Customer side*/}
@@ -58,7 +63,8 @@ const AppRoutes = () => {
             <PublicRoute exact path={APP_ROUTES.SIGNUP} Component={Signup} />
 
             <PublicRoute exact path={APP_ROUTES.USER_PERSONAL_DETAILS} Component={PersonalDetails} />
-            <PublicRoute exact path={APP_ROUTES.USER_WISHLIST} Component={WishList} />
+            <PublicRoute exact path={APP_ROUTES.USER_WISHLIST} Component={MyWishList} />
+            <PublicRoute path={APP_ROUTES.A_WISHLIST+":id/:fname/:lname"} Component={WishList} />
             <PublicRoute exact path={APP_ROUTES.WISHLIST_SEARCH} Component={SearchWishList} />
 
             <PublicRoute exact path={APP_ROUTES.USER_CONTACT_US} Component={ContactUs} />
@@ -74,10 +80,9 @@ const AppRoutes = () => {
             <PublicRoute exact path={APP_ROUTES.USER_HOMEPAGE} Component={Homepage} />
             <PublicRoute exact path={APP_ROUTES.PRODUCT_PAGE} Component={ProductPage} />
             <PublicRoute exact path={APP_ROUTES.BOOKS} Component={Books} />
-            <PublicRoute exact path={APP_ROUTES.USER_VIEW_BY_CATEGORY} Component={ViewBookByCategory} />            
+            <PublicRoute exact path={APP_ROUTES.USER_VIEW_BY_CATEGORY} Component={ViewBookByCategory} />
             <PublicRoute exact path={APP_ROUTES.USER_SEARCH_BOOKS} Component={SearchBooks} />
-
-
+            <PublicRoute exact path={APP_ROUTES.USER_ABOUT_US} Component={AboutUs} />
 
             {/**Admin side*/}
             <PublicRoute exact path={APP_ROUTES.ADMIN_VIEW_PRIVATE_POLICY} Component={ViewPrivatePolicy} />
@@ -95,15 +100,26 @@ const AppRoutes = () => {
             <PublicRoute exact path={APP_ROUTES.ADMIN_VIEW_DELIVERY} Component={ViewDelivery}></PublicRoute>
             <PublicRoute exact path={APP_ROUTES.ADMIN_UPDATE_DELIVERY} Component={UpdateDelivery}></PublicRoute>
             <PublicRoute exact path={APP_ROUTES.ADMIN_ADD_BOOK} Component={AddBook} />
-            <PublicRoute exact path={APP_ROUTES.ADMIN_ADD_CATEGORY} Component={AddCategory} />             
-            <PublicRoute exact path={APP_ROUTES.ADMIN_VIEW_BOOK} Component={ViewBook} />                
-            <PublicRoute exact path={APP_ROUTES.ADMIN_VIEW_CATEGORY} Component={ViewCategory} />             
-            <PublicRoute exact path={APP_ROUTES.ADMIN_UPDATE_BOOK} Component={UpdateBook} />            
+            <PublicRoute exact path={APP_ROUTES.ADMIN_ADD_CATEGORY} Component={AddCategory} />
+            <PublicRoute exact path={APP_ROUTES.ADMIN_VIEW_BOOK} Component={ViewBook} />
+            <PublicRoute exact path={APP_ROUTES.ADMIN_VIEW_CATEGORY} Component={ViewCategory} />
+            <PublicRoute exact path={APP_ROUTES.ADMIN_UPDATE_BOOK} Component={UpdateBook} />
             <PublicRoute exact path={APP_ROUTES.ADMIN_UPDATE_CATEGORY} Component={UpdateCategory} />
             <PublicRoute exact path={APP_ROUTES.ADMIN_PRODUCT_DASHBOARD} Component={ProductDashboard} />
             <PublicRoute exact path={APP_ROUTES.ADMIN_PAYMENT_DASHBOARD} Component={PaymentDashboard} />
+            <PublicRoute exact path={APP_ROUTES.ADMIN_REPORT_WISHLIST} Component={WishListReport} />
+            <PublicRoute exact path={APP_ROUTES.HOME} Component={HomeScreen} />
+            <PublicRoute exact path={APP_ROUTES.PRODUCT} Component={ProductScreen} />
+            <PublicRoute exact path={APP_ROUTES.CART} Component={CartScreen} />
+            <PublicRoute exact path={APP_ROUTES.USER_ADD_CARD_DETAILS} Component={AddCardDetails} />
+            <PublicRoute exact path={APP_ROUTES.USER_CARD_DETAILS} Component={CardDetails} />
 
-        
+
+
+
+
+
+
         </Router>
     )
 }
