@@ -51,22 +51,26 @@ render() {
     return (
         <div>
             <div className="row" style={{'paddingLeft':'60px','paddingRight':'30px'}}>
-                <div className="card text-dark bg-light mb-3 ">
+                <div className="card text-dark bg-light mb-3 " >
                     <div class="card-body" >
                         <h4> <b> Recently Added Books </b> </h4>
                         <br></br>                          
-                            <div class="row row-cols-6" style={{'marginBottom':'15px'}}>
+                            <div class="row row-cols-7" style={{'marginBottom':'15px',float:'left'}}>
                                 {this.state.books.length > 0 && this.state.books.map((item, index) => (
                                     <div className="col">    
-                                        <div key={index} class="card shadow" >
-                                            <img class="card-img-top" src={item.image} style={{'width':'100%'}} alt="Card image cap"/>
-                                            <div class="card-body">
-                                                <h3 class="card-title"> {item.title} </h3>
-                                                <h4 class="card-text" style={{'color':'#069999'}} > <b> Rs. {item.price}.00 </b> </h4>
+                                        <div key={index} class="card shadow" style={{width:'13rem', height:'34rem'}}>
+                                            <img class="card-img-top" src={item.image} style={{'width':'100%', height:'17rem'}} alt="Card image cap"/>
+                                            <div class="card-body" style={{height:'15rem'}}>
+                                                <h5 class="card-title"> {item.title} </h5>                                              
                                                 <br></br>
-                                                <button type="button" className="btn btn-lg shadow" style={{'backgroundColor':'#069999', 'color':'white'}} 
+                                            </div>
+                                            <div class="card-footer"  style={{'backgroundColor':'white'}}>
+                                                <h5 class="card-text" style={{'color':'#069999'}} > <b> LKR {item.price}.00 </b> </h5>
+                                            </div>
+                                            <div class="card-footer"  style={{'backgroundColor':'#069999'}}>
+                                                <button type="button" className="btn btn-lg" style={{'backgroundColor':'#069999', 'color':'white', textAlign:'center', width:'11rem'}} 
                                                     onClick={() => this.viewBook(item._id, item.title, item.author_name, item.publisher, item.year, item.isbn, item.description, item.price, item.image)}>
-                                                    View Book 
+                                                    View Details
                                                 </button>
                                             </div>
                                         </div>    
@@ -81,20 +85,24 @@ render() {
             <div className="row" style={{'paddingLeft':'60px','paddingRight':'30px'}}>
             <div className="card text-dark bg-light mb-3 ">
                 <div class="card-body" >
-                    <h4> <b> {this.state.category_name} </b> </h4>
+                    <h4> Recently Viewed Category: <b>  {this.state.category_name} </b> </h4>
                     <br></br>                          
-                        <div class="row row-cols-6" style={{'marginBottom':'15px'}}>
+                        <div class="row row-cols-7" style={{'marginBottom':'15px', float:'left'}}>
                             {this.state.booksByCategory.length > 0 && this.state.booksByCategory.map((item, index) => (
                                 <div className="col">    
-                                    <div key={index} class="card shadow" >
-                                        <img class="card-img-top" src={item.image} style={{'width':'100%'}} alt="Card image cap"/>
-                                        <div class="card-body">
-                                            <h3 class="card-title"> {item.title} </h3>
-                                            <h4 class="card-text" style={{'color':'#069999'}} > <b> Rs. {item.price}.00 </b> </h4>
+                                    <div key={index} class="card shadow" style={{width:'13rem', height:'34rem'}}>
+                                        <img class="card-img-top" src={item.image} style={{'width':'100%', height:'17rem'}} alt="Card image cap"/>
+                                        <div class="card-body" style={{height:'15rem'}}>
+                                            <h5 class="card-title"> {item.title} </h5>                                              
                                             <br></br>
-                                            <button type="button" className="btn btn-lg shadow" style={{'backgroundColor':'#069999', 'color':'white'}} 
+                                        </div>
+                                        <div class="card-footer"  style={{'backgroundColor':'white'}}>
+                                            <h5 class="card-text" style={{'color':'#069999'}} > <b> LKR {item.price}.00 </b> </h5>
+                                        </div>
+                                        <div class="card-footer"  style={{'backgroundColor':'#069999'}}>
+                                            <button type="button" className="btn btn-lg" style={{'backgroundColor':'#069999', 'color':'white', textAlign:'center', width:'11rem'}} 
                                                 onClick={() => this.viewBook(item._id, item.title, item.author_name, item.publisher, item.year, item.isbn, item.description, item.price, item.image)}>
-                                                View Book 
+                                                View Details
                                             </button>
                                         </div>
                                     </div>    

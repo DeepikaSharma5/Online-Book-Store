@@ -24,7 +24,7 @@ export default function ProductPageBody() {
                 </div>
                 <div className="col" style={{'paddingLeft': '30px'}}>
                     <p style={{'fontSize':'50px'}} > <b> {title}  </b> </p>
-                    <p style={{'fontSize':'40px', 'color':'#069999', 'marginTop':'-20px'}} > <b> Rs. {price}.00  </b> </p>
+                    <p style={{'fontSize':'40px', 'color':'#069999', 'marginTop':'-20px'}} > <b> LKR {price}.00  </b> </p>
                     <div className="row" style={{'width': '500px'}}>
                         <div className="col"  >
                             <button type="button" class="btn btn-lg shadow " style={{'backgroundColor':'#069999', 'color':'white'}} >                        

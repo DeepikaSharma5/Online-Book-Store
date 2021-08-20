@@ -15,6 +15,7 @@ import Button from '@material-ui/core/Button';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import { ButtonGroup } from '@material-ui/core';
 import { APP_ROUTES } from '../../../../utilities/constants/routes.constants';
+import { User,Heart, Search, Truck, Clipboard } from 'react-feather';
 
 const useStyles = makeStyles((theme) => ({
     grow: {
@@ -90,8 +91,16 @@ export default function Header() {
   const preventDefault = (event) => event.preventDefault();
   const navigateToHome = (event) => window.location.href = APP_ROUTES.USER_HOMEPAGE;
   const NavigateToBooks = (event) => window.location.href = APP_ROUTES.BOOKS;
+  const NavigateToAboutUs = (event) => window.location.href = APP_ROUTES.USER_ABOUT_US;
   const NavigateToContactUs = (event) => window.location.href = APP_ROUTES.USER_CONTACT_US;
   const navigateToSearchResults = (event) => window.location.href = APP_ROUTES.USER_SEARCH_BOOKS;
+  const navigateToMyDeliveryAddress = (event) => window.location.href = APP_ROUTES.USER_VIEW_ADDRESS;
+  const navigateToMyDeliveries = (event) => window.location.href = APP_ROUTES.USER_MY_DELIVERIES;
+  const navigateToMyAccount = (event) => window.location.href = APP_ROUTES.USER_PERSONAL_DETAILS;
+  const navigateToMyWishlist = (event) => window.location.href = APP_ROUTES.USER_WISHLIST;
+  const navigateToSearchForWishlist = (event) => window.location.href = APP_ROUTES.WISHLIST_SEARCH;
+
+
 
   const handleMenuClose = () => {
     setAnchorEl(null);
@@ -108,10 +117,23 @@ export default function Header() {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
-      <MenuItem onClick={handleMenuClose}>My Delivery Address</MenuItem>
-      <MenuItem onClick={handleMenuClose}>My Deliveries</MenuItem>
+      <MenuItem onClick={navigateToMyAccount}> 
+        <User/>&ensp;My account
+      </MenuItem>
+      <MenuItem onClick={navigateToMyWishlist}>
+        <Heart/>&ensp;My Wishlist
+      </MenuItem>
+      <MenuItem onClick={navigateToSearchForWishlist}>
+        <Search/>&ensp;Search for wishlist
+      </MenuItem>
+      <MenuItem onClick={navigateToMyDeliveryAddress}>
+        <Clipboard/>&ensp;My Delivery Address
+      </MenuItem>
+      <MenuItem onClick={navigateToMyDeliveries}>
+        <Truck/>&ensp;My Deliveries
+      </MenuItem>
+
+
     </Menu>
   );
 
@@ -154,7 +176,7 @@ export default function Header() {
                                     Books
                                 </Typography>
                             </Button>
-                            <Button onClick={preventDefault}>
+                            <Button onClick={NavigateToAboutUs}>
                                 <Typography className={classes.title} style={{ color: 'white'}} variant="h6" noWrap>
                                     About Us
                                 </Typography></Button>
@@ -179,7 +201,7 @@ export default function Header() {
                         <AccountCircle />
                         <Typography className={classes.title} variant="h5" >
                                 {/*Add user name here*/}
-                                  user name
+                                &ensp;sithpavan
                         </Typography>
                         </IconButton>
                     </div>
