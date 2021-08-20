@@ -50,6 +50,7 @@ import ProductScreen from "../pages/Payment/ProductScreen";
 import CartScreen from "../pages/Payment/CartScreen";
 import AddCardDetails from "../pages/CardDetails/AddCardDetails";
 import CardDetails from "../pages/CardDetails/CardDetails";
+import { MyWishList } from "../pages";
 
 const AppRoutes = () => {
     const history = createBrowserHistory();
