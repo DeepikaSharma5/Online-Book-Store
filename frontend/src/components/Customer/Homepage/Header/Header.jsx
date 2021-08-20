@@ -1,27 +1,40 @@
-import React from 'react';
-import { alpha, makeStyles } from '@material-ui/core/styles';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import IconButton from '@material-ui/core/IconButton';
-import Typography from '@material-ui/core/Typography';
-import InputBase from '@material-ui/core/InputBase';
-import Badge from '@material-ui/core/Badge';
-import MenuItem from '@material-ui/core/MenuItem';
-import Menu from '@material-ui/core/Menu';
-import SearchIcon from '@material-ui/icons/Search';
-import AccountCircle from '@material-ui/icons/AccountCircle';
-import LibraryBooksIcon from '@material-ui/icons/LibraryBooks';
-import Button from '@material-ui/core/Button';
-import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
-import { ButtonGroup } from '@material-ui/core';
-import { APP_ROUTES } from '../../../../utilities/constants/routes.constants';
+import React from "react";
+import { alpha, makeStyles } from "@material-ui/core/styles";
+import AppBar from "@material-ui/core/AppBar";
+import Toolbar from "@material-ui/core/Toolbar";
+import IconButton from "@material-ui/core/IconButton";
+import Typography from "@material-ui/core/Typography";
+import InputBase from "@material-ui/core/InputBase";
+import Badge from "@material-ui/core/Badge";
+import MenuItem from "@material-ui/core/MenuItem";
+import Menu from "@material-ui/core/Menu";
+import SearchIcon from "@material-ui/icons/Search";
+import AccountCircle from "@material-ui/icons/AccountCircle";
+import LibraryBooksIcon from "@material-ui/icons/LibraryBooks";
+import Button from "@material-ui/core/Button";
+import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
+import { ButtonGroup } from "@material-ui/core";
+import { APP_ROUTES } from "../../../../utilities/constants/routes.constants";
 
 const useStyles = makeStyles((theme) => ({
-    grow: {
-        flexGrow: 1,
+  grow: {
+    flexGrow: 1,
+  },
+  menuButton: {
+    marginRight: theme.spacing(2),
+  },
+  title: {
+    display: "none",
+    [theme.breakpoints.up("sm")]: {
+      display: "block",
     },
-    menuButton: {
-        marginRight: theme.spacing(2),
+  },
+  search: {
+    position: "relative",
+    borderRadius: theme.shape.borderRadius,
+    backgroundColor: alpha(theme.palette.common.white, 0.15),
+    "&:hover": {
+      backgroundColor: alpha(theme.palette.common.white, 0.25),
     },
     title: {
         display: 'none',
@@ -75,6 +88,10 @@ const useStyles = makeStyles((theme) => ({
     button: {
         color: 'inherit',
     },
+  },
+  button: {
+    color: "inherit",
+  },
 }));
 
 export default function Header() {
@@ -87,15 +104,27 @@ export default function Header() {
         setAnchorEl(event.currentTarget);
     };
 
+    const handleMenuClose = () => {
+      setAnchorEl(null);
+  };
+
     const navigateToHome = (event) => window.location.href = APP_ROUTES.USER_HOMEPAGE;
     const NavigateToBooks = (event) => window.location.href = APP_ROUTES.BOOKS;
     const NavigateToContactUs = (event) => window.location.href = APP_ROUTES.USER_CONTACT_US;
     const NavigateToAboutUs = (event) => window.location.href = APP_ROUTES.USER_ABOUT_US;
     const navigateToSearchResults = (event) => window.location.href = APP_ROUTES.USER_SEARCH_BOOKS;
+    const navigateToAddCardDetails = (event) => window.location.href = APP_ROUTES.USER_ADD_CARD_DETAILS;
+    const navigateToCardDetails = (event) => window.location.href = APP_ROUTES.USER_CARD_DETAILS;
 
-    const handleMenuClose = () => {
-        setAnchorEl(null);
+
+
+   
+    const navigateToMyAccount = (event) => {
+      handleMenuClose();
+      window.location.href = APP_ROUTES.USER_PERSONAL_DETAILS;
     };
+
+  const preventDefault = (event) => event.preventDefault();
 
     const menuId = 'primary-search-account-menu';
     const renderMenu = (
@@ -109,9 +138,13 @@ export default function Header() {
             onClose={handleMenuClose}
         >
             <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-            <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+            <MenuItem onClick={navigateToMyAccount}>My account</MenuItem>
             <MenuItem onClick={handleMenuClose}>My Delivery Address</MenuItem>
             <MenuItem onClick={handleMenuClose}>My Deliveries</MenuItem>
+            <MenuItem onClick={navigateToAddCardDetails}>Add Card Details</MenuItem>
+            <MenuItem onClick={navigateToCardDetails}>Card Details</MenuItem>
+
+
         </Menu>
     );
 

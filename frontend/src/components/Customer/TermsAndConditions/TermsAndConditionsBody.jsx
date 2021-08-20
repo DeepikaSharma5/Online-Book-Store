@@ -19,12 +19,16 @@ class TermsAndConditionsBody extends Component {
                 <div style={{ height: '500px' }}>
                     <div class="card overflow-auto" style={{ maxHeight: '200%', minHeight: "120%", background: '#ffffff', boxShadow: '10px 10px 45px #919191,-10px -10px 45px #ffffff' }}>
                         <div class="card-body">
-                            {this.state?.Conditions?.length > 0 && this.state.Conditions.map((item, index) =>
-                                <div style={{ height: '150px' }} key={index}>
-                                    <h3 class="card-title">{item.heading}</h3>
-                                    <p>{item.details}</p>
-                                </div>
-                            )}
+
+                            <div style={{ height: '150px' }}>
+                                {this.state?.Conditions?.length > 0 && this.state.Conditions.map((item, index) =>
+                                    <div style={{marginBottom:'30px'}}>
+                                        <h3 class="card-title">{item.heading}</h3>
+                                        <p>{item.details}</p>
+                                    </div>
+                                )}
+                            </div>
+
                         </div>
                     </div>
                 </div>

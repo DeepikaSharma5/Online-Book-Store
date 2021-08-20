@@ -123,7 +123,7 @@ const DeleteAccountModal = () => {
                       label="Current password"
                       value={password}
                       onChange={handleFieldChange}
-                      variant="outlined"
+                      variant="filled"
                     />
                   <Typography className={styles.descText} style={{marginTop:"10px"}}>
                     <span style={{fontWeight: "600"}}>

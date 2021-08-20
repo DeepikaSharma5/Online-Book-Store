@@ -5,15 +5,15 @@ class MyDeliveriesBody extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            policy: []
+            status: []
         }
     }
 
     componentDidMount() {
-        axios.get('http://localhost:6060/private-policy/view')
+        axios.get('http://localhost:6060/delivery-status/view')
             .then(response => {
-                const policy = response.data;
-                this.setState({ policy });
+                const status = response.data;
+                this.setState({ status });
                 console.log("response", response);
             }).catch(error => {
                 alert(error.message);
@@ -38,12 +38,27 @@ class MyDeliveriesBody extends Component {
                                                     <th scope="col" className="w-15">Order Delivery Status</th>
                                                 </tr>
                                             </thead>
-                                            {this.state?.policy?.length > 0 && this.state.policy.map((item, index) =>
+                                            {this.state?.status?.length > 0 && this.state.status.map((item, index) =>
                                                 <tbody key={index}>
                                                     <tr>
-                                                        <td>{item.heading}</td>
-                                                        <td>{item.details}</td>
-                                                        <td></td>
+                                                        <td>{item._id}</td>
+                                                        <td>{item.date}</td>
+                                                        <td>
+                                                            {item.state === '' ?
+                                                                <p></p>
+                                                                :
+                                                                item.status === 'Pending' ?
+                                                                    <button type="button" className="btn btn-danger" style={{ width: '120px' }}>{item.status}</button>
+                                                                    :
+                                                                    item.status === 'Delivered' ?
+                                                                        <button type="button" className="btn btn-success" style={{ width: '120px' }}>{item.status}</button>
+                                                                        :
+                                                                        item.status === 'Processing' ?
+                                                                            <button type="button" className="btn btn-info" style={{ width: '120px' }}>{item.status}</button>
+                                                                            :
+                                                                            <button type="button" className="btn btn-warning" style={{ width: '120px' }}>{item.status}</button>
+                                                            }
+                                                        </td>
                                                     </tr>
                                                 </tbody>
                                             )}

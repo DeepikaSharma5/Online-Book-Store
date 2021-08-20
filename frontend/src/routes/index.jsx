@@ -42,9 +42,15 @@ import ViewBookByCategory from "../components/Customer/Books/ViewBookByCategory"
 import SearchBooks from "../components/Customer/SearchBooks/SearchBooks";
 
 
-import { Login, Signup, PersonalDetails, WishList, SearchWishList, ManageAdmins } from "../pages";
+import {Login, Signup, PersonalDetails, WishList, SearchWishList, ManageAdmins, WishListReport} from "../pages";
 
 import PaymentDashboard from "../pages/Payment/PaymentDashboard";
+import HomeScreen from "../pages/Payment/HomeScreen";
+import ProductScreen from "../pages/Payment/ProductScreen";
+import CartScreen from "../pages/Payment/CartScreen";
+import AddCardDetails from "../pages/CardDetails/AddCardDetails";
+import CardDetails from "../pages/CardDetails/CardDetails";
+import { MyWishList } from "../pages";
 
 const AppRoutes = () => {
     const history = createBrowserHistory();
@@ -57,7 +63,8 @@ const AppRoutes = () => {
             <PublicRoute exact path={APP_ROUTES.SIGNUP} Component={Signup} />
 
             <PublicRoute exact path={APP_ROUTES.USER_PERSONAL_DETAILS} Component={PersonalDetails} />
-            <PublicRoute exact path={APP_ROUTES.USER_WISHLIST} Component={WishList} />
+            <PublicRoute exact path={APP_ROUTES.USER_WISHLIST} Component={MyWishList} />
+            <PublicRoute path={APP_ROUTES.A_WISHLIST+":id/:fname/:lname"} Component={WishList} />
             <PublicRoute exact path={APP_ROUTES.WISHLIST_SEARCH} Component={SearchWishList} />
 
             <PublicRoute exact path={APP_ROUTES.USER_CONTACT_US} Component={ContactUs} />
@@ -76,9 +83,6 @@ const AppRoutes = () => {
             <PublicRoute exact path={APP_ROUTES.USER_VIEW_BY_CATEGORY} Component={ViewBookByCategory} />
             <PublicRoute exact path={APP_ROUTES.USER_SEARCH_BOOKS} Component={SearchBooks} />
             <PublicRoute exact path={APP_ROUTES.USER_ABOUT_US} Component={AboutUs} />
-
-
-
 
             {/**Admin side*/}
             <PublicRoute exact path={APP_ROUTES.ADMIN_VIEW_PRIVATE_POLICY} Component={ViewPrivatePolicy} />
@@ -103,6 +107,17 @@ const AppRoutes = () => {
             <PublicRoute exact path={APP_ROUTES.ADMIN_UPDATE_CATEGORY} Component={UpdateCategory} />
             <PublicRoute exact path={APP_ROUTES.ADMIN_PRODUCT_DASHBOARD} Component={ProductDashboard} />
             <PublicRoute exact path={APP_ROUTES.ADMIN_PAYMENT_DASHBOARD} Component={PaymentDashboard} />
+            <PublicRoute exact path={APP_ROUTES.ADMIN_REPORT_WISHLIST} Component={WishListReport} />
+            <PublicRoute exact path={APP_ROUTES.HOME} Component={HomeScreen} />
+            <PublicRoute exact path={APP_ROUTES.PRODUCT} Component={ProductScreen} />
+            <PublicRoute exact path={APP_ROUTES.CART} Component={CartScreen} />
+            <PublicRoute exact path={APP_ROUTES.USER_ADD_CARD_DETAILS} Component={AddCardDetails} />
+            <PublicRoute exact path={APP_ROUTES.USER_CARD_DETAILS} Component={CardDetails} />
+
+
+
+
+
 
 
         </Router>
