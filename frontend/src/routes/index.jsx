@@ -38,7 +38,7 @@ import UpdateCategory from "../components/Admin/Contents/Category/UpdateCategory
 import ProductDashboard from "../components/Admin/Contents/ProductDashboard/ProductDashboard";
 import Homepage from "../components/Customer/Homepage/Homepage/Homepage";
 
-import {Login, Signup, PersonalDetails, WishList, SearchWishList, ManageAdmins} from "../pages";
+import {Login, Signup, PersonalDetails, WishList, SearchWishList, ManageAdmins, WishListReport} from "../pages";
 
 import PaymentDashboard from "../pages/Payment/PaymentDashboard";
 
@@ -67,6 +67,8 @@ const AppRoutes = () => {
             <PublicRoute exact path={APP_ROUTES.USER_UPDATE_ADDRESS} Component={UpdateDeliveryAddress} />
             <PublicRoute exact path={APP_ROUTES.USER_MY_DELIVERIES} Component={MyDeliveries} />
             <PublicRoute exact path={APP_ROUTES.USER_HOMEPAGE} Component={Homepage} />
+
+            <PublicRoute exact path={APP_ROUTES.ADMIN_REPORT_WISHLIST} Component={WishListReport} />
 
 
 
