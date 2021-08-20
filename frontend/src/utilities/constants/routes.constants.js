@@ -42,4 +42,5 @@ export const APP_ROUTES = {
   ADMIN_UPDATE_CATEGORY: "/admin-update-category",
   ADMIN_PRODUCT_DASHBOARD: "/admin-product-dashboard",
   ADMIN_PAYMENT_DASHBOARD: "/payment-dashboard",
+  ADMIN_REPORT_WISHLIST: "/wishlist-report",
 };
