@@ -43,7 +43,22 @@ class MyDeliveriesBody extends Component {
                                                     <tr>
                                                         <td>{item._id}</td>
                                                         <td>{item.date}</td>
-                                                        <td>{item.status}</td>
+                                                        <td>
+                                                            {item.state === '' ?
+                                                                <p></p>
+                                                                :
+                                                                item.status === 'Pending' ?
+                                                                    <button type="button" className="btn btn-danger" style={{ width: '120px' }}>{item.status}</button>
+                                                                    :
+                                                                    item.status === 'Delivered' ?
+                                                                        <button type="button" className="btn btn-success" style={{ width: '120px' }}>{item.status}</button>
+                                                                        :
+                                                                        item.status === 'Processing' ?
+                                                                            <button type="button" className="btn btn-info" style={{ width: '120px' }}>{item.status}</button>
+                                                                            :
+                                                                            <button type="button" className="btn btn-warning" style={{ width: '120px' }}>{item.status}</button>
+                                                            }
+                                                        </td>
                                                     </tr>
                                                 </tbody>
                                             )}
