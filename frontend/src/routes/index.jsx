@@ -42,7 +42,7 @@ import ViewBookByCategory from "../components/Customer/Books/ViewBookByCategory"
 import SearchBooks from "../components/Customer/SearchBooks/SearchBooks";
 
 
-import {Login, Signup, PersonalDetails, MyWishList, WishList, SearchWishList, ManageAdmins} from "../pages";
+import {Login, Signup, PersonalDetails, WishList, SearchWishList, ManageAdmins, WishListReport} from "../pages";
 
 import PaymentDashboard from "../pages/Payment/PaymentDashboard";
 import HomeScreen from "../pages/Payment/HomeScreen";
@@ -83,9 +83,6 @@ const AppRoutes = () => {
             <PublicRoute exact path={APP_ROUTES.USER_SEARCH_BOOKS} Component={SearchBooks} />
             <PublicRoute exact path={APP_ROUTES.USER_ABOUT_US} Component={AboutUs} />
 
-
-
-
             {/**Admin side*/}
             <PublicRoute exact path={APP_ROUTES.ADMIN_VIEW_PRIVATE_POLICY} Component={ViewPrivatePolicy} />
             <PublicRoute exact path={APP_ROUTES.ADMIN_ADD_PRIVATE_POLICY} Component={AddPrivatePolicy} />
@@ -109,6 +106,7 @@ const AppRoutes = () => {
             <PublicRoute exact path={APP_ROUTES.ADMIN_UPDATE_CATEGORY} Component={UpdateCategory} />
             <PublicRoute exact path={APP_ROUTES.ADMIN_PRODUCT_DASHBOARD} Component={ProductDashboard} />
             <PublicRoute exact path={APP_ROUTES.ADMIN_PAYMENT_DASHBOARD} Component={PaymentDashboard} />
+            <PublicRoute exact path={APP_ROUTES.ADMIN_REPORT_WISHLIST} Component={WishListReport} />
             <PublicRoute exact path={APP_ROUTES.HOME} Component={HomeScreen} />
             <PublicRoute exact path={APP_ROUTES.PRODUCT} Component={ProductScreen} />
             <PublicRoute exact path={APP_ROUTES.CART} Component={CartScreen} />
