@@ -1,20 +1,21 @@
-import React from "react";
-import { alpha, makeStyles } from "@material-ui/core/styles";
-import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
-import IconButton from "@material-ui/core/IconButton";
-import Typography from "@material-ui/core/Typography";
-import InputBase from "@material-ui/core/InputBase";
-import Badge from "@material-ui/core/Badge";
-import MenuItem from "@material-ui/core/MenuItem";
-import Menu from "@material-ui/core/Menu";
-import SearchIcon from "@material-ui/icons/Search";
-import AccountCircle from "@material-ui/icons/AccountCircle";
-import LibraryBooksIcon from "@material-ui/icons/LibraryBooks";
-import Button from "@material-ui/core/Button";
-import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
-import { ButtonGroup } from "@material-ui/core";
-import { APP_ROUTES } from "../../../../utilities/constants/routes.constants";
+import React from 'react';
+import { alpha, makeStyles } from '@material-ui/core/styles';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import IconButton from '@material-ui/core/IconButton';
+import Typography from '@material-ui/core/Typography';
+import InputBase from '@material-ui/core/InputBase';
+import Badge from '@material-ui/core/Badge';
+import MenuItem from '@material-ui/core/MenuItem';
+import Menu from '@material-ui/core/Menu';
+import SearchIcon from '@material-ui/icons/Search';
+import AccountCircle from '@material-ui/icons/AccountCircle';
+import LibraryBooksIcon from '@material-ui/icons/LibraryBooks';
+import Button from '@material-ui/core/Button';
+import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
+import { ButtonGroup } from '@material-ui/core';
+import { APP_ROUTES } from '../../../../utilities/constants/routes.constants';
+import { User,Heart, Search, Truck, Clipboard, CreditCard, PlusSquare } from 'react-feather';
 
 const useStyles = makeStyles((theme) => ({
   grow: {
@@ -108,45 +109,55 @@ export default function Header() {
       setAnchorEl(null);
   };
 
-    const navigateToHome = (event) => window.location.href = APP_ROUTES.USER_HOMEPAGE;
-    const NavigateToBooks = (event) => window.location.href = APP_ROUTES.BOOKS;
-    const NavigateToContactUs = (event) => window.location.href = APP_ROUTES.USER_CONTACT_US;
-    const NavigateToAboutUs = (event) => window.location.href = APP_ROUTES.USER_ABOUT_US;
-    const navigateToSearchResults = (event) => window.location.href = APP_ROUTES.USER_SEARCH_BOOKS;
     const navigateToAddCardDetails = (event) => window.location.href = APP_ROUTES.USER_ADD_CARD_DETAILS;
     const navigateToCardDetails = (event) => window.location.href = APP_ROUTES.USER_CARD_DETAILS;
 
-
-
-   
-    const navigateToMyAccount = (event) => {
-      handleMenuClose();
-      window.location.href = APP_ROUTES.USER_PERSONAL_DETAILS;
-    };
-
   const preventDefault = (event) => event.preventDefault();
+  const navigateToHome = (event) => window.location.href = APP_ROUTES.USER_HOMEPAGE;
+  const NavigateToBooks = (event) => window.location.href = APP_ROUTES.BOOKS;
+  const NavigateToAboutUs = (event) => window.location.href = APP_ROUTES.USER_ABOUT_US;
+  const NavigateToContactUs = (event) => window.location.href = APP_ROUTES.USER_CONTACT_US;
+  const navigateToSearchResults = (event) => window.location.href = APP_ROUTES.USER_SEARCH_BOOKS;
+  const navigateToMyDeliveryAddress = (event) => window.location.href = APP_ROUTES.USER_VIEW_ADDRESS;
+  const navigateToMyDeliveries = (event) => window.location.href = APP_ROUTES.USER_MY_DELIVERIES;
+  const navigateToMyAccount = (event) => window.location.href = APP_ROUTES.USER_PERSONAL_DETAILS;
+  const navigateToMyWishlist = (event) => window.location.href = APP_ROUTES.USER_WISHLIST;
+  const navigateToSearchForWishlist = (event) => window.location.href = APP_ROUTES.WISHLIST_SEARCH;
 
-    const menuId = 'primary-search-account-menu';
-    const renderMenu = (
-        <Menu
-            anchorEl={anchorEl}
-            anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-            id={menuId}
-            keepMounted
-            transformOrigin={{ vertical: 'top', horizontal: 'right' }}
-            open={isMenuOpen}
-            onClose={handleMenuClose}
-        >
-            <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-            <MenuItem onClick={navigateToMyAccount}>My account</MenuItem>
-            <MenuItem onClick={handleMenuClose}>My Delivery Address</MenuItem>
-            <MenuItem onClick={handleMenuClose}>My Deliveries</MenuItem>
-            <MenuItem onClick={navigateToAddCardDetails}>Add Card Details</MenuItem>
-            <MenuItem onClick={navigateToCardDetails}>Card Details</MenuItem>
+  const menuId = 'primary-search-account-menu';
+  const renderMenu = (
+    <Menu
+      anchorEl={anchorEl}
+      anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+      id={menuId}
+      keepMounted
+      transformOrigin={{ vertical: 'top', horizontal: 'right' }}
+      open={isMenuOpen}
+      onClose={handleMenuClose}
+    >
+      <MenuItem onClick={navigateToMyAccount}> 
+        <User/>&ensp;My account
+      </MenuItem>
+      <MenuItem onClick={navigateToMyWishlist}>
+        <Heart/>&ensp;My Wishlist
+      </MenuItem>
+      <MenuItem onClick={navigateToSearchForWishlist}>
+        <Search/>&ensp;Search for wishlist
+      </MenuItem>
+      <MenuItem onClick={navigateToMyDeliveryAddress}>
+        <Clipboard/>&ensp;My Delivery Address
+      </MenuItem>
+      <MenuItem onClick={navigateToMyDeliveries}>
+        <Truck/>&ensp;My Deliveries
+      </MenuItem>
 
+      <MenuItem onClick={navigateToAddCardDetails}>
+        <PlusSquare/>&ensp;Add Card Details</MenuItem>
+      <MenuItem onClick={navigateToCardDetails}>
+        <CreditCard/>&ensp;Card Details</MenuItem>
 
-        </Menu>
-    );
+    </Menu>
+  );
 
     return (
         <div className={classes.grow}>
@@ -166,7 +177,7 @@ export default function Header() {
                         BookLab
                     </Typography>
                     {/*Search Bar*/}
-                    <div className={classes.search}>
+                    <div className={classes.search} style={{"width":"300px", "height":"40px"}}>
                         <div className={classes.searchIcon}>
                             <SearchIcon />
                         </div>
@@ -176,7 +187,7 @@ export default function Header() {
                                 root: classes.inputRoot,
                                 input: classes.inputInput,
                             }}
-                            inputProps={{ 'aria-label': 'search' }}
+                            inputProps={{'aria-label': 'search'}}
                         />
                     </div>
                     <div className={classes.grow} />
@@ -188,7 +199,7 @@ export default function Header() {
                                 </Typography>
                             </Button>
                             <Button onClick={NavigateToAboutUs}>
-                                <Typography className={classes.title} style={{ color: 'white' }} variant="h6" noWrap>
+                                <Typography className={classes.title} style={{ color: 'white'}} variant="h6" noWrap>
                                     About Us
                                 </Typography></Button>
                             <Button onClick={NavigateToContactUs} >
@@ -212,8 +223,8 @@ export default function Header() {
                             <AccountCircle />
                             <Typography className={classes.title} variant="h5" >
                                 {/*Add user name here*/}
-                                user name
-                            </Typography>
+                                username
+                        </Typography>
                         </IconButton>
                     </div>
                 </Toolbar>

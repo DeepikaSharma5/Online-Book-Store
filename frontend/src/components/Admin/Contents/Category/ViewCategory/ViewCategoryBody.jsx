@@ -82,12 +82,18 @@ updateCategories(id, category_name, description, books) {
 render() {
     return (
         <div>
-            <div className="card card border border-light shadow-0 mb-3" style={{ maxWidth: '100rem', margin: 'auto', padding: '10px' }}>
+            <div className="card card border border-light shadow-0 mb-3" style={{ maxWidth: '100rem', margin: 'auto', padding: '10px', marginRight:"50px" }}>
                 <br></br><br></br>
                 <h1>List of Categories</h1>
-                <br></br>
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb"  style={{backgroundColor:'white'}}>
+                        <li class="breadcrumb-item" style={{fontSize:"20px"}}> <a href="/admin-product-dashboard" style={{color:"#049191"}}> Product Dashboard</a></li>
+                        <li class="breadcrumb-item active"style={{fontSize:"20px"}}  aria-current="page">Manage Categories</li>
+                    </ol>
+                </nav>
+                <hr></hr>
                 <div>
-                    <button type="button" className="btn btn-info" style={{ float: 'right', padding: '12px 28px', marginBottom:'30px' }} onClick={() => { window.location.href = APP_ROUTES.ADMIN_ADD_CATEGORY }}>
+                    <button type="button" className="btn btn-outline-secondary" style={{ float: 'right', padding: '12px 28px', marginBottom:'30px' }} onClick={() => { window.location.href = APP_ROUTES.ADMIN_ADD_CATEGORY }}>
                         <PlusLg /> Add New Category
                     </button>
                     <button type="submit" className="btn btn-outline-success" style={{ float: 'left', padding: '12px 68px', marginBottom: '30px', fontWeight: 'bold', fontSize: "130%" }} ><Folder /> Generate Category Report </button>

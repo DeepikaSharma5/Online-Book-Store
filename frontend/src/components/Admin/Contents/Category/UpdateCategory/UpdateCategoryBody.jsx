@@ -72,8 +72,18 @@ export default function UpdateCategoryBody() {
 
     return (
         <div className="col-md-14 col-sm-12" style={{ maxWidth: '70rem', margin: 'auto', padding: '10px', borderColor: 'black', background: '#ffffff'}}>
+            <br></br><br></br>
+                <h1>Update Category Details </h1>
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb"  style={{backgroundColor:'white'}}>
+                        <li class="breadcrumb-item" style={{fontSize:"20px"}}> <a href="/admin-product-dashboard" style={{color:"#049191"}}> Product Dashboard</a></li>
+                        <li class="breadcrumb-item" style={{fontSize:"20px"}}><a href="/admin-view-category" style={{color:"#049191"}} > Manage Categories </a></li>
+                        <li class="breadcrumb-item active"style={{fontSize:"20px"}}  aria-current="page">Update Category Details </li>
+                    </ol>
+                </nav>
+            <hr></hr>
             <div className="col" style={{ borderRadius: '33px', height: '590px' }}>
-                <form id="UpdateForm" style={{ paddingTop: "70px" }}>
+                <form id="UpdateForm" style={{ paddingTop: "10px" }}>
                 <div className="mb-3"> 
                         <label for="inputCategoryName" className="form-label">Category Name</label>
                         <input 
