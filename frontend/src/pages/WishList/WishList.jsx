@@ -92,7 +92,7 @@ const WishList = (props) => {
   return (
     <React.Fragment>
       <AppLayout>
-        <div style={{ margin: "10px 25px" }}>
+        <div style={{ margin: "80px 25px" }}>
           <Typography className={styles.pageHeading}>{props.match.params.fname+" "+props.match.params.lname}'s Wish List</Typography>
           <Divider style={{ margin: "20px 0px 30px 0px", width: "100%"}} />
           
