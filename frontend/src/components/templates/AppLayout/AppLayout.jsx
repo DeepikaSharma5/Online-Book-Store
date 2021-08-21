@@ -10,7 +10,9 @@ const AppLayout = ({ children, componentTitle }) => {
               <div>
                 <aside className="content">
                   <AppLayoutHeader/>
+                  <div style={{marginTop:"45px"}}>
                   {children}
+                  </div>
                   <Footer />
                 </aside>
               </div>

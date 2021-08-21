@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useSelector} from "react";
 import { alpha, makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -15,6 +15,7 @@ import Button from "@material-ui/core/Button";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import { ButtonGroup } from "@material-ui/core";
 import { APP_ROUTES } from "../../../../utilities/constants/routes.constants";
+import { User,Heart, Search, Truck, Clipboard, CreditCard, PlusSquare } from 'react-feather';
 
 const useStyles = makeStyles((theme) => ({
   grow: {
@@ -91,13 +92,13 @@ export default function Header() {
     setAnchorEl(null);
 };
 
-const cart = useSelector((state) => state.cart);
+//const cart = useSelector((state) => state.cart);
 
-const { cartItems } = cart;
+// const { cartItems } = cart;
 
-const getCartCount = () => {
-  return cartItems.reduce((qty, item) => qty + Number(item.qty), 0);
-};
+// const getCartCount = () => {
+//   return cartItems.reduce((qty, item) => qty + Number(item.qty), 0);
+// };
 
 
   const navigateToAddCardDetails = (event) => window.location.href = APP_ROUTES.USER_ADD_CARD_DETAILS;
@@ -201,7 +202,7 @@ const renderMenu = (
                               </Typography></Button>
                       </ButtonGroup>
                       <IconButton aria-label="show 4 new mails" color="inherit">
-                          <Badge badgeContent={getCartCount()} color="secondary">
+                          <Badge badgeContent={() => {}} color="secondary">
                               <ShoppingCartIcon onClick={navigateToCart} />
                           </Badge>
                       </IconButton>
