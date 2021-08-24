@@ -45,17 +45,17 @@ class ViewDeliveryAddress extends Component {
                 <div>
                     <div className="card card border border-light shadow-0 mb-3" style={{ maxWidth: '80rem', margin: 'auto', padding: '10px' }}>
                         <div>
-                            {this.state.deliveryAddress.map((item) => (
+                            {/* {this.state.deliveryAddress.map((item) => (
                                 (item.name !== "" ?
                                     <button type="button" className="btn btn-info" style={{ float: 'right', padding: '12px 28px', marginBottom: '30px' }} disabled={true}>
                                         <PlusLg /> Add new Delivery Address
                                     </button>
-                            :
+                            : */}
                             <button type="button" className="btn btn-info" style={{ float: 'right', padding: '12px 28px', marginBottom: '30px' }} onClick={() => { window.location.href = APP_ROUTES.USER_ADD_ADDRESS }}>
                                 <PlusLg /> Add new Delivery Address
                             </button>
-                            )
-                            ))} 
+                            {/* )
+                            ))}  */}
                         </div>
                         <div className="col-md-14 col-sm-12" style={{ maxWidth: '80rem', margin: 'auto', padding: '10px', borderColor: 'black', background: '#ffffff', boxShadow: '10px 10px 45px #919191,-10px -10px 45px #ffffff' }}>
                             <div className="col" style={{ borderRadius: '33px', height: '600px' }}>
