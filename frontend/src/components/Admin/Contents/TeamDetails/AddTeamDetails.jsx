@@ -79,7 +79,7 @@ export default function AddTeamDetails() {
 
                             </div>
                             <div className="form-outline mb-4">
-                                position: <label style={{ color: 'red' }}>*</label><input type="text" id="position" className="form-control border border-dark mb-3" name="position" onChange={(e) => { setPosition(e.target.value) }} required />
+                                Position: <label style={{ color: 'red' }}>*</label><input type="text" id="position" className="form-control border border-dark mb-3" name="position" onChange={(e) => { setPosition(e.target.value) }} required />
 
                             </div>
                             <div className="btn-toolbar justify-content-between" role="toolbar" aria-label="Toolbar with button groups">
