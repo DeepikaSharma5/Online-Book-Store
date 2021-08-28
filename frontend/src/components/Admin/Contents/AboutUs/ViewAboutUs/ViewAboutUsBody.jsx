@@ -36,17 +36,17 @@ class ViewAboutUsBody extends Component {
             <div style={{ position: 'relative', left: '110px' }}>
                 <div className="card card border border-light shadow-0 mb-3" style={{ maxWidth: '90rem', margin: 'auto', padding: '10px' }}>
                     <div>
-                        {/* {this.state.aboutus.map((item) => (
-                            (item.mission !== "" || item.mission.length !== 0 ?
+                        {
+                            (this.state.aboutus.length > 0 ?
                                 <button type="button" className="btn btn-info" style={{ float: 'right', padding: '12px 28px', marginBottom: '30px' }} disabled={true}>
                                     <PlusLg /> Add About Us Details
                                 </button>
-                                : */}
-                        <button type="button" className="btn btn-info" style={{ float: 'right', padding: '12px 28px', marginBottom: '30px' }} onClick={() => { window.location.href = APP_ROUTES.ADMIN_ADD_ABOUT_US }}>
-                            <PlusLg /> Add About Us Details
-                        </button>
-                        {/* )
-                        ))} */}
+                                :
+                                <button type="button" className="btn btn-info" style={{ float: 'right', padding: '12px 28px', marginBottom: '30px' }} onClick={() => { window.location.href = APP_ROUTES.ADMIN_ADD_ABOUT_US }}>
+                                    <PlusLg /> Add About Us Details
+                                </button>
+                            )
+                        }
                     </div>
                     <div className="col-md-14 col-sm-12" style={{ margin: 'auto', padding: '10px', borderColor: 'black', background: '#ffffff', boxShadow: '10px 10px 45px #919191,-10px -10px 45px #ffffff' }}>
                         <div className="col" style={{ borderRadius: '33px', height: '1100px' }}>
