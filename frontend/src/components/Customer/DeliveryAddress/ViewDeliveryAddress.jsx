@@ -37,7 +37,7 @@ class ViewDeliveryAddress extends Component {
         return (
             <div>
                 <div>
-                    <Header/>
+                    <Header />
                 </div>
                 <div className="d-flex p-2" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '200px' }}>
                     <h2 tag='div' className='display-1 pb-3 mb-3 border-bottom' style={{ fontWeight: "bold", fontSize: '300%' }}>DELIVERY ADDRESS DETAIL</h2>
@@ -45,59 +45,60 @@ class ViewDeliveryAddress extends Component {
                 <div>
                     <div className="card card border border-light shadow-0 mb-3" style={{ maxWidth: '80rem', margin: 'auto', padding: '10px' }}>
                         <div>
-                            {this.state.deliveryAddress.map((item) => (
-                                (item.name !== "" ?
+                            {
+                                (this.state.deliveryAddress.length > 0 ?
                                     <button type="button" className="btn btn-info" style={{ float: 'right', padding: '12px 28px', marginBottom: '30px' }} disabled={true}>
                                         <PlusLg /> Add new Delivery Address
                                     </button>
-                            :
-                            <button type="button" className="btn btn-info" style={{ float: 'right', padding: '12px 28px', marginBottom: '30px' }} onClick={() => { window.location.href = APP_ROUTES.USER_ADD_ADDRESS }}>
-                                <PlusLg /> Add new Delivery Address
-                            </button>
-                            )
-                            ))} 
+                                    :
+                                    <button type="button" className="btn btn-info" style={{ float: 'right', padding: '12px 28px', marginBottom: '30px' }} onClick={() => { window.location.href = APP_ROUTES.USER_ADD_ADDRESS }}>
+                                        <PlusLg /> Add new Delivery Address
+                                    </button>
+
+                                )
+                            }
                         </div>
                         <div className="col-md-14 col-sm-12" style={{ maxWidth: '80rem', margin: 'auto', padding: '10px', borderColor: 'black', background: '#ffffff', boxShadow: '10px 10px 45px #919191,-10px -10px 45px #ffffff' }}>
                             <div className="col" style={{ borderRadius: '33px', height: '600px' }}>
                                 {this.state.deliveryAddress.map((item) => (
-                                    <form style={{ paddingTop: "70px", paddingLeft:"10%" }}>
+                                    <form style={{ paddingTop: "70px", paddingLeft: "10%" }}>
                                         <div className="form-group row">
-                                            <label htmlFor="inputSubject" className="col-lg-4 col-form-label col-form-label-lg" style={{ fontSize: "130%", fontWeight: "bold", height: '50px', paddingLeft:"5%" }}>Full Name : </label>
+                                            <label htmlFor="inputSubject" className="col-lg-4 col-form-label col-form-label-lg" style={{ fontSize: "130%", fontWeight: "bold", height: '50px', paddingLeft: "5%" }}>Full Name : </label>
                                             <div className="col-sm-6">
-                                                <h5 style={{paddingTop:"1.5%", paddingLeft:"15%"}}>{item.name}</h5>
+                                                <h5 style={{ paddingTop: "1.5%", paddingLeft: "15%" }}>{item.name}</h5>
                                             </div>
                                         </div>
                                         <div className="form-group row">
-                                            <label htmlFor="inputSubject" className="col-lg-4 col-form-label col-form-label-lg" style={{ fontSize: "130%", fontWeight: "bold", height: '50px', paddingLeft:"5%" }}>Address Line 1 (No) :</label>
+                                            <label htmlFor="inputSubject" className="col-lg-4 col-form-label col-form-label-lg" style={{ fontSize: "130%", fontWeight: "bold", height: '50px', paddingLeft: "5%" }}>Address Line 1 (No) :</label>
                                             <div className="col-sm-6">
-                                                <h5 style={{paddingTop:"1.5%",  paddingLeft:"15%"}}>{item.address1}</h5>
+                                                <h5 style={{ paddingTop: "1.5%", paddingLeft: "15%" }}>{item.address1}</h5>
                                             </div>
                                         </div>
                                         <div className="form-group row">
-                                            <label htmlFor="inputSubject" className="col-lg-4 col-form-label col-form-label-lg" style={{ fontSize: "130%", fontWeight: "bold", height: '50px', paddingLeft:"5%" }}>Address Line 2 (Lane) : </label>
+                                            <label htmlFor="inputSubject" className="col-lg-4 col-form-label col-form-label-lg" style={{ fontSize: "130%", fontWeight: "bold", height: '50px', paddingLeft: "5%" }}>Address Line 2 (Lane) : </label>
                                             <div className="col-sm-6">
-                                                <h5 style={{paddingTop:"1.5%", paddingLeft:"15%"}}>{item.address2}</h5>
+                                                <h5 style={{ paddingTop: "1.5%", paddingLeft: "15%" }}>{item.address2}</h5>
                                             </div>
                                         </div>
                                         <div className="form-group row">
-                                            <label htmlFor="inputSubject" className="col-lg-4 col-form-label col-form-label-lg" style={{ fontSize: "130%", fontWeight: "bold", height: '50px', paddingLeft:"5%" }}>Address Line 3 (City) : </label>
+                                            <label htmlFor="inputSubject" className="col-lg-4 col-form-label col-form-label-lg" style={{ fontSize: "130%", fontWeight: "bold", height: '50px', paddingLeft: "5%" }}>Address Line 3 (City) : </label>
                                             <div className="col-sm-6">
-                                                <h5 style={{paddingTop:"1.5%", paddingLeft:"15%"}}>{item.address3}</h5>
+                                                <h5 style={{ paddingTop: "1.5%", paddingLeft: "15%" }}>{item.address3}</h5>
                                             </div>
                                         </div>
                                         <div className="form-group row">
-                                            <label htmlFor="inputSubject" className="col-lg-4 col-form-label col-form-label-lg" style={{ fontSize: "130%", fontWeight: "bold", height: '50px', paddingLeft:"5%" }}>Phone Number : </label>
+                                            <label htmlFor="inputSubject" className="col-lg-4 col-form-label col-form-label-lg" style={{ fontSize: "130%", fontWeight: "bold", height: '50px', paddingLeft: "5%" }}>Phone Number : </label>
                                             <div className="col-sm-6">
-                                                <h5 style={{paddingTop:"1.5%", paddingLeft:"15%"}}>{item.phoneNumber}</h5>
+                                                <h5 style={{ paddingTop: "1.5%", paddingLeft: "15%" }}>{item.phoneNumber}</h5>
                                             </div>
                                         </div>
                                         <div className="form-group row">
-                                            <label htmlFor="inputSubject" className="col-lg-4 col-form-label col-form-label-lg" style={{ fontSize: "130%", fontWeight: "bold", height: '50px', paddingLeft:"5%" }}>Email : </label>
+                                            <label htmlFor="inputSubject" className="col-lg-4 col-form-label col-form-label-lg" style={{ fontSize: "130%", fontWeight: "bold", height: '50px', paddingLeft: "5%" }}>Email : </label>
                                             <div className="col-sm-6">
-                                                <h5 style={{paddingTop:"1.5%", paddingLeft:"15%"}}>{item.email}</h5>
+                                                <h5 style={{ paddingTop: "1.5%", paddingLeft: "15%" }}>{item.email}</h5>
                                             </div>
                                         </div>
-                                        <div className="btn-toolbar justify-content-between" role="toolbar" aria-label="Toolbar with button groups" style={{marginLeft:'33%'}}>
+                                        <div className="btn-toolbar justify-content-between" role="toolbar" aria-label="Toolbar with button groups" style={{ marginLeft: '33%' }}>
                                             <center><button type="button" className="btn btn-outline-primary" style={{ padding: '12px 68px', marginBottom: '30px', fontWeight: 'bold', fontSize: "130%" }} onClick={() => this.updateDeliveryAddress(item._id, item.name, item.address1, item.address2, item.address3, item.phone, item.email)}><Pencil /> Update</button></center>
                                         </div>
                                     </form>
@@ -106,7 +107,7 @@ class ViewDeliveryAddress extends Component {
                         </div>
                     </div>
                 </div>
-                <Footer/>
+                <Footer />
             </div>
         );
     }

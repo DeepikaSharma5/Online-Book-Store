@@ -88,7 +88,7 @@ class AddDeliveryAddress extends Component {
                 <div className="d-flex p-2" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '250px' }}>
                     <h2 tag='div' className='display-1 pb-3 mb-3 border-bottom' style={{ fontWeight: "bold", fontSize: '300%' }}>ADD DELIVERY ADDRESS DETAIL</h2>
                 </div>
-                <div style={{height:"20px"}}>
+                <div style={{height:"960px"}}>
                     <div className="col-md-14 col-sm-12" style={{ maxWidth: '80rem', margin: 'auto', padding: '10px', borderColor: 'black', background: '#ffffff', boxShadow: '10px 10px 45px #919191,-10px -10px 45px #ffffff' }}>
                         <div className="col" style={{ borderRadius: '33px', height: '900px' }}>
                             <form style={{ paddingTop: "70px" }}>

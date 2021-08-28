@@ -5,6 +5,7 @@ import Swal from 'sweetalert2';
 import { reactLocalStorage } from 'reactjs-localstorage';
 import { APP_ROUTES } from '../../../../utilities/constants/routes.constants';
 import NavBar from '../../NavBar/NavBar';
+import AppBar from '../../NavBar/AppBar';
 
 export default function ViewTeamDetails() {
 
@@ -54,6 +55,7 @@ export default function ViewTeamDetails() {
     return (
         <div>
             <div>
+                <AppBar />
                 <NavBar />
             </div>
             <div>

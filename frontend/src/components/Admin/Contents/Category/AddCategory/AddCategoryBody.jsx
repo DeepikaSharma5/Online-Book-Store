@@ -89,7 +89,12 @@ class AddCategoryBody extends Component {
             <div className="container">
                 <br></br><br></br>
                 <h1>Add Category Details </h1>
-                <br></br>
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb"  style={{backgroundColor:'white'}}>
+                        <li class="breadcrumb-item" style={{fontSize:"20px"}}> <a href="/admin-product-dashboard" style={{color:"#049191"}}> Product Dashboard</a></li>
+                        <li class="breadcrumb-item active"style={{fontSize:"20px"}}  aria-current="page"> Add Categories</li>
+                    </ol>
+                </nav>
                 <form onSubmit={this.onSubmit} > 
                     <div className="mb-3"> 
                         <label for="inputCategoryName" className="form-label">Category Name</label>

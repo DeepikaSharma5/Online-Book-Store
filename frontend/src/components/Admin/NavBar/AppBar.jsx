@@ -25,13 +25,10 @@ export default function ButtonAppBar() {
 
   return (
     <div className={classes.root}>
-      <AppBar style={{ backgroundColor:"teal"}} position="static">
-        <Toolbar>
-          <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
-            <MenuIcon />
-          </IconButton>
-          <Typography variant="h6" className={classes.title}>
-            BookLab
+      <AppBar style={{ backgroundColor:"teal"}} position="fixed">
+        <Toolbar>          
+          <Typography variant="h5" className={classes.title}>
+            BookLab Dashboard
           </Typography>
           <Button color="inherit">Logout</Button>
         </Toolbar>

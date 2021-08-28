@@ -7,10 +7,14 @@ const CartItem = ({ item, qtyChangeHandler, removeHandler }) => {
   return (
     <div className="cartitem">
       <div className="cartitem__image">
-        <img src={item.imageUrl} alt={item.name} />
+        <img
+          style={{ height: "120px", borderRadius: "4px" }}
+          src={item.image}
+          alt={item.title}
+        />
       </div>
       <Link to={`/product/${item.product}`} className="cartItem__name">
-        <p>{item.name}</p>
+        <p>{item.title}</p>
       </Link>
       <p className="cartitem__price">{item.price}</p>
       <select
@@ -18,11 +22,9 @@ const CartItem = ({ item, qtyChangeHandler, removeHandler }) => {
         value={item.qty}
         onChange={(e) => qtyChangeHandler(item.product, e.target.value)}
       >
-        {[...Array(item.countInStock).keys()].map((x) => (
-          <option key={x + 1} value={x + 1}>
-            {x + 1}
-          </option>
-        ))}
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
       </select>
       <button
         className="cartItem__deleteBtn"
