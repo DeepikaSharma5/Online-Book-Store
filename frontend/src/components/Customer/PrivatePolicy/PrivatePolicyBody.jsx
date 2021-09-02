@@ -21,9 +21,10 @@ class PrivatePolicyBody extends Component {
                         <div class="card-body">
                             <div style={{ height: '150px' }}>
                                 {this.state?.policy?.length > 0 && this.state.policy.map((item, index) =>
-                                    <div style={{marginBottom:'30px'}}>
+                                    <div>
                                         <h3 class="card-title">{item.heading}</h3>
                                         <p>{item.details}</p>
+                                        <br/>
                                     </div>
                                 )}
                             </div>
