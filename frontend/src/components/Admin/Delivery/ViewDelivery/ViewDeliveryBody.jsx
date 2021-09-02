@@ -163,13 +163,14 @@ class PrivatestatusBody extends Component {
                             </div>
                         </div>
                     </div>
-                    <div>
-                        <button type="button" className="btn btn-info" style={{ float: 'left', padding: '12px 28px', marginTop: '30px' }} >
-                            <FileEarmarkPdf /> Generate Report
-                        </button>
-                    </div>
+                </div>
+                <div>
+                    <button type="button" className="btn btn-info" style={{ float: 'left', padding: '12px 28px', marginTop: '30px' }} >
+                        <FileEarmarkPdf /> Generate Report
+                    </button>
                 </div>
             </div>
+
         );
     }
 }
