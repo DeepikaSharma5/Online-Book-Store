@@ -47,7 +47,7 @@ class ContactUsBody extends Component {
             }).catch((err) => {
                 Swal.fire({
                     title: "Error!",
-                    text: "Unable to send message",
+                    text: "Unable to send your message",
                     icon: 'error',
                     confirmButtonText: "OK",
                     type: "success"
@@ -99,33 +99,33 @@ class ContactUsBody extends Component {
                 </div>
                 <div className="row row-cols-1 row-cols-md-2 g-4">
                     <div className="col" style={{ borderRadius: '33px', height: '690px', background: '#ffffff', boxShadow: '10px 10px 45px #919191,-10px -10px 45px #ffffff' }}>
-                        <h5 style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '150px', fontSize: '250%' }}>Contact Us for More Details</h5>
+                        <h5 style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '150px', fontSize: '250%' }}>Contact Us For More Details</h5>
                         <form onSubmit={this.onSubmit}>
                             <div class="form-group row ">
-                                <label htmlFor="inputName" class="col-sm-2 col-form-label col-form-label-lg" style={{ fontSize: "120%", fontWeight: "bold" }}>Name: <label style={{ color: 'red' }}>*</label></label>
-                                <div className="col-sm-10">
+                                <label htmlFor="inputName" class="col-sm-2 col-form-label col-form-label-lg" style={{ fontSize: "120%", fontWeight: "bold", marginLeft: '40px' }}>Name: <label style={{ color: 'red' }}>*</label></label>
+                                <div className="col-sm-8">
                                     <input type="text" id="name" className="form-control form-control-lg" name="name" value={this.state.name} onChange={this.onChange} required />
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label htmlFor="inputEmail" class="col-sm-2 col-form-label col-form-label-lg" style={{ fontSize: "120%", fontWeight: "bold" }}>Email:<label style={{ color: 'red' }}>*</label></label>
-                                <div className="col-sm-10">
+                                <label htmlFor="inputEmail" class="col-sm-2 col-form-label col-form-label-lg" style={{ fontSize: "120%", fontWeight: "bold", marginLeft: '40px'  }}>Email: <label style={{ color: 'red' }}>*</label></label>
+                                <div className="col-sm-8">
                                     <input data-testid="email-input" type="email" id="email" className="form-control form-control-lg" name="email" value={this.state.email} onChange={this.onChange} required />
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label htmlFor="inputSubject" class="col-sm-2 col-form-label col-form-label-lg" style={{ fontSize: "120%", fontWeight: "bold" }}>Subject: </label>
-                                <div className="col-sm-10">
+                                <label htmlFor="inputSubject" class="col-sm-2 col-form-label col-form-label-lg" style={{ fontSize: "120%", fontWeight: "bold", marginLeft: '40px'  }}>Subject: </label>
+                                <div className="col-sm-8">
                                     <input type="text" className="form-control form-control-lg" id="subject" name="subject" value={this.state.subject} onChange={this.onChange} />
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label htmlFor="inputSubject" class="col-sm-2 col-form-label col-form-label-lg" style={{ fontSize: "120%", fontWeight: "bold" }}>Message:<label style={{ color: 'red' }}>*</label></label>
-                                <div className="col-sm-10">
+                                <label htmlFor="inputSubject" class="col-sm-2 col-form-label col-form-label-lg" style={{ fontSize: "120%", fontWeight: "bold", marginLeft: '40px'  }}>Message: <label style={{ color: 'red' }}>*</label></label>
+                                <div className="col-sm-8">
                                     <textarea className="form-control form-control-lg" id="message" rows="4" name="message" value={this.state.message} onChange={this.onChange} required />
                                 </div>
                             </div>
-                            <center><button type="submit" className="btn btn-outline-success" style={{ width: "30%", height: "60px", fontWeight:'bold' }}><Envelope/> Send Message</button></center>
+                            <center><button type="submit" className="btn btn-outline-success" style={{ width: "30%", height: "60px", fontWeight: 'bold'}}><Envelope /> Send Message</button></center>
                         </form>
                     </div>
                     <div className="col" >
