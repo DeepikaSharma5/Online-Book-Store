@@ -40,7 +40,11 @@ import ProductPage from "../components/Customer/ProductPage/ProductPage";
 import Books from "../components/Customer/Books/Books";
 import ViewBookByCategory from "../components/Customer/Books/ViewBookByCategory";
 import SearchBooks from "../components/Customer/SearchBooks/SearchBooks";
-
+import AllDeliveryPdf from "../components/Admin/Delivery/ViewDelivery/AllDeliveryPdf";
+import DeliveredPdf from "../components/Admin/Delivery/ViewDelivery/DeliveredPdf";
+import PendingPdf from "../components/Admin/Delivery/ViewDelivery/PendingPdf";
+import ProcessingPdf from "../components/Admin/Delivery/ViewDelivery/ProcessingPdf";
+import ShippedPdf from "../components/Admin/Delivery/ViewDelivery/ShippedPdf";
 
 import {Login, Signup, PersonalDetails, WishList, SearchWishList, ManageAdmins, WishListReport} from "../pages";
 
@@ -113,13 +117,11 @@ const AppRoutes = () => {
             <PublicRoute exact path={APP_ROUTES.CART} Component={CartScreen} />
             <PublicRoute exact path={APP_ROUTES.USER_ADD_CARD_DETAILS} Component={AddCardDetails} />
             <PublicRoute exact path={APP_ROUTES.USER_CARD_DETAILS} Component={CardDetails} />
-
-
-
-
-
-
-
+            <PublicRoute exact path={APP_ROUTES.ADMIN_ALL_DELIVERY_PDF} Component={AllDeliveryPdf} />
+            <PublicRoute exact path={APP_ROUTES.ADMIN_DELIVERED_PDF} Component={DeliveredPdf} />
+            <PublicRoute exact path={APP_ROUTES.ADMIN_PENDING_PDF} Component={PendingPdf} />
+            <PublicRoute exact path={APP_ROUTES.ADMIN_PROCESSING_PDF} Component={ProcessingPdf} />
+            <PublicRoute exact path={APP_ROUTES.ADMIN_SHIPPED_PDF} Component={ShippedPdf} />
         </Router>
     )
 }
