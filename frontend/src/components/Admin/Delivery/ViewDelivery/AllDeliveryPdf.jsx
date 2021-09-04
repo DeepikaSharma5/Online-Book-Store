@@ -4,6 +4,8 @@ import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 import NavBar from '../../NavBar/NavBar';
 import AppBar from '../../NavBar/AppBar';
+import { APP_ROUTES } from '../../../../utilities/constants/routes.constants';
+import { Backspace } from 'react-bootstrap-icons';
 
 class AllDeliveryPdf extends Component {
     constructor(props) {
@@ -44,10 +46,10 @@ class AllDeliveryPdf extends Component {
     render() {
         return (
             <div>
-                <AppBar/>
-                <NavBar/>
-                <div id="pdfdiv" style={{ maxWidth: '100%', background: '#ffffff', marginBottom:"30px" }}>
-                    <div className="card-body" style={{ maxWidth: '60%', margin: 'auto', padding: '10px', background: '#ffffff', marginTop: '30px', marginBottom: '30px', borderColor: 'black', border: 'double' }}>
+                <AppBar />
+                <NavBar />
+                <div id="pdfdiv" style={{ maxWidth: '100%', background: '#ffffff', marginBottom: "30px", minHeight:'1300px'}}>
+                    <div className="card-body" style={{ maxWidth: '60%', margin: 'auto', padding: '10px', background: '#ffffff', marginTop: '90px', marginBottom: '30px', borderColor: 'black', border: 'double', minHeight:'1300px' }}>
                         <div className="d-flex p-2" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '200px', position: 'relative', marginBottom: '-80px', marginTop: '20px' }}>
                             <h4 tag='div' className='display-1 pb-3 mb-3 border-bottom' style={{ fontWeight: "bold", fontSize: '250%' }}>ALL ORDERS</h4>
                         </div>
@@ -174,8 +176,10 @@ class AllDeliveryPdf extends Component {
 
                     </div>
                 </div>
-                <center><button style={{ marginTop: '90px', marginBottom: '200px', width: "50%", cursor: "pointer", backgroundColor: "orange", border: "black", padding: "5px 20px", margin: "20px 10px", borderRadius: "2px", fontWeight: "bold" }} onClick={this.printDocument}  >Download PDF</button></center>
-
+                <div className="btn-toolbar justify-content-between" role="toolbar" aria-label="Toolbar with button groups">
+                    <button type="button" className="btn btn-outline-danger" style={{ float: 'center', padding: '12px 68px', marginBottom: '30px', fontWeight: 'bold', fontSize: "130%", marginLeft:'20%' }} onClick={() => { window.location.href = APP_ROUTES.ADMIN_VIEW_DELIVERY }}><Backspace /> Cancel</button>
+                    <button type="submit" className="btn btn-outline-success" style={{ float: 'center', padding: '12px 68px', marginBottom: '30px', fontWeight: 'bold', fontSize: "130%", marginRight:"20%" }} onClick={this.printDocument}> Download PDF</button>
+                </div>
             </div>
 
         );
