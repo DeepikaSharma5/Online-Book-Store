@@ -11,6 +11,7 @@ class PrivatestatusBody extends Component {
         this.deleteData = this.deleteData.bind(this);
         this.updateStatus = this.updateStatus.bind(this);
         this.search = this.search.bind(this);
+        this.dropdown = this.dropdown.bind(this);
         this.state = {
             filterText: '',
             status: []
@@ -21,12 +22,15 @@ class PrivatestatusBody extends Component {
         this.setState({ filterText: event.target.value })
     }
 
+    dropdown(event) {
+
+    }
+
     componentDidMount() {
         axios.get('http://localhost:6060/delivery-status/view')
             .then(response => {
                 const status = response.data;
                 this.setState({ status });
-                console.log("response", response);
             }).catch(error => {
                 alert(error.message);
                 console.log("Error", error);
@@ -85,7 +89,7 @@ class PrivatestatusBody extends Component {
                                 <div className="card-body" >
                                     <div className="row">
                                         <div className="col" >
-                                            <select className="form-control" id="exampleFormControlSelect1" style={{ width: '50%' }}>
+                                            <select className="form-control" id="exampleFormControlSelect1" style={{ width: '80%' }}>
                                                 <option>All</option>
                                                 <option>Pending</option>
                                                 <option>Processing</option>
@@ -181,9 +185,18 @@ class PrivatestatusBody extends Component {
                         </div>
                     </div>
                     <div>
-                        <button type="button" className="btn btn-info" style={{ float: 'left', padding: '12px 28px', marginTop: '30px' }} >
-                            <FileEarmarkPdf /> Generate Report
-                        </button>
+                        <div className="dropdown" style={{ float: 'left', padding: '12px 28px', marginTop: '30px' }}>
+                            <button className="btn btn-info dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <FileEarmarkPdf /> Generate Reports
+                            </button>
+                            <div className="dropdown-menu" aria-labelledby="dropdownMenu2">
+                                <button onClick={() => { window.location.href = APP_ROUTES.ADMIN_ALL_DELIVERY_PDF }} className="dropdown-item" type="button">All Orders</button>
+                                <button onClick={() => { window.location.href = APP_ROUTES.ADMIN_DELIVERED_PDF }} className="dropdown-item" type="button">Delivered orders</button>
+                                <button onClick={() => { window.location.href = APP_ROUTES.ADMIN_PENDING_PDF }} className="dropdown-item" type="button">Pending Orders</button>
+                                <button onClick={() => { window.location.href = APP_ROUTES.ADMIN_PROCESSING_PDF }} className="dropdown-item" type="button">Processing Orders</button>
+                                <button onClick={() => { window.location.href = APP_ROUTES.ADMIN_SHIPPED_PDF }} className="dropdown-item" type="button">Shipped Orders</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
