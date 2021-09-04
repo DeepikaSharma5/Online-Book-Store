@@ -26,6 +26,7 @@ export const APP_ROUTES = {
   ADMIN_PENDING_PDF : '/pending-orders',
   ADMIN_PROCESSING_PDF : '/processing-orders',
   ADMIN_SHIPPED_PDF : '/shipped-orders',
+  USER_DELIVERY_PDF : '/my-order',
 
   SUPERADMIN_MANAGE_ADMINS: "/manage-admins",
 

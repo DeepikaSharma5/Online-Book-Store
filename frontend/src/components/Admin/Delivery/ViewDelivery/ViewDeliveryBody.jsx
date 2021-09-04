@@ -89,7 +89,7 @@ class PrivatestatusBody extends Component {
                                 <div className="card-body" >
                                     <div className="row">
                                         <div className="col" >
-                                            <select className="form-control" id="exampleFormControlSelect1" style={{ width: '80%' }}>
+                                            <select className="form-control" id="exampleFormControlSelect1" style={{ width: '50%' }}>
                                                 <option>All</option>
                                                 <option>Pending</option>
                                                 <option>Processing</option>
