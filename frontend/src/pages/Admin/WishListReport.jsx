@@ -13,6 +13,8 @@ import { Alert } from "@material-ui/lab";
 import styles from "../WishList/WishList.module.scss";
 
 import { AppLayout, TopProductsTable } from "../../components";
+import AppBar from "../../components/Admin/NavBar/AppBar";
+import NavBar from "../../components/Admin/NavBar/NavBar";
 
 const WishListReport = () => {
   const months = [
@@ -98,18 +100,28 @@ const WishListReport = () => {
 
   return (
     <React.Fragment>
-      <AppLayout>
+      <AppBar />
+      <Grid container direction="row">
+        <Grid item sm={2}>
+          <NavBar />
+        </Grid>
         <Grid
+          item
+          sm={10}
           container
           className="content-padding"
           className={styles.background}
-          style={{ height: "92vh" }}
+          style={{ height: "89.8vh" }}
         >
           <Grid
             item
             sm={3}
             xs={12}
-            style={{ marginTop: "30px", borderRight: "1px solid #c8c6c6" }}
+            style={{
+              marginTop: "30px",
+              borderRight: "1px solid #c8c6c6",
+              paddingLeft: "20px",
+            }}
           >
             <Typography
               variant="h5"
@@ -169,8 +181,22 @@ const WishListReport = () => {
             >
               Generate Report
             </Button>
-            {success ? <Alert style={{border: "1px solid #74c274", width:"90%"}} severity="success">{success}</Alert> : null}
-            {error ? <Alert style={{border: "1px solid #ffca18", width:"90%"}} severity="warning">{error}</Alert> : null}
+            {success ? (
+              <Alert
+                style={{ border: "1px solid #74c274", width: "90%" }}
+                severity="success"
+              >
+                {success}
+              </Alert>
+            ) : null}
+            {error ? (
+              <Alert
+                style={{ border: "1px solid #ffca18", width: "90%" }}
+                severity="warning"
+              >
+                {error}
+              </Alert>
+            ) : null}
           </Grid>
           <Grid
             item
@@ -188,7 +214,7 @@ const WishListReport = () => {
             <TopProductsTable productList={topBooks} />
           </Grid>
         </Grid>
-      </AppLayout>
+      </Grid>
     </React.Fragment>
   );
 };

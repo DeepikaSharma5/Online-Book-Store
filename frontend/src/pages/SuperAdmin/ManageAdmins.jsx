@@ -4,7 +4,14 @@ import { Alert } from "@material-ui/lab";
 
 import styles from "../WishList/WishList.module.scss";
 
-import { AdminAddModal, AdminTable, AppLayout, WishListTable } from "../../components";
+import {
+  AdminAddModal,
+  AdminTable,
+  AppLayout,
+  WishListTable,
+} from "../../components";
+import AppBar from "../../components/Admin/NavBar/AppBar";
+import NavBar from "../../components/Admin/NavBar/NavBar";
 
 const ManageAdmins = () => {
   const [newAdmin, setNewAdmin] = useState({
@@ -39,27 +46,33 @@ const ManageAdmins = () => {
 
   const handleFieldChange = (e) => {
     setNewAdmin((currentDetails) => {
-      return{
+      return {
         ...currentDetails,
-        [e.target.id] : e.target.value
-      }
-    })
-  }
+        [e.target.id]: e.target.value,
+      };
+    });
+  };
 
   return (
     <React.Fragment>
-      <AppLayout>
+      <AppBar />
+      <Grid container direction="row">
+        <Grid item sm={2}>
+        <NavBar />
+        </Grid>
         <Grid
+          item
+          sm={10}
           container
           className="content-padding"
           className={styles.background}
-          style={{ height: "92vh" }}
+          style={{height: "89.8vh"}}
         >
           <Grid
             item
             sm={3}
             xs={12}
-            style={{ marginTop: "30px", borderRight: "1px solid #c8c6c6" }}
+            style={{ marginTop: "30px", borderRight: "1px solid #c8c6c6", paddingLeft:"20px" }}
           >
             <Typography
               variant="h5"
@@ -88,7 +101,11 @@ const ManageAdmins = () => {
               onChange={handleFieldChange}
               variant="filled"
               label="Admin name"
-              style={{ backgroundColor: "#ffffff", width: "90%", marginTop: "10px" }}
+              style={{
+                backgroundColor: "#ffffff",
+                width: "90%",
+                marginTop: "10px",
+              }}
             />
             <TextField
               id="password"
@@ -96,7 +113,11 @@ const ManageAdmins = () => {
               onChange={handleFieldChange}
               variant="filled"
               label="New password for admin"
-              style={{ backgroundColor: "#ffffff", width: "90%", marginTop: "10px" }}
+              style={{
+                backgroundColor: "#ffffff",
+                width: "90%",
+                marginTop: "10px",
+              }}
             />
             <AdminAddModal admin={newAdmin} />
           </Grid>
@@ -116,7 +137,7 @@ const ManageAdmins = () => {
             <AdminTable adminList={admins} />
           </Grid>
         </Grid>
-      </AppLayout>
+      </Grid>
     </React.Fragment>
   );
 };
