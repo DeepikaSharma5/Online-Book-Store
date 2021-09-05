@@ -3,6 +3,7 @@ import axios from 'axios';
 import Swal from 'sweetalert2';
 import Select from 'react-select';
 import { APP_ROUTES } from '../../../../../utilities/constants/routes.constants';
+import { Folder, XCircle, Backspace } from 'react-bootstrap-icons';
 
 class AddCategoryBody extends Component {
     constructor(props) {
@@ -10,6 +11,7 @@ class AddCategoryBody extends Component {
         this.onChange = this.onChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
         this.onBookSelect = this.onBookSelect.bind(this);
+        this.cancel = this.cancel.bind(this);
         this.state = {
             category_name: '',
             description: '',
@@ -35,6 +37,11 @@ class AddCategoryBody extends Component {
             })   
         })
         
+    }
+
+    
+    cancel(){        
+        window.location.href = APP_ROUTES.ADMIN_VIEW_CATEGORY;
     }
 
     onChange(e) {
@@ -129,7 +136,10 @@ class AddCategoryBody extends Component {
                     />
                     <br></br>
                     <br></br>
-                    <button type="submit" className="btn btn-primary">Submit</button>
+                    <div className="btn-toolbar justify-content-between" role="toolbar" aria-label="Toolbar with button groups">
+                        <button type="button" className="btn btn-outline-danger" style={{ float: 'right', padding: '12px 68px', marginBottom: '30px', fontWeight: 'bold', fontSize: "130%" }} onClick={this.cancel}><Backspace /> Cancel</button>
+                        <button type="submit" className="btn btn-outline-success" style={{ float: 'left', padding: '12px 68px', marginBottom: '30px', fontWeight: 'bold', fontSize: "130%" }}><Folder /> Submit </button>
+                    </div>
                     <br></br><br></br>
                 </form>
             </div>

@@ -2,17 +2,15 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { reactLocalStorage } from 'reactjs-localstorage';
 import { APP_ROUTES } from '../../../utilities/constants/routes.constants';
-import Header from '../Homepage/Header/Header';
 
-
-export default function SearchBooksBody() {
+export default function SearchBody() {
     
     const [categories, getCategories] = useState([]);
     const [allData,setAllData] = useState([]);
     const [filteredData,setFilteredData] = useState(allData);
-    const [searchValue, setSearchValue] = useState(reactLocalStorage.getObject('SearchValue'));
+    const [searchResults, setSearchResults] = useState(reactLocalStorage.getObject('SearchBooks'));
     const [condition, setCondition] = useState(false);
-    const [loading, setLoading] = useState(true);
+    var searchValue = reactLocalStorage.getObject('SearchValue');
 
     useEffect( () => {
         getAllCategories();        
@@ -24,6 +22,10 @@ export default function SearchBooksBody() {
             alert(error.message);
             console.log("Error", error);
         });                 
+        setFilteredData(searchResults); 
+        
+        console.log("searchResults", searchResults);
+        getSearchBarResults();
     }, []);
  
     const getAllCategories = () => {  
@@ -40,32 +42,10 @@ export default function SearchBooksBody() {
 
     const getSearchBarResults = () => {
         setCondition(false);
-        setLoading(false);  
-        let searchbar_result = [];
-        searchbar_result = allData.filter((data) => {
-            let data_title = data.title.toLowerCase();
-            return data_title.search(searchValue) != -1;
-        });        
-        if( searchbar_result.length==0 ){
+        if( searchResults.length==0 ){
             setCondition(true);
-            setLoading(false);
         };
-        setFilteredData(searchbar_result); 
-    }
-
-    const handleSearch = (event) => {            
-        setCondition(false);     
-        let value = event.target.value;
-        let result = [];
-        console.log(value);
-        result = allData.filter((data) => {
-            let data_title = data.title.toLowerCase();
-            return data_title.search(value) != -1;
-        });
-        if( result.length==0 ){
-            setCondition(true);            
-        };
-        setFilteredData(result);     
+        setFilteredData(searchResults); 
     }
       
     const navigatePage = (e,_id) => {
@@ -83,24 +63,9 @@ export default function SearchBooksBody() {
     }
   
     return (
-      <div className="container" onMouseMove={getSearchBarResults} style={{ maxWidth: '90rem', margin: 'auto', padding: '10px', borderColor: 'black', background: '#ffffff'}}>
-        <div>
-            <Header/>
-        </div>
-        <br></br><br></br>
+      <div className="container" style={{ width:'auto', heigth:'auto' , margin: 'auto', padding: '10px', borderColor: 'black', background: '#ffffff'}}>
         <div className="row">               
-        <div className="col-5 col-md-3" style={{paddingTop:'55px'}}>
-                <div className="card text-dark bg-light mb-3 ">
-                    <div class="card-body" style={{width:'400px', height:'auto'}}>
-                        <h5> Search by Book Name </h5>
-                        <input style={{width:'300px', height:'40px'}}
-                            type = "text"
-                            onChange={(event) =>handleSearch(event)}
-                            placeholder="Type something to search"
-                        /> 
-                    </div>
-                </div>    
-                <br></br>
+        <div className="col-5 col-md-3" style={{paddingTop:'55px'}}>         
                 <div className="card text-dark bg-light mb-3 ">
                             <div class="card-body" style={{width:'auto', height:'auto'}}>
                                 <h5> Categories List </h5>
@@ -127,14 +92,8 @@ export default function SearchBooksBody() {
                 <br></br><br></br>
                 <h3>  <b>  Search results related to </b> <i> {searchValue} </i>  </h3>  
                 <div className="card text-dark bg-light mb-3 ">
-                    <div class="card-body" >  
-                        {loading ? ( 
-                            <div class="d-flex align-items-center">
-                                <strong>Loading...</strong>
-                                <div class="spinner-border ml-auto" role="status" aria-hidden="true"></div>
-                            </div>
-                        ) : (<i> </i>) }                        
-                         {condition ? (
+                    <div class="card-body" >                                                 
+                        {condition ? (
                         <i><h5> No Results Found...</h5></i>
                         ) : (
                           <div class="row row-cols-4" style={{'marginBottom':'15px'}}>                             
