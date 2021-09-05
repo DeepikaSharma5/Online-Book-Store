@@ -5,13 +5,17 @@ import Footer from "../../Customer/Homepage/Footer/Footer";
 
 const AppLayout = ({ children, componentTitle }) => {
   return (
-    <div style={{ marginTop: "60px" }}>
-      <AppLayoutHeader />
-      <div style={{ marginTop: "60px" }}>{children}</div>
-      <div style={{ width: "99%" }} >
-      <Footer />
+    <React.Fragment>
+      <div>
+        <aside className="content">
+          <AppLayoutHeader />
+          <div style={{ marginTop: "45px" }}>{children}</div>
+          <div style={{ width: "99%" }}>
+            <Footer />
+          </div>
+        </aside>
       </div>
-    </div>
+    </React.Fragment>
   );
 };
 

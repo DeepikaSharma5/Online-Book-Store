@@ -40,67 +40,48 @@ const MyWishList = () => {
     {
       value: 1,
       label: "Star Talk",
-      author: "author1",
+      author: "National Geographic",
       price: 6000,
     },
     {
       value: 2,
       label: "Ulimate Visual Dictionary",
-      author: "author1",
+      author: "DK books",
       price: 6000,
     },
     {
       value: 3,
       label: "The Mentor",
-      author: "author1",
+      author: "Lee Mathew Goldberg",
       price: 6000,
     },
     {
       value: 4,
       label: "The Dog Book",
-      author: "author1",
+      author: "Parragon",
       price: 6000,
     },
     {
       value: 5,
       label: "CATS 101",
-      author: "author1",
+      author: "DK books",
       price: 6000,
     },
     {
       value: 6,
       label: "Read me a story",
-      author: "author1",
+      author: "Pi Kids",
       price: 6000,
     },
     {
       value: 7,
       label: "Stay close",
-      author: "author1",
+      author: "Harlen Coben",
       price: 6000,
     },
   ];
 
-  const wishList = [
-    {
-      value: 1,
-      label: "10,000 Years of Art",
-      author: "author1",
-      price: 5500,
-    },
-    {
-      value: 2,
-      label: "Classic ghost Stories",
-      author: "author1",
-      price: 6000,
-    },
-    {
-      value: 3,
-      label: "Light and Architecture",
-      author: "author1",
-      price: 7000,
-    },
-  ];
+  const [wishList, setWishList] = useState([]);
 
   const classes = useStyles();
 
@@ -123,14 +104,29 @@ const MyWishList = () => {
 
   const addBook = () => {
     //POST
+    setWishList([
+      {
+        value: 3,
+        label: "The Mentor",
+        author: "Lee Mathew Goldberg",
+        price: 6000,
+      }
+    ])
   };
 
   const removeListItem = (itemId) => {
     //Send DELETE req
+    setTimeout(() => {
+      setWishList([])
 
-    //If all ok
-    setOpenSuccess(true);
-    setTimeout(() => setOpenSuccess(false), 1500);
+      //If all ok
+      setOpenSuccess(true);
+      setTimeout(() => setOpenSuccess(false), 1500);
+
+    }, 1000)
+
+    
+
 
     //If error
     // setOpenFail(true);
@@ -140,7 +136,7 @@ const MyWishList = () => {
   return (
     <React.Fragment>
       <AppLayout>
-        <div style={{ margin: "10px 25px" }}>
+        <div style={{ margin: "80px 25px", minHeight:"74vh" }}>
           <Typography className={styles.pageHeading}>My Wish List</Typography>
           <div style={{ display: "flex", justifyContent: "space-around" }}>
             <Grid container direction="row">

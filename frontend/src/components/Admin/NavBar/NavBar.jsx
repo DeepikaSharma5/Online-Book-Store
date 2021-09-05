@@ -40,10 +40,10 @@ import HeadsetMicIcon from '@material-ui/icons/HeadsetMic';
 import NavItem from './NavItem';
 import SettingsSystemDaydreamIcon from '@material-ui/icons/SettingsSystemDaydream';
 import GroupWorkIcon from '@material-ui/icons/GroupWork';
+import { APP_ROUTES } from '../../../utilities/constants/routes.constants';
 
 /*
   Also don't forget to add APPBAR, NAVBAR in your admin pages.
-
   <div>
     <div className="row">
       <AppBar/>      
@@ -134,7 +134,7 @@ const contentsItems = [
 //Wishlist part
 const wishlistItems = [
   {
-    href: '/wishlistreport',
+    href: APP_ROUTES.ADMIN_REPORT_WISHLIST,
     icon: Clipboard,
     title: 'View Wishlist report'
   },

@@ -102,8 +102,8 @@ const AdminAddModal = ({ admin }) => {
       >
         Add administrator
       </Button>
-      {error ? <Alert severity="warning">{error}</Alert> : null}
-      {success ? <Alert severity="success">{success}</Alert> : null}
+      {error ? <Alert severity="warning" style={{border: "1px solid #f5d872", width:"90%"}}>{error}</Alert> : null}
+      {success ? <Alert severity="success" style={{border: "1px solid #74c274", width:"90%"}}>{success}</Alert> : null}
       <Modal
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"

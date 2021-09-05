@@ -36,6 +36,7 @@ import UpdateBook from "../components/Admin/Contents/Book/UpdateBook/UpdateBook"
 import UpdateCategory from "../components/Admin/Contents/Category/UpdateCategory/UpdateCategory";
 import ProductDashboard from "../components/Admin/Contents/ProductDashboard/ProductDashboard";
 import Homepage from "../components/Customer/Homepage/Homepage/Homepage";
+
 import ProductPage from "../components/Customer/ProductPage/ProductPage";
 import Books from "../components/Customer/Books/Books";
 import ViewBookByCategory from "../components/Customer/Books/ViewBookByCategory";
@@ -47,7 +48,7 @@ import ProcessingPdf from "../components/Admin/Delivery/ViewDelivery/ProcessingP
 import ShippedPdf from "../components/Admin/Delivery/ViewDelivery/ShippedPdf";
 import MyOrderPdf from "../components/Customer/MyDeliveries/MyOrderPdf";
 
-import { Login, Signup, PersonalDetails, WishList, SearchWishList, ManageAdmins, WishListReport } from "../pages";
+import {Login, Signup, PersonalDetails, WishList, SearchWishList, ManageAdmins, WishListReport, MyWishList} from "../pages";
 
 import PaymentDashboard from "../pages/Payment/PaymentDashboard";
 import HomeScreen from "../pages/Payment/HomeScreen";
@@ -55,7 +56,6 @@ import ProductScreen from "../pages/Payment/ProductScreen";
 import CartScreen from "../pages/Payment/CartScreen";
 import AddCardDetails from "../pages/CardDetails/AddCardDetails";
 import CardDetails from "../pages/CardDetails/CardDetails";
-import { MyWishList } from "../pages";
 
 const AppRoutes = () => {
     const history = createBrowserHistory();
