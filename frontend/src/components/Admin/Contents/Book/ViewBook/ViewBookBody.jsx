@@ -1,19 +1,28 @@
-import React, { Component } from 'react';
+import React, {Component, PropTypes} from 'react';
 import { Trash, Pencil, PlusLg } from 'react-bootstrap-icons';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import { reactLocalStorage } from 'reactjs-localstorage';
+import { Folder, XCircle, Backspace } from 'react-bootstrap-icons';
 import { APP_ROUTES } from '../../../../../utilities/constants/routes.constants';
+import jsPDF from "jspdf";
+import autoTable from 'jspdf-autotable';
 
 class ViewBookBody extends Component {
   constructor(props) {
     super(props);
     this.deleteData = this.deleteData.bind(this);
     this.updateBooks = this.updateBooks.bind(this);
+    this.generatePDF = this.generatePDF.bind(this);
     this.state = {
-        books: []
+        books: [],
+        count:1 
     }
 }
+
+componentWillMount() {
+    this.getChartData();
+  }
 
 componentDidMount() {
     axios.get('http://localhost:6060/book/view')
@@ -25,6 +34,51 @@ componentDidMount() {
             alert(error.message);
             console.log("Error", error);
         });
+}
+
+getChartData() {
+    this.setState({
+      data: {
+        datasets: [
+          {
+            label: "complete",
+            data: [60, 40],
+            backgroundColor: ["#0f4c75", "#3282b8"],
+          },
+        ],
+      },
+    });
+}
+
+
+
+generatePDF = (e) => {
+    const doc = new jsPDF();
+    const tableColumns = ["No", "Title", "Author Name", "Publisher", "Year", "ISBN", "Description", "Price"];
+    const tableRows = [];   
+
+    this.state.books.forEach(book => {
+        const bookData = [
+            this.state.count,
+            book.title,
+            book.author_name,
+            book.publisher,
+            book.year,
+            book.isbn,
+            book.description,
+            'LKR ' + book.price +'.00'
+        ];
+        this.state.count = this.state.count + 1;
+        tableRows.push(bookData);
+    });    
+    
+    this.state.count = 1;
+
+    doc.autoTable(tableColumns, tableRows, { startY: 20 });
+    const date = Date().split(" ");
+    const dateStr = date[0] + " " + date[1] + " " + date[2] + " " + date[3] + " " + date[4];
+    doc.text("BookLab : Report of book list for " + dateStr , 14, 15);
+    doc.save(`Book List Report - ${dateStr}.pdf`);
 }
 
 deleteData(id) {
@@ -69,23 +123,29 @@ deleteData(id) {
         });
 }
 
-updateBooks(id, title, author_name, publisher, year, isbn, description) {
-    reactLocalStorage.setObject("Books", [id, title, author_name, publisher, year, isbn, description]);
+updateBooks(id, title, author_name, publisher, year, isbn, description, price, image) {
+    reactLocalStorage.setObject("Books", [id, title, author_name, publisher, year, isbn, description, price, image]);
     window.location.href = APP_ROUTES.ADMIN_UPDATE_BOOK;
 }
-
 
 render() {
     return (
         <div>
-            <div className="card card border border-light shadow-0 mb-3" style={{ maxWidth: '100rem', margin: 'auto', padding: '10px' }}>
-                <br></br><br></br>
-                <h1>List of Books</h1>
+            <div className="card card border border-light shadow-0 mb-3" style={{ maxWidth: '100rem', margin: 'auto', padding: '10px', marginRight:'50px' }}>
                 <br></br>
+                <h1>List of Books</h1>
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb"  style={{backgroundColor:'white'}}>
+                        <li class="breadcrumb-item" style={{fontSize:"20px"}}> <a href="/admin-product-dashboard" style={{color:"#049191"}}> Product Dashboard</a></li>
+                        <li class="breadcrumb-item active"style={{fontSize:"20px"}}  aria-current="page">Manage Books</li>
+                    </ol>
+                </nav>
+                <hr></hr>
                 <div>
-                    <button type="button" className="btn btn-info" style={{ float: 'right', padding: '12px 28px', marginBottom:'30px' }} onClick={() => { window.location.href = APP_ROUTES.ADMIN_ADD_BOOK }}>
+                    <button type="button" className="btn btn-outline-secondary" style={{ float: 'right', padding: '12px 28px', marginBottom:'30px' }} onClick={() => { window.location.href = APP_ROUTES.ADMIN_ADD_BOOK }}>
                         <PlusLg /> Add New Book
                     </button>
+                    <button type="submit" className="btn btn-outline-success" style={{ float: 'left', padding: '12px 28px', marginBottom: '30px', fontWeight: 'bold', fontSize: "130%" }} onClick={() => { this.generatePDF() }} ><Folder /> Generate Book Report </button>
                 </div>
                 <div className="card overflow-auto" style={{ maxHeight: '300%',background:'#ffffff'}}>
                     <div className="card-body">
@@ -96,11 +156,13 @@ render() {
                                         <thead className="thead-light" >
                                             <tr>
                                                 <th scope="col" className="w-25">Title</th>
-                                                <th scope="col" className="w-25">Author Name</th>
+                                                <th scope="col" className="w-10">Author Name</th>
                                                 <th scope="col" className="w-25">Publisher</th>
-                                                <th scope="col" className="w-25">Year</th>
-                                                <th scope="col" className="w-50">ISBN</th>                                                
-                                                <th scope="col" className="w-25">Description</th>   
+                                                <th scope="col" className="w-10">Year</th>
+                                                <th scope="col" className="w-10">ISBN</th>                                                
+                                                <th scope="col" className="w-100">Description</th>                                         
+                                                <th scope="col" className="w-25">Price</th>                                        
+                                                <th scope="col" className="w-10">Image</th>  
                                                 <th scope="col" className="w-15">Edit</th>
                                                 <th scope="col" className="w-15">Delete</th>
                                             </tr>
@@ -114,8 +176,10 @@ render() {
                                                     <td>{item.year}</td>
                                                     <td>{item.isbn}</td>
                                                     <td>{item.description}</td>
+                                                    <td>Rs.{item.price}.00</td>
+                                                    <td> <img className="card-img-top " style={{ width: '100px' }} src={item.image}/> </td>
                                                     <td>
-                                                        <button type="button" className="btn btn-outline-success" onClick={() => this.updateBooks(item._id, item.title, item.author_name, item.publisher, item.year, item.isbn, item.description)}>
+                                                        <button type="button" className="btn btn-outline-success" onClick={() => this.updateBooks(item._id, item.title, item.author_name, item.publisher, item.year, item.isbn, item.description, item.price, item.image)}>
                                                             <Pencil /> Update
                                                         </button>
                                                     </td>

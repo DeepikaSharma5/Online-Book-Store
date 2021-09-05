@@ -88,7 +88,7 @@ class AddDeliveryAddress extends Component {
                 <div className="d-flex p-2" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '250px' }}>
                     <h2 tag='div' className='display-1 pb-3 mb-3 border-bottom' style={{ fontWeight: "bold", fontSize: '300%' }}>ADD DELIVERY ADDRESS DETAIL</h2>
                 </div>
-                <div style={{height:"20px"}}>
+                <div style={{height:"960px"}}>
                     <div className="col-md-14 col-sm-12" style={{ maxWidth: '80rem', margin: 'auto', padding: '10px', borderColor: 'black', background: '#ffffff', boxShadow: '10px 10px 45px #919191,-10px -10px 45px #ffffff' }}>
                         <div className="col" style={{ borderRadius: '33px', height: '900px' }}>
                             <form style={{ paddingTop: "70px" }}>
@@ -129,7 +129,7 @@ class AddDeliveryAddress extends Component {
                                     </div>
                                 </div>
                                 <div className="btn-toolbar justify-content-between" role="toolbar" aria-label="Toolbar with button groups">
-                                    <button type="submit" className="btn btn-outline-danger" style={{ float: 'right', padding: '12px 68px', marginBottom: '30px', fontWeight: 'bold', fontSize: "130%" }} onClick={() => { window.location.href = APP_ROUTES.ADMIN_VIEW_PRIVATE_POLICY }}><Backspace /> Cancel</button>
+                                    <button type="submit" className="btn btn-outline-danger" style={{ float: 'right', padding: '12px 68px', marginBottom: '30px', fontWeight: 'bold', fontSize: "130%" }} onClick={() => { window.location.href = APP_ROUTES.USER_VIEW_ADDRESS }}><Backspace /> Cancel</button>
                                     <button type="reset" className="btn btn-outline-primary" style={{ float: 'center', padding: '12px 68px', marginBottom: '30px', fontWeight: 'bold', fontSize: "130%" }} onClick={this.onClear}><XCircle /> Clear</button>
                                     <button type="submit" className="btn btn-outline-success" style={{ float: 'left', padding: '12px 68px', marginBottom: '30px', fontWeight: 'bold', fontSize: "130%" }} onClick={this.onSubmit}><Folder /> Save</button>
                                 </div>

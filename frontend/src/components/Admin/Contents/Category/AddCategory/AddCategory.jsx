@@ -1,15 +1,24 @@
 import React, { Component } from 'react';
 import AddCategoryBody from './AddCategoryBody';
+import AppBar from '../../../NavBar/AppBar';
+import NavBar from '../../../NavBar/NavBar';
 
 class AddCategory extends Component {
     render() { 
         return ( 
             <div>
-                {/**navigation */}
-                <div>
-                    <AddCategoryBody/>
+                <div className="row">
+                    <AppBar/>      
                 </div>
-                {/**footer */}
+                <div className="row">
+                    <div className="col">
+                        <NavBar/>
+                    </div>
+                    <div className="col-10">
+                        <br></br><br></br>
+                        <AddCategoryBody/>
+                    </div>                    
+                </div>
             </div>
          );
     }

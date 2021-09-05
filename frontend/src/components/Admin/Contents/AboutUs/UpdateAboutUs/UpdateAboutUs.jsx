@@ -1,22 +1,24 @@
 import React, { Component } from 'react';
 import UpdateAboutUsBody from './UpdateAboutUsBody';
 import UpdateAboutUsHeading from './UpdateAboutUsHeading';
+import NavBar from '../../../NavBar/NavBar';
+import Appbar from '../../../NavBar/AppBar';
 
 class UpdateAboutUs extends Component {
-    render() { 
-        return ( 
+    render() {
+        return (
             <div>
-                {/**navigation */}
+                <Appbar />
+                <NavBar />
                 <div>
-                    <UpdateAboutUsHeading/>
+                    <UpdateAboutUsHeading />
                 </div>
                 <div>
-                    <UpdateAboutUsBody/>
+                    <UpdateAboutUsBody />
                 </div>
-                {/**footer */}
             </div>
-         );
+        );
     }
 }
- 
+
 export default UpdateAboutUs;

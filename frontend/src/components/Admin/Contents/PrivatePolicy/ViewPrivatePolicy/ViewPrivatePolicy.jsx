@@ -1,20 +1,24 @@
 import React, { Component } from 'react';
-import PrivatePolictHeading from "../../../../Customer/PrivatePolicy/PrivatePolictHeading";
+import PrivatePolicyHeading from "../ViewPrivatePolicy/ViewPrivatePolicyHeading";
 import ViewPrivatePolicyBody from '../ViewPrivatePolicy/ViewPrivatePolicyBody';
+import NavBar from '../../../NavBar/NavBar';
+import AppBar from '../../../NavBar/AppBar';
 
 class ViewPrivatePolicy extends Component {
-    render() { 
-        return ( 
+    render() {
+        return (
             <div>
+                <AppBar />
+                <NavBar />
                 <div>
-                    <PrivatePolictHeading/>
+                    <PrivatePolicyHeading />
                 </div>
                 <div>
-                    <ViewPrivatePolicyBody/>
+                    <ViewPrivatePolicyBody />
                 </div>
             </div>
-         );
+        );
     }
 }
- 
+
 export default ViewPrivatePolicy;

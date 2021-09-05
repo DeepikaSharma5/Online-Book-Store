@@ -1,21 +1,24 @@
 import React, { Component } from 'react';
 import UpdateTermsAndConditionsHeading from './UpdateTermsAndConditionsHeading';
 import UpdateTermsAndConditionsBody from './UpdateTermsAndConditionsBody';
+import NavBar from '../../../NavBar/NavBar';
+import AppBar from '../../../NavBar/AppBar';
 
 class updateTermsAndConditions extends Component {
-    state = {  }
-    render() { 
-        return ( 
+    render() {
+        return (
             <div>
+                <AppBar />
+                <NavBar />
                 <div>
-                    <UpdateTermsAndConditionsHeading/>
+                    <UpdateTermsAndConditionsHeading />
                 </div>
                 <div>
-                    <UpdateTermsAndConditionsBody/>
+                    <UpdateTermsAndConditionsBody />
                 </div>
             </div>
-         );
+        );
     }
 }
- 
+
 export default updateTermsAndConditions;

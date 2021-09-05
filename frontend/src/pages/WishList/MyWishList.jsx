@@ -136,7 +136,7 @@ const MyWishList = () => {
   return (
     <React.Fragment>
       <AppLayout>
-        <div style={{ margin: "80px 25px" }}>
+        <div style={{ margin: "80px 25px", minHeight:"74vh" }}>
           <Typography className={styles.pageHeading}>My Wish List</Typography>
           <div style={{ display: "flex", justifyContent: "space-around" }}>
             <Grid container direction="row">

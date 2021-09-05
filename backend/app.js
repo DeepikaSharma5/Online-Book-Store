@@ -1,57 +1,67 @@
-const express = require("express")
-const cors = require("cors")
-const mongoose = require("mongoose")
-const nodemailer = require('nodemailer')
+const express = require("express");
+const cors = require("cors");
+const mongoose = require("mongoose");
+const nodemailer = require("nodemailer");
 
-require("dotenv").config()
-const app = express()
-const port = process.env.PORT || 6060
-app.use(cors())
-app.use(express.json())
+require("dotenv").config();
+const app = express();
+const port = process.env.PORT || 6060;
+app.use(cors());
+app.use(express.json());
 
 const password = process.env.EMAIL_PASSWORD;
 
-const url = process.env.ATLAS_URI
-global.URL = url
-mongoose.connect(url, { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true })
+const url = process.env.ATLAS_URI;
+global.URL = url;
+mongoose.connect(url, {
+  useNewUrlParser: true,
+  useCreateIndex: true,
+  useUnifiedTopology: true,
+});
 
-const connection = mongoose.connection
+const connection = mongoose.connection;
 
 connection.once("open", () => {
-    console.log("MongoDB connected successfully")
-  })
+  console.log("MongoDB connected successfully");
+});
 
-app.get('/',(req,res) => {
-    res.send("Running Successfully")
-})
+app.get("/", (req, res) => {
+  res.send("Running Successfully");
+});
 
 const PrivatePolicy = require("./routers/PrivatePolicy");
-app.use("/private-policy",PrivatePolicy)
+app.use("/private-policy", PrivatePolicy);
 
 const TermsAndConditions = require("./routers/TermsAndConditions");
-app.use("/terms-and-conditions",TermsAndConditions)
+app.use("/terms-and-conditions", TermsAndConditions);
 
-const AboutUs = require('./routers/AboutUs');
-app.use('/about-us',AboutUs);
+const AboutUs = require("./routers/AboutUs");
+app.use("/about-us", AboutUs);
 
-const TeamDetails = require('./routers/TeamDetails');
-app.use('/team-details',TeamDetails);
+const TeamDetails = require("./routers/TeamDetails");
+app.use("/team-details", TeamDetails);
 
-const DeliveryAddress = require('./routers/DeliveryAddress');
-app.use('/delivery-address', DeliveryAddress)
+const DeliveryAddress = require("./routers/DeliveryAddress");
+app.use("/delivery-address", DeliveryAddress);
 
-const Book = require('./routers/Book');
-app.use('/book', Book);
+const DeliveryStatus = require("./routers/DeliveryStatus");
+app.use("/delivery-status", DeliveryStatus);
 
-const Category = require('./routers/Category');
-app.use('/category', Category);
+const Book = require("./routers/Book");
+app.use("/book", Book);
+
+const Category = require("./routers/Category");
+app.use("/category", Category);
+
+const CardDetails = require("./routers/CardDetails");
+app.use("/card", CardDetails);
 
 const userAPI = require("./api/user.api");
-app.use('/user', userAPI());
+app.use("/user", userAPI());
 
 //Contact Us Email sending configuration
 app.post("/contactdata", (req, res) => {
-  let data = req.body
+  let data = req.body;
   let smtpTransoprt = nodemailer.createTransport({
     service: "gmail",
     port: 465,
@@ -59,7 +69,7 @@ app.post("/contactdata", (req, res) => {
       user: "2021segroup30@gmail.com",
       pass: password,
     },
-  })
+  });
   let mailOptions = {
     from: data.email,
     to: "2021segroup30@gmail.com",
@@ -74,17 +84,17 @@ app.post("/contactdata", (req, res) => {
         <h3>Message</h3>
         <p>${data.message}</p>
         `,
-  }
+  };
   smtpTransoprt.sendMail(mailOptions, (err, info) => {
     if (err) {
-      res.send(err)
+      res.send(err);
     } else {
-      res.send(info)
+      res.send(info);
     }
-  })
-  smtpTransoprt.close()
-})
+  });
+  smtpTransoprt.close();
+});
 
 app.listen(port, () => {
-  console.log(`Server is running on port: ${port}`)
-})
+  console.log(`Server is running on port: ${port}`);
+});

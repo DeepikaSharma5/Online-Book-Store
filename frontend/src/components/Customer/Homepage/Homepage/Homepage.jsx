@@ -10,6 +10,9 @@ class Homepage extends Component {
                 <div>
                     <Header/>
                 </div>
+                <br></br>
+                <br></br>
+                <br></br>
                 <div>
                     <HomepageBody/>
                 </div>
