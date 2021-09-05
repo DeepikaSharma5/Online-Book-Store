@@ -5,6 +5,7 @@ import CartItem from "../../components/Cart/CartItem";
 import { Link } from "react-router-dom";
 import { addToCart, removeFromcart } from "../../redux/actions/cartActions";
 import Header from "../../components/Customer/Homepage/Header/Header";
+import { APP_ROUTES } from "../../utilities/constants/routes.constants";
 const CartScreen = () => {
   const dispatch = useDispatch();
 
@@ -30,6 +31,9 @@ const CartScreen = () => {
     );
   };
 
+  const navigateToHome = (event) =>
+    (window.location.href = APP_ROUTES.USER_HOMEPAGE);
+
   return (
     <>
       <Header />
@@ -39,7 +43,11 @@ const CartScreen = () => {
 
           {cartItems.length === 0 ? (
             <div>
-              Your cart is empty <Link to="/"> Go back</Link>
+              Your cart is empty{" "}
+              <button style={{ color: "teal" }} onClick={navigateToHome}>
+                {" "}
+                Go back
+              </button>
             </div>
           ) : (
             cartItems.map((item) => (

@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const CardDetailsSchema = new mongoose.Schema(
   {
-    name: { type: String, required: true, unique: true },
+    name: { type: String, required: true },
     card_number: { type: Number, required: true },
     cvc: { type: String, required: true },
     expiry_date: { type: String, required: true },
