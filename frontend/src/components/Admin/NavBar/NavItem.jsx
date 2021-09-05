@@ -1,3 +1,4 @@
+  
 import React from 'react';
 import { NavLink as RouterLink } from 'react-router-dom';
 import clsx from 'clsx';
@@ -42,18 +43,22 @@ const NavItem = ({ className, href, icon: Icon, title, ...rest }) => {
   return (
     <ListItem
       className={clsx(classes.item, className)}
+      style={{ fontSize:'19px'}}
       disableGutters
       {...rest}
     >
-      <Button
+      <div onClick={() => { window.location = href }}>
+        <Button
         activeClassName={classes.active}
         className={classes.button}
-        component={RouterLink}
-        to={href}
-      >
-        {Icon && <Icon className={classes.icon} size="20" />}
-        <span className={classes.title}>{title}</span>
-      </Button>
+        >
+          {Icon && <Icon className={classes.icon} size="20" />}
+          <span className={classes.title}>{title}</span>
+        </Button>
+      </div>
+      
+
+        
     </ListItem>
   );
 };

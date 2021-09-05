@@ -58,9 +58,9 @@ const PersonalInfoForm = () => {
       setError("Please enter all required fields");
       setTimeout(() => setError(""), 3000);
     } else if (
-      !personalDetails.email.match(/[\w\d\.-]+@[\w\d\.-]+\.[\w\d\.-]+/g)
+      personalDetails.name.length < 3
     ) {
-      setError("Please enter a valid email");
+      setError("Please enter a valid name");
       setTimeout(() => setError(""), 3000);
     } else if (personalDetails.phone.length < 10 | isNaN(personalDetails.phone)) {
       setError("Please enter a valid phone number");
@@ -145,7 +145,7 @@ const PersonalInfoForm = () => {
               ) : (
                 <TextField
                   className={styles.txtfield}
-                  disabled={disableFields}
+                  disabled={true}
                   id="email"
                   value={personalDetails.email}
                   onChange={handleFieldChange}

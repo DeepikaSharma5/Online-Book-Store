@@ -81,26 +81,7 @@ const MyWishList = () => {
     },
   ];
 
-  const wishList = [
-    {
-      value: 1,
-      label: "10,000 Years of Art",
-      author: "Phaidon",
-      price: 3500,
-    },
-    {
-      value: 2,
-      label: "Classic ghost Stories",
-      author: "Harper & Collins",
-      price: 5000,
-    },
-    {
-      value: 3,
-      label: "Light and Architecture",
-      author: "Harper & Collins",
-      price: 5500,
-    },
-  ];
+  const [wishList, setWishList] = useState([]);
 
   const classes = useStyles();
 
@@ -123,14 +104,29 @@ const MyWishList = () => {
 
   const addBook = () => {
     //POST
+    setWishList([
+      {
+        value: 3,
+        label: "The Mentor",
+        author: "Lee Mathew Goldberg",
+        price: 6000,
+      }
+    ])
   };
 
   const removeListItem = (itemId) => {
     //Send DELETE req
+    setTimeout(() => {
+      setWishList([])
 
-    //If all ok
-    setOpenSuccess(true);
-    setTimeout(() => setOpenSuccess(false), 1500);
+      //If all ok
+      setOpenSuccess(true);
+      setTimeout(() => setOpenSuccess(false), 1500);
+
+    }, 1000)
+
+    
+
 
     //If error
     // setOpenFail(true);
