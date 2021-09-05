@@ -9,7 +9,7 @@ const Login = () => {
   return (
     <React.Fragment>
       <Grid container direction="row" className="content-padding">
-        <Grid item direction="column" md={5} className={styles.leftCol}>
+        <Grid item direction="column" md={4} className={styles.leftCol}>
           <h3 className={styles.explore}>
             EXPLORE!
           </h3>
@@ -25,7 +25,7 @@ const Login = () => {
         <Grid
           item
           direction="column"
-          md={7}
+          md={8}
           spacing={4}
           justify="center"
           alignItems="center"

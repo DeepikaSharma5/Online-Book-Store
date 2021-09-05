@@ -54,7 +54,7 @@ const BuyItemModal = ({ buy, itemId, name, price, author, imgSrc, setSuccess }) 
     <React.Fragment>
       <div
         className={styles.signInBtn}
-        style={{ cursor: "pointer", fontWeight: "300" }}
+        style={{ cursor: "pointer", fontWeight: "300", width: "100%", textAlign:"center" }}
         onClick={handleOpen}
       >
         Add to cart

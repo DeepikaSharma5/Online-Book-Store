@@ -39,7 +39,7 @@ const WishList = (props) => {
     {
       id: 1,
       name: "Star Talk",
-      author: "author1",
+      author: "National Geographic",
       price: 6000,
       isBought: 0,
       itemsInStock: 12
@@ -47,7 +47,7 @@ const WishList = (props) => {
     {
       id: 2,
       name: "Ulimate Visual Dictionary",
-      author: "author1",
+      author: "DK books",
       price: 6000,
       isBought: 1,
       itemsInStock: 12
@@ -55,7 +55,7 @@ const WishList = (props) => {
     {
       id: 4,
       name: "The Dog Book",
-      author: "author1",
+      author: "Parragon",
       price: 6000,
       isBought: 0,
       itemsInStock: 12
@@ -63,7 +63,7 @@ const WishList = (props) => {
     {
       id: 5,
       name: "CATS 101",
-      author: "author1",
+      author: "DK books",
       price: 6000,
       isBought: 0,
       itemsInStock: 0
@@ -71,7 +71,7 @@ const WishList = (props) => {
     {
       id: 6,
       name: "Read me a story",
-      author: "author1",
+      author: "Pi Kids",
       price: 6000,
       isBought: 0,
       itemsInStock: 12
@@ -79,7 +79,7 @@ const WishList = (props) => {
     {
       id: 7,
       name: "Stay close",
-      author: "author1",
+      author: "Harlen Coben",
       price: 6000,
       isBought: 0,
       itemsInStock: 12
@@ -92,7 +92,7 @@ const WishList = (props) => {
   return (
     <React.Fragment>
       <AppLayout>
-        <div style={{ margin: "10px 25px" }}>
+        <div style={{ margin: "80px 25px" }}>
           <Typography className={styles.pageHeading}>{props.match.params.fname+" "+props.match.params.lname}'s Wish List</Typography>
           <Divider style={{ margin: "20px 0px 30px 0px", width: "100%"}} />
           

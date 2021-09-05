@@ -13,6 +13,7 @@ const PersonalDetails = () => {
           container
           className="content-padding"
           className={styles.background}
+          style={{marginTop:"70px"}}
         >
           <Grid item xs={12}>
             <Card variant="outlined" className={styles.card}>

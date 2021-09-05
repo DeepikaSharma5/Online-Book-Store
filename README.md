@@ -9,7 +9,7 @@
    Name   |   Student ID   |   Username 
 ----------|----------------|------------
 Deepika. S | IT19148632 | DeepikaSharma5 
-Nugawela M | IT19018706 | methmingu
+Nugawela M | IT19018706 | methminug
 Sithpavan. G | IT19134468 | sidpavn
 Kajathees. P | IT19156170 | Kajan03
 

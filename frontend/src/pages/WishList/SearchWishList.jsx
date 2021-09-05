@@ -76,15 +76,16 @@ const SearchWishList = () => {
                 fontWeight: "bold",
               }}
             >
-              List owner's name
+              Enter a name and find a wish list
             </Typography>
             <TextField
               className={styles.modalTextField}
               id="ownerName"
               value={ownerName}
+              label="List owner's name"
               onChange={(e) => setOwnerName(e.target.value)}
-              variant="outlined"
-              style={{ backgroundColor: "#ffffff", width: "90%" }}
+              variant="filled"
+              style={{width: "90%" }}
             />
             <Button
               className={styles.searchbtn}
@@ -93,7 +94,7 @@ const SearchWishList = () => {
             >
               Search for list
             </Button>
-            {error ? <Alert severity="warning">{error}</Alert> : null}
+            {error ? <Alert severity="warning" style={{border: "1px solid #f5d872", width:"90%"}}>{error}</Alert> : null}
           </Grid>
           <Grid
             item
