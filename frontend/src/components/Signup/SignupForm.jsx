@@ -95,7 +95,7 @@ const SignupForm = () => {
           />
           <Box textAlign="center" md={8}>
             <Button onClick={handleSubmit} className={styles.signInBtn}>
-              SIGN IN
+              SIGN UP
             </Button>
           </Box>
         </Grid>
