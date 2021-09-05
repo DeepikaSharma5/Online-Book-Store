@@ -9,6 +9,8 @@ import {
 } from "@material-ui/core";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import Swal from 'sweetalert2';
+
 import axiosInstance from "../../services/axiosInstance";
 import Header from '../../components/Customer/Homepage/Header/Header';
 import Footer from '../../components/Customer/Homepage/Footer/Footer';
@@ -33,10 +35,29 @@ export default function AddCardDetails() {
 
     try {
       const res = await axios.post("http://localhost:6060/card/add", newCardDetail);
-      alert("form has been submitted successfully");
+      Swal.fire({
+        title: "Success!",
+        text: "Added Successed!",
+        icon: 'success',
+        confirmButtonText: "OK",
+        type: "success"
+    })
       console.log(res.data);
     } catch (error) {
       console.log(error);
+      Swal.fire({
+        title: "error!",
+        text: "Not Success",
+        icon: 'error',
+        position: 'center',
+        showConfirmButton: false,
+        timer: 2000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+            toast.addEventListener('mouseenter', Swal.stopTimer)
+            toast.addEventListener('mouseleave', Swal.resumeTimer)
+        }
+    });
     }
   };
   return (
@@ -79,11 +100,12 @@ export default function AddCardDetails() {
                     </div>
 
                     <div className="mb-3">
-                      <label for="exampleInputPassword1" className="form-label">
+                      <label for="exampleInputPassword1" className="form-label" >
                         Expiry Date
                       </label>
                       <input
-                        type="text"
+                        type="date"
+                        data-provide="datepicker"
                         name="expiry_date"
                         className="form-control"
                         onChange={(e) => {
