@@ -88,7 +88,7 @@ export default function Index() {
 				<>
 					<AppBar />
 					<NavBar />
-					<Grid container>
+					<Grid container style={{paddingTop:"70px"}}>
 						<Grid item sm={2}></Grid>
 						<Grid item sm={10}>
 							<div style={{ paddingLeft: '30px', paddingRight: '30px' }}>
