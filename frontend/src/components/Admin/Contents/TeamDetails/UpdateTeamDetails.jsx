@@ -5,6 +5,7 @@ import { reactLocalStorage } from 'reactjs-localstorage';
 import { Folder, Backspace } from 'react-bootstrap-icons';
 import { APP_ROUTES } from '../../../../utilities/constants/routes.constants';
 import NavBar from '../../NavBar/NavBar';
+import AppBar from '../../NavBar/AppBar';
 
 export default function UpdateTeamDetails() {
     var TeamDetails = reactLocalStorage.getObject('TeamDetails');
@@ -59,10 +60,11 @@ export default function UpdateTeamDetails() {
     return (
         <div>
             <div>
+                <AppBar />
                 <NavBar />
             </div>
             <div className="d-flex p-2" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '250px', position: 'relative', left: '60px' }}>
-                <h1 tag='div' className='display-1 pb-3 mb-3 border-bottom' style={{ fontWeight: "bold", fontSize: '250%' }}>Add TeamDetails</h1>
+                <h1 tag='div' className='display-1 pb-3 mb-3 border-bottom' style={{ fontWeight: "bold", fontSize: '250%' }}>UPDATE TEAM DETAILS</h1>
             </div>
             <div style={{ height: '500px', position: 'relative', left: '80px' }}>
                 <div className="col-md-14 col-sm-12" style={{ maxWidth: '80rem', margin: 'auto', padding: '30px', borderColor: 'black', background: '#ffffff', boxShadow: '10px 10px 45px #919191,-10px -10px 45px #ffffff' }}>

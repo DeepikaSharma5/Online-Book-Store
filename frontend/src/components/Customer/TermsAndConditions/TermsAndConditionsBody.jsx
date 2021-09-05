@@ -22,9 +22,10 @@ class TermsAndConditionsBody extends Component {
 
                             <div style={{ height: '150px' }}>
                                 {this.state?.Conditions?.length > 0 && this.state.Conditions.map((item, index) =>
-                                    <div style={{marginBottom:'30px'}}>
+                                    <div>
                                         <h3 class="card-title">{item.heading}</h3>
                                         <p>{item.details}</p>
+                                        <br/>
                                     </div>
                                 )}
                             </div>

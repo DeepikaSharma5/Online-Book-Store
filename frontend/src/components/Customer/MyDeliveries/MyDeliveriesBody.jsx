@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { reactLocalStorage } from 'reactjs-localstorage';
+import { APP_ROUTES } from '../../../utilities/constants/routes.constants';
 
 class MyDeliveriesBody extends Component {
     constructor(props) {
@@ -21,6 +23,11 @@ class MyDeliveriesBody extends Component {
             });
     }
 
+    getPdf(id, name, address1, address2, address3, phoneNumber, status, date, updatedAt) {
+        reactLocalStorage.setObject("getPdf", [id, name, address1, address2, address3, phoneNumber, status, date, updatedAt]);
+        window.location.href= APP_ROUTES.USER_DELIVERY_PDF;
+    }
+
     render() {
         return (
             <div>
@@ -36,6 +43,7 @@ class MyDeliveriesBody extends Component {
                                                     <th scope="col" className="w-25">Order ID</th>
                                                     <th scope="col" className="w-50">Order Date</th>
                                                     <th scope="col" className="w-15">Order Delivery Status</th>
+                                                    <th scope="col" className="w-15">Get PDF</th>
                                                 </tr>
                                             </thead>
                                             {this.state?.status?.length > 0 && this.state.status.map((item, index) =>
@@ -58,6 +66,9 @@ class MyDeliveriesBody extends Component {
                                                                             :
                                                                             <button type="button" className="btn btn-warning" style={{ width: '120px' }}>{item.status}</button>
                                                             }
+                                                        </td>
+                                                        <td>
+                                                            <button type="button" className="btn" style={{ width: '120px', backgroundColor:'#20c997' }} onClick={() => this.getPdf(item._id, item.name, item.address1, item.address2, item.address3, item.phoneNumber, item.status, item.date, item.updatedAt)}>Get PDF</button>
                                                         </td>
                                                     </tr>
                                                 </tbody>

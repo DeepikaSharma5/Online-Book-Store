@@ -1,5 +1,5 @@
 import React,{useState,useEffect} from 'react'
-import {Grid,Card,CardContent,TextField} from "@material-ui/core"
+import {Grid,Card,CardContent,Button} from "@material-ui/core"
 import { getCardDetailsById } from '../../services/getCardDetailsById'
 import Header from '../../components/Customer/Homepage/Header/Header'
 
@@ -53,6 +53,10 @@ const CardDetails = () => {
                    
                 </CardContent>
             </Card>
+            <div style={{paddingTop:'30px'}}>
+            <Button style={{backgroundColor:"teal",color:'white'}}>Edit Details</Button>
+            </div>
+                
                 </Grid>
                 <Grid item sm={5}></Grid>
             </Grid>
