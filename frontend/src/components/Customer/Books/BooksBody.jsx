@@ -19,8 +19,10 @@ class BooksBody extends Component {
 
         axios.get('http://localhost:6060/book/view')
             .then(response => {
-                const books = response.data.data;            
-                this.setState({ books });  
+                const books = response.data.data; 
+                const bookPrices = response.data.data.price; 
+                const filteredBooksByPrice = response.data.data;            
+                this.setState({ books, filteredBooksByPrice, bookPrices });  
                 console.log("response", response);
             }).catch(error => {
                 alert(error.message);
@@ -52,13 +54,12 @@ class BooksBody extends Component {
         window.location.href = APP_ROUTES.BOOKS;
     }
 
-
     render() {
         return (
             <div className="container" style={{ maxWidth: '90rem', margin: 'auto', padding: '10px', borderColor: 'black', background: '#ffffff'}}>
                 <br></br><br></br>
-                <div className="row">
-                    <div className="col-4 col-md-2">
+                <div className="row">                    
+                    <div className="col-4 col-md-2" style={{'paddingTop': '10px'}} >                        
                         <div className="card text-dark bg-light mb-3 ">
                             <div class="card-body" style={{width:'auto', height:'auto'}}>
                                 <h5> Categories List </h5>
@@ -81,7 +82,7 @@ class BooksBody extends Component {
                             </div>
                         </div>
                     </div>
-                    <div className="col-md-10" style={{'paddingLeft': '30px'}}>
+                    <div className="col-md-10" style={{'paddingLeft': '30px'}}>                        
                         <h1>  <b>  Books  </b>  </h1>  
                         <div className="card text-dark bg-light mb-3 " >
                             <div class="card-body" >             

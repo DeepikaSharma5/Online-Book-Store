@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Footer from '../Homepage/Footer/Footer';
 import Header from '../Homepage/Header/Header';
-import SearchBooksBody from './SearchBooksBody';
+import SearchBody from './SearchBody';
 
 class SearchBooks extends Component {
     render() { 
@@ -12,7 +12,7 @@ class SearchBooks extends Component {
                 </div>
                 <br></br>
                 <div>
-                    <SearchBooksBody/>
+                    <SearchBody/>
                 </div>
                 <br></br><br></br>
                 <div>

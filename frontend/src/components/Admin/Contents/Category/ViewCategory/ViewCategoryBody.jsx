@@ -5,30 +5,77 @@ import Swal from 'sweetalert2';
 import { reactLocalStorage } from 'reactjs-localstorage';
 import { Folder, XCircle, Backspace } from 'react-bootstrap-icons';
 import { APP_ROUTES } from '../../../../../utilities/constants/routes.constants';
+import jsPDF from "jspdf";
+import autoTable from 'jspdf-autotable';
 
 class ViewCategoryBody extends Component {
   constructor(props) {
     super(props);
     this.deleteData = this.deleteData.bind(this);
     this.updateCategories = this.updateCategories.bind(this);
+    this.generatePDF = this.generatePDF.bind(this);
     this.state = {
         categories: [],
-        books:[]
+        count:1 
     }
 }
+
+componentWillMount() {
+    this.getChartData();
+  }
 
 componentDidMount() {
     axios.get('http://localhost:6060/category/view')
         .then(response => {
-            const categories = response.data.data;  
-            const books = response.data.data.books;           
-            this.setState({ categories, books });
+            const categories = response.data.data;           
+            this.setState({ categories });
             console.log("response", response);
         }).catch(error => {
             alert(error.message);
             console.log("Error", error);
         });
    
+}
+
+
+getChartData() {
+    this.setState({
+      data: {
+        datasets: [
+          {
+            label: "complete",
+            data: [60, 40],
+            backgroundColor: ["#0f4c75", "#3282b8"],
+          },
+        ],
+      },
+    });
+}
+
+
+generatePDF = (e) => {
+    const doc = new jsPDF();
+    const tableColumns = ["No", "Category Name", "Description"];
+    const tableRows = [];  
+
+    this.state.categories.forEach(category => {
+        const categoryData = [
+            this.state.count,
+            category.category_name,
+            category.description
+        ];
+        this.state.count = this.state.count + 1;
+        tableRows.push(categoryData);
+    }); 
+    
+    
+    this.state.count = 1;
+
+    doc.autoTable(tableColumns, tableRows, { startY: 20 });
+    const date = Date().split(" ");
+    const dateStr = date[0] + " " + date[1] + " " + date[2] + " " + date[3] + " " + date[4];
+    doc.text("BookLab : Report of category list for " + dateStr , 14, 15);
+    doc.save(`Category List Report - ${dateStr}.pdf`);
 }
 
 deleteData(id) {
@@ -73,8 +120,8 @@ deleteData(id) {
         });
 }
 
-updateCategories(id, category_name, description, books) {
-    reactLocalStorage.setObject("Categories", [id, category_name, description, books]);
+updateCategories(id) {
+    reactLocalStorage.setObject("CategoryID", [id]);
     window.location.href = APP_ROUTES.ADMIN_UPDATE_CATEGORY;
 }
 
@@ -96,7 +143,7 @@ render() {
                     <button type="button" className="btn btn-outline-secondary" style={{ float: 'right', padding: '12px 28px', marginBottom:'30px' }} onClick={() => { window.location.href = APP_ROUTES.ADMIN_ADD_CATEGORY }}>
                         <PlusLg /> Add New Category
                     </button>
-                    <button type="submit" className="btn btn-outline-success" style={{ float: 'left', padding: '12px 68px', marginBottom: '30px', fontWeight: 'bold', fontSize: "130%" }} ><Folder /> Generate Category Report </button>
+                    <button type="submit" className="btn btn-outline-success" style={{ float: 'left', padding: '12px 28px', marginBottom: '30px', fontWeight: 'bold', fontSize: "130%" }} onClick={() => { this.generatePDF() }} ><Folder /> Generate Category Report </button>
                 </div>
                 <div className="card overflow-auto" style={{ maxHeight: '300%',background:'#ffffff'}}>
                     <div className="card-body">
@@ -107,7 +154,7 @@ render() {
                                         <thead className="thead-light" >
                                             <tr>
                                                 <th scope="col" className="w-25">Category Name</th>                                              
-                                                <th scope="col" className="w-25">Description</th>
+                                                <th scope="col" className="w-25">Description</th>                 
                                                 <th scope="col" className="w-15">Edit</th>
                                                 <th scope="col" className="w-15">Delete</th>
                                             </tr>
@@ -118,7 +165,7 @@ render() {
                                                     <td>{item.category_name}</td>
                                                     <td>{item.description}</td>
                                                     <td>
-                                                        <button type="button" className="btn btn-outline-success" onClick={() => this.updateCategories(item._id, item.category_name, item.description, item.books)}>
+                                                        <button type="button" className="btn btn-outline-success" onClick={() => this.updateCategories(item._id)}>
                                                             <Pencil /> Update
                                                         </button>
                                                     </td>
