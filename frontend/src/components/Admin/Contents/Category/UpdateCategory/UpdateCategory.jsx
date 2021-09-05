@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import UpdateCategoryBody from './UpdateCategoryBody';
 import AppBar from '../../../NavBar/AppBar';
 import NavBar from '../../../NavBar/NavBar';
+import UpdateCategoryBody from './UpdateCategoryBody';
 
 class UpdateCategory extends Component {
     state = {  }

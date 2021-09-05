@@ -1,9 +1,9 @@
-import { createMuiTheme, makeStyles } from "@material-ui/core";
+import { createTheme, makeStyles } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
 import TableCell from "@material-ui/core/TableCell";
 import TableRow from "@material-ui/core/TableRow";
 
-export const PrimaryTheme = createMuiTheme({
+export const PrimaryTheme = createTheme({
     palette: {
         primary: {
             main: "#008080"

@@ -30,7 +30,7 @@ const ProductPageBody =({match,history}) => {
             <br></br><br></br>
             <div className="row">
                 <div className="col">
-                    <img className="shadow " src={image} style={{'width':'100%'}} />
+                    <img className="shadow " src={image} style={{'width':'70%'}} />
                 </div>
                 <div className="col" style={{'paddingLeft': '30px'}}>
                     <p style={{'fontSize':'50px'}} > <b> {title}  </b> </p>

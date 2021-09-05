@@ -34,7 +34,7 @@ export default function UploadImage() {
       {loading ? (
         <i><h6>Loading...</h6></i>
       ) : (
-        <img src={image} style={{ width: '300px' }} />
+        <img src={image} style={{ width: '100px' }} />
         
         
       )

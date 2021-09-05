@@ -9,9 +9,12 @@ class CategoryContainer extends Component {
     this.state = {
         books:[],
         booksByCategory:[],
-        categoryID:'611d2beb4f4c0f212c2f7be5' , 
-        category_name:''
-    }
+        categoryID:"" , 
+        category_name:'',
+        list:[]
+    }    
+
+   
 }
 
 componentDidMount() {
@@ -31,14 +34,16 @@ componentDidMount() {
 
     axios.get('http://localhost:6060/book/view')
         .then(response => {
-            const books = response.data.data;            
-            this.setState({ books });  
+            const books = response.data.data; 
+            const list = books.reverse().slice(0,7);           
+            this.setState({ books, list });  
             console.log("response", response);
         }).catch(error => {
             alert(error.message);
             console.log("Error", error);
         });
    
+
 }
 
 viewBook(id, title, author_name, publisher, year, isbn, description, price, image) {
@@ -56,7 +61,7 @@ render() {
                         <h4> <b> Recently Added Books </b> </h4>
                         <br></br>                          
                             <div class="row row-cols-7" style={{'marginBottom':'15px',float:'left'}}>
-                                {this.state.books.length > 0 && this.state.books.map((item, index) => (
+                                {this.state.list.length > 0 && this.state.list.map((item, index) => (
                                     <div className="col">    
                                         <div key={index} class="card shadow" style={{width:'13rem', height:'34rem'}}>
                                             <img class="card-img-top" src={item.image} style={{'width':'100%', height:'17rem'}} alt="Card image cap"/>

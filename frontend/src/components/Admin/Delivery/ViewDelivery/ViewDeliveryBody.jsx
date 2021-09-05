@@ -10,9 +10,20 @@ class PrivatestatusBody extends Component {
         super(props);
         this.deleteData = this.deleteData.bind(this);
         this.updateStatus = this.updateStatus.bind(this);
+        this.search = this.search.bind(this);
+        this.dropdown = this.dropdown.bind(this);
         this.state = {
+            filterText: '',
             status: []
         }
+    }
+
+    search(event) {
+        this.setState({ filterText: event.target.value })
+    }
+
+    dropdown(event) {
+
     }
 
     componentDidMount() {
@@ -20,7 +31,6 @@ class PrivatestatusBody extends Component {
             .then(response => {
                 const status = response.data;
                 this.setState({ status });
-                console.log("response", response);
             }).catch(error => {
                 alert(error.message);
                 console.log("Error", error);
@@ -73,8 +83,7 @@ class PrivatestatusBody extends Component {
         return (
             <div style={{ position: 'relative', left: '110px' }}>
                 <div className="card card border border-light shadow-0 mb-3" style={{ maxWidth: '100rem', margin: 'auto', padding: '10px' }}>
-
-                    <div className="card border-light" style={{ maxHeight: '2%', background: '#ffffff'}}>
+                    <div className="card border-light" style={{ maxHeight: '4%', background: '#ffffff' }}>
                         <div className="card-body">
                             <div style={{ height: '5%' }}>
                                 <div className="card-body" >
@@ -88,11 +97,17 @@ class PrivatestatusBody extends Component {
                                                 <option>Delivered</option>
                                             </select>
                                         </div>
-                                        <div className="col" >
-                                            <form className="form-inline" style={{ float: 'right' }}>
-                                                <input className="form-control mr-sm-2" type="search" placeholder="Search By Order ID" aria-label="Search" />
-                                                <button className="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-                                            </form>
+                                        <div className="col" style={{ paddingLeft: '900px' }}>
+                                            <input
+                                                className="form-control mr-sm-2"
+                                                type="search"
+                                                placeholder="Search By Order ID"
+                                                aria-label="Search"
+                                                name="search"
+                                                value={this.state.filterText}
+                                                onChange={this.search}
+                                                style={{ width: "100%" }}
+                                            />
                                         </div>
                                     </div>
                                 </div>
@@ -100,7 +115,7 @@ class PrivatestatusBody extends Component {
                         </div>
                     </div>
 
-                    <div className="card overflow-auto" style={{ maxHeight: '400%', background: '#ffffff', boxShadow: '10px 10px 45px #919191,-10px -10px 45px #ffffff' }}>
+                    <div className="card overflow-auto" style={{ maxHeight: '200%', background: '#ffffff', boxShadow: '10px 10px 45px #919191,-10px -10px 45px #ffffff' }}>
                         <div className="card-body">
                             <div style={{ height: '450px' }}>
                                 <div className="card-body" >
@@ -116,47 +131,53 @@ class PrivatestatusBody extends Component {
                                                     <th scope="col" className="w-15">Delete</th>
                                                 </tr>
                                             </thead>
-                                            {this.state?.status?.length > 0 && this.state.status.map((item, index) =>
-                                                <tbody key={index}>
-                                                    <tr>
-                                                        <td>{item._id}</td>
-                                                        <td>{item.address1}. {item.address2}, {item.address3}</td>
-                                                        <td>{item.phoneNumber}</td>
-                                                        <td>
-                                                            {item.state === '' ?
-                                                                <p></p>
-                                                                :
-                                                                item.status === 'Pending' ?
-                                                                    <button type="button" className="btn btn-danger" style={{ width: '120px' }}>{item.status}</button>
-                                                                    :
-                                                                    item.status === 'Delivered' ?
-                                                                        <button type="button" className="btn btn-success" style={{ width: '120px' }}>{item.status}</button>
+                                            {this.state?.status?.length > 0 && this.state.status.map((item, index) => {
+                                                const filterText = this.state.filterText;
+                                                const id = item._id;
+                                                if (!filterText || id.indexOf(filterText) !== -1) {
+                                                    return (
+                                                        <tbody key={index}>
+                                                            <tr>
+                                                                <td>{item._id}</td>
+                                                                <td>{item.address1}. {item.address2}, {item.address3}</td>
+                                                                <td>{item.phoneNumber}</td>
+                                                                <td>
+                                                                    {item.state === '' ?
+                                                                        <p></p>
                                                                         :
-                                                                        item.status === 'Processing' ?
-                                                                            <button type="button" className="btn btn-info" style={{ width: '120px' }}>{item.status}</button>
+                                                                        item.status === 'Pending' ?
+                                                                            <button type="button" className="btn btn-danger" style={{ width: '120px' }}>{item.status}</button>
                                                                             :
-                                                                            <button type="button" className="btn btn-warning" style={{ width: '120px' }}>{item.status}</button>
-                                                            }
-                                                        </td>
-                                                        <td>
-                                                            <button type="button" className="btn btn-outline-success" onClick={() => this.updateStatus(item._id, item.address1, item.address2, item.address3, item.phoneNumber, item.status)}>
-                                                                <Pencil /> Update
-                                                            </button>
-                                                        </td>
-                                                        <td>
-                                                            {item.status === "Delivered" ?
-                                                                <button type="button" className="btn btn-outline-danger" onClick={() => this.deleteData(item._id)}>
-                                                                    <Trash /> Delete
-                                                                </button>
-                                                                :
-                                                                <button type="button" className="btn btn-outline-danger" disabled={true}>
-                                                                    <Trash /> Delete
-                                                                </button>
-                                                            }
-                                                        </td>
-                                                    </tr>
-                                                </tbody>
-                                            )}
+                                                                            item.status === 'Delivered' ?
+                                                                                <button type="button" className="btn btn-success" style={{ width: '120px' }}>{item.status}</button>
+                                                                                :
+                                                                                item.status === 'Processing' ?
+                                                                                    <button type="button" className="btn btn-info" style={{ width: '120px' }}>{item.status}</button>
+                                                                                    :
+                                                                                    <button type="button" className="btn btn-warning" style={{ width: '120px' }}>{item.status}</button>
+                                                                    }
+                                                                </td>
+                                                                <td>
+                                                                    <button type="button" className="btn btn-outline-success" onClick={() => this.updateStatus(item._id, item.address1, item.address2, item.address3, item.phoneNumber, item.status)}>
+                                                                        <Pencil /> Update
+                                                                    </button>
+                                                                </td>
+                                                                <td>
+                                                                    {item.status === "Delivered" ?
+                                                                        <button type="button" className="btn btn-outline-danger" onClick={() => this.deleteData(item._id)}>
+                                                                            <Trash /> Delete
+                                                                        </button>
+                                                                        :
+                                                                        <button type="button" className="btn btn-outline-danger" disabled={true}>
+                                                                            <Trash /> Delete
+                                                                        </button>
+                                                                    }
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    )
+                                                }
+                                            })}
                                         </table>
                                     </div>
                                 </div>
@@ -164,12 +185,23 @@ class PrivatestatusBody extends Component {
                         </div>
                     </div>
                     <div>
-                        <button type="button" className="btn btn-info" style={{ float: 'left', padding: '12px 28px', marginTop: '30px' }} >
-                            <FileEarmarkPdf /> Generate Report
-                        </button>
+                        <div className="dropdown" style={{ float: 'left', padding: '12px 28px', marginTop: '30px' }}>
+                            <button className="btn btn-info dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <FileEarmarkPdf /> Generate Reports
+                            </button>
+                            <div className="dropdown-menu" aria-labelledby="dropdownMenu2">
+                                <button onClick={() => { window.location.href = APP_ROUTES.ADMIN_ALL_DELIVERY_PDF }} className="dropdown-item" type="button">All Orders</button>
+                                <button onClick={() => { window.location.href = APP_ROUTES.ADMIN_DELIVERED_PDF }} className="dropdown-item" type="button">Delivered orders</button>
+                                <button onClick={() => { window.location.href = APP_ROUTES.ADMIN_PENDING_PDF }} className="dropdown-item" type="button">Pending Orders</button>
+                                <button onClick={() => { window.location.href = APP_ROUTES.ADMIN_PROCESSING_PDF }} className="dropdown-item" type="button">Processing Orders</button>
+                                <button onClick={() => { window.location.href = APP_ROUTES.ADMIN_SHIPPED_PDF }} className="dropdown-item" type="button">Shipped Orders</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
+
             </div>
+
         );
     }
 }
