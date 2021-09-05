@@ -24,6 +24,7 @@ router.route("/add").post((req, res) => {
 
 router.route("/view").get((req, res) => {
   Payment.find({})
+    .populate("books", "title price")
     .then((data) => {
       res.status(200).send({ data: data });
     })
