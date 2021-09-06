@@ -40,7 +40,7 @@ const getWishListItems = async (req, res) => {
   }
 };
 
-const addItemToWishList = async (req, res) => {
+const addWishListItem = async (req, res) => {
   if (req.body && req.params && req.params.id) {
     let wishItem = req.body;
     let day = new Date()
@@ -72,8 +72,33 @@ const addProductToWishList = async (listID, itemID) => {
   );
 };
 
+const deleteWishListItem = async (req, res) => {
+  if (req.params && req.params.listid && req.params.itemid) {
+    await WishListItem.deleteOne({ _id: req.params.itemid })
+      .then((data) => {
+        const listID = req.params.listid;
+        const itemID = req.params.itemid;
+        deleteProductFromWishList(listID, itemID);
+        console.log("Product deleted successfully");
+        res.status(200).send({ data: data });
+      })
+      .catch((error) => {
+        res.status(500).send({ error: error.message });
+      });
+  }
+};
+
+const deleteProductFromWishList = async (listID, itemID) => {
+  await WishList.findByIdAndUpdate(
+    listID,
+    { $pull: { items: itemID } },
+    { new: true, useFindAndModify: false }
+  );
+};
+
 module.exports = {
   createWishList,
-  addItemToWishList,
+  addWishListItem,
+  deleteWishListItem,
   getWishListItems,
 };
