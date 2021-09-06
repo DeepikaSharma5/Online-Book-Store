@@ -136,7 +136,17 @@ export default function Header() {
   const navigateToMyDeliveryAddress = (event) => window.location.href = APP_ROUTES.USER_VIEW_ADDRESS;
   const navigateToMyDeliveries = (event) => window.location.href = APP_ROUTES.USER_MY_DELIVERIES;
   const navigateToMyAccount = (event) => window.location.href = APP_ROUTES.USER_PERSONAL_DETAILS;
-  const navigateToMyWishlist = (event) => window.location.href = APP_ROUTES.USER_WISHLIST;
+  const navigateToMyWishlist = (event) => {
+    const userToken = localStorage.getItem("user-token");
+    if(userToken != null){
+        //If logged in go to wish list
+        window.location.href = APP_ROUTES.USER_WISHLIST;
+    }else{
+        //Else redirect to login page
+        window.location.href = APP_ROUTES.LOGIN;
+    }
+    
+  };
   const navigateToSearchForWishlist = (event) => window.location.href = APP_ROUTES.WISHLIST_SEARCH;
 
   function searchValue(e) {

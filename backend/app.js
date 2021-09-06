@@ -59,6 +59,9 @@ app.use("/card", CardDetails);
 const userAPI = require("./api/user.api");
 app.use("/user", userAPI());
 
+const wishlistAPI = require("./api/wishlist.api");
+app.use("/wishlist", wishlistAPI());
+
 //Contact Us Email sending configuration
 app.post("/contactdata", (req, res) => {
   let data = req.body;
