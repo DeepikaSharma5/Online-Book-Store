@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Grid,
   Typography,
@@ -17,6 +17,8 @@ import { dangerIcon, okIcon } from "../../assets/images";
 import { AppLayout, VisibilityModal, WishItemCard } from "../../components";
 import SearchSelect from "react-select";
 import { Autocomplete } from "@material-ui/lab";
+import { getWishListByID } from "../../services/wishlistService";
+import jwt_decode from "jwt-decode";
 
 const useStyles = makeStyles((theme) => ({
   modal: {
@@ -102,6 +104,25 @@ const MyWishList = () => {
     setBookToAdd(value.label);
   };
 
+  async function getListItems() {
+    const userToken = localStorage.getItem("user-token");
+
+    if (userToken != null) {
+      const decodedToken = jwt_decode(userToken, { complete: true });
+      const response = await getWishListByID(decodedToken.id);
+
+      if (response._id !== null) {
+        setWishList(response.items);
+        setIsPublic(!response.isPrivate)
+      } else {
+        console.log(response);
+      }
+    } else {
+      //setError("Error loading details");
+      console.log("ERROR loading details")
+    }
+  }
+
   const addBook = () => {
     //POST
     setWishList([
@@ -126,12 +147,14 @@ const MyWishList = () => {
     }, 1000)
 
     
-
-
     //If error
     // setOpenFail(true);
     // setTimeout(() => setOpenFail(false), 2500);
   };
+
+  useEffect(() => {
+    getListItems();
+  }, []);
 
   return (
     <React.Fragment>
@@ -179,8 +202,9 @@ const MyWishList = () => {
                 <Grid item xs={3}>
                   <WishItemCard
                     itemId={wishItem.value}
-                    name={wishItem.label}
+                    name={wishItem.title}
                     author={wishItem.author}
+                    publisher={wishItem.publisher}
                     price={wishItem.price}
                     removeItem={removeListItem}
                   />

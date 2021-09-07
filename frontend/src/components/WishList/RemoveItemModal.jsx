@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const RemoveItemModal = ({ remove, itemId, name, price, author, imgSrc }) => {
+const RemoveItemModal = ({ remove, itemId, name, price, author, imgSrc, publisher }) => {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   const [open2, setOpen2] = React.useState(false);
@@ -91,6 +91,9 @@ const RemoveItemModal = ({ remove, itemId, name, price, author, imgSrc }) => {
                       </Typography>
                       <Typography className={styles.descText}>
                         {author}
+                      </Typography>
+                      <Typography className={styles.descText} style={{fontStyle:"italic"}}>
+                        {publisher}
                       </Typography>
                       <Typography className={styles.descText2}>
                         Rs. {price}

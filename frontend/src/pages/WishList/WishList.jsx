@@ -35,6 +35,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const WishList = (props) => {
+
+  //Get from service
   const wishList = [
     {
       id: 1,

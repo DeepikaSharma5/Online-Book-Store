@@ -9,6 +9,7 @@ const wishItemSchema = new mongoose.Schema({
   title: { type: String, required: true, trim: true },
   author: { type: String, required: true, trim: true },
   isbn: { type: String, required: true, trim: true },
+  price: { type: Number, required: true},
   publisher: { type: String, required: true, trim: true },
   addedDate: { type: Date, required: true, trim: true },
   isBought: { type: Boolean, required: true, trim: true },
