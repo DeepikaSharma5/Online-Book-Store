@@ -1,31 +1,5 @@
 const baseUrl = "http://localhost:6060/wishlist";
 
-export async function newList(userID) {
-  const listID = { userid: userID };
-  try {
-    const response = await fetch(baseUrl + "/new", {
-      method: "POST",
-
-      // Adding body or contents to send
-      body: JSON.stringify(listID),
-
-      // Adding headers to the request
-      headers: {
-        "Content-Type": "application/json; charset=UTF-8",
-      },
-    });
-
-    if (!response.ok) {
-      throw response;
-    } else {
-      return "ok";
-    }
-  } catch (error) {
-    let responseTxt = await error.text();
-    return responseTxt;
-  }
-}
-
 export async function getWishListByID(id) {
   const response = await fetch(baseUrl + "/" + id);
   console.log("Fetching details of " + id);
@@ -70,6 +44,34 @@ export async function updateListStatus(listID, listStatus) {
       const response = await fetch(baseUrl + "/" + listID + "/" + listStatus, {
         method: "PUT",
       })
+        if (!response.ok) {
+            throw response;
+          } else {
+            return "ok";
+          }
+    } catch (error) {
+      let responseTxt = await error.text();
+      return responseTxt;
+    }
+  }
+
+  export async function newList(listID) {
+    try {
+      const newList = ({
+        userid: listID
+      })
+      const response = await fetch("http://localhost:6060/wishlist/new",{
+        method: "POST",
+
+        // Adding body or contents to send
+        body: JSON.stringify(newList),
+        
+        // Adding headers to the request
+        headers: {
+            'Content-Type': 'application/json; charset=UTF-8',
+        }
+
+    });
         if (!response.ok) {
             throw response;
           } else {
