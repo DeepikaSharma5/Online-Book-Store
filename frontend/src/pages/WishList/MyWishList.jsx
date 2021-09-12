@@ -17,8 +17,13 @@ import { dangerIcon, okIcon } from "../../assets/images";
 
 import { AppLayout, VisibilityModal, WishItemCard } from "../../components";
 import SearchSelect from "react-select";
-import { Autocomplete } from "@material-ui/lab";
-import { addItemToList, getWishListByID } from "../../services/wishlistService";
+import { Alert, Autocomplete } from "@material-ui/lab";
+import {
+  addItemToList,
+  getWishListByID,
+  deleteItemFromList,
+  updateListStatus,
+} from "../../services/wishlistService";
 import { getBooks } from "../../services/bookService";
 import jwt_decode from "jwt-decode";
 
@@ -52,6 +57,8 @@ const MyWishList = () => {
   const [openSuccess, setOpenSuccess] = useState(false);
   const [openFail, setOpenFail] = useState(false);
   const [defaultBook, setDefaultBook] = useState(uuid());
+  const [success, setSuccess] = useState(false);
+  const [bookExists, setBookExists] = useState(false);
 
   const formatOptionLabel = ({ title, author_name, price }) => (
     <div style={{ display: "flex", justifyContent: "space-between" }}>
@@ -64,7 +71,7 @@ const MyWishList = () => {
   );
 
   const selectBook = (event, value) => {
-    console.log(value)
+    console.log(value);
     if (value) setBookToAdd(value);
   };
 
@@ -93,58 +100,103 @@ const MyWishList = () => {
     }
   }
 
-  async function  addBook(){
-    if (bookToAdd.title !== "") {
-      const book = {
-        bookID:bookToAdd._id,
-        title:bookToAdd.title,
-        author:bookToAdd.author_name,
-        isbn:bookToAdd.isbn,
-        publisher:bookToAdd.publisher,
-        price:bookToAdd.price,
-        image:bookToAdd.image,
-        isBought:false
+  async function addBook() {
+    let exists = false;
+    setBookExists(false);
+    wishList.every(item => {
+      if (item.bookID === bookToAdd._id) {
+        exists = true
+        return false;
       }
+      return true;
+    });
+    if (exists) {
+      setBookExists(true);
+      setDefaultBook(uuid());
+      setTimeout(() => setBookExists(false), 3000);
+    } else {
+      if (bookToAdd.title !== "") {
+        const book = {
+          bookID: bookToAdd._id,
+          title: bookToAdd.title,
+          author: bookToAdd.author_name,
+          isbn: bookToAdd.isbn,
+          publisher: bookToAdd.publisher,
+          price: bookToAdd.price,
+          image: bookToAdd.image,
+          isBought: false,
+        };
 
+        const userToken = localStorage.getItem("user-token");
+
+        if (userToken != null) {
+          const decodedToken = jwt_decode(userToken, { complete: true });
+          const response = await addItemToList(book, decodedToken.id);
+
+          if (response !== null) {
+            setDefaultBook(uuid());
+            book["_id"] = response;
+            setWishList((current) => {
+              return [...current, book];
+            });
+            setSuccess(true);
+            setTimeout(() => setSuccess(false), 3000);
+          } else {
+            console.log(response);
+          }
+        } else {
+          //setError("Error loading details");
+          console.log("ERROR saving to list");
+        }
+      }
+      getBookList();
+    }
+  }
+
+  async function updateStatus(status) {
+    const userToken = localStorage.getItem("user-token");
+
+    if (userToken != null) {
+      const decodedToken = jwt_decode(userToken, { complete: true });
+      const response = await updateListStatus(decodedToken.id, status);
+      if (response === "ok") {
+        setIsPublic(!status);
+      } else {
+        console.log(response);
+      }
+    } else {
+      //setError("Error loading details");
+      console.log("ERROR updating list status");
+    }
+  }
+
+  async function removeListItem(itemId) {
+    if (itemId !== "") {
       const userToken = localStorage.getItem("user-token");
 
       if (userToken != null) {
         const decodedToken = jwt_decode(userToken, { complete: true });
-        const response = await addItemToList(book, decodedToken.id);
-  
+        const response = await deleteItemFromList(itemId, decodedToken.id);
+
         if (response === "ok") {
-          setDefaultBook(uuid());
-          setWishList((current) => {
-            return [
-              ...current,
-              bookToAdd
-            ];
+          setWishList((items) => {
+            return items.filter((item) => item._id !== itemId);
           });
+          setOpenSuccess(true);
+          setTimeout(() => setOpenSuccess(false), 1500);
         } else {
           console.log(response);
+          setOpenFail(true);
+          setTimeout(() => setOpenFail(false), 2500);
         }
       } else {
-        //setError("Error loading details");
-        console.log("ERROR saving to list");
+        //If error
+        setOpenFail(true);
+        setTimeout(() => setOpenFail(false), 2500);
       }
     }
     getBookList();
-  };
-
-  const removeListItem = (itemId) => {
-    //Send DELETE req
-    setTimeout(() => {
-      setWishList([]);
-
-      //If all ok
-      setOpenSuccess(true);
-      setTimeout(() => setOpenSuccess(false), 1500);
-    }, 1000);
-
-    //If error
-    // setOpenFail(true);
-    // setTimeout(() => setOpenFail(false), 2500);
-  };
+  }
 
   useEffect(() => {
     getListItems();
@@ -190,16 +242,29 @@ const MyWishList = () => {
               </Button>
             </Grid>
             <div style={{ width: "230px" }}>
-              <VisibilityModal isPublic={isPublic} setIsPublic={setIsPublic} />
+              <VisibilityModal
+                isPublic={isPublic}
+                updateStatus={updateStatus}
+              />
             </div>
           </div>
-          <Divider style={{ margin: "20px 0px 30px 0px", width: "100%" }} />
+          <Divider style={{ margin: "20px 0px 10px 0px", width: "100%" }} />
+          {success ? (
+            <Alert severity="success" style={{ marginBottom: "10px" }}>
+              Book added successfully
+            </Alert>
+          ) : null}
+          {bookExists ? (
+            <Alert severity="warning" style={{ marginBottom: "10px" }}>
+              This book already exists in your wish list!
+            </Alert>
+          ) : null}
           <div style={{ margin: "0px 30px" }}>
             <Grid container spacing={3}>
               {wishList.map((wishItem) => (
                 <Grid item xs={3}>
                   <WishItemCard
-                    itemId={wishItem.value}
+                    itemId={wishItem._id}
                     name={wishItem.title}
                     author={wishItem.author}
                     publisher={wishItem.publisher}

@@ -48,8 +48,8 @@ const addWishListItem = async (req, res) => {
         const wishListID = req.params.id;
         const wishItemID = data._id;
         addProductToWishList(wishListID, wishItemID);
-        console.log("Product added successfully");
-        res.status(200).send({ data: data });
+        console.log("Product "+wishItemID+" added successfully");
+        res.status(200).send({ data: wishItemID });
       })
       .catch((error) => {
         res.status(500).send({ error: error.message });
@@ -89,10 +89,26 @@ const deleteProductFromWishList = async (listID, itemID) => {
     { new: true, useFindAndModify: false }
   );
 };
+const updateisPrivate = async (req, res) => {
+  if (req.params && req.params.listid && req.params.liststate) {
+    await WishList.findByIdAndUpdate(
+      req.params.listid,
+      {isPrivate: req.params.liststate},
+      { new: true, useFindAndModify: false }
+    )
+      .then((data) => {
+        res.status(200).send({ data: data });
+      })
+      .catch((error) => {
+        res.status(500).send({ error: error.message });
+      });
+  }
+};
 
 module.exports = {
   createWishList,
   addWishListItem,
   deleteWishListItem,
   getWishListItems,
+  updateisPrivate
 };

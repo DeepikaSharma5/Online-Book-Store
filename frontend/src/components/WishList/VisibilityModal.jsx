@@ -85,7 +85,7 @@ const VisibilitySwitch = withStyles((theme) => ({
   );
 });
 
-const VisibilityModal = ({ isPublic, setIsPublic }) => {
+const VisibilityModal = ({ isPublic, updateStatus }) => {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
 
@@ -99,7 +99,7 @@ const VisibilityModal = ({ isPublic, setIsPublic }) => {
 
   const handleSubmit = () => {
     setOpen(false)
-    setTimeout(() => setIsPublic(!isPublic), 500);
+    updateStatus(isPublic)
   };
 
   return (

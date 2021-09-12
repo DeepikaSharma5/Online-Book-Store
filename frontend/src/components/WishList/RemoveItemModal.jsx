@@ -46,6 +46,7 @@ const RemoveItemModal = ({ remove, itemId, name, price, author, imgSrc, publishe
 
   const handleSubmit = () => {
     setOpen(false);
+    console.log("ID",itemId)
     remove(itemId);
   };
 
