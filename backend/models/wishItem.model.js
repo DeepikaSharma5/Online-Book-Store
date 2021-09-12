@@ -12,6 +12,7 @@ const wishItemSchema = new mongoose.Schema({
   price: { type: Number, required: true},
   publisher: { type: String, required: true, trim: true },
   addedDate: { type: Date, required: true, trim: true },
+  image: { type: String, required: true, trim: true },
   isBought: { type: Boolean, required: true, trim: true },
 });
 

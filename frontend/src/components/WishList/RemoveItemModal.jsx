@@ -83,7 +83,7 @@ const RemoveItemModal = ({ remove, itemId, name, price, author, imgSrc, publishe
                 <div>
                   <Grid container direction="row" spacing={3}>
                     <Grid item>
-                      <div style={{ width: "100px", height: "130px", backgroundColor: "grey" }} />
+                    <img height="130px" width="auto" src={imgSrc} />
                     </Grid>
                     <Grid item>
                       <Typography className={styles.descText2}>

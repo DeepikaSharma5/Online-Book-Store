@@ -24,7 +24,7 @@ const createWishList = async (req, res) => {
 const getWishListItems = async (req, res) => {
   if (req.params && req.params.id) {
     await WishList.findById(req.params.id)
-      .populate("items", "bookID title author price isbn publisher isBought isPrivate")
+      .populate("items", "bookID title author price isbn publisher image isBought isPrivate")
       .then((data) => {
         res.status(200).send(data);
       })
