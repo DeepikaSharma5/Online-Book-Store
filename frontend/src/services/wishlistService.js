@@ -11,6 +11,17 @@ export async function getWishListByID(id) {
   throw response;
 }
 
+export async function searchWishListByName(name) {
+  const response = await fetch(baseUrl + "/search/" + name);
+  console.log("Searching for" + name);
+  if (response.ok) {
+    return response.json();
+  } else {
+    return response.status(500).send({ error: "Error loading list" });
+  }
+  throw response;
+}
+
 export async function addItemToList(itemDetails, listID) {
   try {
     const response = await fetch(baseUrl + "/" + listID, {

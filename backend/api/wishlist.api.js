@@ -4,9 +4,9 @@ const wishlistcontroller = require("../controllers/wishList.controller");
 
 //Add proper routing nouns
 module.exports = () => {
-    router.post('/new', wishlistcontroller.createWishList);
     router.post('/:id', wishlistcontroller.addWishListItem);
     router.get('/:id', wishlistcontroller.getWishListItems);
+    router.get('/search/:name', wishlistcontroller.searchWishList);
     router.delete('/:listid/:itemid', wishlistcontroller.deleteWishListItem);
     router.put('/:listid/:liststate', wishlistcontroller.updateisPrivate);
     return router;

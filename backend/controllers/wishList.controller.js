@@ -1,29 +1,10 @@
 const WishList = require("../models/wishList.model");
 const WishListItem = require("../models/wishItem.model");
-
-const createWishList = async (req, res) => {
-  if (req.body) {
-    const newList = new WishList({
-      _id: req.body.userid,
-      owner: req.body.userid,
-      isPrivate: true,
-      items: [],
-    });
-
-    await newList
-      .save()
-      .then((data) => {
-        res.status(200).send({ data: data });
-      })
-      .catch((error) => {
-        res.status(500).send({ error: error.message });
-      });
-  }
-};
+const User = require("../models/user.model");
 
 const getWishListItems = async (req, res) => {
   if (req.params && req.params.id) {
-    await WishList.findById(req.params.id)
+    await User.findById(req.params.id)
       .populate("items", "bookID title author price isbn publisher image isBought isPrivate")
       .then((data) => {
         res.status(200).send(data);
@@ -31,6 +12,19 @@ const getWishListItems = async (req, res) => {
       .catch((error) => {
         res.status(500).send({ error: error.message });
       });
+  }
+};
+
+const searchWishList = async (req, res) => {
+  if (req.params && req.params.name) {
+
+    await User.find({ 'isPrivate': false, 'name': {$regex : req.params.name} }, {"_id": 1, "name": 1})
+    .then((data) => {
+      res.status(200).send({lists: data});
+    })
+    .catch((error) => {
+      res.status(500).send({ error: error.message });
+    });
   }
 };
 
@@ -58,8 +52,8 @@ const addWishListItem = async (req, res) => {
 };
 
 const addProductToWishList = async (listID, itemID) => {
-  console.log("List ID: ", listID);
-  await WishList.findByIdAndUpdate(
+  //console.log("List ID: ", listID);
+  await User.findByIdAndUpdate(
     listID,
     { $push: { items: itemID } },
     { new: true, useFindAndModify: false }
@@ -83,7 +77,7 @@ const deleteWishListItem = async (req, res) => {
 };
 
 const deleteProductFromWishList = async (listID, itemID) => {
-  await WishList.findByIdAndUpdate(
+  await User.findByIdAndUpdate(
     listID,
     { $pull: { items: itemID } },
     { new: true, useFindAndModify: false }
@@ -91,7 +85,7 @@ const deleteProductFromWishList = async (listID, itemID) => {
 };
 const updateisPrivate = async (req, res) => {
   if (req.params && req.params.listid && req.params.liststate) {
-    await WishList.findByIdAndUpdate(
+    await User.findByIdAndUpdate(
       req.params.listid,
       {isPrivate: req.params.liststate},
       { new: true, useFindAndModify: false }
@@ -106,9 +100,9 @@ const updateisPrivate = async (req, res) => {
 };
 
 module.exports = {
-  createWishList,
   addWishListItem,
   deleteWishListItem,
   getWishListItems,
-  updateisPrivate
+  updateisPrivate,
+  searchWishList
 };

@@ -59,27 +59,13 @@ const createUser = async (req, res) => {
           email: req.body.email,
           phone: req.body.phone,
           password: hashedPassword,
+          isPrivate: true,
+          items:[]
         });
 
         await newUser
           .save()
           .then(async (data) => {
-            //createWishList
-            const newList = new WishList({
-              _id: data._id,
-              owner: data._id,
-              isPrivate: true,
-              items: [],
-            });
-
-            await newList
-              .save()
-              .then((data) => {
-                res.status(200).send({ data: data });
-              })
-              .catch((error) => {
-                res.status(500).send({ error: error.message });
-              });
             res.status(200).send({ data: data });
           })
           .catch((error) => {
