@@ -9,5 +9,6 @@ module.exports = () => {
     router.get('/search/:name', wishlistcontroller.searchWishList);
     router.delete('/:listid/:itemid', wishlistcontroller.deleteWishListItem);
     router.put('/:listid/:liststate', wishlistcontroller.updateisPrivate);
+    router.get('/top/wish/items', wishlistcontroller.getTopFiveProducts);
     return router;
 }

@@ -1,11 +1,14 @@
-const WishList = require("../models/wishList.model");
 const WishListItem = require("../models/wishItem.model");
 const User = require("../models/user.model");
+const Book = require("../models/Book");
 
 const getWishListItems = async (req, res) => {
   if (req.params && req.params.id) {
     await User.findById(req.params.id)
-      .populate("items", "bookID title author price isbn publisher image isBought isPrivate")
+      .populate(
+        "items",
+        "bookID title author price isbn publisher image isBought isPrivate"
+      )
       .then((data) => {
         res.status(200).send(data);
       })
@@ -17,22 +20,24 @@ const getWishListItems = async (req, res) => {
 
 const searchWishList = async (req, res) => {
   if (req.params && req.params.name) {
-
-    await User.find({ 'isPrivate': false, 'name': {$regex : req.params.name} }, {"_id": 1, "name": 1})
-    .then((data) => {
-      res.status(200).send({lists: data});
-    })
-    .catch((error) => {
-      res.status(500).send({ error: error.message });
-    });
+    await User.find(
+      { isPrivate: false, name: { $regex: req.params.name } },
+      { _id: 1, name: 1 }
+    )
+      .then((data) => {
+        res.status(200).send({ lists: data });
+      })
+      .catch((error) => {
+        res.status(500).send({ error: error.message });
+      });
   }
 };
 
 const addWishListItem = async (req, res) => {
   if (req.body && req.params && req.params.id) {
     let wishItem = req.body;
-    let day = new Date()
-    day.setTime(day.getTime() - new Date().getTimezoneOffset() * 60 * 1000)
+    let day = new Date();
+    day.setTime(day.getTime() - new Date().getTimezoneOffset() * 60 * 1000);
     wishItem["addedDate"] = day;
     const newItem = new WishListItem(wishItem);
 
@@ -42,7 +47,7 @@ const addWishListItem = async (req, res) => {
         const wishListID = req.params.id;
         const wishItemID = data._id;
         addProductToWishList(wishListID, wishItemID);
-        console.log("Product "+wishItemID+" added successfully");
+        console.log("Product " + wishItemID + " added successfully");
         res.status(200).send({ data: wishItemID });
       })
       .catch((error) => {
@@ -83,11 +88,12 @@ const deleteProductFromWishList = async (listID, itemID) => {
     { new: true, useFindAndModify: false }
   );
 };
+
 const updateisPrivate = async (req, res) => {
   if (req.params && req.params.listid && req.params.liststate) {
     await User.findByIdAndUpdate(
       req.params.listid,
-      {isPrivate: req.params.liststate},
+      { isPrivate: req.params.liststate },
       { new: true, useFindAndModify: false }
     )
       .then((data) => {
@@ -99,10 +105,46 @@ const updateisPrivate = async (req, res) => {
   }
 };
 
+//NOT RETURNING ANYTHING
+const getTopFiveProducts = async (req, res) => {
+  await WishListItem.aggregate([
+    {
+      $group: {
+        _id: "$bookID",
+        counter: {
+          $sum: 1,
+        },
+      }
+      
+    },
+    {
+      $lookup: {
+        from: 'books',
+        localField: '_id',
+        foreignField: '_id',
+        as: 'bookinfo'
+      }
+    },
+    {
+      $unwind: "$bookinfo"
+    },
+    {
+      $sort: {"counter": -1}
+    }
+  ])
+  .then(async(data) => {    
+      res.status(200).send(data);
+  })
+  .catch((error) => {
+    res.status(500).send({ error: error.message });
+  });
+};
+
 module.exports = {
   addWishListItem,
   deleteWishListItem,
   getWishListItems,
   updateisPrivate,
-  searchWishList
+  searchWishList,
+  getTopFiveProducts,
 };
