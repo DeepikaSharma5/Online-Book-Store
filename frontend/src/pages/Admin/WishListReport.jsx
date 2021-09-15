@@ -13,8 +13,9 @@ import { Alert } from "@material-ui/lab";
 import styles from "../WishList/WishList.module.scss";
 
 import { AppLayout, TopProductsTable } from "../../components";
-import AppBar from "../../components/Admin/NavBar/AppBar";
 import NavBar from "../../components/Admin/NavBar/NavBar";
+import AppBar from "../../components/Admin/NavBar/AppBar";
+import { getTopFiveTtems } from "../../services/wishlistService";
 
 const WishListReport = () => {
   const months = [
@@ -54,38 +55,33 @@ const WishListReport = () => {
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
 
-  const [topBooks, setTopBooks] = useState([
-    {
-      id: "P005",
-      title: "Insurgent",
-      publisher: "Harper & Collins",
-      price: 2500.0,
-    },
-    {
-      id: "P024",
-      title: "Big Little Lies",
-      publisher: "Penguin CLassics",
-      price: 3000.0,
-    },
-    {
-      id: "P079",
-      title: "Light and Architecture",
-      publisher: "Harper & Collins",
-      price: 5500.0,
-    },
-    {
-      id: "P020",
-      title: "10,000 Years of Art",
-      publisher: "Phaidon",
-      price: 2500.0,
-    },
-    {
-      id: "P040",
-      title: "Classic Ghost Stories",
-      publisher: "Harper & Collins",
-      price: 5000.0,
-    },
-  ]);
+  const [topBooks, setTopBooks] = useState([]);
+
+  async function getTopBooks() {
+    const response = await getTopFiveTtems();
+
+    if (response) {
+      console.log(response);
+      let books = [];
+
+      response.forEach((item) => {
+        const listitem = {
+          id: item._id,
+          title: item.bookinfo.title,
+          publisher: item.bookinfo.publisher,
+          price: item.bookinfo.price,
+          isbn: item.bookinfo.isbn,
+          count: item.counter,
+        };
+        books.push(listitem);
+      });
+
+      setTopBooks(books);
+    } else {
+      console.log(response);
+      setError("Error loading top products, please try again later.");
+    }
+  }
 
   const generateReport = () => {
     setTimeout(() => {
@@ -97,6 +93,10 @@ const WishListReport = () => {
   };
 
   // useEffect(() => generateYears(), [])
+
+  useEffect(() => {
+    getTopBooks();
+  }, []);
 
   return (
     <React.Fragment>
@@ -111,7 +111,7 @@ const WishListReport = () => {
           container
           className="content-padding"
           className={styles.background}
-          style={{ height: "89.8vh" }}
+          style={{ height: "89.8vh", marginTop:"10.2vh" }}
         >
           <Grid
             item

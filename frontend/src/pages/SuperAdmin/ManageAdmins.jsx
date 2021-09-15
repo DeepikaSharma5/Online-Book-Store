@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Grid, Typography, Button, TextField } from "@material-ui/core";
-import { Alert } from "@material-ui/lab";
 
 import styles from "../WishList/WishList.module.scss";
 

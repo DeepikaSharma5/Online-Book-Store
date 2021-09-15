@@ -1,29 +1,63 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import Swal from 'sweetalert2';
+import Select from 'react-select';
 import { APP_ROUTES } from '../../../../../utilities/constants/routes.constants';
+import { Folder, XCircle, Backspace } from 'react-bootstrap-icons';
 
 class AddCategoryBody extends Component {
     constructor(props) {
         super(props);
         this.onChange = this.onChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
-        this.onClear = this.onClear.bind(this);
+        this.onBookSelect = this.onBookSelect.bind(this);
+        this.cancel = this.cancel.bind(this);
         this.state = {
             category_name: '',
-            description: ''
+            description: '',
+            books: [],
+            options: [],
+            selectedBooks: []
         }
+    }
+
+    componentDidMount(){
+        axios.get('http://localhost:6060/book/view')
+        .then(response => {
+            this.setState({ books: response.data.data}, () => {
+                let data = [];
+                this.state.books.map((item, index) => {
+                    let book = {
+                        value: item._id, 
+                        label: item.title
+                    }
+                    data.push(book)
+                })
+                this.setState({options: data});
+            })   
+        })
+        
+    }
+
+    
+    cancel(){        
+        window.location.href = APP_ROUTES.ADMIN_VIEW_CATEGORY;
     }
 
     onChange(e) {
         this.setState({ [e.target.name]: e.target.value })
     };
 
+    onBookSelect(e) {
+        this.setState( { selectedBooks: e ? e.map(item =>item.value) : [] })
+    }
+
     onSubmit(e) {
         e.preventDefault();
         let AddCategory = {
             category_name: this.state.category_name,
-            description: this.state.description
+            description: this.state.description,            
+            books: this.state.selectedBooks
         }
         console.log('Data', AddCategory);
         axios.post('http://localhost:6060/category/add', AddCategory)
@@ -57,19 +91,17 @@ class AddCategoryBody extends Component {
             })
     }
 
-    onClear(e){
-        this.setState= {
-            category_name: '',
-            description: ''
-        }
-    }
-
     render() {
         return (
             <div className="container">
                 <br></br><br></br>
                 <h1>Add Category Details </h1>
-                <br></br>
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb"  style={{backgroundColor:'white'}}>
+                        <li class="breadcrumb-item" style={{fontSize:"20px"}}> <a href="/admin-product-dashboard" style={{color:"#049191"}}> Product Dashboard</a></li>
+                        <li class="breadcrumb-item active"style={{fontSize:"20px"}}  aria-current="page"> Add Categories</li>
+                    </ol>
+                </nav>
                 <form onSubmit={this.onSubmit} > 
                     <div className="mb-3"> 
                         <label for="inputCategoryName" className="form-label">Category Name</label>
@@ -93,8 +125,21 @@ class AddCategoryBody extends Component {
                             style={{height: "100px"}}
                             onChange={this.onChange}/>
                     </div>
+                    <p>Select books</p>
+                    <Select
+                        isMulti
+                        name="books"
+                        onChange={this.onBookSelect}
+                        options={this.state.options}
+                        className="basic-multi-select"
+                        classNamePrefix="select"
+                    />
                     <br></br>
-                    <button type="submit" className="btn btn-primary">Submit</button>
+                    <br></br>
+                    <div className="btn-toolbar justify-content-between" role="toolbar" aria-label="Toolbar with button groups">
+                        <button type="button" className="btn btn-outline-danger" style={{ float: 'right', padding: '12px 68px', marginBottom: '30px', fontWeight: 'bold', fontSize: "130%" }} onClick={this.cancel}><Backspace /> Cancel</button>
+                        <button type="submit" className="btn btn-outline-success" style={{ float: 'left', padding: '12px 68px', marginBottom: '30px', fontWeight: 'bold', fontSize: "130%" }}><Folder /> Submit </button>
+                    </div>
                     <br></br><br></br>
                 </form>
             </div>

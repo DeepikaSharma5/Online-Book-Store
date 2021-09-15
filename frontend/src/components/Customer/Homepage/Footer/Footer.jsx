@@ -5,7 +5,7 @@ class Footer extends Component {
     render() { 
         return ( 
             <div>             
-               <footer class="row row-cols-6 py-5" style={{backgroundColor: '#049191', width:'100.76%'}}>
+               <footer class="row row-cols-6 py-5" style={{backgroundColor: '#049191', width:'device-width', bottom:'0'}}>
                     <div class="col">
                     </div>
                     <div class="col">
@@ -18,7 +18,7 @@ class Footer extends Component {
                         <h3 style={{ color: 'white' }} >Navigation</h3>
                         <ul class="nav flex-column">
                             <li class="nav-item mb-2"><a href="http://localhost:3000/homepage" style={{ color: 'white', fontSize:'19px' }}>Home</a></li>
-                            <li class="nav-item mb-2"><a href="#" style={{ color: 'white', fontSize:'19px' }}>About Us</a></li>
+                            <li class="nav-item mb-2"><a href="http://localhost:3000/about-us" style={{ color: 'white', fontSize:'19px' }}>About Us</a></li>
                             <li class="nav-item mb-2"><a href="http://localhost:3000/contact-us" style={{ color: 'white', fontSize:'19px' }}>Contact Us</a></li>
                         </ul>
                     </div>

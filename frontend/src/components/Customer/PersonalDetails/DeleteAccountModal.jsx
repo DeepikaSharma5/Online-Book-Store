@@ -13,6 +13,7 @@ import { Alert } from "@material-ui/lab";
 
 import styles from "./Personaldetails.module.scss";
 import { dangerIcon } from "../../../assets/images";
+import { APP_ROUTES } from "../../../utilities/constants/routes.constants";
 
 const useStyles = makeStyles((theme) => ({
   modal: {
@@ -63,10 +64,16 @@ const DeleteAccountModal = () => {
       //POST
 
       //Check for errors in mismatching current password
-
-      //if All good set success
-      setSuccess("Account deleted successfully");
-      setTimeout(() => setSuccess(""), 2000);
+      //CHANGE THIS!!!
+      if (password === "111111") {
+        setError("Password entered is incorrect.");
+        setTimeout(() => setError(""), 4000);
+      } else {
+        //if All good set success
+        setSuccess("Account deleted successfully");
+        setTimeout(() => setSuccess(""), 2000);
+        window.location.href = APP_ROUTES.USER_HOMEPAGE
+      }
 
       //Else set error
       // setError("Password entered is incorrect.");
@@ -101,38 +108,49 @@ const DeleteAccountModal = () => {
                 <Typography
                   variant="h5"
                   component="h2"
-                  style={{ paddingBottom: "10px", fontWeight:"500" }}
+                  style={{ paddingBottom: "10px", fontWeight: "500" }}
                 >
                   DELETE your account?
                 </Typography>
                 <div>
                   <Typography className={styles.descText}>
-                    This deletes your account and all data related to it including :
+                    This deletes your account and all data related to it
+                    including :
                     <br />
-                    <span style={{fontWeight: "600"}}>
-                      Delivery details <br/>
+                    <span style={{ fontWeight: "600" }}>
+                      Delivery details <br />
                       Currently pending orders <br />
                       Your wish list items
                     </span>
                   </Typography>
-                  <Typography className={styles.descText} style={{marginTop:"10px"}}>Enter your current password to proceed.</Typography>
-                    <TextField
-                      className={styles.modalTextField}
-                      id="password"
-                      type="password"
-                      label="Current password"
-                      value={password}
-                      onChange={handleFieldChange}
-                      variant="filled"
-                    />
-                  <Typography className={styles.descText} style={{marginTop:"10px"}}>
-                    <span style={{fontWeight: "600"}}>
+                  <Typography
+                    className={styles.descText}
+                    style={{ marginTop: "10px" }}
+                  >
+                    Enter your current password to proceed.
+                  </Typography>
+                  <TextField
+                    className={styles.modalTextField}
+                    id="password"
+                    type="password"
+                    label="Current password"
+                    value={password}
+                    onChange={handleFieldChange}
+                    variant="filled"
+                  />
+                  <Typography
+                    className={styles.descText}
+                    style={{ marginTop: "10px" }}
+                  >
+                    <span style={{ fontWeight: "600" }}>
                       NOTE : This action cannot be undone.
                     </span>
                   </Typography>
-                  <div style={{marginTop:"10px"}}>
-                  {success ? <Alert severity="success">{success}</Alert> : null}
-                  {error ? <Alert severity="warning">{error}</Alert> : null}
+                  <div style={{ marginTop: "10px" }}>
+                    {success ? (
+                      <Alert severity="success">{success}</Alert>
+                    ) : null}
+                    {error ? <Alert severity="warning">{error}</Alert> : null}
                   </div>
                   <Button
                     className={styles.deleteAcc}

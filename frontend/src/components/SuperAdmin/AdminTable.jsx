@@ -24,7 +24,7 @@ const AdminTable = ({ adminList }) => {
             <StyledTableCell align="left">Name</StyledTableCell>
             <StyledTableCell align="left">Email</StyledTableCell>
             <StyledTableCell align="left">Status</StyledTableCell>
-            <StyledTableCell align="left">Activate</StyledTableCell>
+            <StyledTableCell align="left">Enable</StyledTableCell>
           </TableRow>
         </TableHead>
         <TableBody>

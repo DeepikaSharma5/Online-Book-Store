@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Grid, Card, Typography, Button } from "@material-ui/core";
 
 import styles from "./PersonalDetails.module.scss";
 import { AppLayout, ChangePasswordModal, DeleteAccountModal, PersonalInfoForm } from "../../components";
 
 const PersonalDetails = () => {
-  
+
   return (
     <React.Fragment>
       <AppLayout>
@@ -13,6 +13,7 @@ const PersonalDetails = () => {
           container
           className="content-padding"
           className={styles.background}
+          style={{marginTop:"70px"}}
         >
           <Grid item xs={12}>
             <Card variant="outlined" className={styles.card}>

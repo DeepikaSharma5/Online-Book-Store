@@ -8,7 +8,8 @@ router.route("/add").post((req, res) => {
     const year = req.body.year;
     const isbn = req.body.isbn;
     const description = req.body.description;
-    const categories = req.body.categories;
+    const price = req.body.price;
+    const image = req.body.image;
     const date = new Date().toISOString().slice(0,10);
   
     const newBook = new Book({
@@ -18,7 +19,8 @@ router.route("/add").post((req, res) => {
         year,
         isbn,
         description,
-        categories,
+        price,
+        image,
         date
     })
   
@@ -57,7 +59,8 @@ router.route("/add").post((req, res) => {
     const year = req.body.year;
     const isbn = req.body.isbn;
     const description = req.body.description;
-    const selectedCategories = req.body.categories;
+    const price = req.body.price;
+    const image = req.body.image;
     const updateRangeBook = {
       title, 
       author_name,
@@ -65,7 +68,8 @@ router.route("/add").post((req, res) => {
       year,
       isbn,
       description,
-      selectedCategories
+      price,
+      image
     }
     const updateRange = await Book.findOneAndUpdate({ _id: id }, updateRangeBook)
       .then(() => {

@@ -1,20 +1,24 @@
 import React, { Component } from 'react';
-import ViewTermsAndConditionsHeading from "../../../../Customer/TermsAndConditions/TermsAndConditionsHeading";
+import ViewTermsAndConditionsHeading from '../ViewTermsAndConditions/ViewTermsAndConditionsHeading';
 import ViewTermsAndConditionsBody from '../ViewTermsAndConditions/ViewTermsAndConditionsBody';
+import NavBar from '../../../NavBar/NavBar';
+import AppBar from '../../../NavBar/AppBar';
 
 class ViewTermsAndConditions extends Component {
-    render() { 
-        return ( 
+    render() {
+        return (
             <div>
+                <AppBar />
+                <NavBar />
                 <div>
-                    <ViewTermsAndConditionsHeading/>
+                    <ViewTermsAndConditionsHeading />
                 </div>
                 <div>
-                    <ViewTermsAndConditionsBody/>
+                    <ViewTermsAndConditionsBody />
                 </div>
             </div>
-         );
+        );
     }
 }
- 
+
 export default ViewTermsAndConditions;

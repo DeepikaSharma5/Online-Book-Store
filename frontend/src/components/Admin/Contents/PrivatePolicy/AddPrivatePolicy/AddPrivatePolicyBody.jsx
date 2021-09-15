@@ -58,8 +58,8 @@ class AddPrivatePolicyBody extends Component {
             })
     }
 
-    onClear(e){
-        this.setState= {
+    onClear(e) {
+        this.setState = {
             heading: " ",
             details: " "
         }
@@ -67,27 +67,29 @@ class AddPrivatePolicyBody extends Component {
 
     render() {
         return (
-            <div className="col-md-14 col-sm-12" style={{ maxWidth: '70rem', margin: 'auto', padding: '10px', borderColor: 'black', background: '#ffffff', boxShadow: '10px 10px 45px #919191,-10px -10px 45px #ffffff' }}>
-                <div className="col" style={{ borderRadius: '33px', height: '590px' }}>
-                    <form style={{ paddingTop: "70px" }}>
-                        <div className="form-group row ">
-                            <label htmlFor="inputName" className="col-sm-2 col-form-label col-form-label-lg" style={{ fontSize: "170%", fontWeight: "bold", height: '150px' }}>Heading: <label style={{ color: 'red' }}>*</label></label>
-                            <div className="col-sm-10">
-                                <input type="text" id="heading" className="form-control form-control-lg" name="heading" value={this.state.heading} onChange={this.onChange} required />
+            <div style={{ position: 'relative', left: '110px' }}>
+                <div className="col-md-14 col-sm-12" style={{ maxWidth: '70rem', margin: 'auto', padding: '10px', borderColor: 'black', background: '#ffffff', boxShadow: '10px 10px 45px #919191,-10px -10px 45px #ffffff' }}>
+                    <div className="col" style={{ borderRadius: '33px', height: '450px' }}>
+                        <form style={{ paddingTop: "70px" }}>
+                            <div className="form-group row ">
+                                <label htmlFor="inputName" className="col-sm-2 col-form-label col-form-label-lg" style={{ fontSize: "130%", fontWeight: "bold", height: '100px' }}>Heading: <label style={{ color: 'red' }}>*</label></label>
+                                <div className="col-sm-10">
+                                    <input type="text" id="heading" className="form-control form-control-md" name="heading" value={this.state.heading} onChange={this.onChange} required />
+                                </div>
                             </div>
-                        </div>
-                        <div className="form-group row">
-                            <label htmlFor="inputSubject" className="col-sm-2 col-form-label col-form-label-lg" style={{ fontSize: "170%", fontWeight: "bold", height: '200px' }}>Details: <label style={{ color: 'red' }}>*</label></label>
-                            <div className="col-sm-10">
-                                <textarea className="form-control form-control-lg" id="details" rows="4" name="details" value={this.state.details} onChange={this.onChange} required />
+                            <div className="form-group row">
+                                <label htmlFor="inputSubject" className="col-sm-2 col-form-label col-form-label-lg" style={{ fontSize: "130%", fontWeight: "bold", height: '150px' }}>Details: <label style={{ color: 'red' }}>*</label></label>
+                                <div className="col-sm-10">
+                                    <textarea className="form-control form-control-md" id="details" rows="4" name="details" value={this.state.details} onChange={this.onChange} required />
+                                </div>
                             </div>
-                        </div>
-                        <div className="btn-toolbar justify-content-between" role="toolbar" aria-label="Toolbar with button groups">
-                            <button type="submit" className="btn btn-outline-danger" style={{ float: 'right',padding: '12px 68px', marginBottom:'30px',fontWeight:'bold', fontSize:"130%" }} onClick={() => { window.location.href = APP_ROUTES.ADMIN_VIEW_PRIVATE_POLICY }}><Backspace/> Cancel</button>
-                            <button type="submit" className="btn btn-outline-primary" style={{ float: 'center',padding: '12px 68px', marginBottom:'30px', fontWeight:'bold', fontSize:"130%"  }} onClick={this.onClear}><XCircle/> Clear</button>
-                            <button type="submit" className="btn btn-outline-success" style={{ float: 'left',padding: '12px 68px', marginBottom:'30px', fontWeight:'bold', fontSize:"130%" }} onClick={this.onSubmit}><Folder/> Save</button>
-                        </div>
-                    </form>
+                            <div className="btn-toolbar justify-content-between" role="toolbar" aria-label="Toolbar with button groups">
+                                <button type="button" className="btn btn-outline-danger" style={{ float: 'right', padding: '12px 68px', marginBottom: '30px', fontWeight: 'bold', fontSize: "130%" }} onClick={() => { window.location.href = APP_ROUTES.ADMIN_VIEW_PRIVATE_POLICY }}><Backspace /> Cancel</button>
+                                <button type="submit" className="btn btn-outline-primary" style={{ float: 'center', padding: '12px 68px', marginBottom: '30px', fontWeight: 'bold', fontSize: "130%" }} onClick={this.onClear}><XCircle /> Clear</button>
+                                <button type="submit" className="btn btn-outline-success" style={{ float: 'left', padding: '12px 68px', marginBottom: '30px', fontWeight: 'bold', fontSize: "130%" }} onClick={this.onSubmit}><Folder /> Save</button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         );
