@@ -14,7 +14,8 @@ class PrivatestatusBody extends Component {
         this.dropdown = this.dropdown.bind(this);
         this.state = {
             filterText: '',
-            status: []
+            status: [],
+            selectedValue:'All'
         }
     }
 
@@ -23,7 +24,7 @@ class PrivatestatusBody extends Component {
     }
 
     dropdown(event) {
-
+        this.setState({selectedValue:event.target.value});
     }
 
     componentDidMount() {
@@ -35,6 +36,7 @@ class PrivatestatusBody extends Component {
                 alert(error.message);
                 console.log("Error", error);
             });
+            
     }
 
     deleteData(id) {
@@ -73,6 +75,7 @@ class PrivatestatusBody extends Component {
                 });
             });
     }
+    
 
     updateStatus(id, address1, address2, address3, phoneNumber, status) {
         reactLocalStorage.setObject("UpdateStatus", [id, address1, address2, address3, phoneNumber, status]);
@@ -80,6 +83,7 @@ class PrivatestatusBody extends Component {
     }
 
     render() {
+        console.log("Dropdown", this.state.selectedValue);
         return (
             <div style={{ position: 'relative', left: '110px' }}>
                 <div className="card card border border-light shadow-0 mb-3" style={{ maxWidth: '100rem', margin: 'auto', padding: '10px' }}>
@@ -89,15 +93,16 @@ class PrivatestatusBody extends Component {
                                 <div className="card-body" >
                                     <div className="row">
                                         <div className="col" >
-                                            <select className="form-control" id="exampleFormControlSelect1" style={{ width: '50%' }}>
-                                                <option>All</option>
-                                                <option>Pending</option>
-                                                <option>Processing</option>
-                                                <option>Shipped</option>
-                                                <option>Delivered</option>
+                                            <select className="form-control" id="dropdown" style={{ width: '50%' }} onChange={this.dropdown} value={this.state.selectedValue}>
+                                                <option defaultValue="All">All</option>
+                                                <option value="Pending">Pending</option>
+                                                <option value="Processing">Processing</option>
+                                                <option value="Shipped">Shipped</option>
+                                                <option value="Delivered">Delivered</option>
                                             </select>
                                         </div>
                                         <div className="col" style={{ paddingLeft: '900px' }}>
+                                            {this.state.selectedValue === "All" ? 
                                             <input
                                                 className="form-control mr-sm-2"
                                                 type="search"
@@ -107,7 +112,9 @@ class PrivatestatusBody extends Component {
                                                 value={this.state.filterText}
                                                 onChange={this.search}
                                                 style={{ width: "100%" }}
-                                            />
+                                            />:
+                                            <h1></h1>
+                                            }
                                         </div>
                                     </div>
                                 </div>
@@ -131,10 +138,192 @@ class PrivatestatusBody extends Component {
                                                     <th scope="col" className="w-15">Delete</th>
                                                 </tr>
                                             </thead>
-                                            {this.state?.status?.length > 0 && this.state.status.map((item, index) => {
+                                            {this.state?.status?.length > 0 && this.state.selectedValue === "All" && this.state.status.map((item, index) => {
                                                 const filterText = this.state.filterText;
                                                 const id = item._id;
                                                 if (!filterText || id.indexOf(filterText) !== -1) {
+                                                    return (
+                                                        <tbody key={index}>
+                                                            <tr>
+                                                                <td>{item._id}</td>
+                                                                <td>{item.address1}. {item.address2}, {item.address3}</td>
+                                                                <td>{item.phoneNumber}</td>
+                                                                <td>
+                                                                    {item.state === '' ?
+                                                                        <p></p>
+                                                                        :
+                                                                        item.status === 'Pending' ?
+                                                                            <button type="button" className="btn btn-danger" style={{ width: '120px' }}>{item.status}</button>
+                                                                            :
+                                                                            item.status === 'Delivered' ?
+                                                                                <button type="button" className="btn btn-success" style={{ width: '120px' }}>{item.status}</button>
+                                                                                :
+                                                                                item.status === 'Processing' ?
+                                                                                    <button type="button" className="btn btn-info" style={{ width: '120px' }}>{item.status}</button>
+                                                                                    :
+                                                                                    <button type="button" className="btn btn-warning" style={{ width: '120px' }}>{item.status}</button>
+                                                                    }
+                                                                </td>
+                                                                <td>
+                                                                    <button type="button" className="btn btn-outline-success" onClick={() => this.updateStatus(item._id, item.address1, item.address2, item.address3, item.phoneNumber, item.status)}>
+                                                                        <Pencil /> Update
+                                                                    </button>
+                                                                </td>
+                                                                <td>
+                                                                    {item.status === "Delivered" ?
+                                                                        <button type="button" className="btn btn-outline-danger" onClick={() => this.deleteData(item._id)}>
+                                                                            <Trash /> Delete
+                                                                        </button>
+                                                                        :
+                                                                        <button type="button" className="btn btn-outline-danger" disabled={true}>
+                                                                            <Trash /> Delete
+                                                                        </button>
+                                                                    }
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    )
+                                                }
+                                            })}
+                                            {this.state?.status?.length > 0 && this.state.selectedValue === "Delivered" && this.state.status.map((item, index) => {
+                                                if (item.status === "Delivered") {
+                                                    return (
+                                                        <tbody key={index}>
+                                                            <tr>
+                                                                <td>{item._id}</td>
+                                                                <td>{item.address1}. {item.address2}, {item.address3}</td>
+                                                                <td>{item.phoneNumber}</td>
+                                                                <td>
+                                                                    {item.state === '' ?
+                                                                        <p></p>
+                                                                        :
+                                                                        item.status === 'Pending' ?
+                                                                            <button type="button" className="btn btn-danger" style={{ width: '120px' }}>{item.status}</button>
+                                                                            :
+                                                                            item.status === 'Delivered' ?
+                                                                                <button type="button" className="btn btn-success" style={{ width: '120px' }}>{item.status}</button>
+                                                                                :
+                                                                                item.status === 'Processing' ?
+                                                                                    <button type="button" className="btn btn-info" style={{ width: '120px' }}>{item.status}</button>
+                                                                                    :
+                                                                                    <button type="button" className="btn btn-warning" style={{ width: '120px' }}>{item.status}</button>
+                                                                    }
+                                                                </td>
+                                                                <td>
+                                                                    <button type="button" className="btn btn-outline-success" onClick={() => this.updateStatus(item._id, item.address1, item.address2, item.address3, item.phoneNumber, item.status)}>
+                                                                        <Pencil /> Update
+                                                                    </button>
+                                                                </td>
+                                                                <td>
+                                                                    {item.status === "Delivered" ?
+                                                                        <button type="button" className="btn btn-outline-danger" onClick={() => this.deleteData(item._id)}>
+                                                                            <Trash /> Delete
+                                                                        </button>
+                                                                        :
+                                                                        <button type="button" className="btn btn-outline-danger" disabled={true}>
+                                                                            <Trash /> Delete
+                                                                        </button>
+                                                                    }
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    )
+                                                }
+                                            })}
+                                            {this.state?.status?.length > 0 && this.state.selectedValue === "Pending" && this.state.status.map((item, index) => {
+                                                if (item.status === "Pending") {
+                                                    return (
+                                                        <tbody key={index}>
+                                                            <tr>
+                                                                <td>{item._id}</td>
+                                                                <td>{item.address1}. {item.address2}, {item.address3}</td>
+                                                                <td>{item.phoneNumber}</td>
+                                                                <td>
+                                                                    {item.state === '' ?
+                                                                        <p></p>
+                                                                        :
+                                                                        item.status === 'Pending' ?
+                                                                            <button type="button" className="btn btn-danger" style={{ width: '120px' }}>{item.status}</button>
+                                                                            :
+                                                                            item.status === 'Delivered' ?
+                                                                                <button type="button" className="btn btn-success" style={{ width: '120px' }}>{item.status}</button>
+                                                                                :
+                                                                                item.status === 'Processing' ?
+                                                                                    <button type="button" className="btn btn-info" style={{ width: '120px' }}>{item.status}</button>
+                                                                                    :
+                                                                                    <button type="button" className="btn btn-warning" style={{ width: '120px' }}>{item.status}</button>
+                                                                    }
+                                                                </td>
+                                                                <td>
+                                                                    <button type="button" className="btn btn-outline-success" onClick={() => this.updateStatus(item._id, item.address1, item.address2, item.address3, item.phoneNumber, item.status)}>
+                                                                        <Pencil /> Update
+                                                                    </button>
+                                                                </td>
+                                                                <td>
+                                                                    {item.status === "Delivered" ?
+                                                                        <button type="button" className="btn btn-outline-danger" onClick={() => this.deleteData(item._id)}>
+                                                                            <Trash /> Delete
+                                                                        </button>
+                                                                        :
+                                                                        <button type="button" className="btn btn-outline-danger" disabled={true}>
+                                                                            <Trash /> Delete
+                                                                        </button>
+                                                                    }
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    )
+                                                }
+                                            })}
+                                            {this.state?.status?.length > 0 && this.state.selectedValue === "Processing" && this.state.status.map((item, index) => {
+                                                if (item.status === "Processing") {
+                                                    return (
+                                                        <tbody key={index}>
+                                                            <tr>
+                                                                <td>{item._id}</td>
+                                                                <td>{item.address1}. {item.address2}, {item.address3}</td>
+                                                                <td>{item.phoneNumber}</td>
+                                                                <td>
+                                                                    {item.state === '' ?
+                                                                        <p></p>
+                                                                        :
+                                                                        item.status === 'Pending' ?
+                                                                            <button type="button" className="btn btn-danger" style={{ width: '120px' }}>{item.status}</button>
+                                                                            :
+                                                                            item.status === 'Delivered' ?
+                                                                                <button type="button" className="btn btn-success" style={{ width: '120px' }}>{item.status}</button>
+                                                                                :
+                                                                                item.status === 'Processing' ?
+                                                                                    <button type="button" className="btn btn-info" style={{ width: '120px' }}>{item.status}</button>
+                                                                                    :
+                                                                                    <button type="button" className="btn btn-warning" style={{ width: '120px' }}>{item.status}</button>
+                                                                    }
+                                                                </td>
+                                                                <td>
+                                                                    <button type="button" className="btn btn-outline-success" onClick={() => this.updateStatus(item._id, item.address1, item.address2, item.address3, item.phoneNumber, item.status)}>
+                                                                        <Pencil /> Update
+                                                                    </button>
+                                                                </td>
+                                                                <td>
+                                                                    {item.status === "Delivered" ?
+                                                                        <button type="button" className="btn btn-outline-danger" onClick={() => this.deleteData(item._id)}>
+                                                                            <Trash /> Delete
+                                                                        </button>
+                                                                        :
+                                                                        <button type="button" className="btn btn-outline-danger" disabled={true}>
+                                                                            <Trash /> Delete
+                                                                        </button>
+                                                                    }
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    )
+                                                }
+                                            })}
+                                            {this.state?.status?.length > 0 && this.state.selectedValue === "Shipped" && this.state.status.map((item, index) => {
+                                                const filterText = this.state.filterText;
+                                                const id = item._id;
+                                                if (item.status === "Shipped") {
                                                     return (
                                                         <tbody key={index}>
                                                             <tr>
