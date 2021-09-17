@@ -63,7 +63,17 @@ export async function login(userCreds){
 }
 
 export async function getAdminList() {
-    const response = await fetch(baseUrl+"/all-admins");
+    const userToken = localStorage.getItem("user-token");
+    const response = await fetch(baseUrl+"/all-admins",{
+        method: "GET",
+        
+        // Adding headers to the request
+        headers: {
+            'auth-token': userToken,
+            'Content-Type': 'application/json; charset=UTF-8',
+        }
+
+    });
     if(response.ok){
         return response.json()
     }else{
@@ -73,6 +83,9 @@ export async function getAdminList() {
 }
 
 export async function updateAdminStatus(userDetails){
+
+    const userToken = localStorage.getItem("user-token");
+
     try{
         const response = await fetch(baseUrl+"/",{
             method: "PATCH",
@@ -82,6 +95,7 @@ export async function updateAdminStatus(userDetails){
             
             // Adding headers to the request
             headers: {
+                'auth-token': userToken,
                 'Content-Type': 'application/json; charset=UTF-8',
             }
     

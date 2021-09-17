@@ -33,14 +33,14 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const AdminStatusModal = ({ adminId, adminName, isActive }) => {
+const AdminStatusModal = ({ adminId, adminName, isActive, setAdmins }) => {
 
   const [open, setOpen] = React.useState(false);
 
   const [success, setSuccess] = React.useState("");
   const [error, setError] = React.useState("");
 
-  const [isActivated, setIsActivated] = React.useState(isActive);
+  const [isActivated, setIsActivated] = React.useState(isActive === 1 ? true : false);
 
   const handleOpen = () => {
     setOpen(true);
@@ -50,12 +50,16 @@ const AdminStatusModal = ({ adminId, adminName, isActive }) => {
     setOpen(false);
   };
 
+  async function updateStatus() {
+
+  }
+
   const setEnable = () => {
     //UPDATE api to enable admin
 
     //If no errors
-    setIsActivated(!isActive);
-    console.log("Status of admin ", adminId, " is ", !isActive);
+    setIsActivated(!isActivated);
+    console.log("Status of admin ", adminId, " is ", !isActivated);
     setSuccess("Admin status updated successfully")
     setTimeout(() => {
         setSuccess(null)
@@ -110,7 +114,7 @@ const AdminStatusModal = ({ adminId, adminName, isActive }) => {
                   component="h2"
                   style={{ paddingBottom: "10px", fontWeight: "500" }}
                 >
-                  {isActive ? "Deactivate admin?" : "Activate admin?"}
+                  {isActivated ? "Deactivate admin?" : "Activate admin?"}
                 </Typography>
                 <div>
                   <Typography className={styles.descText}>
@@ -118,7 +122,7 @@ const AdminStatusModal = ({ adminId, adminName, isActive }) => {
                       {adminName}
                     </span>
                     <br />
-                    {isActive
+                    {isActivated
                       ? "This admin will lose authorization to add or update any site content until activated again."
                       : "This admin WILL BE AUTHORIZED to add or update any site content until deactivated."}
                   </Typography>
@@ -129,7 +133,7 @@ const AdminStatusModal = ({ adminId, adminName, isActive }) => {
                     style={{ marginTop: "15px" }}
                     onClick={setEnable}
                   >
-                    {isActive ? "deactivate" : "activate"} admin
+                    {isActivated ? "deactivate" : "activate"} admin
                   </Button>
                   <Button
                     className={styles.canceldanger}

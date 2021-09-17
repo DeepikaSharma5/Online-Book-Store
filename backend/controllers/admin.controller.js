@@ -148,8 +148,7 @@ const loginAdmin = async (req, res) => {
 };
 
 const getAllAdmins = async (req, res) => {
-  await Admin.find({})
-  .populate("admins", "name email status")
+  await Admin.find({},{ _id: 1, name: 1, email: 1, status: 1 })
   .then((data) => {
     res.status(200).send(data);
   })

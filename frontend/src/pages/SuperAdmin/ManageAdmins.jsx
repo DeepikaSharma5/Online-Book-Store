@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Grid, Typography, Button, TextField } from "@material-ui/core";
 
 import styles from "../WishList/WishList.module.scss";
@@ -11,6 +11,7 @@ import {
 } from "../../components";
 import AppBar from "../../components/Admin/NavBar/AppBar";
 import NavBar from "../../components/Admin/NavBar/NavBar";
+import { getAdminList } from "../../services/adminService";
 
 const ManageAdmins = () => {
   const [newAdmin, setNewAdmin] = useState({
@@ -43,6 +44,16 @@ const ManageAdmins = () => {
     },
   ]);
 
+  async function getAdmins(){
+    const response = await getAdminList();
+
+    if (response) {
+      setAdmins(response.filter((admin) => admin.status !== 2))
+    } else {
+      return null;
+    }
+  }
+
   const handleFieldChange = (e) => {
     setNewAdmin((currentDetails) => {
       return {
@@ -51,6 +62,10 @@ const ManageAdmins = () => {
       };
     });
   };
+
+  useEffect(() => {
+    getAdmins()
+  }, [])
 
   return (
     <React.Fragment>
@@ -133,7 +148,7 @@ const ManageAdmins = () => {
             >
               Currently authorized administrators
             </Typography>
-            <AdminTable adminList={admins} />
+            <AdminTable adminList={admins} setAdmins={setAdmins} />
           </Grid>
         </Grid>
       </Grid>
