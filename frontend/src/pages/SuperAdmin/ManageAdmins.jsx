@@ -12,6 +12,7 @@ import {
 import AppBar from "../../components/Admin/NavBar/AppBar";
 import NavBar from "../../components/Admin/NavBar/NavBar";
 import { getAdminList } from "../../services/adminService";
+import { Alert } from "@material-ui/lab";
 
 const ManageAdmins = () => {
   const [newAdmin, setNewAdmin] = useState({
@@ -21,28 +22,8 @@ const ManageAdmins = () => {
   });
 
   const [error, setError] = useState(null);
-  const [success, setSuccess] = useState(null);
 
-  const [admins, setAdmins] = useState([
-    {
-      id: 1,
-      name: "Deepika",
-      email: "deepika123@gmail.com",
-      isActive: 1,
-    },
-    {
-      id: 2,
-      name: "Sithpavan",
-      email: "sithpavan@gmail.com",
-      isActive: 0,
-    },
-    {
-      id: 3,
-      name: "Kajan",
-      email: "kajan@gmail.com",
-      isActive: 1,
-    },
-  ]);
+  const [admins, setAdmins] = useState([]);
 
   async function getAdmins(){
     const response = await getAdminList();
@@ -50,7 +31,7 @@ const ManageAdmins = () => {
     if (response) {
       setAdmins(response.filter((admin) => admin.status !== 2))
     } else {
-      return null;
+      setError("Error loading administrators")
     }
   }
 
@@ -133,7 +114,7 @@ const ManageAdmins = () => {
                 marginTop: "10px",
               }}
             />
-            <AdminAddModal admin={newAdmin} clearAdmin={setNewAdmin} />
+            <AdminAddModal admin={newAdmin} clearAdmin={setNewAdmin} getAdmins={getAdmins} />
           </Grid>
           <Grid
             item
@@ -149,6 +130,9 @@ const ManageAdmins = () => {
               Currently authorized administrators
             </Typography>
             <AdminTable adminList={admins} getAdmins={getAdmins} />
+            {
+              error ? <Alert severity="warning">{error}</Alert> : null
+            }
           </Grid>
         </Grid>
       </Grid>

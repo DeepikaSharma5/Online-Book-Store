@@ -35,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const AdminAddModal = ({ admin, clearAdmin }) => {
+const AdminAddModal = ({ admin, clearAdmin, getAdmins }) => {
   const [open, setOpen] = React.useState(false);
 
   const [adminpassword, setAdminPassword] = React.useState("");
@@ -84,6 +84,7 @@ const AdminAddModal = ({ admin, clearAdmin }) => {
           password: "",
         })
         setSuccess("Admin added successfully");
+        getAdmins()
         
         setTimeout(() => {
           setSuccess(null);
