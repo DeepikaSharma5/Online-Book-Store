@@ -1,6 +1,9 @@
 const baseUrl = "http://localhost:6060/admin";
 
 export async function registerAdmin(newUserDetails) {
+    
+    const userToken = localStorage.getItem("user-token");
+
     try{
         const response = await fetch(baseUrl+"/new-admin",{
             method: "POST",
@@ -10,6 +13,7 @@ export async function registerAdmin(newUserDetails) {
             
             // Adding headers to the request
             headers: {
+                'auth-token': userToken,
                 'Content-Type': 'application/json; charset=UTF-8'
             }
     

@@ -65,7 +65,7 @@ const ManageAdmins = () => {
           container
           className="content-padding"
           className={styles.background}
-          style={{height: "89.8vh"}}
+          style={{height: "89.8vh", marginTop:"10.2vh"}}
         >
           <Grid
             item
@@ -118,7 +118,7 @@ const ManageAdmins = () => {
                 marginTop: "10px",
               }}
             />
-            <AdminAddModal admin={newAdmin} />
+            <AdminAddModal admin={newAdmin} clearAdmin={setNewAdmin} />
           </Grid>
           <Grid
             item

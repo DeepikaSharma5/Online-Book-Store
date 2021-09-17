@@ -15,6 +15,7 @@ const validateAdmin = (admin) => {
     name: Joi.string().min(6).required(),
     email: Joi.string().pattern(new RegExp(emailRegExp)).required(),
     password: Joi.string().pattern(new RegExp(passwordRegExp)).required(),
+    adminpassword: Joi.string().pattern(new RegExp(passwordRegExp)).required(),
   });
 
   return schema.validate(admin);
@@ -39,42 +40,67 @@ const checkEmail = (email) => {
   });
 };
 
+const getSuperAdminPassword = (password) => {
+  return Admin.findOne(
+    { status: 2 },
+    { password: 1 }
+  )
+    .then((data) => {
+      return data;
+    })
+}
+
 const createAdmin = async (req, res) => {
   if (req.body) {
-
-    //check if user id is super admin
 
     const { error } = validateAdmin(req.body);
 
     if (error) return res.status(401).send(error.details[0].message);
 
-    checkEmail(req.body.email).then(async (userExists) => {
-      if (!userExists) {
-        //Hashing password
-        const salt = await bcrypt.genSalt(10);
-        const hashedPassword = await bcrypt.hash(req.body.password, salt);
+    //check if super admin password is correct
+    
+    getSuperAdminPassword(req.body.adminpassword).then( async (superAdminPassword) => {
 
-        const newAdmin = new Admin({
-          name: req.body.name,
-          email: req.body.email,
-          password: hashedPassword,
-          status: 1
+      if(superAdminPassword){
+
+        const validPassword = await bcrypt.compare(
+          req.body.adminpassword,
+          superAdminPassword.password
+        );
+        if (!validPassword) return res.status(400).send("Incorrect super administrator password!");
+
+        checkEmail(req.body.email).then(async (userExists) => {
+          if (!userExists) {
+            //Hashing password
+            const salt = await bcrypt.genSalt(10);
+            const hashedPassword = await bcrypt.hash(req.body.password, salt);
+    
+            const newAdmin = new Admin({
+              name: req.body.name,
+              email: req.body.email,
+              password: hashedPassword,
+              status: 1
+            });
+    
+            await newAdmin
+              .save()
+              .then(async (data) => {
+                res.status(200).send({ data: data });
+              })
+              .catch((error) => {
+                res.status(500).send({ error: error.message });
+              });
+          } else {
+            res
+              .status(500)
+              .send("Sorry, an admin already exists by this email.");
+          }
         });
-
-        await newAdmin
-          .save()
-          .then(async (data) => {
-            res.status(200).send({ data: data });
-          })
-          .catch((error) => {
-            res.status(500).send({ error: error.message });
-          });
-      } else {
-        res
-          .status(500)
-          .send("Sorry, an admin already exists by this email.");
+      }else{
+        return res.status(400).send("Incorrect super administrator password!");
       }
-    });
+    })
+    
   }
 };
 
