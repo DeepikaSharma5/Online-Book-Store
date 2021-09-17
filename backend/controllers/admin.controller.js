@@ -93,7 +93,7 @@ const createAdmin = async (req, res) => {
           } else {
             res
               .status(500)
-              .send("Sorry, an admin already exists by this email.");
+              .send("Sorry, an administrator already exists by this email.");
           }
         });
       }else{
