@@ -15,7 +15,7 @@ import { dangerIcon } from "../../assets/images";
 import styles from "./AdminTable.module.scss";
 import AdminStatusModal from "./AdminStatusModal";
 
-const AdminTable = ({ adminList, setAdmins }) => {
+const AdminTable = ({ adminList, getAdmins }) => {
   return (
     <React.Fragment>
       <Table>
@@ -45,7 +45,7 @@ const AdminTable = ({ adminList, setAdmins }) => {
                     adminId={admin._id}
                     adminName={admin.name}
                     isActive={admin.status}
-                    setAdmins={setAdmins}
+                    getAdmins={getAdmins}
                   />
                 </StyledTableCell>
               </StyledTableRow>

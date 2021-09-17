@@ -148,7 +148,7 @@ const ManageAdmins = () => {
             >
               Currently authorized administrators
             </Typography>
-            <AdminTable adminList={admins} setAdmins={setAdmins} />
+            <AdminTable adminList={admins} getAdmins={getAdmins} />
           </Grid>
         </Grid>
       </Grid>

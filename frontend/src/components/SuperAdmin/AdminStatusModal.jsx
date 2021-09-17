@@ -15,6 +15,7 @@ import { StyledTableCell, StyledTableRow } from "../../assets/theme/theme";
 import { dangerIcon } from "../../assets/images";
 
 import styles from "./AdminTable.module.scss";
+import { updateAdminStatus } from "../../services/adminService";
 
 const useStyles = makeStyles((theme) => ({
   modal: {
@@ -33,7 +34,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const AdminStatusModal = ({ adminId, adminName, isActive, setAdmins }) => {
+const AdminStatusModal = ({ adminId, adminName, isActive, getAdmins }) => {
 
   const [open, setOpen] = React.useState(false);
 
@@ -50,21 +51,34 @@ const AdminStatusModal = ({ adminId, adminName, isActive, setAdmins }) => {
     setOpen(false);
   };
 
-  async function updateStatus() {
+  async function updateStatus(adminInfo) {
+    const response = await updateAdminStatus(adminInfo);
 
+    if (response) {
+      return true
+    } else {
+      return false;
+    }
   }
 
   const setEnable = () => {
     //UPDATE api to enable admin
+    updateStatus({
+      "id":adminId,
+      "status":!isActivated
+    }).then((updated) => {
+      if(updated){
+        setIsActivated(!isActivated);
+        getAdmins();
+        console.log("Status of admin ", adminId, " is ", !isActivated);
+        setSuccess("Admin status updated successfully")
+        setTimeout(() => {
+            setSuccess(null)
+            setOpen(false)
+        }, 2000)
+      }
+    })
 
-    //If no errors
-    setIsActivated(!isActivated);
-    console.log("Status of admin ", adminId, " is ", !isActivated);
-    setSuccess("Admin status updated successfully")
-    setTimeout(() => {
-        setSuccess(null)
-        setOpen(false)
-    }, 2000)
 
     //else show error
     // setError("Error updating admin status")
