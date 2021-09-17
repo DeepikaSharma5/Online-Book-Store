@@ -21,6 +21,7 @@ export const APP_ROUTES = {
   USER_ADD_ADDRESS: "/add-delivery-address",
   USER_MY_DELIVERIES: "/my-deliveries",
   USER_ABOUT_US: "/about-us",
+  ADMIN_LOGIN : '/admin-login',
   ADMIN_ALL_DELIVERY_PDF : '/all-deliveries',
   ADMIN_DELIVERED_PDF : '/delivered-orders',
   ADMIN_PENDING_PDF : '/pending-orders',

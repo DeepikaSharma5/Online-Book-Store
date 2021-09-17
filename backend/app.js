@@ -62,6 +62,9 @@ app.use("/user", userAPI());
 const wishlistAPI = require("./api/wishlist.api");
 app.use("/wishlist", wishlistAPI());
 
+const adminAPI = require("./api/admin.api");
+app.use("/admin", adminAPI());
+
 //Contact Us Email sending configuration
 app.post("/contactdata", (req, res) => {
   let data = req.body;
