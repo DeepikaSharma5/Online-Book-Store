@@ -48,7 +48,7 @@ import ProcessingPdf from "../components/Admin/Delivery/ViewDelivery/ProcessingP
 import ShippedPdf from "../components/Admin/Delivery/ViewDelivery/ShippedPdf";
 import MyOrderPdf from "../components/Customer/MyDeliveries/MyOrderPdf";
 
-import {Login, Signup, PersonalDetails, WishList, SearchWishList, ManageAdmins, WishListReport, MyWishList} from "../pages";
+import {Login, Signup, PersonalDetails, WishList, SearchWishList, ManageAdmins, WishListReport, MyWishList, AdminLogin} from "../pages";
 
 import PaymentDashboard from "../pages/Payment/PaymentDashboard";
 import HomeScreen from "../pages/Payment/HomeScreen";
@@ -90,6 +90,7 @@ const AppRoutes = () => {
             <PublicRoute exact path={APP_ROUTES.USER_ABOUT_US} Component={AboutUs} />
 
             {/**Admin side*/}
+            <PublicRoute exact path={APP_ROUTES.ADMIN_LOGIN} Component={AdminLogin} />
             <PublicRoute exact path={APP_ROUTES.ADMIN_VIEW_PRIVATE_POLICY} Component={ViewPrivatePolicy} />
             <PublicRoute exact path={APP_ROUTES.ADMIN_ADD_PRIVATE_POLICY} Component={AddPrivatePolicy} />
             <PublicRoute exact path={APP_ROUTES.ADMIN_UPDATE_PRIVATE_POLICY} Component={UpdatePrivatePolicy} />
