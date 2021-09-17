@@ -7,7 +7,7 @@ module.exports = function (req, res, next) {
     if(!token) return res.status(401).send('Access Denied');
 
     try {
-        // Only authorizes users with a seller token
+        // Only authorizes users with a super admin token
         const verified = jwt.verify(token, process.env.TOKEN_SECRET_SUPERADMIN);
 
         //req.user available through out the app
