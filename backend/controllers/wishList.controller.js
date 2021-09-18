@@ -19,10 +19,19 @@ const getWishListItems = async (req, res) => {
 
 const searchWishList = async (req, res) => {
   if (req.params && req.params.name) {
-    await User.find(
-      { isPrivate: false, name: { $regex: req.params.name } },
-      { _id: 1, name: 1 }
-    )
+    await User.aggregate([
+      {
+        $project: {
+          name: { $toLower: "$name" },
+          isPrivate: "$isPrivate"
+        },
+      },
+      {
+        $match: {
+          $and: [{ name: { $regex: req.params.name }}, { isPrivate: false }]
+        },
+      },
+    ])
       .then((data) => {
         res.status(200).send({ lists: data });
       })
