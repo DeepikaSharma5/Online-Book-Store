@@ -40,7 +40,7 @@ const checkEmail = (email) => {
   });
 };
 
-const getSuperAdminPassword = (password) => {
+const getSuperAdminPassword = () => {
   return Admin.findOne(
     { status: 2 },
     { password: 1 }
@@ -59,7 +59,7 @@ const createAdmin = async (req, res) => {
 
     //check if super admin password is correct
     
-    getSuperAdminPassword(req.body.adminpassword).then( async (superAdminPassword) => {
+    getSuperAdminPassword().then( async (superAdminPassword) => {
 
       if(superAdminPassword){
 
