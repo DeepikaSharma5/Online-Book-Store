@@ -95,8 +95,10 @@ const loginUser = async (req, res) => {
         );
         if (!validPassword) return res.status(400).send("Incorrect password!");
 
+        const displayname = userExists.name.split(" ")[0]
+
         token = jwt.sign(
-          { id: userExists._id, role: 1 },
+          { id: userExists._id, role: 1, name: displayname},
           process.env.TOKEN_SECRET
         );
 

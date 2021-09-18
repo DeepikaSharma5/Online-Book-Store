@@ -36,6 +36,8 @@ const SearchWishList = () => {
 
         if (userToken != null) {
           const decodedToken = jwt_decode(userToken, { complete: true });
+          console.log(response.lists)
+          console.log(decodedToken.id)
           setSearchResults(response.lists.filter((list) => list._id !== decodedToken.id))
         }else{
           setSearchResults(response.lists)
