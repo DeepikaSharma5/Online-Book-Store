@@ -151,3 +151,7 @@ export async function deleteUserAccount(id, password) {
         return responseTxt;
     }
 }
+export function logout(){
+    localStorage.removeItem("user-token");
+    window.location.href = "/homepage";
+}

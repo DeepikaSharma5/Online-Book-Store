@@ -6,6 +6,7 @@ import styles from "./LoginForm.module.scss";
 
 import { useHistory } from "react-router-dom";
 import { login } from "../../services/userService";
+import { APP_ROUTES } from "../../utilities/constants/routes.constants";
 
 const LoginForm = () => {
   const history = useHistory();
@@ -38,7 +39,7 @@ const LoginForm = () => {
         setError(response);
       } else {
         console.log("User logged in");
-        window.location.href = "/personaldetails";
+        window.location.href = APP_ROUTES.USER_PERSONAL_DETAILS;
       }
     }
   }

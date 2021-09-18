@@ -19,6 +19,7 @@ import { useSelector } from "react-redux";
 import { User,Heart, Search, Truck, Clipboard, CreditCard, PlusSquare } from 'react-feather';
 import { reactLocalStorage } from 'reactjs-localstorage';
 import axios from 'axios';
+import { logout } from '../../../../services/userService';
 
 const useStyles = makeStyles((theme) => ({
   grow: {
@@ -257,6 +258,18 @@ export default function Header() {
                             <Typography className={classes.title} variant="h5" >
                                 {/*Add user name here*/}
                                 username
+                        </Typography>
+                        </IconButton>
+                        <IconButton
+                            edge="end"
+                            aria-label="account of current user"
+                            aria-controls={menuId}
+                            aria-haspopup="true"
+                            onClick={logout}
+                            color="inherit"
+                        >
+                            <Typography className={classes.title} variant="h6" >
+                                LOGOUT
                         </Typography>
                         </IconButton>
                     </div>
