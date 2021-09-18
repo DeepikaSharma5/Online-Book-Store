@@ -124,3 +124,30 @@ export async function updatePassword(userDetails){
         return responseTxt;
     }
 }
+
+export async function deleteUserAccount(id, password) {
+    console.log("Body", JSON.stringify(password))
+    try{
+        const response = await fetch(baseUrl+"/"+id,{
+            method: "DELETE",
+
+            body: JSON.stringify(password),
+
+            headers: {
+                'Content-Type': 'application/json; charset=UTF-8',
+            }
+    
+        });
+
+        if(!response.ok){
+            throw response;
+        }else{
+            return("ok");
+        }
+        
+        
+    }catch(error){
+        let responseTxt = await error.text();
+        return responseTxt;
+    }
+}
