@@ -124,3 +124,8 @@ export async function updatePassword(userDetails){
         return responseTxt;
     }
 }
+
+export function logout(){
+    localStorage.removeItem("user-token");
+    window.location.href = "/homepage";
+}

@@ -41,6 +41,7 @@ import NavItem from './NavItem';
 import SettingsSystemDaydreamIcon from '@material-ui/icons/SettingsSystemDaydream';
 import GroupWorkIcon from '@material-ui/icons/GroupWork';
 import { APP_ROUTES } from '../../../utilities/constants/routes.constants';
+import { logout } from '../../../services/userService';
 
 /*
   Also don't forget to add APPBAR, NAVBAR in your admin pages.
@@ -370,6 +371,7 @@ const NavBar = ({ onMobileClose, openMobile }) => {
               className={classes.font}
               style={{ fontSize:'15px'}}
               disableTypography
+              onClick={logout}
             />
           </ListItem>
         </List>
