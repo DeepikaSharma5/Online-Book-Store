@@ -16,6 +16,7 @@ import {
 } from '@material-ui/core';
 import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
+import jwt_decode from "jwt-decode";
 import {
   BarChart as BarChartIcon,
   Lock as LockIcon,
@@ -174,6 +175,15 @@ const NavBar = ({ onMobileClose, openMobile }) => {
   const [deliveryOpen, setDeliveryOpen] = React.useState(false);
   const [contentsOpen, setContentsOpen] = React.useState(false);
   const [paymentOpen, setPaymentOpen] = React.useState(false);
+
+  const [decodedToken, setDecodedToken] = useState(null);
+
+  useEffect(() => {
+    const userToken = localStorage.getItem("user-token");
+    if (userToken) {
+      setDecodedToken(jwt_decode(userToken, { complete: true }));
+    }
+  }, [])
 
   const dashboardhandleClick = () => {
     setDashboardOpen(!dashboardOpen);
@@ -350,7 +360,9 @@ const NavBar = ({ onMobileClose, openMobile }) => {
               </div>
               </List>
           </Collapse>
-          <ListItem button>
+          {
+            decodedToken?.role === 3 ?
+            <ListItem button>
             <Icon style={{ position: 'relative', left: '-10px', height:'30px', width:'30px' }}>
               <KeyIcon style={{ color: '#637b86' }} />
             </Icon>
@@ -361,7 +373,9 @@ const NavBar = ({ onMobileClose, openMobile }) => {
               style={{ fontSize:'15px'}}
               disableTypography
             />
-          </ListItem>
+          </ListItem> :
+          null
+          }
           <ListItem button>
             <Icon style={{ position: 'relative', left: '-10px', height:'30px', width:'30px' }}>
               <LockIcon style={{ color: '#637b86' }} />
