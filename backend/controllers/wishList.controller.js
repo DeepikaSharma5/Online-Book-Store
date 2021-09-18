@@ -104,7 +104,6 @@ const updateisPrivate = async (req, res) => {
   }
 };
 
-//NOT RETURNING ANYTHING
 const getTopFiveProducts = async (req, res) => {
   await WishListItem.aggregate([
     {
@@ -113,30 +112,80 @@ const getTopFiveProducts = async (req, res) => {
         counter: {
           $sum: 1,
         },
-      }
-      
+      },
     },
     {
       $lookup: {
-        from: 'books',
-        localField: '_id',
-        foreignField: '_id',
-        as: 'bookinfo'
-      }
+        from: "books",
+        localField: "_id",
+        foreignField: "_id",
+        as: "bookinfo",
+      },
     },
     {
-      $unwind: "$bookinfo"
+      $unwind: "$bookinfo",
     },
     {
-      $sort: {"counter": -1}
-    }
+      $sort: { counter: -1 },
+    },
   ])
-  .then(async(data) => {    
+    .then(async (data) => {
       res.status(200).send(data);
-  })
-  .catch((error) => {
-    res.status(500).send({ error: error.message });
-  });
+    })
+    .catch((error) => {
+      res.status(500).send({ error: error.message });
+    });
+};
+
+const genarateReport = async (req, res) => {
+  if (req.params) {
+    const reqMonth = Number(req.params.month);
+    const reqYear = Number(req.params.year);
+
+    await WishListItem.aggregate([
+      {
+        $project: {
+          _id: "$_id",
+          bookID: "$bookID",
+          year: { $year: "$addedDate" },
+          month: { $month: "$addedDate" },
+        },
+      },
+      {
+        $match: {
+          $and: [{ month: reqMonth}, { year: reqYear }],
+        },
+      },
+      {
+        $group: {
+          _id: "$bookID",
+          counter: {
+            $sum: 1,
+          },
+        },
+      },
+      {
+        $lookup: {
+          from: 'books',
+          localField: '_id',
+          foreignField: '_id',
+          as: 'bookinfo'
+        }
+      },
+      {
+        $unwind: "$bookinfo"
+      },
+      {
+        $sort: { counter: -1 },
+      }
+    ])
+      .then(async (data) => {
+        res.status(200).send(data);
+      })
+      .catch((error) => {
+        res.status(500).send({ error: error.message });
+      });
+  }
 };
 
 module.exports = {
@@ -146,4 +195,5 @@ module.exports = {
   updateisPrivate,
   searchWishList,
   getTopFiveProducts,
+  genarateReport,
 };

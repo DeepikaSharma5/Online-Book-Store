@@ -2,7 +2,6 @@ const express = require("express");
 const router = express.Router();
 const admincontroller = require("../controllers/admin.controller");
 const verifySuperAdmin = require("../routers/verifyTokenSuperAdmin")
-const verifyAdmin = require("../routers/verifyTokenAdmin")
 
 //Add proper routing nouns
 module.exports = () => {
