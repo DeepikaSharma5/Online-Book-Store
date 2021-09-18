@@ -9,13 +9,14 @@ import {
   Button,
 } from "@material-ui/core";
 import { Alert } from "@material-ui/lab";
+import jsPDF from "jspdf";
 
 import styles from "../WishList/WishList.module.scss";
 
 import { AppLayout, TopProductsTable } from "../../components";
 import NavBar from "../../components/Admin/NavBar/NavBar";
 import AppBar from "../../components/Admin/NavBar/AppBar";
-import { getTopFiveTtems } from "../../services/wishlistService";
+import { createReport, getTopFiveTtems } from "../../services/wishlistService";
 
 const WishListReport = () => {
   const months = [
@@ -61,7 +62,6 @@ const WishListReport = () => {
     const response = await getTopFiveTtems();
 
     if (response) {
-      console.log(response);
       let books = [];
 
       response.forEach((item) => {
@@ -83,14 +83,52 @@ const WishListReport = () => {
     }
   }
 
-  const generateReport = () => {
-    setTimeout(() => {
-      setSuccess("Report downloaded");
-      setTimeout(() => setSuccess(null), 2000);
-    }, 500);
+  async function generateReport() {
 
-    //setError("Error generating report, please try again later.")
-  };
+    setSuccess(null)
+    setError(null)
+
+    const response = await createReport(month+1, year);
+
+    if (response) {
+      console.log(response)
+      if(response.length === 0){
+        setError("No data for this year and month");
+      setTimeout(() => setError(null), 4000);
+      }else{
+        const wishbooks = response;
+
+        const reportDocument = new jsPDF();
+        const tableColumns = ["Item Count", "Title", "Author Name", "Publisher", "ISBN","Price"];
+        const tableRows = [];   
+  
+        wishbooks.forEach(book => {
+          const bookData = [
+            book.counter,
+            book.bookinfo.title,
+            book.bookinfo.author_name,
+            book.bookinfo.publisher,
+            book.bookinfo.isbn,
+            'LKR ' + book.bookinfo.price +'.00'
+        ];
+        tableRows.push(bookData);
+        });
+  
+        reportDocument.autoTable(tableColumns, tableRows, { startY: 40 });
+        reportDocument.text(`BookLab : Report of Wish Lists for ${months[month]}, ${year}` , 14, 15);
+        reportDocument.setFontSize(11);
+        const subText = reportDocument.splitTextToSize(`The table shows the count of each item that appeared in a wish list for the month of ${months[month]} in year ${year}.` , 180);
+        reportDocument.text(subText , 14, 30);
+        reportDocument.save(`BookLab Wish Lists Report - ${months[month]} ${year}.pdf`);
+  
+        setSuccess("Report downloaded");
+        setTimeout(() => setSuccess(null), 2000);
+      }
+    } else {
+      setError("Error generating report, please try again later.");
+      setTimeout(() => setError(null), 2000);
+    }
+  }
 
   // useEffect(() => generateYears(), [])
 
@@ -111,7 +149,7 @@ const WishListReport = () => {
           container
           className="content-padding"
           className={styles.background}
-          style={{ height: "89.8vh", marginTop:"10.2vh" }}
+          style={{ height: "89.8vh", marginTop: "10.2vh" }}
         >
           <Grid
             item
