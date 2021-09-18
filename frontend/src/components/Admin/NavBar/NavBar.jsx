@@ -213,7 +213,7 @@ const NavBar = ({ onMobileClose, openMobile }) => {
               <ListItemText
                 primary="Dashboards"
                 className={classes.font}
-                style={{ fontSize:'19px'}}
+                style={{ fontSize:'15px'}}
                 disableTypography
               />
               {dashboardOpen ? <ExpandLess /> : <ExpandMore />}
@@ -242,7 +242,7 @@ const NavBar = ({ onMobileClose, openMobile }) => {
               <ListItemText
                 primary="Books"
                 className={classes.font}
-                style={{ fontSize:'19px'}}
+                style={{ fontSize:'15px'}}
                 disableTypography
                 />
                 {bookOpen ? <ExpandLess /> : <ExpandMore />}
@@ -271,7 +271,7 @@ const NavBar = ({ onMobileClose, openMobile }) => {
               <ListItemText
                 primary="Delivery"
                 className={classes.font}
-                style={{ fontSize:'19px'}}
+                style={{ fontSize:'15px'}}
                 disableTypography
                 />
                 {deliveryOpen ? <ExpandLess /> : <ExpandMore />}
@@ -300,7 +300,7 @@ const NavBar = ({ onMobileClose, openMobile }) => {
               <ListItemText
                 primary="Contents"
                 className={classes.font}
-                style={{ fontSize:'19px'}}
+                style={{ fontSize:'15px'}}
                 disableTypography
                 />
                 {contentsOpen ? <ExpandLess /> : <ExpandMore />}
@@ -329,7 +329,7 @@ const NavBar = ({ onMobileClose, openMobile }) => {
               <ListItemText
                 primary="Wishlist"
                 className={classes.font}
-                style={{ fontSize:'19px'}}
+                style={{ fontSize:'15px'}}
                 disableTypography
                 />
                 {wishlistOpen ? <ExpandLess /> : <ExpandMore />}
@@ -351,12 +351,24 @@ const NavBar = ({ onMobileClose, openMobile }) => {
           </Collapse>
           <ListItem button>
             <Icon style={{ position: 'relative', left: '-10px', height:'30px', width:'30px' }}>
+              <KeyIcon style={{ color: '#637b86' }} />
+            </Icon>
+            <ListItemText
+              primary="Manage Administrators"
+              className={classes.font}
+              onClick={() => window.location = APP_ROUTES.SUPERADMIN_MANAGE_ADMINS}
+              style={{ fontSize:'15px'}}
+              disableTypography
+            />
+          </ListItem>
+          <ListItem button>
+            <Icon style={{ position: 'relative', left: '-10px', height:'30px', width:'30px' }}>
               <LockIcon style={{ color: '#637b86' }} />
             </Icon>
             <ListItemText
               primary="Logout"
               className={classes.font}
-              style={{ fontSize:'19px'}}
+              style={{ fontSize:'15px'}}
               disableTypography
             />
           </ListItem>

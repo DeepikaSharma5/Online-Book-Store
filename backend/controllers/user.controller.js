@@ -1,4 +1,5 @@
 const User = require("../models/user.model");
+const WishList = require("../models/wishList.model");
 const Joi = require("joi");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
@@ -23,17 +24,16 @@ const validateUser = (user) => {
 };
 
 // Login VALIDATION
-function validateLogin(user){
+function validateLogin(user) {
+  const emailRegExp = /\S+@\S+\.\S+/;
+  const passwordRegExp = "^[a-zA-Z0-9]{3,30}$";
 
-    const emailRegExp = /\S+@\S+\.\S+/;
-    const passwordRegExp = '^[a-zA-Z0-9]{3,30}$';
+  const schema = Joi.object({
+    email: Joi.string().pattern(new RegExp(emailRegExp)).required(),
+    password: Joi.string().pattern(new RegExp(passwordRegExp)).required(),
+  });
 
-    const schema = Joi.object({
-        email : Joi.string().pattern(new RegExp(emailRegExp)).required(),
-        password : Joi.string().pattern(new RegExp(passwordRegExp)).required(),
-    });
-
-    return schema.validate(user);
+  return schema.validate(user);
 }
 
 const checkEmail = (email) => {
@@ -59,11 +59,13 @@ const createUser = async (req, res) => {
           email: req.body.email,
           phone: req.body.phone,
           password: hashedPassword,
+          isPrivate: true,
+          items:[]
         });
 
         await newUser
           .save()
-          .then((data) => {
+          .then(async (data) => {
             res.status(200).send({ data: data });
           })
           .catch((error) => {
@@ -112,7 +114,6 @@ const loginUser = async (req, res) => {
 
 const getUser = async (req, res) => {
   if (req.params && req.params.id) {
-
     await User.findById(req.params.id)
       .populate("users", "name email password phone")
       .then((data) => {
@@ -126,35 +127,32 @@ const getUser = async (req, res) => {
 
 const updateUser = async (req, res) => {
   if (req.body) {
-
-    await User.findByIdAndUpdate(
-      req.body.id,
-      req.body,
-      { new: true, useFindAndModify: false }
-    )
-    .then((data) => {
-      res.status(200).send(data);
+    await User.findByIdAndUpdate(req.body.id, req.body, {
+      new: true,
+      useFindAndModify: false,
     })
-    .catch((error) => {
-      res.status(500).send({ error: error.message });
-    });
+      .then((data) => {
+        res.status(200).send(data);
+      })
+      .catch((error) => {
+        res.status(500).send({ error: error.message });
+      });
   }
 };
 
 const updatePassword = async (req, res) => {
   if (req.body) {
-
     await User.findByIdAndUpdate(
       req.body.id,
-      {password: req.body.password},
+      { password: req.body.password },
       { new: true, useFindAndModify: false }
     )
-    .then((data) => {
-      res.status(200).send(data);
-    })
-    .catch((error) => {
-      res.status(500).send({ error: error.message });
-    });
+      .then((data) => {
+        res.status(200).send(data);
+      })
+      .catch((error) => {
+        res.status(500).send({ error: error.message });
+      });
   }
 };
 
@@ -163,5 +161,5 @@ module.exports = {
   loginUser,
   getUser,
   updateUser,
-  updatePassword
+  updatePassword,
 };

@@ -85,7 +85,7 @@ const VisibilitySwitch = withStyles((theme) => ({
   );
 });
 
-const VisibilityModal = ({ isPublic, setIsPublic }) => {
+const VisibilityModal = ({ isPublic, updateStatus }) => {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
 
@@ -99,7 +99,7 @@ const VisibilityModal = ({ isPublic, setIsPublic }) => {
 
   const handleSubmit = () => {
     setOpen(false)
-    setTimeout(() => setIsPublic(!isPublic), 500);
+    updateStatus(isPublic)
   };
 
   return (
@@ -145,7 +145,7 @@ const VisibilityModal = ({ isPublic, setIsPublic }) => {
                   ) : (
                     <Typography className={styles.descText}>
                       This makes your list visible to anyone searching the wish lists page of this site.<br />
-                      <span style={{fontWeight:"500"}}>Note: Your full delivery address will not be visible to others, only the city will be shown.</span>
+                      <span style={{fontWeight:"500"}}>Note: Your delivery address will not be visible to others.</span>
                     </Typography>
                   )}
                   </div>
