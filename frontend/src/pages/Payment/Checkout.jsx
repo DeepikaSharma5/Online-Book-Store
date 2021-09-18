@@ -1,20 +1,75 @@
-import React, { useEffect } from "react";
+import React, {useState, useEffect } from "react";
 import { reactLocalStorage } from "reactjs-localstorage";
-
+import axios from 'axios';
+import Swal from 'sweetalert2';
 import { useDispatch, useSelector } from "react-redux";
 
 import "./CartScreen.css";
 import CartItem from "../../components/Cart/CartItem";
+import CheckoutItem from '../../components/Checkout/Checkout';
 import { Link } from "react-router-dom";
 import { addToCart, removeFromcart } from "../../redux/actions/cartActions";
 import Header from "../../components/Customer/Homepage/Header/Header";
 import { APP_ROUTES } from "../../utilities/constants/routes.constants";
 
-const CartScreen = () => {
+const Checkout = () => {
+
+    const[books,setBooks] = useState([]);
+    const [quantity,setQuantity] = useState('');
+    const[total,setTotal] = useState('');
+    const[username,setUsername] = useState('');
+    const [status,setStatus] = useState('');
+    
+
+ 
   const dispatch = useDispatch();
 
   const cart = useSelector((state) => state.cart);
   const { cartItems } = cart;
+
+  const handleSubmit = async () => {
+    
+    const newCardDetail = {
+    username:'kajan',
+      books:cartItems.map((item) => (
+          item.product
+      )),
+      quantity:cartItems.reduce((qty, item) => Number(item.qty) + qty, 0),
+      total:cartItems.reduce(
+        (price, item) => item.price * Number(item.qty) + price,
+        0
+      ),
+      status:'success'
+    };
+  
+
+    try {
+      const res = await axios.post("http://localhost:6060/payment/add", newCardDetail);
+      Swal.fire({
+        title: "Success!",
+        text: "Added Successed!",
+        icon: 'success',
+        confirmButtonText: "OK",
+        type: "success"
+    })
+      console.log(res.data);
+    } catch (error) {
+      console.log(error);
+      Swal.fire({
+        title: "error!",
+        text: "Not Success",
+        icon: 'error',
+        position: 'center',
+        showConfirmButton: false,
+        timer: 2000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+            toast.addEventListener('mouseenter', Swal.stopTimer)
+            toast.addEventListener('mouseleave', Swal.resumeTimer)
+        }
+    });
+    }
+  };
 
   const qtyChangeHandler = (id, qty) => {
     dispatch(addToCart(id, qty));
@@ -30,7 +85,7 @@ const CartScreen = () => {
 
   const handleCart = (id) => {
     cartItems.map((items) => console.log(items.id));
-    window.location.href = APP_ROUTES.USER_CHECKOUT;
+    // window.location.href = APP_ROUTES.USER_CHECKOUT;
   };
 
   const viewCheckout = (product, title, quantity) => {
@@ -65,11 +120,10 @@ const CartScreen = () => {
             </div>
           ) : (
             cartItems.map((item) => (
-              <CartItem
+              <CheckoutItem
                 key={item.product}
                 item={item}
-                qtyChangeHandler={qtyChangeHandler}
-                removeHandler={removeHandler}
+                
               />
             ))
           )}
@@ -81,7 +135,7 @@ const CartScreen = () => {
             <p>Rs.{getCartSubTotal().toFixed(2)}</p>
           </div>
           <div>
-            <button onClick={() => handleCart()}>Proceed to Checkout</button>
+            <button onClick={() => handleSubmit()}>Pay</button>
           </div>
         </div>
       </div>
@@ -89,4 +143,4 @@ const CartScreen = () => {
   );
 };
 
-export default CartScreen;
+export default Checkout;

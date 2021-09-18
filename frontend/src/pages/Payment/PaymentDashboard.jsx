@@ -1,10 +1,10 @@
 import NavBar from '../../components/Admin/NavBar/NavBar';
 import AppBar from '../../components/Admin/NavBar/AppBar';
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Table from '@material-ui/core/Table';
-import { Grid } from '@material-ui/core';
+import { Grid,MenuItem } from '@material-ui/core';
 import TableBody from '@material-ui/core/TableBody';
 import Button from '@material-ui/core/Button';
 import TableCell from '@material-ui/core/TableCell';
@@ -16,6 +16,7 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import DescriptionIcon from '@material-ui/icons/Description';
 import jsPDF from 'jspdf';
 import "jspdf-autotable"
+import { allPayments } from '../../services/getAllPayments';
 
 const useStyles = makeStyles({
 	root: {
@@ -29,6 +30,11 @@ const useStyles = makeStyles({
 export default function Index() {
 	const classes = useStyles();
 	const [page, setPage] = useState(1);
+	const [username,setUsername] = useState("");
+	const[books,setBooks] = useState([]);
+	const[total,setTotal] = useState('');
+	const [payment,setPayment] = useState([]);
+
 
 	function createData(name, book, price, qty, status) {
 		return { name, book, price, qty, status };
@@ -43,12 +49,22 @@ export default function Index() {
 		createData('shaun', 'amazon', 1, 1600.00, "paid"),
 	];
 
+	const getPaymentDetails = async () => {
+		const res = await allPayments();
+		console.log(res.data);
+		setPayment(res.data);  
+	};
+
+    useEffect(() => {
+        getPaymentDetails();
+    }, []);
+
 	const tablehead = [
 		{ name: 'Customer Name', align: 'left', width: '20%' },
-		{ name: 'Book', align: 'left', width: '20%' },
-		{ name: 'Quantity', align: 'left', width: '20%' },
-		{ name: 'Total', align: 'left', width: '20%' },
-		{ name: 'Status', align: 'left', width: '20%' },
+		{ name: 'Book', align: 'left', width: '40%' },
+		{ name: 'Quantity', align: 'left', width: '10%' },
+		{ name: 'Total', align: 'left', width: '10%' },
+		{ name: 'Status', align: 'left', width: '10%' },
 		{ name: 'Actions', align: 'center', width: '20%' }
 	];
 
@@ -109,32 +125,43 @@ export default function Index() {
 												</TableRow>
 											</TableHead>
 											<TableBody>
-												{tableValues.map(row => {
+												{payment.map(row => {
 													return (
 														<>
 															<TableRow>
-																<TableCell>{row.name}</TableCell>
+																<TableCell>{row.username}</TableCell>
+															<TableCell>
+																	{row.books.map(book =>{
+																		return(
+																			<MenuItem>
+																			{book.title}
+																			</MenuItem>
+																			
+																			
+																		)
+																		})}
+																		</TableCell>
+																		
+																
+																
 																<TableCell>
-																	{row.book}
+																	{row.total}
 																</TableCell>
 																<TableCell>
-																	{row.price}
-																</TableCell>
-																<TableCell>
-																	{row.qty}
+																	{row.quantity}
 																</TableCell>
 																<TableCell>
 																	{row.status}
 																</TableCell>
 																<TableCell width="25%" align="center">
-																	<Button
+																	{/* <Button
 																		onClick={() => generatePDF(row)}
 																		title="Generate bill"
 																		style={{ color: 'teal' }}
 																	>
 																		{' '}
 																		<DescriptionIcon />
-																	</Button>
+																	</Button> */}
 																	<Button
 																		title="Delete"
 																		style={{ color: 'red' }}

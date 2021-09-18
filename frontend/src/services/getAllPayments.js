@@ -1,8 +1,7 @@
 import axiosInstance from "./axiosInstance";
-
-export const getCardDetailsById = async (id) => {
+export const allPayments = async () => {
   try {
-    const res = await axiosInstance.get(`/card/${id}`, {
+    const res = await axiosInstance.get(`/payment/view`, {
       data: null,
     });
     return res.data;
@@ -10,5 +9,3 @@ export const getCardDetailsById = async (id) => {
     return error.response.data;
   }
 };
-
-export default { getCardDetailsById };
