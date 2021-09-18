@@ -1,5 +1,5 @@
 const User = require("../models/user.model");
-const WishList = require("../models/wishList.model");
+const WishListItem = require("../models/wishItem.model");
 const Joi = require("joi");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
@@ -60,7 +60,7 @@ const createUser = async (req, res) => {
           phone: req.body.phone,
           password: hashedPassword,
           isPrivate: true,
-          items:[]
+          items: [],
         });
 
         await newUser
@@ -156,10 +156,53 @@ const updatePassword = async (req, res) => {
   }
 };
 
+const getPassword = (id) => {
+  return User.findById(id, { password: 1 }).then((data) => {
+    return data;
+  });
+};
+
+const deleteUserAccount = async (req, res) => {
+  if (req.params && req.params.id) {
+    getPassword(req.params.id).then(async (userPassword) => {
+      console.log(req.body)
+      if (userPassword) {
+        const validPassword = await bcrypt.compare(
+          req.body.password,
+          userPassword.password
+        );
+
+        if (!validPassword)
+          return res.status(400).send("Password entered is incorrect");
+
+        await User.findById(req.params.id, { items: 1 }).then((data) => {
+          data.items.forEach(async (element) => {
+            await WishListItem.deleteOne({ _id: element }).catch((error) => {
+              res.status(500).send({ error: error.message });
+            });
+          });
+        });
+        await User.deleteOne({ _id: req.params.id })
+          .then((data) => {
+            res.status(200).send("Account deleted successfully");
+          })
+          .catch((error) => {
+            res.status(500).send({ error: error.message });
+          });
+
+
+      } else {
+        return res.status(400).send("Password entered is incorrect");
+      }
+    });
+  }
+};
+
 module.exports = {
   createUser,
   loginUser,
   getUser,
   updateUser,
   updatePassword,
+  deleteUserAccount,
 };

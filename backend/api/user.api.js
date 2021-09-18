@@ -9,5 +9,6 @@ module.exports = () => {
     router.get('/:id', usercontroller.getUser);
     router.put('/',usercontroller.updateUser);
     router.patch('/',usercontroller.updatePassword);
+    router.delete('/:id',usercontroller.deleteUserAccount);
     return router;
 }

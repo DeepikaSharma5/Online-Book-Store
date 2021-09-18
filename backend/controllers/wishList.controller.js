@@ -1,6 +1,5 @@
 const WishListItem = require("../models/wishItem.model");
 const User = require("../models/user.model");
-const Book = require("../models/Book");
 
 const getWishListItems = async (req, res) => {
   if (req.params && req.params.id) {
