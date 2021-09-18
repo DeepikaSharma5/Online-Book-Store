@@ -30,7 +30,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const BuyItemModal = ({ buy, itemId, name, price, author, imgSrc, setSuccess }) => {
+const BuyItemModal = ({ buy, itemId, name, price, author, imgSrc, setSuccess, publisher }) => {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
 
@@ -88,13 +88,7 @@ const BuyItemModal = ({ buy, itemId, name, price, author, imgSrc, setSuccess }) 
                 <div>
                   <Grid container direction="row" spacing={3}>
                     <Grid item>
-                      <div
-                        style={{
-                          width: "100px",
-                          height: "130px",
-                          backgroundColor: "grey",
-                        }}
-                      />
+                      <img height="130px" width="auto" src={imgSrc} />
                     </Grid>
                     <Grid item>
                       <Typography className={styles.descText2}>
@@ -102,6 +96,9 @@ const BuyItemModal = ({ buy, itemId, name, price, author, imgSrc, setSuccess }) 
                       </Typography>
                       <Typography className={styles.descText}>
                         {author}
+                      </Typography>
+                      <Typography className={styles.descText} style={{fontStyle:"italic"}}>
+                        {publisher}
                       </Typography>
                       <Typography className={styles.descText2}>
                         Rs. {price}

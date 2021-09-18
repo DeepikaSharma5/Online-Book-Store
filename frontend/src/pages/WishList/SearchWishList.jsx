@@ -5,38 +5,48 @@ import { Alert } from "@material-ui/lab";
 import styles from "./WishList.module.scss";
 
 import { AppLayout, WishListTable } from "../../components";
+import {searchWishListByName } from "../../services/wishlistService";
+import jwt_decode from "jwt-decode";
+
 
 const SearchWishList = () => {
   const [ownerName, setOwnerName] = useState("");
 
   const [error, setError] = useState(null);
 
-  const [searchResults, setSearchResults] = useState([
-    {
-      id: 1,
-      name: "Sayuni Perera",
-      location: "Colombo",
-    },
-    {
-      id: 2,
-      name: "Sayuni Fernando",
-      location: "Galle",
-    },
-    {
-      id: 3,
-      name: "Sayuni Nugawela",
-      location: "Kandy",
-    },
-  ]);
+  const [searchResults, setSearchResults] = useState([{
+    _id : -1
+  }]);
 
-  const searchForList = () => {
+  async function searchForList() {
+    setSearchResults([{
+      _id : -1
+    }])
     setError(null);
     if (ownerName === "") {
       setError("Please enter a name to search");
       setTimeout(() => setError(null), 3000);
     } else {
       //Search
-      //setSearchResults(resultset)
+      const response = await searchWishListByName(ownerName);
+
+      if (response) {
+        console.log(response.lists);
+        const userToken = localStorage.getItem("user-token");
+
+        if (userToken != null) {
+          const decodedToken = jwt_decode(userToken, { complete: true });
+          console.log(response.lists)
+          console.log(decodedToken.id)
+          setSearchResults(response.lists.filter((list) => list._id !== decodedToken.id))
+        }else{
+          setSearchResults(response.lists)
+        }
+
+        
+      } else {
+        console.log(response);
+      }
     }
   };
 

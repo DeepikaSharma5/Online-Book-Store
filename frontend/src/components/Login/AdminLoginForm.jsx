@@ -5,8 +5,7 @@ import { Alert } from "@material-ui/lab";
 import styles from "./LoginForm.module.scss";
 
 import { useHistory } from "react-router-dom";
-import { login } from "../../services/userService";
-import { APP_ROUTES } from "../../utilities/constants/routes.constants";
+import { login } from "../../services/adminService";
 
 const LoginForm = () => {
   const history = useHistory();
@@ -38,8 +37,8 @@ const LoginForm = () => {
         console.log(response);
         setError(response);
       } else {
-        console.log("User logged in");
-        window.location.href = APP_ROUTES.USER_PERSONAL_DETAILS;
+        console.log("Admin logged in");
+        window.location.href = "/wishlist-report";
       }
     }
   }

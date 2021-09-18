@@ -1,8 +1,11 @@
-const baseUrl = "http://localhost:6060/user";
+const baseUrl = "http://localhost:6060/admin";
 
-export async function register(newUserDetails) {
+export async function registerAdmin(newUserDetails) {
+    
+    const userToken = localStorage.getItem("user-token");
+
     try{
-        const response = await fetch(baseUrl+"/register",{
+        const response = await fetch(baseUrl+"/new-admin",{
             method: "POST",
     
             // Adding body or contents to send
@@ -10,6 +13,7 @@ export async function register(newUserDetails) {
             
             // Adding headers to the request
             headers: {
+                'auth-token': userToken,
                 'Content-Type': 'application/json; charset=UTF-8'
             }
     
@@ -58,46 +62,30 @@ export async function login(userCreds){
     }
 }
 
-export async function getUserByID(id) {
-    const response = await fetch(baseUrl+"/"+id);
-    console.log("Fetching details of "+id);
+export async function getAdminList() {
+    const userToken = localStorage.getItem("user-token");
+    const response = await fetch(baseUrl+"/all-admins",{
+        method: "GET",
+        
+        // Adding headers to the request
+        headers: {
+            'auth-token': userToken,
+            'Content-Type': 'application/json; charset=UTF-8',
+        }
+
+    });
     if(response.ok){
         return response.json()
     }else{
-        return response.status(500).send({ error: "Error loading message" })
+        return response.status(500).send({ error: "Error loading administrators" })
     }
     throw response;
 }
 
-export async function updateUser(userDetails){
-    try{
-        const response = await fetch(baseUrl+"/",{
-            method: "PUT",
-    
-            // Adding body or contents to send
-            body: JSON.stringify(userDetails),
-            
-            // Adding headers to the request
-            headers: {
-                'Content-Type': 'application/json; charset=UTF-8',
-            }
-    
-        });
+export async function updateAdminStatus(userDetails){
 
-        if(!response.ok){
-            throw response;
-        }else{
-            return("ok");
-        }
-        
-        
-    }catch(error){
-        let responseTxt = await error.text();
-        return responseTxt;
-    }
-}
+    const userToken = localStorage.getItem("user-token");
 
-export async function updatePassword(userDetails){
     try{
         const response = await fetch(baseUrl+"/",{
             method: "PATCH",
@@ -107,6 +95,7 @@ export async function updatePassword(userDetails){
             
             // Adding headers to the request
             headers: {
+                'auth-token': userToken,
                 'Content-Type': 'application/json; charset=UTF-8',
             }
     
@@ -123,35 +112,4 @@ export async function updatePassword(userDetails){
         let responseTxt = await error.text();
         return responseTxt;
     }
-}
-
-export async function deleteUserAccount(id, password) {
-    console.log("Body", JSON.stringify(password))
-    try{
-        const response = await fetch(baseUrl+"/"+id,{
-            method: "DELETE",
-
-            body: JSON.stringify(password),
-
-            headers: {
-                'Content-Type': 'application/json; charset=UTF-8',
-            }
-    
-        });
-
-        if(!response.ok){
-            throw response;
-        }else{
-            return("ok");
-        }
-        
-        
-    }catch(error){
-        let responseTxt = await error.text();
-        return responseTxt;
-    }
-}
-export function logout(){
-    localStorage.removeItem("user-token");
-    window.location.href = "/homepage";
 }

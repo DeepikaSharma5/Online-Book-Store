@@ -10,10 +10,13 @@ import {
   makeStyles,
 } from "@material-ui/core";
 import { Alert } from "@material-ui/lab";
+import jwt_decode from "jwt-decode";
+import bcrypt from "bcryptjs";
 
 import styles from "./Personaldetails.module.scss";
 import { dangerIcon } from "../../../assets/images";
 import { APP_ROUTES } from "../../../utilities/constants/routes.constants";
+import { deleteUserAccount } from "../../../services/userService";
 
 const useStyles = makeStyles((theme) => ({
   modal: {
@@ -54,30 +57,39 @@ const DeleteAccountModal = () => {
     setOpen(false);
   };
 
-  const handleSubmit = () => {
+  async function handleSubmit(){
     setSuccess("");
     setError("");
     if (password === "") {
       setError("Please enter your current password to proceed.");
       setTimeout(() => setError(""), 3000);
     } else {
-      //POST
 
-      //Check for errors in mismatching current password
-      //CHANGE THIS!!!
-      if (password === "111111") {
-        setError("Password entered is incorrect.");
-        setTimeout(() => setError(""), 4000);
+      const userToken = localStorage.getItem("user-token");
+
+      if (userToken != null) {
+        // const salt = await bcrypt.genSalt(10);
+        //   const hashedPassword = await bcrypt.hash(password, salt);
+        //   const userPassword = {
+        //     password: hashedPassword,
+        //   };
+          const userPassword = {
+            password: password,
+          };
+        const decodedToken = jwt_decode(userToken, { complete: true });
+        const response = await deleteUserAccount(decodedToken.id, userPassword);
+  
+        if (response === "ok") {
+          setSuccess("Account deleted successfully");
+          setTimeout(() => setSuccess(""), 2000);
+          window.location.href = APP_ROUTES.USER_HOMEPAGE
+        } else {
+          setError(response);
+        }
       } else {
-        //if All good set success
-        setSuccess("Account deleted successfully");
-        setTimeout(() => setSuccess(""), 2000);
-        window.location.href = APP_ROUTES.USER_HOMEPAGE
+        setError("Error deleting account. Please login again");
       }
 
-      //Else set error
-      // setError("Password entered is incorrect.");
-      // setTimeout(() => setError(""), 4000);
     }
   };
 

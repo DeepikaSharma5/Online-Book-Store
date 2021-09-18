@@ -12,17 +12,18 @@ const AWishListItemCard = ({
   buyItem,
   isBought,
   itemsInStock,
+  imgSrc,
+  publisher,
   setSuccess 
 }) => {
   return (
     <Card style={{ padding: "25px 20px" }} variant="outlined">
       <div style={{ display: "flex", justifyContent: "center" }}>
-        <div
-          style={{ height: "100px", width: "130px", backgroundColor: "grey" }}
-        ></div>
+          <img height="130px" width="auto" src={imgSrc} />
       </div>
       <Typography className={styles.mainText}>{name}</Typography>
       <p className={styles.subText}>{author}</p>
+      <p className={styles.subText2}>{publisher}</p>
       <p className={styles.subText}>Rs. {price}</p>
       {isBought ? (
         <div className={styles.bought}>BOUGHT</div>
@@ -36,7 +37,8 @@ const AWishListItemCard = ({
             author={author}
             price={price}
             itemId={itemId}
-            imgSrc={""}
+            imgSrc={imgSrc}
+            publisher={publisher}
             setSuccess={setSuccess}
           />
         </div>

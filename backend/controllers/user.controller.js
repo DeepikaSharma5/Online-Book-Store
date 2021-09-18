@@ -1,4 +1,5 @@
 const User = require("../models/user.model");
+const WishListItem = require("../models/wishItem.model");
 const Joi = require("joi");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
@@ -23,17 +24,16 @@ const validateUser = (user) => {
 };
 
 // Login VALIDATION
-function validateLogin(user){
+function validateLogin(user) {
+  const emailRegExp = /\S+@\S+\.\S+/;
+  const passwordRegExp = "^[a-zA-Z0-9]{3,30}$";
 
-    const emailRegExp = /\S+@\S+\.\S+/;
-    const passwordRegExp = '^[a-zA-Z0-9]{3,30}$';
+  const schema = Joi.object({
+    email: Joi.string().pattern(new RegExp(emailRegExp)).required(),
+    password: Joi.string().pattern(new RegExp(passwordRegExp)).required(),
+  });
 
-    const schema = Joi.object({
-        email : Joi.string().pattern(new RegExp(emailRegExp)).required(),
-        password : Joi.string().pattern(new RegExp(passwordRegExp)).required(),
-    });
-
-    return schema.validate(user);
+  return schema.validate(user);
 }
 
 const checkEmail = (email) => {
@@ -59,11 +59,13 @@ const createUser = async (req, res) => {
           email: req.body.email,
           phone: req.body.phone,
           password: hashedPassword,
+          isPrivate: true,
+          items: [],
         });
 
         await newUser
           .save()
-          .then((data) => {
+          .then(async (data) => {
             res.status(200).send({ data: data });
           })
           .catch((error) => {
@@ -93,8 +95,10 @@ const loginUser = async (req, res) => {
         );
         if (!validPassword) return res.status(400).send("Incorrect password!");
 
+        const displayname = userExists.name.split(" ")[0]
+
         token = jwt.sign(
-          { id: userExists._id, role: 1 },
+          { id: userExists._id, role: 1, name: displayname},
           process.env.TOKEN_SECRET
         );
 
@@ -112,7 +116,6 @@ const loginUser = async (req, res) => {
 
 const getUser = async (req, res) => {
   if (req.params && req.params.id) {
-
     await User.findById(req.params.id)
       .populate("users", "name email password phone")
       .then((data) => {
@@ -126,34 +129,73 @@ const getUser = async (req, res) => {
 
 const updateUser = async (req, res) => {
   if (req.body) {
-
-    await User.findByIdAndUpdate(
-      req.body.id,
-      req.body,
-      { new: true, useFindAndModify: false }
-    )
-    .then((data) => {
-      res.status(200).send(data);
+    await User.findByIdAndUpdate(req.body.id, req.body, {
+      new: true,
+      useFindAndModify: false,
     })
-    .catch((error) => {
-      res.status(500).send({ error: error.message });
-    });
+      .then((data) => {
+        res.status(200).send(data);
+      })
+      .catch((error) => {
+        res.status(500).send({ error: error.message });
+      });
   }
 };
 
 const updatePassword = async (req, res) => {
   if (req.body) {
-
     await User.findByIdAndUpdate(
       req.body.id,
-      {password: req.body.password},
+      { password: req.body.password },
       { new: true, useFindAndModify: false }
     )
-    .then((data) => {
-      res.status(200).send(data);
-    })
-    .catch((error) => {
-      res.status(500).send({ error: error.message });
+      .then((data) => {
+        res.status(200).send(data);
+      })
+      .catch((error) => {
+        res.status(500).send({ error: error.message });
+      });
+  }
+};
+
+const getPassword = (id) => {
+  return User.findById(id, { password: 1 }).then((data) => {
+    return data;
+  });
+};
+
+const deleteUserAccount = async (req, res) => {
+  if (req.params && req.params.id) {
+    getPassword(req.params.id).then(async (userPassword) => {
+      console.log(req.body)
+      if (userPassword) {
+        const validPassword = await bcrypt.compare(
+          req.body.password,
+          userPassword.password
+        );
+
+        if (!validPassword)
+          return res.status(400).send("Password entered is incorrect");
+
+        await User.findById(req.params.id, { items: 1 }).then((data) => {
+          data.items.forEach(async (element) => {
+            await WishListItem.deleteOne({ _id: element }).catch((error) => {
+              res.status(500).send({ error: error.message });
+            });
+          });
+        });
+        await User.deleteOne({ _id: req.params.id })
+          .then((data) => {
+            res.status(200).send("Account deleted successfully");
+          })
+          .catch((error) => {
+            res.status(500).send({ error: error.message });
+          });
+
+
+      } else {
+        return res.status(400).send("Password entered is incorrect");
+      }
     });
   }
 };
@@ -163,5 +205,6 @@ module.exports = {
   loginUser,
   getUser,
   updateUser,
-  updatePassword
+  updatePassword,
+  deleteUserAccount,
 };

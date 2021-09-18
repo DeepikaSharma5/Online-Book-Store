@@ -16,6 +16,7 @@ import { StyledTableCell, StyledTableRow } from "../../assets/theme/theme";
 import { dangerIcon } from "../../assets/images";
 
 import styles from "./AdminTable.module.scss";
+import { registerAdmin } from "../../services/adminService";
 
 const useStyles = makeStyles((theme) => ({
   modal: {
@@ -34,10 +35,10 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const AdminAddModal = ({ admin }) => {
+const AdminAddModal = ({ admin, clearAdmin, getAdmins }) => {
   const [open, setOpen] = React.useState(false);
 
-  const [password, setPassword] = React.useState("");
+  const [adminpassword, setAdminPassword] = React.useState("");
 
   const [success, setSuccess] = React.useState("");
   const [error, setError] = React.useState("");
@@ -52,44 +53,49 @@ const AdminAddModal = ({ admin }) => {
       setError("Please enter a valid email");
       setTimeout(() => setError(null), 4000);
     } else {
-      //Add
-      //setError OR setSuccess
-
       setOpen(true);
     }
   };
 
   const handleClose = () => {
+    setAdminPassword("")
     setOpen(false);
   };
 
-  const addAdmin = () => {
-    if (password === "") {
+  async function addAdmin() {
+    if (adminpassword === "") {
       setError("Please enter password to proceed");
     } else {
-      //check password match
-      // if correct pwd
-      //POST to add admin
+
       const newAdmin = {
         name: admin.name,
         email: admin.email,
         password: admin.password,
-        isActive: 1,
+        adminpassword: adminpassword,
       };
 
-      //If no errors in POSt
+      const response = await registerAdmin(newAdmin);
 
-      setSuccess("Admin added successfully");
-      setTimeout(() => {
-        setSuccess(null);
-        setOpen(false);
-      }, 2000);
+      if (response == "ok") {
 
-      //else show error
-      // setError("Error adding admin")
-      // setTimeout(() => setError(null), 3000)
+        clearAdmin({
+          email: "",
+          name: "",
+          password: "",
+        })
+        setSuccess("Admin added successfully");
+        getAdmins()
+        
+        setTimeout(() => {
+          setSuccess(null);
+          handleClose();
+        }, 2000);
+      } else {
+        setError(response);
+        setTimeout(() => setError(null), 3000);
+      }
     }
-  };
+  }
 
   const classes = useStyles();
 
@@ -102,8 +108,22 @@ const AdminAddModal = ({ admin }) => {
       >
         Add administrator
       </Button>
-      {error ? <Alert severity="warning" style={{border: "1px solid #f5d872", width:"90%"}}>{error}</Alert> : null}
-      {success ? <Alert severity="success" style={{border: "1px solid #74c274", width:"90%"}}>{success}</Alert> : null}
+      {error ? (
+        <Alert
+          severity="warning"
+          style={{ border: "1px solid #f5d872", width: "90%" }}
+        >
+          {error}
+        </Alert>
+      ) : null}
+      {success ? (
+        <Alert
+          severity="success"
+          style={{ border: "1px solid #74c274", width: "90%" }}
+        >
+          {success}
+        </Alert>
+      ) : null}
       <Modal
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"
@@ -140,7 +160,10 @@ const AdminAddModal = ({ admin }) => {
                   Add this administrator?
                 </Typography>
                 <div>
-                  <Typography className={styles.descText} style={{marginBottom: "10px"}}>
+                  <Typography
+                    className={styles.descText}
+                    style={{ marginBottom: "10px" }}
+                  >
                     <span style={{ fontWeight: "600", fontSize: "20px" }}>
                       {admin.name + " - " + admin.email}
                     </span>
@@ -153,18 +176,20 @@ const AdminAddModal = ({ admin }) => {
                     until deactivated.
                   </Typography>
                   <TextField
-                  style={{width: "300px"}}
+                    style={{ width: "300px" }}
                     id="password"
                     type="password"
                     label="Current super admin password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
+                    value={adminpassword}
+                    onChange={(e) => setAdminPassword(e.target.value)}
                     variant="filled"
                   />
                   <br />
-                  <div style={{margin: "10px 0px"}}>
-                  {success ? <Alert severity="success">{success}</Alert> : null}
-                  {error ? <Alert severity="warning">{error}</Alert> : null}
+                  <div style={{ margin: "10px 0px" }}>
+                    {success ? (
+                      <Alert severity="success">{success}</Alert>
+                    ) : null}
+                    {error ? <Alert severity="warning">{error}</Alert> : null}
                   </div>
                   <Button
                     className={styles.deleteAcc}

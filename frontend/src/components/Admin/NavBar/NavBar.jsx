@@ -16,6 +16,7 @@ import {
 } from '@material-ui/core';
 import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
+import jwt_decode from "jwt-decode";
 import {
   BarChart as BarChartIcon,
   Lock as LockIcon,
@@ -41,6 +42,7 @@ import NavItem from './NavItem';
 import SettingsSystemDaydreamIcon from '@material-ui/icons/SettingsSystemDaydream';
 import GroupWorkIcon from '@material-ui/icons/GroupWork';
 import { APP_ROUTES } from '../../../utilities/constants/routes.constants';
+import { logout } from '../../../services/userService';
 
 /*
   Also don't forget to add APPBAR, NAVBAR in your admin pages.
@@ -174,6 +176,15 @@ const NavBar = ({ onMobileClose, openMobile }) => {
   const [contentsOpen, setContentsOpen] = React.useState(false);
   const [paymentOpen, setPaymentOpen] = React.useState(false);
 
+  const [decodedToken, setDecodedToken] = useState(null);
+
+  useEffect(() => {
+    const userToken = localStorage.getItem("user-token");
+    if (userToken) {
+      setDecodedToken(jwt_decode(userToken, { complete: true }));
+    }
+  }, [])
+
   const dashboardhandleClick = () => {
     setDashboardOpen(!dashboardOpen);
   };
@@ -213,7 +224,7 @@ const NavBar = ({ onMobileClose, openMobile }) => {
               <ListItemText
                 primary="Dashboards"
                 className={classes.font}
-                style={{ fontSize:'19px'}}
+                style={{ fontSize:'15px'}}
                 disableTypography
               />
               {dashboardOpen ? <ExpandLess /> : <ExpandMore />}
@@ -242,7 +253,7 @@ const NavBar = ({ onMobileClose, openMobile }) => {
               <ListItemText
                 primary="Books"
                 className={classes.font}
-                style={{ fontSize:'19px'}}
+                style={{ fontSize:'15px'}}
                 disableTypography
                 />
                 {bookOpen ? <ExpandLess /> : <ExpandMore />}
@@ -271,7 +282,7 @@ const NavBar = ({ onMobileClose, openMobile }) => {
               <ListItemText
                 primary="Delivery"
                 className={classes.font}
-                style={{ fontSize:'19px'}}
+                style={{ fontSize:'15px'}}
                 disableTypography
                 />
                 {deliveryOpen ? <ExpandLess /> : <ExpandMore />}
@@ -300,7 +311,7 @@ const NavBar = ({ onMobileClose, openMobile }) => {
               <ListItemText
                 primary="Contents"
                 className={classes.font}
-                style={{ fontSize:'19px'}}
+                style={{ fontSize:'15px'}}
                 disableTypography
                 />
                 {contentsOpen ? <ExpandLess /> : <ExpandMore />}
@@ -329,7 +340,7 @@ const NavBar = ({ onMobileClose, openMobile }) => {
               <ListItemText
                 primary="Wishlist"
                 className={classes.font}
-                style={{ fontSize:'19px'}}
+                style={{ fontSize:'15px'}}
                 disableTypography
                 />
                 {wishlistOpen ? <ExpandLess /> : <ExpandMore />}
@@ -349,6 +360,22 @@ const NavBar = ({ onMobileClose, openMobile }) => {
               </div>
               </List>
           </Collapse>
+          {
+            decodedToken?.role === 3 ?
+            <ListItem button>
+            <Icon style={{ position: 'relative', left: '-10px', height:'30px', width:'30px' }}>
+              <KeyIcon style={{ color: '#637b86' }} />
+            </Icon>
+            <ListItemText
+              primary="Manage Administrators"
+              className={classes.font}
+              onClick={() => window.location = APP_ROUTES.SUPERADMIN_MANAGE_ADMINS}
+              style={{ fontSize:'15px'}}
+              disableTypography
+            />
+          </ListItem> :
+          null
+          }
           <ListItem button>
             <Icon style={{ position: 'relative', left: '-10px', height:'30px', width:'30px' }}>
               <LockIcon style={{ color: '#637b86' }} />
@@ -356,8 +383,9 @@ const NavBar = ({ onMobileClose, openMobile }) => {
             <ListItemText
               primary="Logout"
               className={classes.font}
-              style={{ fontSize:'19px'}}
+              style={{ fontSize:'15px'}}
               disableTypography
+              onClick={logout}
             />
           </ListItem>
         </List>
