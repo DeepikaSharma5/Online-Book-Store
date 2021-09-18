@@ -8,7 +8,6 @@ export async function getWishListByID(id) {
   } else {
     return response.status(500).send({ error: "Error loading list" });
   }
-  throw response;
 }
 
 export async function searchWishListByName(name) {
@@ -19,17 +18,45 @@ export async function searchWishListByName(name) {
   } else {
     return response.status(500).send({ error: "Error loading list" });
   }
-  throw response;
+}
+
+export async function createReport(month, year) {
+  const userToken = localStorage.getItem("user-token");
+
+  const response = await fetch(baseUrl + "/report/" + month + "/" + year, {
+    method: "GET",
+
+    // Adding headers to the request
+    headers: {
+      "auth-token": userToken,
+      "Content-Type": "application/json; charset=UTF-8",
+    },
+  });
+  if (response.ok) {
+    return response.json();
+  } else {
+    return response
+      .status(500)
+      .send({ error: "Error generating report, please try again later." });
+  }
 }
 
 export async function getTopFiveTtems() {
-  const response = await fetch(baseUrl + "/top/wish/items");
+  const userToken = localStorage.getItem("user-token");
+  const response = await fetch(baseUrl + "/top/wish/items", {
+    method: "GET",
+
+    // Adding headers to the request
+    headers: {
+      "auth-token": userToken,
+      "Content-Type": "application/json; charset=UTF-8",
+    },
+  });
   if (response.ok) {
     return response.json();
   } else {
     return response.status(500).send({ error: "Error loading list" });
   }
-  throw response;
 }
 
 export async function addItemToList(itemDetails, listID) {
@@ -49,7 +76,7 @@ export async function addItemToList(itemDetails, listID) {
         if (!response.ok) {
           throw response;
         } else {
-            console.log("returned ",data)
+          console.log("returned ", data);
           return data;
         }
       });
@@ -61,48 +88,47 @@ export async function addItemToList(itemDetails, listID) {
 }
 
 export async function updateListStatus(listID, listStatus) {
-    try {
-      const response = await fetch(baseUrl + "/" + listID + "/" + listStatus, {
-        method: "PUT",
-      })
-        if (!response.ok) {
-            throw response;
-          } else {
-            return "ok";
-          }
-    } catch (error) {
-      let responseTxt = await error.text();
-      return responseTxt;
-    }
-  }
-
-  export async function newList(listID) {
-    try {
-      const newList = ({
-        userid: listID
-      })
-      const response = await fetch("http://localhost:6060/wishlist/new",{
-        method: "POST",
-
-        // Adding body or contents to send
-        body: JSON.stringify(newList),
-        
-        // Adding headers to the request
-        headers: {
-            'Content-Type': 'application/json; charset=UTF-8',
-        }
-
+  try {
+    const response = await fetch(baseUrl + "/" + listID + "/" + listStatus, {
+      method: "PUT",
     });
-        if (!response.ok) {
-            throw response;
-          } else {
-            return "ok";
-          }
-    } catch (error) {
-      let responseTxt = await error.text();
-      return responseTxt;
+    if (!response.ok) {
+      throw response;
+    } else {
+      return "ok";
     }
+  } catch (error) {
+    let responseTxt = await error.text();
+    return responseTxt;
   }
+}
+
+export async function newList(listID) {
+  try {
+    const newList = {
+      userid: listID,
+    };
+    const response = await fetch("http://localhost:6060/wishlist/new", {
+      method: "POST",
+
+      // Adding body or contents to send
+      body: JSON.stringify(newList),
+
+      // Adding headers to the request
+      headers: {
+        "Content-Type": "application/json; charset=UTF-8",
+      },
+    });
+    if (!response.ok) {
+      throw response;
+    } else {
+      return "ok";
+    }
+  } catch (error) {
+    let responseTxt = await error.text();
+    return responseTxt;
+  }
+}
 
 export async function deleteItemFromList(itemID, listID) {
   try {

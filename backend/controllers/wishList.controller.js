@@ -154,7 +154,7 @@ const genarateReport = async (req, res) => {
       },
       {
         $match: {
-          $and: [{ month: { $gte: reqMonth } }, { year: { $gte: reqYear } }],
+          $and: [{ month: reqMonth}, { year: reqYear }],
         },
       },
       {
