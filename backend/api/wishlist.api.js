@@ -10,5 +10,6 @@ module.exports = () => {
     router.delete('/:listid/:itemid', wishlistcontroller.deleteWishListItem);
     router.put('/:listid/:liststate', wishlistcontroller.updateisPrivate);
     router.get('/top/wish/items', wishlistcontroller.getTopFiveProducts);
+    router.get('/report/:month/:year', wishlistcontroller.genarateReport);
     return router;
 }
