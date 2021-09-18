@@ -1,7 +1,7 @@
 import React from "react";
 import { Router } from 'react-router-dom';
 import { createBrowserHistory } from 'history';
-//import PrivateRoute from "./PrivateRoute";
+import PrivateRoute from "./PrivateRoute";
 import PublicRoute from "./PublicRoute";
 import { APP_ROUTES } from "../utilities/constants/routes.constants";
 
@@ -67,8 +67,8 @@ const AppRoutes = () => {
             <PublicRoute exact path={APP_ROUTES.LOGIN} Component={Login} />
             <PublicRoute exact path={APP_ROUTES.SIGNUP} Component={Signup} />
 
-            <PublicRoute exact path={APP_ROUTES.USER_PERSONAL_DETAILS} Component={PersonalDetails} />
-            <PublicRoute exact path={APP_ROUTES.USER_WISHLIST} Component={MyWishList} />
+            <PrivateRoute allowed={[1]} exact path={APP_ROUTES.USER_PERSONAL_DETAILS} Component={PersonalDetails} />
+            <PrivateRoute allowed={[1]} exact path={APP_ROUTES.USER_WISHLIST} Component={MyWishList} />
             <PublicRoute path={APP_ROUTES.A_WISHLIST + ":id/:fname/:lname"} Component={WishList} />
             <PublicRoute exact path={APP_ROUTES.WISHLIST_SEARCH} Component={SearchWishList} />
 
@@ -76,7 +76,7 @@ const AppRoutes = () => {
             <PublicRoute exact path={APP_ROUTES.USER_PRIVATE_POLICY} Component={PrivatePolicy} />
             <PublicRoute exact path={APP_ROUTES.USER_TERMS_AND_CONDITIONS} Component={TermsAndConditions} />
             <PublicRoute exact path={APP_ROUTES.USER_DELIVERY_PDF} Component={MyOrderPdf} />
-            <PublicRoute exact path={APP_ROUTES.SUPERADMIN_MANAGE_ADMINS} Component={ManageAdmins} />
+            <PrivateRoute allowed={[3]} exact path={APP_ROUTES.SUPERADMIN_MANAGE_ADMINS} Component={ManageAdmins} />
 
             <PublicRoute exact path={APP_ROUTES.USER_VIEW_ADDRESS} Component={ViewDeliveryAddress} />
             <PublicRoute exact path={APP_ROUTES.USER_ADD_ADDRESS} Component={AddDeliveryAddress} />
@@ -113,7 +113,7 @@ const AppRoutes = () => {
             <PublicRoute exact path={APP_ROUTES.ADMIN_UPDATE_CATEGORY} Component={UpdateCategory} />
             <PublicRoute exact path={APP_ROUTES.ADMIN_PRODUCT_DASHBOARD} Component={ProductDashboard} />
             <PublicRoute exact path={APP_ROUTES.ADMIN_PAYMENT_DASHBOARD} Component={PaymentDashboard} />
-            <PublicRoute exact path={APP_ROUTES.ADMIN_REPORT_WISHLIST} Component={WishListReport} />
+            <PrivateRoute allowed={[2, 3]} exact path={APP_ROUTES.ADMIN_REPORT_WISHLIST} Component={WishListReport} />
             <PublicRoute exact path={APP_ROUTES.HOME} Component={HomeScreen} />
             <PublicRoute exact path={APP_ROUTES.PRODUCT} Component={ProductScreen} />
             <PublicRoute exact path={APP_ROUTES.CART} Component={CartScreen} />
