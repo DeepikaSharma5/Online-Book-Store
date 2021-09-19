@@ -79,10 +79,10 @@ const AppRoutes = () => {
             <PublicRoute exact path={APP_ROUTES.USER_DELIVERY_PDF} Component={MyOrderPdf} />
             <PrivateRoute allowed={[3]} exact path={APP_ROUTES.SUPERADMIN_MANAGE_ADMINS} Component={ManageAdmins} />
 
-            <PublicRoute exact path={APP_ROUTES.USER_VIEW_ADDRESS} Component={ViewDeliveryAddress} />
-            <PublicRoute exact path={APP_ROUTES.USER_ADD_ADDRESS} Component={AddDeliveryAddress} />
-            <PublicRoute exact path={APP_ROUTES.USER_UPDATE_ADDRESS} Component={UpdateDeliveryAddress} />
-            <PublicRoute exact path={APP_ROUTES.USER_MY_DELIVERIES} Component={MyDeliveries} />
+            <PrivateRoute allowed={[1]} exact path={APP_ROUTES.USER_VIEW_ADDRESS} Component={ViewDeliveryAddress} />
+            <PrivateRoute allowed={[1]} exact path={APP_ROUTES.USER_ADD_ADDRESS} Component={AddDeliveryAddress} />
+            <PrivateRoute allowed={[1]} exact path={APP_ROUTES.USER_UPDATE_ADDRESS} Component={UpdateDeliveryAddress} />
+            <PrivateRoute allowed={[1]} exact path={APP_ROUTES.USER_MY_DELIVERIES} Component={MyDeliveries} />
             <PublicRoute exact path={APP_ROUTES.USER_HOMEPAGE} Component={Homepage} />
             <PublicRoute exact path={APP_ROUTES.PRODUCT_PAGE} Component={ProductPage} />
             <PublicRoute exact path={APP_ROUTES.BOOKS} Component={Books} />
