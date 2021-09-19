@@ -79,7 +79,7 @@ const Checkout = () => {
       console.log(error);
       Swal.fire({
         title: "error!",
-        text: "Not Success",
+        text: "Fill your card details",
         icon: 'error',
         position: 'center',
         showConfirmButton: false,

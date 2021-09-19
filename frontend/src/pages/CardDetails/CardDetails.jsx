@@ -50,11 +50,11 @@ const CardDetails = () => {
                 <CardContent>
                   
                     <p>Card Holder Name</p>
-                    <p style={{borderStyle:'solid',borderWidth:"2px"}}>{name}</p>
+                    <p style={{borderStyle:'solid',borderWidth:"2px"}}>{name||'no name details added'}</p>
                     <p>Card Number</p>
-                    <p style={{borderStyle:'solid',borderWidth:"2px"}}>{card_number}</p>
+                    <p style={{borderStyle:'solid',borderWidth:"2px"}}>{card_number || 'no card number addedd'}</p>
                     <p>Expiry Date</p>
-                    <p style={{borderStyle:'solid',borderWidth:"2px"}}>{expiry_date}</p>
+                    <p style={{borderStyle:'solid',borderWidth:"2px"}}>{expiry_date|| 'no expiry date addedd'}</p>
                         
                    
                 </CardContent>
