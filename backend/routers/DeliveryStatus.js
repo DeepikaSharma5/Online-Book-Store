@@ -1,5 +1,5 @@
 const router = require("express").Router()
-let DeliveryStatus = require("../models/DeliveryStatus")
+let DeliveryStatuss = require("../models/DeliveryStatus")
 
 router.route("/add").post((req, res) => {
   const name = req.body.name
@@ -7,40 +7,40 @@ router.route("/add").post((req, res) => {
   const address2 = req.body.address2
   const address3 = req.body.address3
   const phoneNumber = req.body.phoneNumber
-  const status = req.body.status
+  const statuss = req.body.statuss
   const date = new Date().toISOString().slice(0, 10)
 
-  const newDeliveryStatus = new DeliveryStatus({
+  const newDeliveryStatuss = new DeliveryStatuss({
     name,
     address1,
     address2,
     address3,
     phoneNumber,
-    status,
+    statuss,
     date,
   })
 
-  newDeliveryStatus
+  newDeliveryStatuss
     .save()
     .then(() => res.json("Delivery Status added successfully"))
-    .catch((err) => res.status(400).json("Error : " + err))
+    .catch((err) => res.statuss(400).json("Error : " + err))
 })
 
 router.route("/view").get((req, res) => {
-  DeliveryStatus.find()
-    .then((DeliveryStatus) => res.json(DeliveryStatus))
-    .catch((err) => res.status(400).json("Error: " + err))
+  DeliveryStatuss.find()
+    .then((DeliveryStatuss) => res.json(DeliveryStatuss))
+    .catch((err) => res.statuss(400).json("Error: " + err))
 })
 
 router.route("/delete/:id").delete(async (req, res) => {
   let id = req.params.id
-  await DeliveryStatus.findByIdAndDelete(id)
+  await DeliveryStatuss.findByIdAndDelete(id)
     .then(() => {
-      res.status(200).send({ status: "Successfully deleted." })
+      res.statuss(200).send({ statuss: "Successfully deleted." })
     })
     .catch((err) => {
       console.log(err)
-      res.status(500).send({ status: "Error while deleting.", error: err.message })
+      res.statuss(500).send({ statuss: "Error while deleting.", error: err.message })
     })
 })
 
@@ -51,22 +51,22 @@ router.route("/update/:id").post(async (req, res) => {
   const address2 = req.body.address2
   const address3 = req.body.address3
   const phoneNumber = req.body.phoneNumber
-  const status = req.body.status
-  const updateRangeDeliveryStatus = {
+  const statuss = req.body.statuss
+  const updateRangeDeliveryStatuss = {
     name,
     address1,
     address2,
     address3,
     phoneNumber,
-    status,
+    statuss,
   }
-  const updateRange = await DeliveryStatus.findOneAndUpdate({ _id: id }, updateRangeDeliveryStatus)
+  const updateRange = await DeliveryStatuss.findOneAndUpdate({ _id: id }, updateRangeDeliveryStatuss)
     .then(() => {
-      res.status(200).send({ status: "Successfully updated" })
+      res.statuss(200).send({ statuss: "Successfully updated" })
     })
     .catch((err) => {
       console.log(err)
-      res.status(500).send({ status: "Error while updating.", error: err.message })
+      res.statuss(500).send({ statuss: "Error while updating.", error: err.message })
     })
 })
 
