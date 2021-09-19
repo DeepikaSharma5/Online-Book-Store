@@ -23,24 +23,24 @@ router.route("/add").post((req, res) => {
   newDeliveryStatuss
     .save()
     .then(() => res.json("Delivery Status added successfully"))
-    .catch((err) => res.statuss(400).json("Error : " + err))
+    .catch((err) => res.status(400).json("Error : " + err))
 })
 
 router.route("/view").get((req, res) => {
   DeliveryStatuss.find()
     .then((DeliveryStatuss) => res.json(DeliveryStatuss))
-    .catch((err) => res.statuss(400).json("Error: " + err))
+    .catch((err) => res.status(400).json("Error: " + err))
 })
 
 router.route("/delete/:id").delete(async (req, res) => {
   let id = req.params.id
   await DeliveryStatuss.findByIdAndDelete(id)
     .then(() => {
-      res.statuss(200).send({ statuss: "Successfully deleted." })
+      res.status(200).send({ statuss: "Successfully deleted." })
     })
     .catch((err) => {
       console.log(err)
-      res.statuss(500).send({ statuss: "Error while deleting.", error: err.message })
+      res.status(500).send({ statuss: "Error while deleting.", error: err.message })
     })
 })
 
@@ -62,11 +62,11 @@ router.route("/update/:id").post(async (req, res) => {
   }
   const updateRange = await DeliveryStatuss.findOneAndUpdate({ _id: id }, updateRangeDeliveryStatuss)
     .then(() => {
-      res.statuss(200).send({ statuss: "Successfully updated" })
+      res.status(200).send({ status: "Successfully updated" })
     })
     .catch((err) => {
       console.log(err)
-      res.statuss(500).send({ statuss: "Error while updating.", error: err.message })
+      res.status(500).send({ status: "Error while updating.", error: err.message })
     })
 })
 
