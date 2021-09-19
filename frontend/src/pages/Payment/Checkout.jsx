@@ -1,4 +1,4 @@
-import React, {useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { reactLocalStorage } from "reactjs-localstorage";
 import axios from 'axios';
 import Swal from 'sweetalert2';
@@ -15,67 +15,74 @@ import { getCardDetailsById } from '../../services/getCardDetailsById'
 
 const Checkout = () => {
 
-    const[books,setBooks] = useState([]);
-    const [quantity,setQuantity] = useState('');
-    const[total,setTotal] = useState('');
-    const[username,setUsername] = useState('');
-    const [status,setStatus] = useState('');
-    
+  const [books, setBooks] = useState([]);
+  const [quantity, setQuantity] = useState('');
+  const [total, setTotal] = useState('');
+  const [username, setUsername] = useState('');
+  const [status, setStatus] = useState('');
 
-    const userToken = localStorage.getItem("user-token");
-    const decodedToken = jwt_decode(userToken, { complete: true });
-    console.log(decodedToken.name);
-    
+  const [name, setName] = useState("Deepika Srinivasan");
+  const [address1, setAddress1] = useState("No: 11-3/1");
+  const [address2, setAddress2] = useState("Arethusa Lane");
+  const [address3, setAddress3] = useState("Colombo - 06");
+  const [phoneNumber, setPhoneNumber] = useState("0768777199");
+  const [statuss, setStatuss] = useState("Pending");
+
+  const userToken = localStorage.getItem("user-token");
+  const decodedToken = jwt_decode(userToken, { complete: true });
+  console.log(decodedToken.name);
+
   const dispatch = useDispatch();
 
   const cart = useSelector((state) => state.cart);
   const { cartItems } = cart;
 
   const handleSubmit = async () => {
-    
+
     const newCardDetail = {
-    username:decodedToken.name,
-      books:cartItems.map((item) => (
-          item.product
+      username: decodedToken.name,
+      books: cartItems.map((item) => (
+        item.product
       )),
-      quantity:cartItems.reduce((qty, item) => Number(item.qty) + qty, 0),
-      total:cartItems.reduce(
+      quantity: cartItems.reduce((qty, item) => Number(item.qty) + qty, 0),
+      total: cartItems.reduce(
         (price, item) => item.price * Number(item.qty) + price,
         0
       ),
-      status:'success'
+      status: 'success'
     };
-  
+
 
     try {
-        const response = await getCardDetailsById(decodedToken.name);
-        console.log(response.name)
-        if(response === null){
-            Swal.fire({
-                title: "error!",
-                text: "fill ur card details",
-                icon: 'error',
-                position: 'center',
-                showConfirmButton: false,
-                timer: 2000,
-                timerProgressBar: true,
-                didOpen: (toast) => {
-                    toast.addEventListener('mouseenter', Swal.stopTimer)
-                    toast.addEventListener('mouseleave', Swal.resumeTimer)
-                }
-            });
-        }
-        else{
-      const res = await axios.post("http://localhost:6060/payment/add", newCardDetail);
-      Swal.fire({
-        title: "Success!",
-        text: "Added Successed!",
-        icon: 'success',
-        confirmButtonText: "OK",
-        type: "success"
-    })
-      console.log(res.data);
-   } } catch (error) {
+      const response = await getCardDetailsById(decodedToken.name);
+      console.log(response.name)
+      if (response === null) {
+        Swal.fire({
+          title: "error!",
+          text: "fill ur card details",
+          icon: 'error',
+          position: 'center',
+          showConfirmButton: false,
+          timer: 2000,
+          timerProgressBar: true,
+          didOpen: (toast) => {
+            toast.addEventListener('mouseenter', Swal.stopTimer)
+            toast.addEventListener('mouseleave', Swal.resumeTimer)
+          }
+        });
+      }
+      else {
+        const res = await axios.post("http://localhost:6060/payment/add", newCardDetail);
+        Swal.fire({
+          title: "Success!",
+          text: "Added Successed!",
+          icon: 'success',
+          confirmButtonText: "OK",
+          type: "success"
+        })
+        console.log(res.data);
+      }
+    } catch (error) {
       console.log(error);
       Swal.fire({
         title: "error!",
@@ -86,12 +93,26 @@ const Checkout = () => {
         timer: 2000,
         timerProgressBar: true,
         didOpen: (toast) => {
-            toast.addEventListener('mouseenter', Swal.stopTimer)
-            toast.addEventListener('mouseleave', Swal.resumeTimer)
+          toast.addEventListener('mouseenter', Swal.stopTimer)
+          toast.addEventListener('mouseleave', Swal.resumeTimer)
         }
-    });
+      });
     }
   };
+
+  const viewOrders = (e) => {
+    const newAddress = {
+      name,
+      address1,
+      address2,
+      address3,
+      phoneNumber,
+      statuss
+    }
+    axios.post("http://localhost:6060/delivery-status/add", newAddress).then(() => {
+      window.location.href = APP_ROUTES.USER_MY_DELIVERIES;
+    })
+  }
 
   const qtyChangeHandler = (id, qty) => {
     dispatch(addToCart(id, qty));
@@ -145,7 +166,7 @@ const Checkout = () => {
               <CheckoutItem
                 key={item.product}
                 item={item}
-                
+
               />
             ))
           )}
@@ -158,6 +179,9 @@ const Checkout = () => {
           </div>
           <div>
             <button onClick={() => handleSubmit()}>Pay</button>
+          </div>
+          <div>
+            <button onClick={() => viewOrders()}>View Order</button>
           </div>
         </div>
       </div>

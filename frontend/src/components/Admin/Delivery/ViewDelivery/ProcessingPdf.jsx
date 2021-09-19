@@ -65,7 +65,7 @@ class ProcessingPdf extends Component {
                                         </tr>
                                     </thead>
                                     {this.state?.status?.length > 0 && this.state.status.map((item, index) => {
-                                        if (item.status === "Processing") {
+                                        if (item.statuss === "Processing") {
                                             return (
                                                 <tbody key={index}>
                                                     <tr>

@@ -65,7 +65,7 @@ class PendingPdf extends Component {
                                         </tr>
                                     </thead>
                                     {this.state?.status?.length > 0 && this.state.status.map((item, index) => {
-                                        if (item.status === "Pending") {
+                                        if (item.statuss === "Pending") {
                                             return (
                                                 <tbody key={index}>
                                                     <tr>

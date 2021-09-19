@@ -77,13 +77,12 @@ class PrivatestatusBody extends Component {
     }
     
 
-    updateStatus(id, address1, address2, address3, phoneNumber, status) {
-        reactLocalStorage.setObject("UpdateStatus", [id, address1, address2, address3, phoneNumber, status]);
+    updateStatus(id, address1, address2, address3, phoneNumber, statuss) {
+        reactLocalStorage.setObject("UpdateStatus", [id, address1, address2, address3, phoneNumber, statuss]);
         window.location.href = APP_ROUTES.ADMIN_UPDATE_DELIVERY;
     }
 
     render() {
-        console.log("Dropdown", this.state.selectedValue);
         return (
             <div style={{ position: 'relative', left: '110px' }}>
                 <div className="card card border border-light shadow-0 mb-3" style={{ maxWidth: '100rem', margin: 'auto', padding: '10px' }}>
@@ -152,25 +151,25 @@ class PrivatestatusBody extends Component {
                                                                     {item.state === '' ?
                                                                         <p></p>
                                                                         :
-                                                                        item.status === 'Pending' ?
-                                                                            <button type="button" className="btn btn-danger" style={{ width: '120px' }}>{item.status}</button>
+                                                                        item.statuss === 'Pending' ?
+                                                                            <button type="button" className="btn btn-danger" style={{ width: '120px' }}>{item.statuss}</button>
                                                                             :
-                                                                            item.status === 'Delivered' ?
-                                                                                <button type="button" className="btn btn-success" style={{ width: '120px' }}>{item.status}</button>
+                                                                            item.statuss === 'Delivered' ?
+                                                                                <button type="button" className="btn btn-success" style={{ width: '120px' }}>{item.statuss}</button>
                                                                                 :
-                                                                                item.status === 'Processing' ?
-                                                                                    <button type="button" className="btn btn-info" style={{ width: '120px' }}>{item.status}</button>
+                                                                                item.statuss === 'Processing' ?
+                                                                                    <button type="button" className="btn btn-info" style={{ width: '120px' }}>{item.statuss}</button>
                                                                                     :
-                                                                                    <button type="button" className="btn btn-warning" style={{ width: '120px' }}>{item.status}</button>
+                                                                                    <button type="button" className="btn btn-warning" style={{ width: '120px' }}>{item.statuss}</button>
                                                                     }
                                                                 </td>
                                                                 <td>
-                                                                    <button type="button" className="btn btn-outline-success" onClick={() => this.updateStatus(item._id, item.address1, item.address2, item.address3, item.phoneNumber, item.status)}>
+                                                                    <button type="button" className="btn btn-outline-success" onClick={() => this.updateStatus(item._id, item.address1, item.address2, item.address3, item.phoneNumber, item.statuss)}>
                                                                         <Pencil /> Update
                                                                     </button>
                                                                 </td>
                                                                 <td>
-                                                                    {item.status === "Delivered" ?
+                                                                    {item.statuss === "Delivered" ?
                                                                         <button type="button" className="btn btn-outline-danger" onClick={() => this.deleteData(item._id)}>
                                                                             <Trash /> Delete
                                                                         </button>
@@ -186,7 +185,7 @@ class PrivatestatusBody extends Component {
                                                 }
                                             })}
                                             {this.state?.status?.length > 0 && this.state.selectedValue === "Delivered" && this.state.status.map((item, index) => {
-                                                if (item.status === "Delivered") {
+                                                if (item.statuss === "Delivered") {
                                                     return (
                                                         <tbody key={index}>
                                                             <tr>
@@ -198,19 +197,19 @@ class PrivatestatusBody extends Component {
                                                                         <p></p>
                                                                         :
                                                                         item.status === 'Pending' ?
-                                                                            <button type="button" className="btn btn-danger" style={{ width: '120px' }}>{item.status}</button>
+                                                                            <button type="button" className="btn btn-danger" style={{ width: '120px' }}>{item.statuss}</button>
                                                                             :
                                                                             item.status === 'Delivered' ?
-                                                                                <button type="button" className="btn btn-success" style={{ width: '120px' }}>{item.status}</button>
+                                                                                <button type="button" className="btn btn-success" style={{ width: '120px' }}>{item.statuss}</button>
                                                                                 :
                                                                                 item.status === 'Processing' ?
-                                                                                    <button type="button" className="btn btn-info" style={{ width: '120px' }}>{item.status}</button>
+                                                                                    <button type="button" className="btn btn-info" style={{ width: '120px' }}>{item.statuss}</button>
                                                                                     :
-                                                                                    <button type="button" className="btn btn-warning" style={{ width: '120px' }}>{item.status}</button>
+                                                                                    <button type="button" className="btn btn-warning" style={{ width: '120px' }}>{item.statuss}</button>
                                                                     }
                                                                 </td>
                                                                 <td>
-                                                                    <button type="button" className="btn btn-outline-success" onClick={() => this.updateStatus(item._id, item.address1, item.address2, item.address3, item.phoneNumber, item.status)}>
+                                                                    <button type="button" className="btn btn-outline-success" onClick={() => this.updateStatus(item._id, item.address1, item.address2, item.address3, item.phoneNumber, item.statuss)}>
                                                                         <Pencil /> Update
                                                                     </button>
                                                                 </td>
@@ -231,7 +230,7 @@ class PrivatestatusBody extends Component {
                                                 }
                                             })}
                                             {this.state?.status?.length > 0 && this.state.selectedValue === "Pending" && this.state.status.map((item, index) => {
-                                                if (item.status === "Pending") {
+                                                if (item.statuss === "Pending") {
                                                     return (
                                                         <tbody key={index}>
                                                             <tr>
@@ -243,19 +242,19 @@ class PrivatestatusBody extends Component {
                                                                         <p></p>
                                                                         :
                                                                         item.status === 'Pending' ?
-                                                                            <button type="button" className="btn btn-danger" style={{ width: '120px' }}>{item.status}</button>
+                                                                            <button type="button" className="btn btn-danger" style={{ width: '120px' }}>{item.statuss}</button>
                                                                             :
                                                                             item.status === 'Delivered' ?
-                                                                                <button type="button" className="btn btn-success" style={{ width: '120px' }}>{item.status}</button>
+                                                                                <button type="button" className="btn btn-success" style={{ width: '120px' }}>{item.statuss}</button>
                                                                                 :
                                                                                 item.status === 'Processing' ?
-                                                                                    <button type="button" className="btn btn-info" style={{ width: '120px' }}>{item.status}</button>
+                                                                                    <button type="button" className="btn btn-info" style={{ width: '120px' }}>{item.statuss}</button>
                                                                                     :
-                                                                                    <button type="button" className="btn btn-warning" style={{ width: '120px' }}>{item.status}</button>
+                                                                                    <button type="button" className="btn btn-warning" style={{ width: '120px' }}>{item.statuss}</button>
                                                                     }
                                                                 </td>
                                                                 <td>
-                                                                    <button type="button" className="btn btn-outline-success" onClick={() => this.updateStatus(item._id, item.address1, item.address2, item.address3, item.phoneNumber, item.status)}>
+                                                                    <button type="button" className="btn btn-outline-success" onClick={() => this.updateStatus(item._id, item.address1, item.address2, item.address3, item.phoneNumber, item.statuss)}>
                                                                         <Pencil /> Update
                                                                     </button>
                                                                 </td>
@@ -276,7 +275,7 @@ class PrivatestatusBody extends Component {
                                                 }
                                             })}
                                             {this.state?.status?.length > 0 && this.state.selectedValue === "Processing" && this.state.status.map((item, index) => {
-                                                if (item.status === "Processing") {
+                                                if (item.statuss === "Processing") {
                                                     return (
                                                         <tbody key={index}>
                                                             <tr>
@@ -288,19 +287,19 @@ class PrivatestatusBody extends Component {
                                                                         <p></p>
                                                                         :
                                                                         item.status === 'Pending' ?
-                                                                            <button type="button" className="btn btn-danger" style={{ width: '120px' }}>{item.status}</button>
+                                                                            <button type="button" className="btn btn-danger" style={{ width: '120px' }}>{item.statuss}</button>
                                                                             :
                                                                             item.status === 'Delivered' ?
-                                                                                <button type="button" className="btn btn-success" style={{ width: '120px' }}>{item.status}</button>
+                                                                                <button type="button" className="btn btn-success" style={{ width: '120px' }}>{item.statuss}</button>
                                                                                 :
                                                                                 item.status === 'Processing' ?
-                                                                                    <button type="button" className="btn btn-info" style={{ width: '120px' }}>{item.status}</button>
+                                                                                    <button type="button" className="btn btn-info" style={{ width: '120px' }}>{item.statuss}</button>
                                                                                     :
-                                                                                    <button type="button" className="btn btn-warning" style={{ width: '120px' }}>{item.status}</button>
+                                                                                    <button type="button" className="btn btn-warning" style={{ width: '120px' }}>{item.statuss}</button>
                                                                     }
                                                                 </td>
                                                                 <td>
-                                                                    <button type="button" className="btn btn-outline-success" onClick={() => this.updateStatus(item._id, item.address1, item.address2, item.address3, item.phoneNumber, item.status)}>
+                                                                    <button type="button" className="btn btn-outline-success" onClick={() => this.updateStatus(item._id, item.address1, item.address2, item.address3, item.phoneNumber, item.statuss)}>
                                                                         <Pencil /> Update
                                                                     </button>
                                                                 </td>
@@ -323,7 +322,7 @@ class PrivatestatusBody extends Component {
                                             {this.state?.status?.length > 0 && this.state.selectedValue === "Shipped" && this.state.status.map((item, index) => {
                                                 const filterText = this.state.filterText;
                                                 const id = item._id;
-                                                if (item.status === "Shipped") {
+                                                if (item.statuss === "Shipped") {
                                                     return (
                                                         <tbody key={index}>
                                                             <tr>
@@ -335,19 +334,19 @@ class PrivatestatusBody extends Component {
                                                                         <p></p>
                                                                         :
                                                                         item.status === 'Pending' ?
-                                                                            <button type="button" className="btn btn-danger" style={{ width: '120px' }}>{item.status}</button>
+                                                                            <button type="button" className="btn btn-danger" style={{ width: '120px' }}>{item.statuss}</button>
                                                                             :
                                                                             item.status === 'Delivered' ?
-                                                                                <button type="button" className="btn btn-success" style={{ width: '120px' }}>{item.status}</button>
+                                                                                <button type="button" className="btn btn-success" style={{ width: '120px' }}>{item.statuss}</button>
                                                                                 :
                                                                                 item.status === 'Processing' ?
-                                                                                    <button type="button" className="btn btn-info" style={{ width: '120px' }}>{item.status}</button>
+                                                                                    <button type="button" className="btn btn-info" style={{ width: '120px' }}>{item.statuss}</button>
                                                                                     :
-                                                                                    <button type="button" className="btn btn-warning" style={{ width: '120px' }}>{item.status}</button>
+                                                                                    <button type="button" className="btn btn-warning" style={{ width: '120px' }}>{item.statuss}</button>
                                                                     }
                                                                 </td>
                                                                 <td>
-                                                                    <button type="button" className="btn btn-outline-success" onClick={() => this.updateStatus(item._id, item.address1, item.address2, item.address3, item.phoneNumber, item.status)}>
+                                                                    <button type="button" className="btn btn-outline-success" onClick={() => this.updateStatus(item._id, item.address1, item.address2, item.address3, item.phoneNumber, item.statuss)}>
                                                                         <Pencil /> Update
                                                                     </button>
                                                                 </td>

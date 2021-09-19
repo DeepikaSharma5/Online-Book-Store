@@ -15,7 +15,7 @@ export default function MyOrderPdf() {
     const address2 = getPdf[3];
     const address3 = getPdf[4];
     const phoneNumber = getPdf[5];
-    const status = getPdf[6]
+    const statuss = getPdf[6]
     const date = getPdf[7];
     const updatedAt = getPdf[8];
 
@@ -72,9 +72,9 @@ export default function MyOrderPdf() {
                                             </div>
                                         </div>
                                         <div className="form-group row">
-                                            <label htmlFor="inputSubject" className="col-md-12 col-form-label col-form-label-md" style={{ fontSize: "130%", fontWeight: "bold" }}>Order Status : </label>
+                                            <label htmlFor="inputSubject" className="col-md-12 col-form-label col-form-label-md" style={{ fontSize: "130%", fontWeight: "bold" }}>Order Statuss : </label>
                                             <div className="col-sm-12" style={{ paddingTop: '1px' }}>
-                                                <p className="card-text">{status}</p>
+                                                <p className="card-text">{statuss}</p>
                                             </div>
                                         </div>
                                         <div className="form-group row">
@@ -84,7 +84,7 @@ export default function MyOrderPdf() {
                                             </div>
                                         </div>
                                         <div className="form-group row">
-                                            <label htmlFor="inputSubject" className="col-md-12 col-form-label col-form-label-md" style={{ fontSize: "130%", fontWeight: "bold" }}>Status Updated Date : </label>
+                                            <label htmlFor="inputSubject" className="col-md-12 col-form-label col-form-label-md" style={{ fontSize: "130%", fontWeight: "bold" }}>Statuss Updated Date : </label>
                                             <div className="col-sm-12" style={{ paddingTop: '1px' }}>
                                                 <p className="card-text">{updatedAt}</p>
                                             </div>

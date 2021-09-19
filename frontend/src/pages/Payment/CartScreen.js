@@ -30,7 +30,7 @@ const CartScreen = () => {
 
   const handleCart = (id) => {
     cartItems.map((items) => console.log(items.product));
-    window.location.href = APP_ROUTES.USER_CHECKOUT;
+    window.location.href = APP_ROUTES.USER_CHECKOUT_VIEW_ADDRESS;
   };
 
   const viewCheckout = (product, title, quantity) => {
