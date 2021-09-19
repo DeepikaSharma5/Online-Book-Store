@@ -41,6 +41,27 @@ export async function createReport(month, year) {
   }
 }
 
+export async function buyWishItem(itemId, boughtState) {
+  const userToken = localStorage.getItem("user-token");
+
+  const response = await fetch(baseUrl + "/buy-wish-item/" + itemId + "/" + boughtState, {
+    method: "PATCH",
+
+    // Adding headers to the request
+    headers: {
+      "auth-token": userToken,
+      "Content-Type": "application/json; charset=UTF-8",
+    },
+  });
+  if (response.ok) {
+    return response.json();
+  } else {
+    return response
+      .status(500)
+      .send({ error: "Error adding item to cart, please try logging in again." });
+  }
+}
+
 export async function getTopFiveTtems() {
   const userToken = localStorage.getItem("user-token");
   const response = await fetch(baseUrl + "/top/wish/items", {
