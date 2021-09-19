@@ -37,7 +37,7 @@ export async function createReport(month, year) {
   } else {
     return response
       .status(500)
-      .send({ error: "Error generating report, please try again later." });
+      .send({ error: "Error generating report, please try logging in again." });
   }
 }
 
@@ -60,6 +60,7 @@ export async function getTopFiveTtems() {
 }
 
 export async function addItemToList(itemDetails, listID) {
+  const userToken = localStorage.getItem("user-token");
   try {
     const response = await fetch(baseUrl + "/" + listID, {
       method: "POST",
@@ -69,6 +70,7 @@ export async function addItemToList(itemDetails, listID) {
 
       // Adding headers to the request
       headers: {
+        'auth-token': userToken,
         "Content-Type": "application/json; charset=UTF-8",
       },
     }).then((response) => {
@@ -88,9 +90,15 @@ export async function addItemToList(itemDetails, listID) {
 }
 
 export async function updateListStatus(listID, listStatus) {
+  const userToken = localStorage.getItem("user-token");
   try {
     const response = await fetch(baseUrl + "/" + listID + "/" + listStatus, {
       method: "PUT",
+
+      headers: {
+        'auth-token': userToken,
+        "Content-Type": "application/json; charset=UTF-8",
+      },
     });
     if (!response.ok) {
       throw response;
@@ -131,9 +139,15 @@ export async function newList(listID) {
 }
 
 export async function deleteItemFromList(itemID, listID) {
+  const userToken = localStorage.getItem("user-token");
   try {
     const response = await fetch(baseUrl + "/" + listID + "/" + itemID, {
       method: "DELETE",
+
+      headers: {
+        'auth-token': userToken,
+        "Content-Type": "application/json; charset=UTF-8",
+      },
     });
 
     if (!response.ok) {

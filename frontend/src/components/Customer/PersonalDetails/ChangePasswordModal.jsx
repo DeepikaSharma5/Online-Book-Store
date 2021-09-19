@@ -132,7 +132,7 @@ const ChangePasswordModal = ({ currentpassword }) => {
               handleClose();
             }, 2000);
           } else {
-            setError("Error updating password, please try again later.");
+            setError("Error updating password, please try logging in again.");
             setTimeout(() => {
               setError("");
               handleClose();

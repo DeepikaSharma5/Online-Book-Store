@@ -97,6 +97,22 @@ const deleteProductFromWishList = async (listID, itemID) => {
   );
 };
 
+const buyProductFromWishList = async (req, res) => {
+    if (req.params && req.params.itemid && req.params.boughtstate) {
+      await WishListItem.findByIdAndUpdate(
+        req.params.itemid,
+        { isBought: req.params.boughtstate },
+        { new: true, useFindAndModify: false }
+      )
+        .then((data) => {
+          res.status(200).send({ data: data });
+        })
+        .catch((error) => {
+          res.status(500).send({ error: error.message });
+        });
+    }
+  };
+
 const updateisPrivate = async (req, res) => {
   if (req.params && req.params.listid && req.params.liststate) {
     await User.findByIdAndUpdate(
@@ -202,6 +218,7 @@ module.exports = {
   deleteWishListItem,
   getWishListItems,
   updateisPrivate,
+  buyProductFromWishList,
   searchWishList,
   getTopFiveProducts,
   genarateReport,
