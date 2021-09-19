@@ -2,6 +2,7 @@ import React,{useState,useEffect} from 'react'
 import {Grid,Card,CardContent,Button} from "@material-ui/core"
 import { getCardDetailsById } from '../../services/getCardDetailsById'
 import Header from '../../components/Customer/Homepage/Header/Header'
+import jwt_decode from "jwt-decode";
 
 
 const CardDetails = () => {
@@ -12,7 +13,12 @@ const CardDetails = () => {
     const[id,setId] = useState("611e6c4e615edb22980d2660");
 
     const getCardDetails = async () => {
-		const res = await getCardDetailsById(id);
+
+        const userToken = localStorage.getItem("user-token");
+        const decodedToken = jwt_decode(userToken, { complete: true });
+        console.log(`username is ${decodedToken.name}`);
+		const res = await getCardDetailsById(decodedToken.name);
+        console.log(res);
 		if (res) {
 			console.log(`name is ${res.name}`);
             console.log(`number is ${res.card_number}`);

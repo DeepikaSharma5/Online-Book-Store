@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { reactLocalStorage } from "reactjs-localstorage";
 
 import { useDispatch, useSelector } from "react-redux";
-
+import jwt_decode from "jwt-decode";
 import "./CartScreen.css";
 import CartItem from "../../components/Cart/CartItem";
 import { Link } from "react-router-dom";
@@ -29,7 +29,7 @@ const CartScreen = () => {
   };
 
   const handleCart = (id) => {
-    cartItems.map((items) => console.log(items.id));
+    cartItems.map((items) => console.log(items.product));
     window.location.href = APP_ROUTES.USER_CHECKOUT;
   };
 

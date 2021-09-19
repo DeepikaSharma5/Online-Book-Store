@@ -1,8 +1,8 @@
 import axiosInstance from "./axiosInstance";
 
-export const getCardDetailsById = async (id) => {
+export const getCardDetailsById = async (name) => {
   try {
-    const res = await axiosInstance.get(`/card/${id}`, {
+    const res = await axiosInstance.get(`/card/${name}`, {
       data: null,
     });
     return res.data;

@@ -3,7 +3,7 @@ import { reactLocalStorage } from "reactjs-localstorage";
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import { useDispatch, useSelector } from "react-redux";
-
+import jwt_decode from "jwt-decode";
 import "./CartScreen.css";
 import CartItem from "../../components/Cart/CartItem";
 import CheckoutItem from '../../components/Checkout/Checkout';
@@ -11,6 +11,7 @@ import { Link } from "react-router-dom";
 import { addToCart, removeFromcart } from "../../redux/actions/cartActions";
 import Header from "../../components/Customer/Homepage/Header/Header";
 import { APP_ROUTES } from "../../utilities/constants/routes.constants";
+import { getCardDetailsById } from '../../services/getCardDetailsById'
 
 const Checkout = () => {
 
@@ -21,7 +22,10 @@ const Checkout = () => {
     const [status,setStatus] = useState('');
     
 
- 
+    const userToken = localStorage.getItem("user-token");
+    const decodedToken = jwt_decode(userToken, { complete: true });
+    console.log(decodedToken.name);
+    
   const dispatch = useDispatch();
 
   const cart = useSelector((state) => state.cart);
@@ -30,7 +34,7 @@ const Checkout = () => {
   const handleSubmit = async () => {
     
     const newCardDetail = {
-    username:'kajan',
+    username:decodedToken.name,
       books:cartItems.map((item) => (
           item.product
       )),
@@ -44,6 +48,24 @@ const Checkout = () => {
   
 
     try {
+        const response = await getCardDetailsById(decodedToken.name);
+        console.log(response.name)
+        if(response === null){
+            Swal.fire({
+                title: "error!",
+                text: "fill ur card details",
+                icon: 'error',
+                position: 'center',
+                showConfirmButton: false,
+                timer: 2000,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                }
+            });
+        }
+        else{
       const res = await axios.post("http://localhost:6060/payment/add", newCardDetail);
       Swal.fire({
         title: "Success!",
@@ -53,7 +75,7 @@ const Checkout = () => {
         type: "success"
     })
       console.log(res.data);
-    } catch (error) {
+   } } catch (error) {
       console.log(error);
       Swal.fire({
         title: "error!",
