@@ -15,8 +15,12 @@ import TableRow from '@material-ui/core/TableRow';
 import DeleteIcon from '@material-ui/icons/Delete';
 import DescriptionIcon from '@material-ui/icons/Description';
 import jsPDF from 'jspdf';
-import "jspdf-autotable"
+import "jspdf-autotable";
+import Swal from 'sweetalert2';
+import axios from 'axios';
 import { allPayments } from '../../services/getAllPayments';
+import { APP_ROUTES } from "../../utilities/constants/routes.constants";
+
 
 const useStyles = makeStyles({
 	root: {
@@ -58,6 +62,48 @@ export default function Index() {
     useEffect(() => {
         getPaymentDetails();
     }, []);
+
+	const deleteData =(id) => {
+		axios.delete('http://localhost:6060/payment/delete/' + id)
+			.then(() => {
+				Swal.fire({
+					title: "Are you sure want to delete?",
+					text: "You won't be able to revert this!",
+					icon: "warning",
+					showCancelButton: "true",
+					confirmButtonColor: '#3085d6',
+					cancelButtonColor: '#d33',
+					confirmButtonText: 'Yes, delete it!'
+				}).then(okay => {
+					if (okay.isConfirmed) {
+						Swal.fire(
+							'Deleted!',
+							'Your file has been deleted.',
+							'success'
+						)
+						.then(okay => {
+							if (okay) {
+								window.location.href = APP_ROUTES.ADMIN_PAYMENT_DASHBOARD;
+							}
+						});
+					}
+				});
+			}).catch((err) => {
+				Swal.fire({
+					title: "error!",
+					text: "Book details Deleting Not Success",
+					icon: 'error',
+					position: 'center',
+					showConfirmButton: false,
+					timer: 2000,
+					timerProgressBar: true,
+					didOpen: (toast) => {
+						toast.addEventListener('mouseenter', Swal.stopTimer)
+						toast.addEventListener('mouseleave', Swal.resumeTimer)
+					}
+				});
+			});
+	};
 
 	const tablehead = [
 		{ name: 'Customer Name', align: 'left', width: '20%' },
@@ -165,6 +211,7 @@ export default function Index() {
 																	<Button
 																		title="Delete"
 																		style={{ color: 'red' }}
+																		onClick={() => deleteData(row._id)}
 																	>
 																		{' '}
 																		<DeleteIcon />
