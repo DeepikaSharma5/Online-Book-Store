@@ -11,7 +11,7 @@ export async function getWishListByID(id) {
 }
 
 export async function searchWishListByName(name) {
-  const response = await fetch(baseUrl + "/search/" + name);
+  const response = await fetch(baseUrl + "/search/" + name.toLowerCase());
   console.log("Searching for" + name);
   if (response.ok) {
     return response.json();

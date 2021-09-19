@@ -62,7 +62,7 @@ const WishList = (props) => {
       <AppLayout>
         <div style={{ margin: "80px 25px" }}>
           <Typography className={styles.pageHeading}>
-            {props.match.params.fname + " " + props.match.params.lname}'s Wish
+            {props.match.params.fname.toUpperCase() + " " + props.match.params.lname.toUpperCase()}'s Wish
             List
           </Typography>
           <Divider style={{ margin: "20px 0px 30px 0px", width: "100%" }} />
