@@ -66,7 +66,7 @@ class DeliveredPdf extends Component {
                                         </tr>
                                     </thead>
                                     {this.state?.status?.length > 0 && this.state.status.map((item, index) => {
-                                        if (item.status === "Delivered") {
+                                        if (item.statuss === "Delivered") {
                                             return (
                                                 <tbody key={index}>
                                                     <tr>

@@ -12,7 +12,7 @@ export default function UpdateDeliveryBody() {
     const [address2, setAddress2] = useState(UpdateStatus[2]);
     const [address3, setAddress3] = useState(UpdateStatus[3]);
     const [phoneNumber, setPhoneNumber] = useState(UpdateStatus[4]);
-    const [status, setStatus] = useState(UpdateStatus[5]);
+    const [statuss, setStatuss] = useState(UpdateStatus[5]);
 
     function updateUpdateStatus(e) {
         e.preventDefault();
@@ -21,7 +21,7 @@ export default function UpdateDeliveryBody() {
             address2,
             address3,
             phoneNumber,
-            status,
+            statuss,
         }
 
         axios.post("http://localhost:6060/delivery-status/update/" + id, newUpdateStatus)
@@ -61,7 +61,7 @@ export default function UpdateDeliveryBody() {
     }
 
     function reset() {
-        setStatus("Pending");
+        setStatuss("Pending");
     }
 
 
@@ -90,7 +90,7 @@ export default function UpdateDeliveryBody() {
                         </div>
                         <div class="form-row">
                             <label htmlFor="exampleFormControlSelect1" style={{ fontSize: "128%", fontWeight: "bold", height: '50px' }}>Order Delivery Status: </label>
-                            <select class="form-control" id="exampleFormControlSelect1" style={{width:'40%',  marginLeft:'14%'}} defaultValue={status} onChange={(e) => {setStatus(e.target.value)}}>
+                            <select class="form-control" id="exampleFormControlSelect1" style={{width:'40%',  marginLeft:'14%'}} defaultValue={statuss} onChange={(e) => {setStatuss(e.target.value)}}>
                                 <option>Pending</option>
                                 <option>Processing</option>
                                 <option>Shipped</option>
