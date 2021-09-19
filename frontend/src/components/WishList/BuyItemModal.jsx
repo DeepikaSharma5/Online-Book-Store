@@ -105,22 +105,8 @@ const BuyItemModal = ({ buy, itemId, name, price, author, imgSrc, setSuccess, pu
                       </Typography>
                     </Grid>
                   </Grid>
-                  <Grid container direction="column">
-                    <FormControlLabel
-                      style={{
-                        marginTop: "25px",
-                      }}
-                      control={
-                        <Checkbox
-                          onChange={() => {}}
-                          name="showName"
-                          color="primary"
-                        />
-                      }
-                      label="Show my name to list owner"
-                    />
-                    
-                    <div>
+                  <Grid container direction="column">                    
+                    <div style={{marginTop: "10px"}}>
                       <Button
                         className={styles.signInBtn}
                         style={{

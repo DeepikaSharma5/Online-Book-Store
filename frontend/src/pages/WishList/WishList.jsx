@@ -16,7 +16,7 @@ import { dangerIcon, okIcon } from "../../assets/images";
 import { Alert } from "@material-ui/lab";
 
 import { AppLayout, AWishListItemCard } from "../../components";
-import { getWishListByID } from "../../services/wishlistService";
+import { buyWishItem, getWishListByID } from "../../services/wishlistService";
 
 const useStyles = makeStyles((theme) => ({
   modal: {
@@ -53,6 +53,16 @@ const WishList = (props) => {
     }
   }
 
+  async function addWishItemToCart(itemID){
+    const response = await buyWishItem(itemID, true);
+
+    if (response) {
+      getListItems()
+    } else {
+      console.log(response);
+    }
+  }
+
   useEffect(() => {
     getListItems();
   }, []);
@@ -81,7 +91,7 @@ const WishList = (props) => {
                     name={wishItem.title}
                     author={wishItem.author}
                     price={wishItem.price}
-                    buyItem={() => {}}
+                    buyItem={addWishItemToCart}
                     publisher={wishItem.publisher}
                     imgSrc={wishItem.image}
                     isBought={wishItem.isBought}
