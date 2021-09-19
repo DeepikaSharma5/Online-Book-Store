@@ -71,7 +71,7 @@ router.route("/update/:id").post(async (req, res) => {
     });
 });
 
-router.route("/view/:id").get((req, res) => {
+router.route("/:id").get((req, res) => {
   if (req.params && req.params.id) {
     Payment.findById(req.params.id)
 
@@ -82,6 +82,20 @@ router.route("/view/:id").get((req, res) => {
         res.status(500).send({ error: error.message });
       });
   }
+
+  router.route("/delete/:id").delete(async (req, res) => {
+    let id = req.params.id;
+    await Payment.findByIdAndDelete(id)
+      .then(() => {
+        res.status(200).send({ status: "Successfully deleted." });
+      })
+      .catch((err) => {
+        console.log(err);
+        res
+          .status(500)
+          .send({ status: "Error while deleting.", error: err.message });
+      });
+  });
 });
 
 module.exports = router;
