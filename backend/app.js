@@ -56,6 +56,9 @@ app.use("/category", Category);
 const CardDetails = require("./routers/CardDetails");
 app.use("/card", CardDetails);
 
+const PaymentDetails = require("./routers/Payment");
+app.use("/payment", PaymentDetails);
+
 const userAPI = require("./api/user.api");
 app.use("/user", userAPI());
 

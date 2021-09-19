@@ -23,9 +23,9 @@ router.route("/add").post(async (req, res) => {
 
 //getCardDetails
 
-router.route("/:id").get(async (req, res) => {
+router.route("/:name").get(async (req, res) => {
   try {
-    const card = await CardDetails.findById(req.params.id);
+    const card = await CardDetails.findOne({ name: req.params.name });
     // const { cvc, ...others } = card._doc;
     res.status(200).json(card);
   } catch (error) {
@@ -53,6 +53,15 @@ router.route("/:id").put(async (req, res) => {
   } catch (error) {
     res.status(500).json(error);
   }
+});
+
+router.route("/view").get((req, res) => {
+  CardDetails.find({})
+    .populate("carddetails", "name")
+    .then((data) => {
+      res.status(200).send({ data });
+    })
+    .catch((err) => res.status(400).json("Error: " + err));
 });
 
 module.exports = router;

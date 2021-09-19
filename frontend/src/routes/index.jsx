@@ -56,6 +56,7 @@ import ProductScreen from "../pages/Payment/ProductScreen";
 import CartScreen from "../pages/Payment/CartScreen";
 import AddCardDetails from "../pages/CardDetails/AddCardDetails";
 import CardDetails from "../pages/CardDetails/CardDetails";
+import Checkout from "../pages/Payment/Checkout";
 
 const AppRoutes = () => {
     const history = createBrowserHistory();
@@ -124,6 +125,9 @@ const AppRoutes = () => {
             <PublicRoute exact path={APP_ROUTES.ADMIN_PENDING_PDF} Component={PendingPdf} />
             <PublicRoute exact path={APP_ROUTES.ADMIN_PROCESSING_PDF} Component={ProcessingPdf} />
             <PublicRoute exact path={APP_ROUTES.ADMIN_SHIPPED_PDF} Component={ShippedPdf} />
+            <PublicRoute exact path={APP_ROUTES.USER_CHECKOUT} Component={Checkout} />
+
+            
         </Router>
     )
 }

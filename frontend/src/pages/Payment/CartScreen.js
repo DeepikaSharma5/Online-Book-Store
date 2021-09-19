@@ -1,11 +1,15 @@
 import React, { useEffect } from "react";
+import { reactLocalStorage } from "reactjs-localstorage";
+
 import { useDispatch, useSelector } from "react-redux";
+import jwt_decode from "jwt-decode";
 import "./CartScreen.css";
 import CartItem from "../../components/Cart/CartItem";
 import { Link } from "react-router-dom";
 import { addToCart, removeFromcart } from "../../redux/actions/cartActions";
 import Header from "../../components/Customer/Homepage/Header/Header";
 import { APP_ROUTES } from "../../utilities/constants/routes.constants";
+
 const CartScreen = () => {
   const dispatch = useDispatch();
 
@@ -22,6 +26,16 @@ const CartScreen = () => {
 
   const getCartCount = () => {
     return cartItems.reduce((qty, item) => Number(item.qty) + qty, 0);
+  };
+
+  const handleCart = (id) => {
+    cartItems.map((items) => console.log(items.product));
+    window.location.href = APP_ROUTES.USER_CHECKOUT;
+  };
+
+  const viewCheckout = (product, title, quantity) => {
+    reactLocalStorage.setObject("product", [product, title, quantity]);
+    window.location.href = APP_ROUTES.USER_CHECKOUT;
   };
 
   const getCartSubTotal = () => {
@@ -67,7 +81,7 @@ const CartScreen = () => {
             <p>Rs.{getCartSubTotal().toFixed(2)}</p>
           </div>
           <div>
-            <button>Proceed to Checkout</button>
+            <button onClick={() => handleCart()}>Proceed to Checkout</button>
           </div>
         </div>
       </div>

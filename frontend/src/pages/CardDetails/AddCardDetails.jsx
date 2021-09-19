@@ -10,7 +10,7 @@ import {
 import { Link } from "react-router-dom";
 import axios from "axios";
 import Swal from 'sweetalert2';
-
+import jwt_decode from "jwt-decode";
 import axiosInstance from "../../services/axiosInstance";
 import Header from '../../components/Customer/Homepage/Header/Header';
 import Footer from '../../components/Customer/Homepage/Footer/Footer';
@@ -23,13 +23,18 @@ export default function AddCardDetails() {
   const [expiry_date, setExpiryDate] = useState("");
   const [card_number,setCardNumber] = useState(0);
 
+
+  const userToken = localStorage.getItem("user-token");
+  const decodedToken = jwt_decode(userToken, { complete: true });
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const newCardDetail = {
       name,
       cvc,
       expiry_date,
-      card_number
+      card_number,
+      user:decodedToken.name
     };
   
 
