@@ -57,6 +57,9 @@ import CartScreen from "../pages/Payment/CartScreen";
 import AddCardDetails from "../pages/CardDetails/AddCardDetails";
 import CardDetails from "../pages/CardDetails/CardDetails";
 import Checkout from "../pages/Payment/Checkout";
+import AddCheckoutDeliveryAddress from "../components/CheckoutDeliveryAddress/AddCheckoutDeliveryAddress";
+import UpdateCheckoutDeliveryAddress from "../components/CheckoutDeliveryAddress/UpdateCheckoutDeliveryAddress";
+import ViewCheckoutDeliveryAddress from "../components/CheckoutDeliveryAddress/ViewCheckoutDeliveryAddress";
 
 const AppRoutes = () => {
     const history = createBrowserHistory();
@@ -82,6 +85,9 @@ const AppRoutes = () => {
             <PrivateRoute allowed={[1]} exact path={APP_ROUTES.USER_VIEW_ADDRESS} Component={ViewDeliveryAddress} />
             <PrivateRoute allowed={[1]} exact path={APP_ROUTES.USER_ADD_ADDRESS} Component={AddDeliveryAddress} />
             <PrivateRoute allowed={[1]} exact path={APP_ROUTES.USER_UPDATE_ADDRESS} Component={UpdateDeliveryAddress} />
+            <PrivateRoute allowed={[1]} exact path={APP_ROUTES.USER_CHECKOUT_VIEW_ADDRESS} Component={ViewCheckoutDeliveryAddress} />
+            <PrivateRoute allowed={[1]} exact path={APP_ROUTES.USER_CHECKOUT_ADD_ADDRESS} Component={AddCheckoutDeliveryAddress} />
+            <PrivateRoute allowed={[1]} exact path={APP_ROUTES.USER_CHECKOUT_UPDATE_ADDRESS} Component={UpdateCheckoutDeliveryAddress} />
             <PrivateRoute allowed={[1]} exact path={APP_ROUTES.USER_MY_DELIVERIES} Component={MyDeliveries} />
             <PublicRoute exact path={APP_ROUTES.USER_HOMEPAGE} Component={Homepage} />
             <PublicRoute exact path={APP_ROUTES.PRODUCT_PAGE} Component={ProductPage} />
@@ -89,6 +95,7 @@ const AppRoutes = () => {
             <PublicRoute exact path={APP_ROUTES.USER_VIEW_BY_CATEGORY} Component={ViewBookByCategory} />
             <PublicRoute exact path={APP_ROUTES.USER_SEARCH_BOOKS} Component={SearchBooks} />
             <PublicRoute exact path={APP_ROUTES.USER_ABOUT_US} Component={AboutUs} />
+            <PublicRoute exact path={APP_ROUTES.USER_CHECKOUT} Component={Checkout} />
 
             {/**Admin side*/}
             <PublicRoute exact path={APP_ROUTES.ADMIN_LOGIN} Component={AdminLogin} />
@@ -125,8 +132,6 @@ const AppRoutes = () => {
             <PublicRoute exact path={APP_ROUTES.ADMIN_PENDING_PDF} Component={PendingPdf} />
             <PublicRoute exact path={APP_ROUTES.ADMIN_PROCESSING_PDF} Component={ProcessingPdf} />
             <PublicRoute exact path={APP_ROUTES.ADMIN_SHIPPED_PDF} Component={ShippedPdf} />
-            <PublicRoute exact path={APP_ROUTES.USER_CHECKOUT} Component={Checkout} />
-
             
         </Router>
     )
