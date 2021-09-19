@@ -76,7 +76,7 @@ const PersonalInfoForm = () => {
         setTimeout(() => setSuccess(""), 2000);
       } else {
         setPersonalDetails(currentDetails);
-        setError("Error updating details. Please try again later.");
+        setError("Error updating details. Please try logging in again.");
         setTimeout(() => setError(""), 2000);
       }
 

@@ -135,10 +135,7 @@ const MyWishList = () => {
 
           if (response !== null) {
             setDefaultBook(uuid());
-            book["_id"] = response;
-            setWishList((current) => {
-              return [...current, book];
-            });
+            getListItems();
             setSuccess(true);
             setTimeout(() => setSuccess(false), 3000);
           } else {
