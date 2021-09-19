@@ -60,6 +60,7 @@ import Checkout from "../pages/Payment/Checkout";
 import AddCheckoutDeliveryAddress from "../components/CheckoutDeliveryAddress/AddCheckoutDeliveryAddress";
 import UpdateCheckoutDeliveryAddress from "../components/CheckoutDeliveryAddress/UpdateCheckoutDeliveryAddress";
 import ViewCheckoutDeliveryAddress from "../components/CheckoutDeliveryAddress/ViewCheckoutDeliveryAddress";
+import EditCardDetails from "../pages/CardDetails/EditCardDetails";
 
 const AppRoutes = () => {
     const history = createBrowserHistory();
@@ -95,7 +96,6 @@ const AppRoutes = () => {
             <PublicRoute exact path={APP_ROUTES.USER_VIEW_BY_CATEGORY} Component={ViewBookByCategory} />
             <PublicRoute exact path={APP_ROUTES.USER_SEARCH_BOOKS} Component={SearchBooks} />
             <PublicRoute exact path={APP_ROUTES.USER_ABOUT_US} Component={AboutUs} />
-            <PublicRoute exact path={APP_ROUTES.USER_CHECKOUT} Component={Checkout} />
 
             {/**Admin side*/}
             <PublicRoute exact path={APP_ROUTES.ADMIN_LOGIN} Component={AdminLogin} />
@@ -113,14 +113,14 @@ const AppRoutes = () => {
             <PublicRoute exact path={APP_ROUTES.ADMIN_VIEW_TEAM_DETAILS} Component={ViewTeamDetails}></PublicRoute>
             <PublicRoute exact path={APP_ROUTES.ADMIN_VIEW_DELIVERY} Component={ViewDelivery}></PublicRoute>
             <PublicRoute exact path={APP_ROUTES.ADMIN_UPDATE_DELIVERY} Component={UpdateDelivery}></PublicRoute>
-            <PublicRoute exact path={APP_ROUTES.ADMIN_ADD_BOOK} Component={AddBook} />
-            <PublicRoute exact path={APP_ROUTES.ADMIN_ADD_CATEGORY} Component={AddCategory} />
-            <PublicRoute exact path={APP_ROUTES.ADMIN_VIEW_BOOK} Component={ViewBook} />
-            <PublicRoute exact path={APP_ROUTES.ADMIN_VIEW_CATEGORY} Component={ViewCategory} />
-            <PublicRoute exact path={APP_ROUTES.ADMIN_UPDATE_BOOK} Component={UpdateBook} />
-            <PublicRoute exact path={APP_ROUTES.ADMIN_UPDATE_CATEGORY} Component={UpdateCategory} />
-            <PublicRoute exact path={APP_ROUTES.ADMIN_PRODUCT_DASHBOARD} Component={ProductDashboard} />
-            <PublicRoute exact path={APP_ROUTES.ADMIN_PAYMENT_DASHBOARD} Component={PaymentDashboard} />
+            <PrivateRoute allowed={[2,3]} exact path={APP_ROUTES.ADMIN_ADD_BOOK} Component={AddBook} />
+            <PrivateRoute allowed={[2,3]} exact path={APP_ROUTES.ADMIN_ADD_CATEGORY} Component={AddCategory} />
+            <PrivateRoute allowed={[2,3]} exact path={APP_ROUTES.ADMIN_VIEW_BOOK} Component={ViewBook} />
+            <PrivateRoute allowed={[2,3]} exact path={APP_ROUTES.ADMIN_VIEW_CATEGORY} Component={ViewCategory} />
+            <PrivateRoute allowed={[2,3]} exact path={APP_ROUTES.ADMIN_UPDATE_BOOK} Component={UpdateBook} />
+            <PrivateRoute allowed={[2,3]} exact path={APP_ROUTES.ADMIN_UPDATE_CATEGORY} Component={UpdateCategory} />
+            <PrivateRoute allowed={[2,3]} exact path={APP_ROUTES.ADMIN_PRODUCT_DASHBOARD} Component={ProductDashboard} />
+            <PrivateRoute allowed={[2,3]} exact path={APP_ROUTES.ADMIN_PAYMENT_DASHBOARD} Component={PaymentDashboard} />
             <PrivateRoute allowed={[2, 3]} exact path={APP_ROUTES.ADMIN_REPORT_WISHLIST} Component={WishListReport} />
             <PublicRoute exact path={APP_ROUTES.HOME} Component={HomeScreen} />
             <PublicRoute exact path={APP_ROUTES.PRODUCT} Component={ProductScreen} />
@@ -132,6 +132,9 @@ const AppRoutes = () => {
             <PublicRoute exact path={APP_ROUTES.ADMIN_PENDING_PDF} Component={PendingPdf} />
             <PublicRoute exact path={APP_ROUTES.ADMIN_PROCESSING_PDF} Component={ProcessingPdf} />
             <PublicRoute exact path={APP_ROUTES.ADMIN_SHIPPED_PDF} Component={ShippedPdf} />
+            <PublicRoute exact path={APP_ROUTES.USER_CHECKOUT} Component={Checkout} />
+            <PublicRoute exact path="/update-card/:id" Component={EditCardDetails} />
+
             
         </Router>
     )

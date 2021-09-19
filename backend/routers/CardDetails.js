@@ -33,6 +33,17 @@ router.route("/:name").get(async (req, res) => {
   }
 });
 
+router.route("/view/:id").get(async (req, res) => {
+  try {
+    const card = await CardDetails.findById(req.params.id)
+      // const { cvc, ...others } = card._doc;
+      .then((data) => {
+        res.status(200).send({ data: data });
+      });
+  } catch (error) {
+    res.status(500).json(error);
+  }
+});
 //Update
 
 router.route("/:id").put(async (req, res) => {

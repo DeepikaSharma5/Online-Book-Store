@@ -63,4 +63,5 @@ export const APP_ROUTES = {
   USER_CARD_DETAILS: "/card",
   ADMIN_REPORT_WISHLIST: "/wishlist-report",
   USER_CHECKOUT: "/checkout",
+  USER_EDIT_CARDDETAILS: "/update-card",
 };
