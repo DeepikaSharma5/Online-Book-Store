@@ -59,7 +59,17 @@ export async function login(userCreds){
 }
 
 export async function getUserByID(id) {
-    const response = await fetch(baseUrl+"/"+id);
+    const userToken = localStorage.getItem("user-token");
+    const response = await fetch(baseUrl+"/"+id,{
+        method: "GET",
+        
+        // Adding headers to the request
+        headers: {
+            'auth-token': userToken,
+            'Content-Type': 'application/json; charset=UTF-8',
+        }
+
+    });
     console.log("Fetching details of "+id);
     if(response.ok){
         return response.json()
@@ -70,6 +80,7 @@ export async function getUserByID(id) {
 }
 
 export async function updateUser(userDetails){
+    const userToken = localStorage.getItem("user-token");
     try{
         const response = await fetch(baseUrl+"/",{
             method: "PUT",
@@ -79,6 +90,7 @@ export async function updateUser(userDetails){
             
             // Adding headers to the request
             headers: {
+                'auth-token': userToken,
                 'Content-Type': 'application/json; charset=UTF-8',
             }
     
@@ -98,6 +110,7 @@ export async function updateUser(userDetails){
 }
 
 export async function updatePassword(userDetails){
+    const userToken = localStorage.getItem("user-token");
     try{
         const response = await fetch(baseUrl+"/",{
             method: "PATCH",
@@ -107,6 +120,7 @@ export async function updatePassword(userDetails){
             
             // Adding headers to the request
             headers: {
+                'auth-token': userToken,
                 'Content-Type': 'application/json; charset=UTF-8',
             }
     
@@ -126,6 +140,7 @@ export async function updatePassword(userDetails){
 }
 
 export async function deleteUserAccount(id, password) {
+    const userToken = localStorage.getItem("user-token");
     console.log("Body", JSON.stringify(password))
     try{
         const response = await fetch(baseUrl+"/"+id,{
@@ -134,6 +149,7 @@ export async function deleteUserAccount(id, password) {
             body: JSON.stringify(password),
 
             headers: {
+                'auth-token': userToken,
                 'Content-Type': 'application/json; charset=UTF-8',
             }
     

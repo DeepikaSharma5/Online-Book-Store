@@ -79,7 +79,7 @@ const WishListReport = () => {
       setTopBooks(books);
     } else {
       console.log(response);
-      setError("Error loading top products, please try again later.");
+      setError("Error loading top products, please try logging in again.");
     }
   }
 
@@ -125,7 +125,7 @@ const WishListReport = () => {
         setTimeout(() => setSuccess(null), 2000);
       }
     } else {
-      setError("Error generating report, please try again later.");
+      setError("Error generating report, please try logging in again.");
       setTimeout(() => setError(null), 2000);
     }
   }
