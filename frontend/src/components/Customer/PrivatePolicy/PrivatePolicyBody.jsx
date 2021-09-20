@@ -21,7 +21,7 @@ class PrivatePolicyBody extends Component {
                         <div className="card-body">
                             <div style={{ height: '150px' }}>
                                 {this.state?.policy?.length > 0 && this.state.policy.map((item, index) =>
-                                    <div>
+                                    <div key={index}>
                                         <h3 className="card-title">{item.heading}</h3>
                                         <p>{item.details}</p>
                                         <br/>

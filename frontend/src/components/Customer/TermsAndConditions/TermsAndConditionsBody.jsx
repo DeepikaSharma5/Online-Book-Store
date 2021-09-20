@@ -22,7 +22,7 @@ class TermsAndConditionsBody extends Component {
 
                             <div style={{ height: '150px' }}>
                                 {this.state?.Conditions?.length > 0 && this.state.Conditions.map((item, index) =>
-                                    <div>
+                                    <div key={index}>
                                         <h3 className="card-title">{item.heading}</h3>
                                         <p>{item.details}</p>
                                         <br/>

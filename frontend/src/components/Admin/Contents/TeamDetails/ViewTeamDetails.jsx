@@ -72,7 +72,7 @@ export default function ViewTeamDetails() {
                     </div>
                     <div className="row">
                         {TeamDetails.map((TeamDetails, key) => (
-                            <div className="col-sm-3 mt-5">
+                            <div className="col-sm-3 mt-5" key={key}>
                                 <div className="card">
                                     <div className="text-center">
                                         <img className="card-img-top " style={{ width: '100%' }} src={'https://res.cloudinary.com/applicationframework2021/image/upload/v1624901540/' + TeamDetails.image} alt="Card image cap" />
