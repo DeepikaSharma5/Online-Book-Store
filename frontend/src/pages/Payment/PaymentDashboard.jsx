@@ -123,10 +123,12 @@ export default function Index() {
 		const tableRows = [];
 
 		const rowdata = [
-			invoicedata.name,
-			invoicedata.book,
-			invoicedata.price,
-			invoicedata.qty,
+			invoicedata.username,
+			invoicedata.books.map((item) => {
+				return item.title
+			}),
+			invoicedata.total,
+			invoicedata.quantity,
 			invoicedata.status
 		];
 
@@ -139,7 +141,7 @@ export default function Index() {
 
 		const dateStr = date[0] + date[1] + date[2] + date[3] + date[4];
 		doc.text(" Thank you for choosing BookLab!!!", 10, 15);
-		doc.text("Invoice to :" + invoicedata.name, 13, 25);
+		doc.text("Invoice to :" + invoicedata.username, 13, 25);
 		doc.text(`status:` + invoicedata.status, 170, 60);
 		doc.save(`report_${dateStr}.pdf`);
 	}
@@ -200,14 +202,14 @@ export default function Index() {
 																	{row.status}
 																</TableCell>
 																<TableCell width="25%" align="center">
-																	{/* <Button
+																	<Button
 																		onClick={() => generatePDF(row)}
 																		title="Generate bill"
 																		style={{ color: 'teal' }}
 																	>
 																		{' '}
 																		<DescriptionIcon />
-																	</Button> */}
+																	</Button>
 																	<Button
 																		title="Delete"
 																		style={{ color: 'red' }}
