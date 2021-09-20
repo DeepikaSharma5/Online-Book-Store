@@ -118,26 +118,26 @@ class ContactUsBody extends Component {
                     <div className="col" style={{ borderRadius: '33px', height: '690px', background: '#ffffff', boxShadow: '10px 10px 45px #919191,-10px -10px 45px #ffffff' }}>
                         <h5 style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '150px', fontSize: '250%' }}>Contact Us For More Details</h5>
                         <form onSubmit={this.onSubmit}>
-                            <div class="form-group row ">
-                                <label htmlFor="inputName" class="col-sm-2 col-form-label col-form-label-lg" style={{ fontSize: "120%", fontWeight: "bold", marginLeft: '40px' }}>Name: <label style={{ color: 'red' }}>*</label></label>
+                            <div className="form-group row ">
+                                <label htmlFor="inputName" className="col-sm-2 col-form-label col-form-label-lg" style={{ fontSize: "120%", fontWeight: "bold", marginLeft: '40px' }}>Name: <label style={{ color: 'red' }}>*</label></label>
                                 <div className="col-sm-8">
                                     <input type="text" id="name" className="form-control form-control-lg" name="name" value={this.state.name} onChange={this.onChange} required />
                                 </div>
                             </div>
-                            <div class="form-group row">
-                                <label htmlFor="inputEmail" class="col-sm-2 col-form-label col-form-label-lg" style={{ fontSize: "120%", fontWeight: "bold", marginLeft: '40px' }}>Email: <label style={{ color: 'red' }}>*</label></label>
+                            <div className="form-group row">
+                                <label htmlFor="inputEmail" className="col-sm-2 col-form-label col-form-label-lg" style={{ fontSize: "120%", fontWeight: "bold", marginLeft: '40px' }}>Email: <label style={{ color: 'red' }}>*</label></label>
                                 <div className="col-sm-8">
                                     <input data-testid="email-input" type="email" id="email" className="form-control form-control-lg" name="email" onBlur={this.validateEmail} value={this.state.email} onChange={this.onChange} />
                                 </div>
                             </div>
-                            <div class="form-group row">
-                                <label htmlFor="inputSubject" class="col-sm-2 col-form-label col-form-label-lg" style={{ fontSize: "120%", fontWeight: "bold", marginLeft: '40px' }}>Subject: </label>
+                            <div className="form-group row">
+                                <label htmlFor="inputSubject" className="col-sm-2 col-form-label col-form-label-lg" style={{ fontSize: "120%", fontWeight: "bold", marginLeft: '40px' }}>Subject: </label>
                                 <div className="col-sm-8">
                                     <input type="text" className="form-control form-control-lg" id="subject" name="subject" value={this.state.subject} onChange={this.onChange} />
                                 </div>
                             </div>
-                            <div class="form-group row">
-                                <label htmlFor="inputSubject" class="col-sm-2 col-form-label col-form-label-lg" style={{ fontSize: "120%", fontWeight: "bold", marginLeft: '40px' }}>Message: <label style={{ color: 'red' }}>*</label></label>
+                            <div className="form-group row">
+                                <label htmlFor="inputSubject" className="col-sm-2 col-form-label col-form-label-lg" style={{ fontSize: "120%", fontWeight: "bold", marginLeft: '40px' }}>Message: <label style={{ color: 'red' }}>*</label></label>
                                 <div className="col-sm-8">
                                     <textarea className="form-control form-control-lg" id="message" rows="4" name="message" value={this.state.message} onChange={this.onChange} required />
                                 </div>

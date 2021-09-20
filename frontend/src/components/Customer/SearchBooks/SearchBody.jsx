@@ -67,7 +67,7 @@ export default function SearchBody() {
         <div className="row">               
         <div className="col-5 col-md-3" style={{paddingTop:'55px'}}>         
                 <div className="card text-dark bg-light mb-3 ">
-                            <div class="card-body" style={{width:'auto', height:'auto'}}>
+                            <div className="card-body" style={{width:'auto', height:'auto'}}>
                                 <h5> Categories List </h5>
                                 <hr></hr>
                                 <button type="button" className="btn btn-outline-dark" style={{width:'auto','height':'auto', 'marginBottom':'5px'}} 
@@ -77,7 +77,7 @@ export default function SearchBody() {
                                 { categories.length > 0 &&  categories.map((item, index) => (
                                     <div className="col" style={{"marginLeft":"-15px"}}>    
                                         <div key={index} >       
-                                            <button type="button" class="btn btn-outline-dark" style={{width:'auto','height':'auto', 'marginBottom':'-20px'}} 
+                                            <button type="button" className="btn btn-outline-dark" style={{width:'auto','height':'auto', 'marginBottom':'-20px'}} 
                                                 onClick={e=> navigatePage(e, item._id)} >
                                                     {item.category_name}
                                             </button>
@@ -92,23 +92,23 @@ export default function SearchBody() {
                 <br></br><br></br>
                 <h3>  <b>  Search results related to </b> <i> {searchValue} </i>  </h3>  
                 <div className="card text-dark bg-light mb-3 ">
-                    <div class="card-body" >                                                 
+                    <div className="card-body" >                                                 
                         {condition ? (
                         <i><h5> No Results Found...</h5></i>
                         ) : (
-                          <div class="row row-cols-4" style={{'marginBottom':'15px'}}>                             
+                          <div className="row row-cols-4" style={{'marginBottom':'15px'}}>                             
                             { filteredData.length > 0 && filteredData.map((value, index) => (
                                 <div className="col">      
-                                    <div key={index} class="card shadow" style={{width:'13rem', height:'34rem'}}>
-                                        <img class="card-img-top" src={value.image} style={{'width':'100%', height:'17rem'}} alt="Card image cap"/>
-                                        <div class="card-body" style={{height:'15rem'}}>
-                                            <h5 class="card-title"> {value.title} </h5>                                              
+                                    <div key={index} className="card shadow" style={{width:'13rem', height:'34rem'}}>
+                                        <img className="card-img-top" src={value.image} style={{'width':'100%', height:'17rem'}} alt="Card image cap"/>
+                                        <div className="card-body" style={{height:'15rem'}}>
+                                            <h5 className="card-title"> {value.title} </h5>                                              
                                             <br></br>
                                         </div>
-                                        <div class="card-footer"  style={{'backgroundColor':'white'}}>
-                                            <h5 class="card-text" style={{'color':'#069999'}} > <b> LKR {value.price}.00 </b> </h5>
+                                        <div className="card-footer"  style={{'backgroundColor':'white'}}>
+                                            <h5 className="card-text" style={{'color':'#069999'}} > <b> LKR {value.price}.00 </b> </h5>
                                         </div>
-                                        <div class="card-footer"  style={{'backgroundColor':'#069999'}}>
+                                        <div className="card-footer"  style={{'backgroundColor':'#069999'}}>
                                             <button type="button" className="btn btn-lg" style={{'backgroundColor':'#069999', 'color':'white', textAlign:'center', width:'11rem'}} 
                                                 onClick={() => viewBook(value._id, value.title, value.author_name, value.publisher, value.year, value.isbn, value.description, value.price, value.image)}>
                                                 View Details 
