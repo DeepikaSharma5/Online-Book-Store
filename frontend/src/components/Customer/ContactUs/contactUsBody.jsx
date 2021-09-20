@@ -14,7 +14,8 @@ class ContactUsBody extends Component {
             email: "",
             subject: "",
             message: "",
-            sent: false
+            sent: false,
+            email_validation: false
         }
     }
 
@@ -22,37 +23,53 @@ class ContactUsBody extends Component {
         this.setState({ [e.target.name]: e.target.value })
     };
 
+    validateEmail = () => {
+        let email = this.state.email;
+        var email_values = /^(?:[a-z0-9!#$%&amp;'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&amp;'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])$/;
+
+        if (!email_values.test(email)) {
+            Swal.fire({
+                icon: 'error',
+                text: "Invalid Entry! Please check the email field and try again."
+            })
+        } else {
+            this.setState({ email_validation: true })
+        }
+    }
+
     onSubmit(e) {
         e.preventDefault();
-        let Contact = {
-            name: this.state.name,
-            email: this.state.email,
-            subject: this.state.subject,
-            message: this.state.message
-        }
+        if (this.state.email_validation) {
+            let Contact = {
+                name: this.state.name,
+                email: this.state.email,
+                subject: this.state.subject,
+                message: this.state.message
+            }
 
-        axios.post('http://localhost:6060/contactdata', Contact)
-            .then(() => {
-                Swal.fire({
-                    title: "Success!",
-                    text: "Your message is sent. We will contact you soon",
-                    icon: 'success',
-                    confirmButtonText: "OK",
-                    type: "success"
-                }).then(okay => {
-                    if (okay) {
-                        window.location.href = "/contact-us";
-                    }
-                });
-            }).catch((err) => {
-                Swal.fire({
-                    title: "Error!",
-                    text: "Unable to send your message",
-                    icon: 'error',
-                    confirmButtonText: "OK",
-                    type: "success"
+            axios.post('http://localhost:6060/contactdata', Contact)
+                .then(() => {
+                    Swal.fire({
+                        title: "Success!",
+                        text: "Your message is sent. We will contact you soon",
+                        icon: 'success',
+                        confirmButtonText: "OK",
+                        type: "success"
+                    }).then(okay => {
+                        if (okay) {
+                            window.location.href = "/contact-us";
+                        }
+                    });
+                }).catch((err) => {
+                    Swal.fire({
+                        title: "Error!",
+                        text: "Unable to send your message",
+                        icon: 'error',
+                        confirmButtonText: "OK",
+                        type: "success"
+                    })
                 })
-            })
+        }
     }
 
     resetForm = () => {
@@ -108,24 +125,24 @@ class ContactUsBody extends Component {
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label htmlFor="inputEmail" class="col-sm-2 col-form-label col-form-label-lg" style={{ fontSize: "120%", fontWeight: "bold", marginLeft: '40px'  }}>Email: <label style={{ color: 'red' }}>*</label></label>
+                                <label htmlFor="inputEmail" class="col-sm-2 col-form-label col-form-label-lg" style={{ fontSize: "120%", fontWeight: "bold", marginLeft: '40px' }}>Email: <label style={{ color: 'red' }}>*</label></label>
                                 <div className="col-sm-8">
-                                    <input data-testid="email-input" type="email" id="email" className="form-control form-control-lg" name="email" value={this.state.email} onChange={this.onChange} required />
+                                    <input data-testid="email-input" type="email" id="email" className="form-control form-control-lg" name="email" onBlur={this.validateEmail} value={this.state.email} onChange={this.onChange} />
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label htmlFor="inputSubject" class="col-sm-2 col-form-label col-form-label-lg" style={{ fontSize: "120%", fontWeight: "bold", marginLeft: '40px'  }}>Subject: </label>
+                                <label htmlFor="inputSubject" class="col-sm-2 col-form-label col-form-label-lg" style={{ fontSize: "120%", fontWeight: "bold", marginLeft: '40px' }}>Subject: </label>
                                 <div className="col-sm-8">
                                     <input type="text" className="form-control form-control-lg" id="subject" name="subject" value={this.state.subject} onChange={this.onChange} />
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label htmlFor="inputSubject" class="col-sm-2 col-form-label col-form-label-lg" style={{ fontSize: "120%", fontWeight: "bold", marginLeft: '40px'  }}>Message: <label style={{ color: 'red' }}>*</label></label>
+                                <label htmlFor="inputSubject" class="col-sm-2 col-form-label col-form-label-lg" style={{ fontSize: "120%", fontWeight: "bold", marginLeft: '40px' }}>Message: <label style={{ color: 'red' }}>*</label></label>
                                 <div className="col-sm-8">
                                     <textarea className="form-control form-control-lg" id="message" rows="4" name="message" value={this.state.message} onChange={this.onChange} required />
                                 </div>
                             </div>
-                            <center><button type="submit" className="btn btn-outline-success" style={{ width: "30%", height: "60px", fontWeight: 'bold'}}><Envelope /> Send Message</button></center>
+                            <center><button type="submit" className="btn btn-outline-success" style={{ width: "30%", height: "60px", fontWeight: 'bold' }}><Envelope /> Send Message</button></center>
                         </form>
                     </div>
                     <div className="col" >
