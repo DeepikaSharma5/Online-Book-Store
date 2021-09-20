@@ -192,22 +192,7 @@ class PrivatestatusBody extends Component {
                                                                 <td>{item._id}</td>
                                                                 <td>{item.address1}. {item.address2}, {item.address3}</td>
                                                                 <td>{item.phoneNumber}</td>
-                                                                <td>
-                                                                    {item.state === '' ?
-                                                                        <p></p>
-                                                                        :
-                                                                        item.status === 'Pending' ?
-                                                                            <button type="button" className="btn btn-danger" style={{ width: '120px' }}>{item.statuss}</button>
-                                                                            :
-                                                                            item.status === 'Delivered' ?
-                                                                                <button type="button" className="btn btn-success" style={{ width: '120px' }}>{item.statuss}</button>
-                                                                                :
-                                                                                item.status === 'Processing' ?
-                                                                                    <button type="button" className="btn btn-info" style={{ width: '120px' }}>{item.statuss}</button>
-                                                                                    :
-                                                                                    <button type="button" className="btn btn-warning" style={{ width: '120px' }}>{item.statuss}</button>
-                                                                    }
-                                                                </td>
+                                                                <td><button type="button" className="btn btn-success" style={{ width: '120px' }}>{item.statuss}</button></td>
                                                                 <td>
                                                                     <button type="button" className="btn btn-outline-success" onClick={() => this.updateStatus(item._id, item.address1, item.address2, item.address3, item.phoneNumber, item.statuss)}>
                                                                         <Pencil /> Update
@@ -237,22 +222,7 @@ class PrivatestatusBody extends Component {
                                                                 <td>{item._id}</td>
                                                                 <td>{item.address1}. {item.address2}, {item.address3}</td>
                                                                 <td>{item.phoneNumber}</td>
-                                                                <td>
-                                                                    {item.state === '' ?
-                                                                        <p></p>
-                                                                        :
-                                                                        item.status === 'Pending' ?
-                                                                            <button type="button" className="btn btn-danger" style={{ width: '120px' }}>{item.statuss}</button>
-                                                                            :
-                                                                            item.status === 'Delivered' ?
-                                                                                <button type="button" className="btn btn-success" style={{ width: '120px' }}>{item.statuss}</button>
-                                                                                :
-                                                                                item.status === 'Processing' ?
-                                                                                    <button type="button" className="btn btn-info" style={{ width: '120px' }}>{item.statuss}</button>
-                                                                                    :
-                                                                                    <button type="button" className="btn btn-warning" style={{ width: '120px' }}>{item.statuss}</button>
-                                                                    }
-                                                                </td>
+                                                                <td><button type="button" className="btn btn-danger" style={{ width: '120px' }}>{item.statuss}</button></td>
                                                                 <td>
                                                                     <button type="button" className="btn btn-outline-success" onClick={() => this.updateStatus(item._id, item.address1, item.address2, item.address3, item.phoneNumber, item.statuss)}>
                                                                         <Pencil /> Update
@@ -282,22 +252,7 @@ class PrivatestatusBody extends Component {
                                                                 <td>{item._id}</td>
                                                                 <td>{item.address1}. {item.address2}, {item.address3}</td>
                                                                 <td>{item.phoneNumber}</td>
-                                                                <td>
-                                                                    {item.state === '' ?
-                                                                        <p></p>
-                                                                        :
-                                                                        item.status === 'Pending' ?
-                                                                            <button type="button" className="btn btn-danger" style={{ width: '120px' }}>{item.statuss}</button>
-                                                                            :
-                                                                            item.status === 'Delivered' ?
-                                                                                <button type="button" className="btn btn-success" style={{ width: '120px' }}>{item.statuss}</button>
-                                                                                :
-                                                                                item.status === 'Processing' ?
-                                                                                    <button type="button" className="btn btn-info" style={{ width: '120px' }}>{item.statuss}</button>
-                                                                                    :
-                                                                                    <button type="button" className="btn btn-warning" style={{ width: '120px' }}>{item.statuss}</button>
-                                                                    }
-                                                                </td>
+                                                                <td><button type="button" className="btn btn-info" style={{ width: '120px' }}>{item.statuss}</button></td>
                                                                 <td>
                                                                     <button type="button" className="btn btn-outline-success" onClick={() => this.updateStatus(item._id, item.address1, item.address2, item.address3, item.phoneNumber, item.statuss)}>
                                                                         <Pencil /> Update
@@ -329,22 +284,7 @@ class PrivatestatusBody extends Component {
                                                                 <td>{item._id}</td>
                                                                 <td>{item.address1}. {item.address2}, {item.address3}</td>
                                                                 <td>{item.phoneNumber}</td>
-                                                                <td>
-                                                                    {item.state === '' ?
-                                                                        <p></p>
-                                                                        :
-                                                                        item.status === 'Pending' ?
-                                                                            <button type="button" className="btn btn-danger" style={{ width: '120px' }}>{item.statuss}</button>
-                                                                            :
-                                                                            item.status === 'Delivered' ?
-                                                                                <button type="button" className="btn btn-success" style={{ width: '120px' }}>{item.statuss}</button>
-                                                                                :
-                                                                                item.status === 'Processing' ?
-                                                                                    <button type="button" className="btn btn-info" style={{ width: '120px' }}>{item.statuss}</button>
-                                                                                    :
-                                                                                    <button type="button" className="btn btn-warning" style={{ width: '120px' }}>{item.statuss}</button>
-                                                                    }
-                                                                </td>
+                                                                <td><button type="button" className="btn btn-warning" style={{ width: '120px' }}>{item.statuss}</button></td>
                                                                 <td>
                                                                     <button type="button" className="btn btn-outline-success" onClick={() => this.updateStatus(item._id, item.address1, item.address2, item.address3, item.phoneNumber, item.statuss)}>
                                                                         <Pencil /> Update
