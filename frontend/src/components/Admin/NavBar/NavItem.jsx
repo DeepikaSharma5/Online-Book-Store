@@ -49,7 +49,7 @@ const NavItem = ({ className, href, icon: Icon, title, ...rest }) => {
     >
       <div onClick={() => { window.location = href }}>
         <Button
-        activeClassName={classes.active}
+        activeclassname={classes.active}
         className={classes.button}
         >
           {Icon && <Icon className={classes.icon} size="20" />}

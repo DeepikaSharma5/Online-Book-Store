@@ -45,28 +45,28 @@ class ProductDashboardBody extends React.Component {
           <br></br>          
           <br></br>
       
-          <div class="container">
+          <div className="container">
             <div className="row mb-3">
               <div className="col mb-3">    
                 <a href="http://localhost:3000/admin-add-book">  
-                  <button type="button" class="btn btn-outline-dark shadow" style={{height: "100px", width:"350px"}} >Add Books</button> 
+                  <button type="button" className="btn btn-outline-dark shadow" style={{height: "100px", width:"350px"}} >Add Books</button> 
                 </a>
               </div>
               <div className="col mb-3">  
                 <a href="http://localhost:3000/admin-view-book">               
-                  <button type="button" class="btn btn-outline-dark shadow" style={{height: "100px", width:"350px"}}>Manage Books</button>
+                  <button type="button" className="btn btn-outline-dark shadow" style={{height: "100px", width:"350px"}}>Manage Books</button>
                 </a>
               </div>
             </div>
             <div className="row mb-3">
               <div className="col mb-3">    
                 <a href="http://localhost:3000/admin-add-category">             
-                  <button type="button" class="btn btn-outline-dark shadow"style={{height: "100px", width:"350px"}}>Add Categories</button>
+                  <button type="button" className="btn btn-outline-dark shadow"style={{height: "100px", width:"350px"}}>Add Categories</button>
                 </a>
               </div>
               <div className="col mb-3"> 
                 <a href="http://localhost:3000/admin-view-category">                
-                  <button type="button" class="btn btn-outline-dark shadow"style={{height: "100px", width:"350px"}}>Manage Categories</button>
+                  <button type="button" className="btn btn-outline-dark shadow"style={{height: "100px", width:"350px"}}>Manage Categories</button>
                 </a>
               </div>
             </div>
@@ -75,21 +75,21 @@ class ProductDashboardBody extends React.Component {
           <hr></hr>
           <h4> Summary Section</h4>
           <hr></hr><br></br>
-          <div class="container">
-            <div class="row row-cols-2">
+          <div className="container">
+            <div className="row row-cols-2">
                 <div className="col"> 
-                    <div class="card text-white  mb-3" style={{backgroundColor:"#049191", color:"white"}}>
-                        <div class="card-body">
-                        <h5 class="card-title">Total no of books added</h5>
-                        <h2 class="card-text"> {this.state.books.length} </h2>
+                    <div className="card text-white  mb-3" style={{backgroundColor:"#049191", color:"white"}}>
+                        <div className="card-body">
+                        <h5 className="card-title">Total no of books added</h5>
+                        <h2 className="card-text"> {this.state.books.length} </h2>
                         </div>
                     </div>
                 </div>
                 <div className="col">
-                    <div class="card text-white text-right mb-3"  style={{backgroundColor:"#049191", color:"white"}}>
-                        <div class="card-body">
-                        <h5 class="card-title">Total no of categories added</h5>
-                        <h2 class="card-text"> {this.state.categories.length} </h2>
+                    <div className="card text-white text-right mb-3"  style={{backgroundColor:"#049191", color:"white"}}>
+                        <div className="card-body">
+                        <h5 className="card-title">Total no of categories added</h5>
+                        <h2 className="card-text"> {this.state.categories.length} </h2>
                         </div>
                     </div>
                 </div>

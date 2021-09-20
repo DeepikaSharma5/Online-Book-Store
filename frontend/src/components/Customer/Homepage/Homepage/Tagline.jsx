@@ -7,12 +7,12 @@ export default class Tagline extends Component {
                 <div className="row">
                     <div>
                         <br></br><br></br><br></br>
-                        <div class="card p-3 text-center ">
-                        <blockquote class="blockquote mb-0 card-body">
+                        <div className="card p-3 text-center ">
+                        <blockquote className="blockquote mb-0 card-body">
                         <h1> <i> “Read the books and make your life better.” </i></h1>
                         <br></br>
-                        <footer class="blockquote-footer" style={{'fontSize':'25px'}}>
-                            <small class="text-muted">
+                        <footer className="blockquote-footer" style={{'fontSize':'25px'}}>
+                            <small className="text-muted">
                              BookLab
                             </small>
                         </footer>

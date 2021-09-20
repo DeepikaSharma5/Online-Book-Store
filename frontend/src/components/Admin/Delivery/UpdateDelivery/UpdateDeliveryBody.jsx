@@ -90,7 +90,7 @@ export default function UpdateDeliveryBody() {
                         </div>
                         <div className="form-row">
                             <label htmlFor="exampleFormControlSelect1" style={{ fontSize: "128%", fontWeight: "bold", height: '50px' }}>Order Delivery Status: </label>
-                            <select class="form-control" id="exampleFormControlSelect1" style={{ width: '40%', marginLeft: '14%' }} defaultValue={statuss} onChange={(e) => { setStatuss(e.target.value) }}>
+                            <select className="form-control" id="exampleFormControlSelect1" style={{ width: '40%', marginLeft: '14%' }} defaultValue={statuss} onChange={(e) => { setStatuss(e.target.value) }}>
                                 <option>Pending</option>
                                 <option>Processing</option>
                                 <option>Shipped</option>
