@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import { Folder, XCircle, Backspace } from 'react-bootstrap-icons';
-import { APP_ROUTES } from '../../../utilities/constants/routes.constants';
-import Header from "../Homepage/Header/Header";
-import Footer from "../Homepage/Footer/Footer";
+import { APP_ROUTES } from '../../utilities/constants/routes.constants';
+import Header from "../Customer/Homepage/Header/Header";
+import Footer from '../Customer/Homepage/Footer/Footer';
 
-class AddDeliveryAddress extends Component {
+class AddCheckoutDeliveryAddress extends Component {
     constructor(props) {
         super(props);
         this.onChange = this.onChange.bind(this);
@@ -80,7 +80,7 @@ class AddDeliveryAddress extends Component {
                         type: "success"
                     }).then(okay => {
                         if (okay) {
-                            window.location.href = APP_ROUTES.USER_VIEW_ADDRESS;
+                            window.location.href = APP_ROUTES.USER_CHECKOUT_VIEW_ADDRESS;
                         }
                     });
 
@@ -153,17 +153,17 @@ class AddDeliveryAddress extends Component {
                                 <div className="form-group row">
                                     <label htmlFor="inputSubject" className="col-sm-2 col-form-label col-form-label-lg" style={{ fontSize: "130%", fontWeight: "bold", height: '100px' }}>phoneNumber Number: <label style={{ color: 'red' }}>*</label></label>
                                     <div className="col-sm-10">
-                                        <input type="number" id="phoneNumber" className="form-control form-control-lg" name="phoneNumber" value={this.state.phoneNumber} onChange={this.onChange} onBlur={this.validatePhone} placeholder="0774567891" />
+                                        <input type="number" id="phoneNumber" className="form-control form-control-lg" name="phoneNumber" onBlur={this.validatePhone} value={this.state.phoneNumber} onChange={this.onChange} placeholder="0774567891" />
                                     </div>
                                 </div>
                                 <div className="form-group row">
                                     <label htmlFor="inputSubject" className="col-sm-2 col-form-label col-form-label-lg" style={{ fontSize: "130%", fontWeight: "bold", height: '100px' }}>Email: <label style={{ color: 'red' }}>*</label></label>
                                     <div className="col-sm-10">
-                                        <input type="email" id="email" className="form-control form-control-lg" name="email" value={this.state.email} onChange={this.onChange} onBlur={this.validateEmail} />
+                                        <input type="email" id="email" className="form-control form-control-lg" name="email" onBlur={this.validateEmail} value={this.state.email} onChange={this.onChange} />
                                     </div>
                                 </div>
                                 <div className="btn-toolbar justify-content-between" role="toolbar" aria-label="Toolbar with button groups">
-                                    <button type="submit" className="btn btn-outline-danger" style={{ float: 'right', padding: '12px 68px', marginBottom: '30px', fontWeight: 'bold', fontSize: "130%" }} onClick={() => { window.location.href = APP_ROUTES.USER_VIEW_ADDRESS }}><Backspace /> Cancel</button>
+                                    <button type="submit" className="btn btn-outline-danger" style={{ float: 'right', padding: '12px 68px', marginBottom: '30px', fontWeight: 'bold', fontSize: "130%" }} onClick={() => { window.location.href = APP_ROUTES.USER_CHECKOUT_VIEW_ADDRESS }}><Backspace /> Cancel</button>
                                     <button type="reset" className="btn btn-outline-primary" style={{ float: 'center', padding: '12px 68px', marginBottom: '30px', fontWeight: 'bold', fontSize: "130%" }} onClick={this.onClear}><XCircle /> Clear</button>
                                     <button type="submit" className="btn btn-outline-success" style={{ float: 'left', padding: '12px 68px', marginBottom: '30px', fontWeight: 'bold', fontSize: "130%" }} onClick={this.onSubmit}><Folder /> Save</button>
                                 </div>
@@ -179,4 +179,4 @@ class AddDeliveryAddress extends Component {
     }
 }
 
-export default AddDeliveryAddress;
+export default AddCheckoutDeliveryAddress;

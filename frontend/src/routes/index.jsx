@@ -57,6 +57,9 @@ import CartScreen from "../pages/Payment/CartScreen";
 import AddCardDetails from "../pages/CardDetails/AddCardDetails";
 import CardDetails from "../pages/CardDetails/CardDetails";
 import Checkout from "../pages/Payment/Checkout";
+import AddCheckoutDeliveryAddress from "../components/CheckoutDeliveryAddress/AddCheckoutDeliveryAddress";
+import UpdateCheckoutDeliveryAddress from "../components/CheckoutDeliveryAddress/UpdateCheckoutDeliveryAddress";
+import ViewCheckoutDeliveryAddress from "../components/CheckoutDeliveryAddress/ViewCheckoutDeliveryAddress";
 import EditCardDetails from "../pages/CardDetails/EditCardDetails";
 
 const AppRoutes = () => {
@@ -77,36 +80,41 @@ const AppRoutes = () => {
             <PublicRoute exact path={APP_ROUTES.USER_CONTACT_US} Component={ContactUs} />
             <PublicRoute exact path={APP_ROUTES.USER_PRIVATE_POLICY} Component={PrivatePolicy} />
             <PublicRoute exact path={APP_ROUTES.USER_TERMS_AND_CONDITIONS} Component={TermsAndConditions} />
-            <PublicRoute exact path={APP_ROUTES.USER_DELIVERY_PDF} Component={MyOrderPdf} />
+            <PrivateRoute allowed={[1]} exact path={APP_ROUTES.USER_DELIVERY_PDF} Component={MyOrderPdf} />
             <PrivateRoute allowed={[3]} exact path={APP_ROUTES.SUPERADMIN_MANAGE_ADMINS} Component={ManageAdmins} />
 
-            <PublicRoute exact path={APP_ROUTES.USER_VIEW_ADDRESS} Component={ViewDeliveryAddress} />
-            <PublicRoute exact path={APP_ROUTES.USER_ADD_ADDRESS} Component={AddDeliveryAddress} />
-            <PublicRoute exact path={APP_ROUTES.USER_UPDATE_ADDRESS} Component={UpdateDeliveryAddress} />
-            <PublicRoute exact path={APP_ROUTES.USER_MY_DELIVERIES} Component={MyDeliveries} />
+            <PrivateRoute allowed={[1]} exact path={APP_ROUTES.USER_VIEW_ADDRESS} Component={ViewDeliveryAddress} />
+            <PrivateRoute allowed={[1]} exact path={APP_ROUTES.USER_ADD_ADDRESS} Component={AddDeliveryAddress} />
+            <PrivateRoute allowed={[1]} exact path={APP_ROUTES.USER_UPDATE_ADDRESS} Component={UpdateDeliveryAddress} />
+            <PrivateRoute allowed={[1]} exact path={APP_ROUTES.USER_CHECKOUT_VIEW_ADDRESS} Component={ViewCheckoutDeliveryAddress} />
+            <PrivateRoute allowed={[1]} exact path={APP_ROUTES.USER_CHECKOUT_ADD_ADDRESS} Component={AddCheckoutDeliveryAddress} />
+            <PrivateRoute allowed={[1]} exact path={APP_ROUTES.USER_CHECKOUT_UPDATE_ADDRESS} Component={UpdateCheckoutDeliveryAddress} />
+            <PrivateRoute allowed={[1]} exact path={APP_ROUTES.USER_MY_DELIVERIES} Component={MyDeliveries} />
             <PublicRoute exact path={APP_ROUTES.USER_HOMEPAGE} Component={Homepage} />
             <PublicRoute exact path={APP_ROUTES.PRODUCT_PAGE} Component={ProductPage} />
             <PublicRoute exact path={APP_ROUTES.BOOKS} Component={Books} />
             <PublicRoute exact path={APP_ROUTES.USER_VIEW_BY_CATEGORY} Component={ViewBookByCategory} />
             <PublicRoute exact path={APP_ROUTES.USER_SEARCH_BOOKS} Component={SearchBooks} />
             <PublicRoute exact path={APP_ROUTES.USER_ABOUT_US} Component={AboutUs} />
+            <PublicRoute exact path={APP_ROUTES.USER_CHECKOUT} Component={Checkout} />
+            <PublicRoute exact path="/update-card/:id" Component={EditCardDetails} />
 
             {/**Admin side*/}
             <PublicRoute exact path={APP_ROUTES.ADMIN_LOGIN} Component={AdminLogin} />
-            <PublicRoute exact path={APP_ROUTES.ADMIN_VIEW_PRIVATE_POLICY} Component={ViewPrivatePolicy} />
-            <PublicRoute exact path={APP_ROUTES.ADMIN_ADD_PRIVATE_POLICY} Component={AddPrivatePolicy} />
-            <PublicRoute exact path={APP_ROUTES.ADMIN_UPDATE_PRIVATE_POLICY} Component={UpdatePrivatePolicy} />
-            <PublicRoute exact path={APP_ROUTES.ADMIN_VIEW_TERMS_AND_CONDITIONS} Component={ViewTermsAndConditions} />
-            <PublicRoute exact path={APP_ROUTES.ADMIN_ADD_TERMS_AND_CONDITIONS} Component={AddTermsAndConditions} />
-            <PublicRoute exact path={APP_ROUTES.ADMIN_UPDATE_TERMS_AND_CONDITIONS} Component={UpdateTermsAndConditions} />
-            <PublicRoute exact path={APP_ROUTES.ADMIN_ADD_ABOUT_US} Component={AddAboutUs} />
-            <PublicRoute exact path={APP_ROUTES.ADMIN_VIEW_ABOUT_US} Component={ViewAboutUs}></PublicRoute>
-            <PublicRoute exact path={APP_ROUTES.ADMIN_UPDATE_ABOUT_US} Component={UpdateAboutUs}></PublicRoute>
-            <PublicRoute exact path={APP_ROUTES.ADMIN_ADD_TEAM_DETAILS} Component={AddTeamDetails}></PublicRoute>
-            <PublicRoute exact path={APP_ROUTES.ADMIN_UPDATE_TEAM_DETAILS} Component={UpdateTeamDetails}></PublicRoute>
-            <PublicRoute exact path={APP_ROUTES.ADMIN_VIEW_TEAM_DETAILS} Component={ViewTeamDetails}></PublicRoute>
-            <PublicRoute exact path={APP_ROUTES.ADMIN_VIEW_DELIVERY} Component={ViewDelivery}></PublicRoute>
-            <PublicRoute exact path={APP_ROUTES.ADMIN_UPDATE_DELIVERY} Component={UpdateDelivery}></PublicRoute>
+            <PrivateRoute allowed={[2,3]} exact path={APP_ROUTES.ADMIN_VIEW_PRIVATE_POLICY} Component={ViewPrivatePolicy} />
+            <PrivateRoute allowed={[2,3]} exact path={APP_ROUTES.ADMIN_ADD_PRIVATE_POLICY} Component={AddPrivatePolicy} />
+            <PrivateRoute allowed={[2,3]} exact path={APP_ROUTES.ADMIN_UPDATE_PRIVATE_POLICY} Component={UpdatePrivatePolicy} />
+            <PrivateRoute allowed={[2,3]} exact path={APP_ROUTES.ADMIN_VIEW_TERMS_AND_CONDITIONS} Component={ViewTermsAndConditions} />
+            <PrivateRoute allowed={[2,3]} exact path={APP_ROUTES.ADMIN_ADD_TERMS_AND_CONDITIONS} Component={AddTermsAndConditions} />
+            <PrivateRoute allowed={[2,3]} exact path={APP_ROUTES.ADMIN_UPDATE_TERMS_AND_CONDITIONS} Component={UpdateTermsAndConditions} />
+            <PrivateRoute allowed={[2,3]} exact path={APP_ROUTES.ADMIN_ADD_ABOUT_US} Component={AddAboutUs} />
+            <PrivateRoute allowed={[2,3]} exact path={APP_ROUTES.ADMIN_VIEW_ABOUT_US} Component={ViewAboutUs}/>
+            <PrivateRoute allowed={[2,3]} exact path={APP_ROUTES.ADMIN_UPDATE_ABOUT_US} Component={UpdateAboutUs}/>
+            <PrivateRoute allowed={[2,3]} exact path={APP_ROUTES.ADMIN_ADD_TEAM_DETAILS} Component={AddTeamDetails}/>
+            <PrivateRoute allowed={[2,3]} exact path={APP_ROUTES.ADMIN_UPDATE_TEAM_DETAILS} Component={UpdateTeamDetails}/>
+            <PrivateRoute allowed={[2,3]} exact path={APP_ROUTES.ADMIN_VIEW_TEAM_DETAILS} Component={ViewTeamDetails}/>
+            <PrivateRoute allowed={[2,3]} exact path={APP_ROUTES.ADMIN_VIEW_DELIVERY} Component={ViewDelivery}/>
+            <PrivateRoute allowed={[2,3]} exact path={APP_ROUTES.ADMIN_UPDATE_DELIVERY} Component={UpdateDelivery}/>
             <PrivateRoute allowed={[2,3]} exact path={APP_ROUTES.ADMIN_ADD_BOOK} Component={AddBook} />
             <PrivateRoute allowed={[2,3]} exact path={APP_ROUTES.ADMIN_ADD_CATEGORY} Component={AddCategory} />
             <PrivateRoute allowed={[2,3]} exact path={APP_ROUTES.ADMIN_VIEW_BOOK} Component={ViewBook} />
@@ -121,14 +129,11 @@ const AppRoutes = () => {
             <PublicRoute exact path={APP_ROUTES.CART} Component={CartScreen} />
             <PublicRoute exact path={APP_ROUTES.USER_ADD_CARD_DETAILS} Component={AddCardDetails} />
             <PublicRoute exact path={APP_ROUTES.USER_CARD_DETAILS} Component={CardDetails} />
-            <PublicRoute exact path={APP_ROUTES.ADMIN_ALL_DELIVERY_PDF} Component={AllDeliveryPdf} />
-            <PublicRoute exact path={APP_ROUTES.ADMIN_DELIVERED_PDF} Component={DeliveredPdf} />
-            <PublicRoute exact path={APP_ROUTES.ADMIN_PENDING_PDF} Component={PendingPdf} />
-            <PublicRoute exact path={APP_ROUTES.ADMIN_PROCESSING_PDF} Component={ProcessingPdf} />
-            <PublicRoute exact path={APP_ROUTES.ADMIN_SHIPPED_PDF} Component={ShippedPdf} />
-            <PublicRoute exact path={APP_ROUTES.USER_CHECKOUT} Component={Checkout} />
-            <PublicRoute exact path="/update-card/:id" Component={EditCardDetails} />
-
+            <PrivateRoute allowed={[2,3]} exact path={APP_ROUTES.ADMIN_ALL_DELIVERY_PDF} Component={AllDeliveryPdf} />
+            <PrivateRoute allowed={[2,3]} exact path={APP_ROUTES.ADMIN_DELIVERED_PDF} Component={DeliveredPdf} />
+            <PrivateRoute allowed={[2,3]} exact path={APP_ROUTES.ADMIN_PENDING_PDF} Component={PendingPdf} />
+            <PrivateRoute allowed={[2,3]} exact path={APP_ROUTES.ADMIN_PROCESSING_PDF} Component={ProcessingPdf} />
+            <PrivateRoute allowed={[2,3]} exact path={APP_ROUTES.ADMIN_SHIPPED_PDF} Component={ShippedPdf} />
             
         </Router>
     )

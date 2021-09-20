@@ -100,9 +100,9 @@ class AddBookBody extends Component {
                 <br></br><br></br>
                 <h1>Add Book Details </h1>
                 <nav aria-label="breadcrumb">
-                    <ol class="breadcrumb"  style={{backgroundColor:'white'}}>
-                        <li class="breadcrumb-item" style={{fontSize:"20px"}}> <a href="/admin-product-dashboard" style={{color:"#049191"}}> Product Dashboard</a></li>
-                        <li class="breadcrumb-item active"style={{fontSize:"20px"}}  aria-current="page">Add Books</li>
+                    <ol className="breadcrumb"  style={{backgroundColor:'white'}}>
+                        <li className="breadcrumb-item" style={{fontSize:"20px"}}> <a href="/admin-product-dashboard" style={{color:"#049191"}}> Product Dashboard</a></li>
+                        <li className="breadcrumb-item active"style={{fontSize:"20px"}}  aria-current="page">Add Books</li>
                     </ol>
                 </nav>
                 <hr></hr>

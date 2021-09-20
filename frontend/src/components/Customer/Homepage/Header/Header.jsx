@@ -240,9 +240,9 @@ export default function Header() {
           </Typography>
           <div className={classes.space} />
           {/*Search Bar*/}
-          <form class="form-inline my-2 my-lg-0">
+          <form className="form-inline my-2 my-lg-0">
             <input
-              class="form-control mr-sm-2"
+              className="form-control mr-sm-2"
               style={{ paddingLeft: "10px", width: "400px" }}
               type="search"
               placeholder="Type something to search"
@@ -252,7 +252,7 @@ export default function Header() {
               }}
             />
             <button
-              class="btn btn-dark my-2 my-sm-0"
+              className="btn btn-dark my-2 my-sm-0"
               type="submit"
               onClick={searchValue}
               disabled={!value}

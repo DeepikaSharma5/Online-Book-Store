@@ -2,7 +2,7 @@ import React from "react";
 import {Route} from "react-router-dom";
 import jwt_decode from "jwt-decode";
 
-import {Login} from "../pages";
+import {AdminLogin, Login} from "../pages";
 
 const PrivateRoute = ({Component, path, allowed, ...rest}) => {
 
@@ -23,27 +23,52 @@ const PrivateRoute = ({Component, path, allowed, ...rest}) => {
         )
       }else{
           // Not allowed
-          return(
-            <Route
-                {...rest}
-                 path={path}
-                render={(props) => {
-                    return <Login />;
-                }}
-            />
-        )
+          if(allowed.includes(3)){
+            return(
+                <Route
+                    {...rest}
+                     path={path}
+                    render={(props) => {
+                        return <AdminLogin />;
+                    }}
+                />
+            )
+          }else{
+            return(
+                <Route
+                    {...rest}
+                     path={path}
+                    render={(props) => {
+                        return <Login />;
+                    }}
+                />
+            )
+          }
+          
       }
     }else{
         // Not allowed
-        return(
-            <Route
-                {...rest}
-                 path={path}
-                render={(props) => {
-                    return <Login />;
-                }}
-            />
-        )
+        if(allowed.includes(3)){
+            return(
+                <Route
+                    {...rest}
+                     path={path}
+                    render={(props) => {
+                        return <AdminLogin />;
+                    }}
+                />
+            )
+          }else{
+            return(
+                <Route
+                    {...rest}
+                     path={path}
+                    render={(props) => {
+                        return <Login />;
+                    }}
+                />
+            )
+          }
     }
 }
 

@@ -23,8 +23,8 @@ class MyDeliveriesBody extends Component {
             });
     }
 
-    getPdf(id, name, address1, address2, address3, phoneNumber, status, date, updatedAt) {
-        reactLocalStorage.setObject("getPdf", [id, name, address1, address2, address3, phoneNumber, status, date, updatedAt]);
+    getPdf(id, name, address1, address2, address3, phoneNumber, statuss, date, updatedAt) {
+        reactLocalStorage.setObject("getPdf", [id, name, address1, address2, address3, phoneNumber, statuss, date, updatedAt]);
         window.location.href= APP_ROUTES.USER_DELIVERY_PDF;
     }
 
@@ -55,20 +55,20 @@ class MyDeliveriesBody extends Component {
                                                             {item.state === '' ?
                                                                 <p></p>
                                                                 :
-                                                                item.status === 'Pending' ?
-                                                                    <button type="button" className="btn btn-danger" style={{ width: '120px' }}>{item.status}</button>
+                                                                item.statuss === 'Pending' ?
+                                                                    <button type="button" className="btn btn-danger" style={{ width: '120px' }}>{item.statuss}</button>
                                                                     :
-                                                                    item.status === 'Delivered' ?
-                                                                        <button type="button" className="btn btn-success" style={{ width: '120px' }}>{item.status}</button>
+                                                                    item.statuss === 'Delivered' ?
+                                                                        <button type="button" className="btn btn-success" style={{ width: '120px' }}>{item.statuss}</button>
                                                                         :
-                                                                        item.status === 'Processing' ?
-                                                                            <button type="button" className="btn btn-info" style={{ width: '120px' }}>{item.status}</button>
+                                                                        item.statuss === 'Processing' ?
+                                                                            <button type="button" className="btn btn-info" style={{ width: '120px' }}>{item.statuss}</button>
                                                                             :
-                                                                            <button type="button" className="btn btn-warning" style={{ width: '120px' }}>{item.status}</button>
+                                                                            <button type="button" className="btn btn-warning" style={{ width: '120px' }}>{item.statuss}</button>
                                                             }
                                                         </td>
                                                         <td>
-                                                            <button type="button" className="btn" style={{ width: '120px', backgroundColor:'#20c997' }} onClick={() => this.getPdf(item._id, item.name, item.address1, item.address2, item.address3, item.phoneNumber, item.status, item.date, item.updatedAt)}>Get PDF</button>
+                                                            <button type="button" className="btn" style={{ width: '120px', backgroundColor:'#20c997' }} onClick={() => this.getPdf(item._id, item.name, item.address1, item.address2, item.address3, item.phoneNumber, item.statuss, item.date, item.updatedAt)}>Get PDF</button>
                                                         </td>
                                                     </tr>
                                                 </tbody>

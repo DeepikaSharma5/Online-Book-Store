@@ -30,10 +30,10 @@ class AboutUsHome extends Component {
         return (
             <div>
                 <Header />
-                <img src={Image} class="img-fluid" width="100%" alt="..."></img>
+                <img src={Image} className="img-fluid" width="100%" alt="..."></img>
                 <div className="container" style={{ marginTop: '5%' }}>
-                    {this.state.aboutus.map((item) => (
-                        <div className="row ps-16">
+                    {this.state.aboutus.map((item,key) => (
+                        <div className="row ps-16" key={key}>
                             <div className="col-sm-1 "></div>
                             <div className="col-sm-10 ">
                                 <span className=" h2 text-dark text-uppercase" style={{ textDecoration: 'none' }}>{item.mission}</span>

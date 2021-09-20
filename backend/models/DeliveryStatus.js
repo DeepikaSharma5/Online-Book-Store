@@ -23,7 +23,7 @@ const DeliveryStatusSchema = new Schema(
         type: Number,
         required: true,
       },
-      status: {
+      statuss: {
         type: String,
         required: true,
       },
